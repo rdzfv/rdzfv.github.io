@@ -242,7 +242,9 @@
         </header>
 
         <div class="post-content">
-            <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><h3 id="一、简单引入-·-斐波那契的例子"><a href="#一、简单引入-·-斐波那契的例子" class="headerlink" title="一、简单引入 · 斐波那契的例子"></a>一、简单引入 · 斐波那契的例子</h3><p>举个例子：计算斐波那契数列（1，1，2，3，5，…）的第n项</p>
+            <p>不会吧不会吧，还有人学了三五遍还是不会动态规划算法？快戳 –&gt;&gt;</p>
+<a id="more"></a>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><h3 id="一、简单引入-·-斐波那契的例子"><a href="#一、简单引入-·-斐波那契的例子" class="headerlink" title="一、简单引入 · 斐波那契的例子"></a>一、简单引入 · 斐波那契的例子</h3><p>举个例子：计算斐波那契数列（1，1，2，3，5，…）的第n项</p>
 <h5 id="1-暴力法（递归）"><a href="#1-暴力法（递归）" class="headerlink" title="1. 暴力法（递归）"></a>1. 暴力法（递归）</h5>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> Fibonacci(n - <span class="number">1</span>) + Fibonacci(n - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>   但这是一个非常低效的办法。我们评判递归算法的性能一般采用递归树，那让我们画出上面算法的递归树：</p>
 <img src="http://qiniu.xuyuyan.cn/image-20210116122611516.png" alt="image-20210116122611516" style="zoom:33%;" />
