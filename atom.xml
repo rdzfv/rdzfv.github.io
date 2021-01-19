@@ -6,7 +6,7 @@
   <link href="http://www.xuyuyan.cn/atom.xml" rel="self"/>
   
   <link href="http://www.xuyuyan.cn/"/>
-  <updated>2021-01-17T10:37:02.000Z</updated>
+  <updated>2021-01-19T11:27:39.000Z</updated>
   <id>http://www.xuyuyan.cn/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>因特网的前世今生</title>
+    <link href="http://www.xuyuyan.cn/2021/01/19/%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/"/>
+    <id>http://www.xuyuyan.cn/2021/01/19/%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/</id>
+    <published>2021-01-19T09:19:59.000Z</published>
+    <updated>2021-01-19T11:27:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>每天 5G 冲浪的你知道因特网的发展历史吗？点击查看博文》</p><a id="more"></a><h1 id="因特网的前世今生"><a href="#因特网的前世今生" class="headerlink" title="因特网的前世今生"></a>因特网的前世今生</h1><ul><li>因特网（Internet）不是单个网络，而是<strong>大量不同网络的集合</strong></li></ul><p>我们可以将因特网的发展历程分为三个阶段：</p><ol><li>60年代，阿帕网（ARPANET）出现</li><li>70年代，TCP/IP 出现</li><li>80年代，NSFNET 出现</li><li>90年代，Internet 高速发展，开始向全世界普及</li></ol><h3 id="第一阶段：ARPANET-的出现"><a href="#第一阶段：ARPANET-的出现" class="headerlink" title="第一阶段：ARPANET 的出现"></a>第一阶段：ARPANET 的出现</h3><p>阿帕网是美国国防部高级研究计划局（ARPA）设计的一个分散指挥系统。</p><p>在20世纪50年代后期的冷战高峰期，美国国防部希望建立一个“命令-控制”网络，即使在核战争爆发的情况下也能生存下来。当时所有的军事通信都使用公共电话网络，如下图图a所示。可以发现每一个“交换局”“长途局”与很多节点连接，如果中心节点瘫痪，则会造成大面积的网络瘫痪。因此，<strong>电话网络被认为非常脆弱</strong>。</p><p>于是，美国国防部授权兰德公司进行研发新的网络结构。当时，其中一位雇员Paul Baran 提出了如下图图b的<strong>高度分布式和容错的设计方案</strong>。虽然最初这个想法收到五角大楼的青睐但因当初最大最富有的公司的过度的自尊心而告终，但这<strong>为ARPANET的研究奠定了基础</strong>。</p><img src="http://qiniu.xuyuyan.cn/2021-01-19%281.jpg.PNG" style="zoom:40%;" /><p>最后由于英国国家物理实验室实现了一个网络雏形，和 Baran 的想法非常相近，将实验室园区内的几台计算机连接起来，<strong>证明了数据包交换思想是可行的</strong>，于是 ARPA 重新着手 APARNET 的研究。</p><p>APARNET 子网由一些小型机组成，这些小型机被称为接口报文处理器（IMP，Interface Message Processors）。为了保证高可靠性，每个 IMP 至少和其他 IMP 连接。采用了数据报技术，如果由一些线路或者 IMP 被损坏，报文能自动地重新路由到其他代替的路径上。早期的 ARPANET 如下图所示。</p><img src="http://qiniu.xuyuyan.cn/2021-01-19%282.jpg.PNG" alt="image-20210116122611516" style="zoom:40%;" /><p>随着更多的 IMP 被交付和安装，网络的增长速度很快，很快就扩展到了整个美国。<strong>与此同时，APRPA 还进行了卫星网络和移动数据包无线网络应用方面的研究工作</strong>。在不断发展的过程中，研究人员发现现有的 ARPANET 协议并不适合跨越多个网络运行<strong>（仅支持相同网络的互连）</strong>。</p><h3 id="第二阶段：TCP-IP-的出现"><a href="#第二阶段：TCP-IP-的出现" class="headerlink" title="第二阶段：TCP/IP 的出现"></a>第二阶段：TCP/IP 的出现</h3><p>1972年，全世界电脑业和通讯业的专家学者在美国华盛顿举行了第一届国际计算机通信会议，在不同的计算机网络之间进行通信达成协议<strong>（支持不同网络的互联）</strong>，会议决定成立 Internet 工作组，负责建立一种能保证计算机之间进行通信的标准规范（即“通信协议”）；1973年，美国国防部也开始研究如何实现各种不同网络之间的互联问题。</p><p>至1974年，IP（Internet协议）和TCP（传输控制协议）问世，合称 <strong>TCP/IP 协议</strong>。这两个协议定义了一种在电脑网络间传送报文（文件或命令）的方法。随后，美国国防部决定向全世界无条件地免费提供 TCP/IP，即向全世界公布解决电脑网络之间通信的核心技术，<strong>TCP/IP 协议核心技术的公开最终导致了Internet的大发展</strong>。</p><p>到1980年，世界上既有使用 TCP/IP 协议的美国军方的 ARPA 网，也有很多使用其它通信协议的各种网络。为了将这些网络连接起来，美国人温顿·瑟夫（Vinton Cerf）提出一个想法：<strong>在每个网络内部各自使用自己的通讯协议，在和其它网络通信时使用 TCP/IP 协议</strong>。这个设想最终导致了Internet的诞生，并确立了 TCP/IP 协议在网络互联方面不可动摇的地位。</p><h3 id="第三阶段：NSFNET-出现"><a href="#第三阶段：NSFNET-出现" class="headerlink" title="第三阶段：NSFNET 出现"></a>第三阶段：NSFNET 出现</h3><p>到 20 世纪 70 年代后期，美国国家科学基金会（NSF，National Science Foundation）看到了 ARPANET 对大学研究工作产生的巨大影响，然而接入 ARPANET 的门槛较高，很多大学都不具备。因此，NSF 决定设计一个 ARPANET 的继任网络，对所有大学的研究组都开放 —— NSFNET 网络。采用了和 ARPANET 相同的硬件技术，在软件方面稍有不同，<strong>从一开始使用 TCP/IP ，因此成为第一个 TCP/IP 广域网</strong>。与此同时，也提出了<strong>三级网络</strong>的概念：</p><img src="http://qiniu.xuyuyan.cn/2021-01-19%283.jpg.png" alt="image-20210116122611516" style="zoom:70%;" /><p>NSFNET 很快获得了成功，从一开始就超负荷地运作，尽管不断地进行升级，但是很快网络又面临超负荷运作。随着网络地不断增长， NSF 政府很快意识到不可能永远不停地资助网络发展。同时，也有很多商业组织想要加入，于是 NSF 鼓励 MERIT、MCI、IBM 组成一个非营利性的公司作为<strong>商业化道路</strong>的第一步。</p><p>为了使传输更加容易，并且确保每一个区域网络都可以与每一个其他区域网络进行通信，NSF 与 4 个网络运营商签订合同，让他们都来建立网络接入点（NAP，Network Access Point）。从此，原来单个默认的骨干网络被一个<strong>由商业驱动的竞争基础设施</strong>取代。</p><p>此后，我们使用 Internet 的方式也发生了变化。从起初学术用的电子邮件、新闻组、远程登录和文件传输等应用占据主导位置，到逐步发展为普通人也使用电子邮件，到现在更加丰富的媒体种类，无疑，因特网带给了人类生活新的转变。</p><h3 id="第四阶段：Internet"><a href="#第四阶段：Internet" class="headerlink" title="第四阶段：Internet"></a>第四阶段：Internet</h3><p>随着网络规模的爆炸性增长，Internet 的体系结构也发生了很大的变化。例如：”三网融合“、”四网融合“，也就是有线电视网络、电信网络、计算机网络，和电网的融合。下图为简化后的 Internet 全局。</p><img src="http://qiniu.xuyuyan.cn/2021-01-19%284.jpg.PNG" style="zoom:40%;" /><p>先解释图中的一些符号：</p><ul><li>ISP ：为了加入 Internet，计算机必须连接到的 Internet 服务提供商（简单来说，就是我们熟悉的电信、移动、联通这些网络运营商）。相互连接的 ISP 被人那位彼此对等。</li><li>IXP（Internet eXchange Point）：Internet 交换点。ISP 将他们的网络连接到 Internet 交换点一边交流流量。</li></ul><p>从上图的边缘家用计算机开始，计算机只有连接到 ISP 才能加入 Internet。而家用计算机连接到 ISP 的一种常见方法是使用家里的电话线，计算机与<strong>调制解调器 DSL</strong>（Digital Subscriber Line） 连接，该设备将数字数据包转换成可以畅通无阻地通过电话线传递地模拟信号。在另一端连接<strong>数字用户线接入复用器 DSLAM</strong>（DIgital Subscriber Line Access Multiplexer） 可以将模拟信号转换成数字数据包。</p><br><blockquote><p>以上就是因特网的发展历史。</p><p>参考资料：</p><ol><li>《计算机网络（第五版）》Andrew S. Tanenbaum，David J. Wetherall 著</li><li>《计算机网络 - 自顶向下方法》James F. Kurose，Keith W. Ross 著</li><li>《2021 计算机网络考研复习指导》 王道论坛 组编</li><li> 部分内容来源网络</li></ol></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;每天 5G 冲浪的你知道因特网的发展历史吗？点击查看博文》&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="计算机网络" scheme="http://www.xuyuyan.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="计算机网络" scheme="http://www.xuyuyan.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="因特网历史" scheme="http://www.xuyuyan.cn/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/"/>
+    
+  </entry>
   
   <entry>
     <title>小解动态规划</title>
