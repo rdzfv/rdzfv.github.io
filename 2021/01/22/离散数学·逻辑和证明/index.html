@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>friends: undefined | xyy爱吃番茄</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">离散数学·逻辑和证明</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">一月 22, 2021&nbsp;&nbsp;21:47:10</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>《离散数学及其应用》第一章·逻辑和证明 学习笔记</p>
+<a id="more"></a>
+<h1 id="离散数学-·-逻辑和证明"><a href="#离散数学-·-逻辑和证明" class="headerlink" title="离散数学 · 逻辑和证明"></a>离散数学 · 逻辑和证明</h1><h3 id="一、先导概念"><a href="#一、先导概念" class="headerlink" title="一、先导概念"></a>一、先导概念</h3><ul>
+<li><strong>命题</strong>：是一个陈述句，或真或假，但不能既真又假。</li>
+</ul>
+<p>接下来我们字母表示命题变元，例如 p，q，r，s 等。后文所述<strong>真值</strong>可理解为命题的真假性，命题为真记作 T，命题为假记作 F。</p>
+<ul>
+<li><strong>p的否定/逆命题</strong>：$\lnot p$ 或 $\overline{p}$ ，读作 “非 p”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>$\lnot p$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+</tr>
+</tbody></table>
+<p>  从真值表中可以看出，命题 p 和 命题 p 的否定真值相反。</p>
+<ul>
+<li><strong>p，q 的合取命题</strong>（AND）：$p \bigwedge q$，读作 “p 并且 q”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<p>从真值表可以看出，当且仅当合取的两命题均为真时，结果为真。</p>
+<ul>
+<li><strong>p，q 的析取命题</strong>（OR）：$p \bigvee q$，读作 “p 或 q”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<p>从真值表可以看出，只要两个合取的两命题有一个为真时，结果为真。</p>
+<ul>
+<li><strong>p，q 的异或命题</strong>（XOR）：$p \bigoplus  q$，读作 “p 异或 q”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<p>从真值表可以看出，当异或的两个命题中恰好只有一个为真（两命题的真值不同），结果为真。</p>
+<ul>
+<li><strong>条件语句</strong>：$p \rightarrow q$，读作 “如果 p，则 q”。我们通常将 p 称为 （前提）前件，将 q 称为（结论）后件。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+</tr>
+</tbody></table>
+<p>相比之前的概念，这个真值表可能较难理解，在此举一个例子：设 p 为命题 “天下雨”，命题 q 为 “我不去打球”。则条件语句 “$p \rightarrow q$” 可以翻译为 “如果天下雨，我就不去打球”。将不同的真值带入：</p>
+<table>
+<thead>
+<tr>
+<th>p 的真值</th>
+<th>命题</th>
+<th>q 的真值</th>
+<th>命题</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>天下雨</td>
+<td>T</td>
+<td>我不去打球</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>天下雨</td>
+<td>F</td>
+<td>我去打球</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>天不下雨</td>
+<td>T</td>
+<td>我去打球</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>天不下雨</td>
+<td>F</td>
+<td>我不去打球</td>
+<td>T</td>
+</tr>
+</tbody></table>
+<p>可以发现，只有当 p（前提） 的真值为 T ，q（结论） 的真值为 F，条件语句才为 F。</p>
+<ul>
+<li><strong>逆命题</strong>：$p \rightarrow q$ 和  $q \rightarrow p$ 互为逆命题，也就是<strong>交换前提和结论</strong>。</li>
+<li><strong>逆否命题</strong>： $p \rightarrow q$ 和  $\lnot q \rightarrow \lnot p$ 互为逆命题，也就是<strong>交换前提和结论</strong>，并且<strong>取条件和结论的逆命题</strong>。</li>
+<li><strong>反命题</strong>：$p \rightarrow q$ 和  $\lnot p \rightarrow \lnot q$ 互为反命题，也就是<strong>取条件和结论的逆命题</strong>。</li>
+</ul>
+<p>以下为有关逆命题、逆否命题、反命题的一些结论：</p>
+<ol>
+<li><strong>原命题和逆否命题的真值相同</strong></li>
+<li><strong>逆命题和反命题都不具有相同的真值</strong></li>
+</ol>
+<p>一般地，我们称两个总具有相同真值的复合命题为<strong>等价命题</strong>。同时，为表达命题的等价，我们同样也可以运用<strong>双条件语句</strong>。</p>
+<ul>
+<li><strong>双条件语句</strong>：$p \leftarrow\rightarrow q$，读作 “p 当且仅当 q”，也称 p 为 q 的充分必要条件。等价于 $(p \rightarrow q) \bigwedge (q \rightarrow p)$</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+</tr>
+</tbody></table>
+<p>较为容易理解，因为双条件语句的定义是 p 和 q 等价，所以只有当 p 和 q 的真值相同时结果才为 T 。</p>
+<p>至此我们介绍了部分逻辑运算符，我们希望你可以了解一下<strong>逻辑运算符的优先级</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\lnot$</td>
+<td>1</td>
+</tr>
+<tr>
+<td>$\bigwedge$</td>
+<td>2</td>
+</tr>
+<tr>
+<td>$\bigvee$</td>
+<td>3</td>
+</tr>
+<tr>
+<td>$\rightarrow$</td>
+<td>4</td>
+</tr>
+<tr>
+<td>$\leftarrow \rightarrow$</td>
+<td>5</td>
+</tr>
+</tbody></table>
+<h3 id="二、一些逻辑恒等式"><a href="#二、一些逻辑恒等式" class="headerlink" title="二、一些逻辑恒等式"></a>二、一些逻辑恒等式</h3><table>
+<thead>
+<tr>
+<th>等价式</th>
+<th>解释</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$p \bigwedge T \equiv p$ <br>$p \bigvee F \equiv p$</td>
+<td></td>
+<td>恒等律</td>
+</tr>
+<tr>
+<td>$p \bigvee T \equiv T$ <br>$p \bigwedge F \equiv F$</td>
+<td></td>
+<td>支配律</td>
+</tr>
+<tr>
+<td>$p \bigvee p \equiv p$ <br>$p \bigwedge p \equiv p$</td>
+<td>对于合取与析取的幂运算，结果仍为论元本身</td>
+<td>幂等律</td>
+</tr>
+<tr>
+<td>$\lnot (\lnot p) \equiv p$</td>
+<td></td>
+<td>双重否定律</td>
+</tr>
+<tr>
+<td>$p \bigvee q \equiv q \bigvee p$ <br>$p \bigwedge q \equiv q \bigwedge p$</td>
+<td>合取与析取满足交换律</td>
+<td>交换律</td>
+</tr>
+<tr>
+<td>$(p \bigvee q) \bigvee r \equiv p \bigvee (q \bigvee r)$ <br>$(p \bigwedge q) \bigwedge r \equiv p \bigwedge (q \bigwedge r)$</td>
+<td>合取与析取满足结合律</td>
+<td>结合律</td>
+</tr>
+<tr>
+<td>$(p \bigvee q) \bigwedge r \equiv (p \bigvee r) \bigwedge (q \bigvee r)$ <br>$(p \bigwedge q) \bigvee r \equiv (p \bigwedge r) \bigvee (q \bigwedge r)$</td>
+<td>合取与析取满足分配律</td>
+<td>分配律</td>
+</tr>
+<tr>
+<td>$\lnot (p \bigwedge q) \equiv \lnot p \bigvee \lnot q$ <br>$\lnot (p \bigvee q) \equiv \lnot p \bigwedge \lnot q$</td>
+<td>将 $\lnot$ 分配到每个论元，合取与析取互换</td>
+<td>德·摩根律</td>
+</tr>
+<tr>
+<td>$p \bigvee \lnot p \equiv T$ <br>$p \bigwedge \lnot p \equiv F$</td>
+<td></td>
+<td>否定律</td>
+</tr>
+<tr>
+<td>$p \bigvee (p \bigwedge q) \equiv p$ <br>$p \bigwedge (p \bigvee q) \equiv p$</td>
+<td>p 并 （p和q的交集）还是 p<br>p 交 （p和q的并集）还是 p</td>
+<td>吸收律</td>
+</tr>
+<tr>
+<td>$p \rightarrow q \equiv \lnot p \bigvee q$<br>$p \rightarrow q \equiv \lnot q \rightarrow \lnot p$ <br>$p \bigvee q \equiv \lnot p \rightarrow q$ <br>$p \bigwedge q \equiv \lnot (p \rightarrow \lnot q)$<br>$\lnot(p \rightarrow q) \equiv p \bigwedge \lnot q$ <br>$(p\rightarrow q) \bigwedge (p \rightarrow r) \equiv p \rightarrow (q \bigwedge r)$<br>$(p \rightarrow r) \bigwedge (q \rightarrow r) \equiv (p \bigvee q) \rightarrow r$<br>$(p \rightarrow q) \bigvee (p \rightarrow r) \equiv p \rightarrow (q \bigvee r)$ <br>$(p \rightarrow r) \bigvee (q \rightarrow r) \equiv (p \bigwedge q) \rightarrow r$</td>
+<td>$\rightarrow$ 可以理解为 $\lnot \bigvee$ <br>第三个和第四个需要牢记</td>
+<td>条件命题的逻辑等价式</td>
+</tr>
+<tr>
+<td>$p \leftarrow \rightarrow q \equiv (p \rightarrow q) \bigwedge (q \rightarrow p)$ <br>$p \leftarrow \rightarrow q \equiv \lnot p \leftarrow \rightarrow \lnot q$ <br>$p \leftarrow \rightarrow q \equiv (p \bigwedge q) \bigvee (\lnot p \bigwedge \lnot q)$ <br>$\lnot (p \leftarrow \rightarrow q) \equiv p \leftarrow \rightarrow \lnot q$</td>
+<td>$\lnot$ 可以挪到双条件表达式的后项</td>
+<td>双条件命题的逻辑等价式</td>
+</tr>
+</tbody></table>
+<h3 id="三、谓词、量词"><a href="#三、谓词、量词" class="headerlink" title="三、谓词、量词"></a>三、谓词、量词</h3><ul>
+<li><strong>谓词</strong></li>
+</ul>
+<p>一般地，<strong>涉及 n 个变量</strong> $x_1$，$x_2$，…，$x_n$ 的语句可以表示为 $P(x_1，x_2，…，x_n)$ ，我们将其称为命题函数 P 在 n 元组 ( $x_1$，$x_2$，…，$x_n$) 的值，P 也称为 <strong>n 元谓词</strong>。</p>
+<ul>
+<li><p><strong>量词</strong>：量词比命题演算中所有逻辑运算符的<strong>优先级</strong>都更高</p>
+<ul>
+<li><strong>全称量词</strong>：全体域均可使命题成立。用符号 $\forall$ 表示。</li>
+<li><strong>存在量词</strong>：存在一个个体使命题成立。用符号 $\exists$ 表示。</li>
+</ul>
+</li>
+<li><p><strong>量化表达式的否定</strong>：$\forall x P(x) \equiv \exists x \lnot P(x)$</p>
+</li>
+<li><p><strong>嵌套量词</strong>：一个量词出现在另一个量词的作用域中，例如 $\forall x \forall y (x + y = y + x)$</p>
+</li>
+<li><p><strong>量词的顺序</strong>：量词的顺序十分重要，除非所有的量词均为全称量词或者存在量词。（言下之意：如果只有全称量词或存在量词，则可前后交换顺序）</p>
+</li>
+<li><p><strong>嵌套量词的否定</strong></p>
+<p>$\lnot (\forall x \exists y (xy = 1)) = \exists x \lnot \exists y (xy = 1)$  (将否定词移入所有量词之中)</p>
+<p>= $\exists x \forall y \lnot (xy  = 1)$ = $\exists x \forall y \lnot (xy \not= 1)$</p>
+</li>
+</ul>
+<h3 id="四、推理"><a href="#四、推理" class="headerlink" title="四、推理"></a>四、推理</h3><ul>
+<li><strong>推理规则：</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>永真式</th>
+<th>理解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>假言推理</td>
+<td>$p \bigwedge ( p \rightarrow q)) \rightarrow q$</td>
+<td>已知 p ，$p \rightarrow q$，可以推得 q</td>
+</tr>
+<tr>
+<td>取拒式</td>
+<td>$(\lnot q \bigwedge (p \rightarrow q)) \rightarrow \lnot p$</td>
+<td>已知 $\lnot q$，$p \rightarrow q$，可以推得 $\lnot p$</td>
+</tr>
+<tr>
+<td>假言三段论</td>
+<td>$((p \rightarrow q) \bigwedge (q \rightarrow r)) \rightarrow (p \rightarrow r)$</td>
+<td>已知 $p \rightarrow q$，$q \rightarrow r$，可以推得 $p \rightarrow r$</td>
+</tr>
+<tr>
+<td>析取三段论</td>
+<td>$((p \bigvee q) \bigwedge \lnot p) \rightarrow q$</td>
+<td>已知 $p \bigvee q$，$\lnot p$，可以推得 q</td>
+</tr>
+<tr>
+<td>附加律</td>
+<td>$p \rightarrow (p \bigvee q)$</td>
+<td>已知 p，可以推得 $p \bigvee q$</td>
+</tr>
+<tr>
+<td>化简律</td>
+<td>$(p \bigwedge q) \rightarrow p$</td>
+<td>已知 $p \bigwedge q$，可以推得 p</td>
+</tr>
+<tr>
+<td>合取律</td>
+<td>$((p) \bigwedge (q)) \rightarrow (p \bigwedge q)$</td>
+<td>已知 p，q，可以推得 $p \bigwedge q$</td>
+</tr>
+<tr>
+<td>消解律</td>
+<td>$((p \bigvee q) \bigwedge (\lnot p \bigwedge r)) \rightarrow (q \bigvee r)$</td>
+<td>已知 $p \bigvee q$，$\lnot p \bigvee r$，可以推得 $q \bigvee r$</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>量化命题的推理规则：</strong></li>
+</ul>
+<ol>
+<li><strong>全称实例</strong>：由 $\forall x P(x)$ 得出 $P(c)$</li>
+<li><strong>全称引入</strong>：由 论域中所有元素 c 都存在$P(c)$，得出 $\forall x P(x)$ </li>
+<li><strong>存在实例</strong>：由 $\exists x P(x)$，得出 $P(c)$。但是 c 不知道确切的值，仅知道存在。</li>
+<li><strong>存在引入</strong>：由 $P(c)$，得出 $\exists x P(x)$</li>
+</ol>
+<h3 id="五、证明"><a href="#五、证明" class="headerlink" title="五、证明"></a>五、证明</h3><ol>
+<li><p><strong>直接证明法</strong>：（$p \rightarrow q$）</p>
+<p>第一步：假设 p 为真；第二步：用推理规则构造；第三步：推导出 q 为真。</p>
+</li>
+<li><p><strong>反证法</strong>：（$p \rightarrow q$ 等价于 $\lnot q \rightarrow \lnot p$）</p>
+<p>第一步：假设 $\lnot q$；第二步：用推理规则构造；第三步：推导出 $\lnot p$ 为真。</p>
+</li>
+<li><p><strong>空证明</strong>：如果能证明 p 为假，则我们就有了一个 $p \rightarrow q$ 的证明方法</p>
+</li>
+<li><p><strong>平凡证明</strong>：如果能证明 p 为真，则我们也可以很快证明出 $p \rightarrow q$</p>
+</li>
+<li><p><strong>归谬证明</strong>：如果我们能证明对于某个命题 r，$\lnot p \rightarrow (r \bigwedge \lnot r)$为真，则可以得出：p 是真的</p>
+</li>
+<li><p><strong>等价证明法：</strong>为了证明双命题条件 $p \leftarrow \rightarrow q$，则需要证明 $p \rightarrow q$ 和 $q \rightarrow p$</p>
+</li>
+<li><p><strong>唯一性证明</strong>：（存在性：P(c)）&amp;&amp;（唯一性：如果 $b \not= c$，则 P(b) 不成立）</p>
+</li>
+</ol>
+<blockquote>
+<p>参考书籍：《离散数学及其应用》Kenneth H. Rosen 著</p>
+</blockquote>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2021/01/22/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E9%80%BB%E8%BE%91%E5%92%8C%E8%AF%81%E6%98%8E/">http://www.xuyuyan.cn/2021/01/22/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E9%80%BB%E8%BE%91%E5%92%8C%E8%AF%81%E6%98%8E/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/"># 离散数学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/01/19/%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/">因特网的前世今生</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: 'f2403cf086dbd6cb4a92',
+        clientSecret: 'b8ea1826f0ac52e06bd19801125a7e56d9922f8f',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = 'https://cdn.webpushr.com/app.min.js';fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BIEZFw_gBv-oSxInrK1rZwjUYN6YuC8GcMJU1tcwnfuTeMPh2k0694PdaxCA5WL_WoY_k3D9NCaYkE3YY-6YPTU');</script></body>
+</html>
