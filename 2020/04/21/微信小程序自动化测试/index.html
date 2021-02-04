@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>微信小程序自动化测试 | xyy爱吃番茄</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">微信小程序自动化测试</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">四月 21, 2020&nbsp;&nbsp;13:22:26</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="微信小程序自动化测试"><a href="#微信小程序自动化测试" class="headerlink" title="微信小程序自动化测试"></a>微信小程序自动化测试</h1><blockquote>
+<p>工具：miniprogram-automator<br>需要准备：微信开发者工具（需要记住自己的安装位置）</p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用小程序自动化SDK，在cmd执行以下命令<br><code>npm i miniprogram-automator --save-dev</code> 如果没有开科学上网就用<code>cnpm i miniprogram-automator --save-dev</code><br><img src="https://qiniu.xuyuyan.cn/QQ%E6%88%AA%E5%9B%BE20200421125127.png" alt="avatar"><br>如果报错说npm/cnpm不是可用命令，说明电脑里没有node环境，百度配一下就好了，很方便。</p>
+<h2 id="启动微信开发者工具的远程连接端口"><a href="#启动微信开发者工具的远程连接端口" class="headerlink" title="启动微信开发者工具的远程连接端口"></a>启动微信开发者工具的远程连接端口</h2><ol>
+<li>打开一个小程序（第一次使用建议新建一个demo，项目较为简单）</li>
+<li><code>设置</code> -&gt; <code>安全</code> -&gt; <code>选择开启服务端口</code></li>
+<li>cmd进入微信开发者工具的安装目录，输入<code>./cli.bat --auto 项目绝对路径 --auto-port 9420</code><br><img src="https://qiniu.xuyuyan.cn/QQ%E6%88%AA%E5%9B%BE20200421132357.png" alt="avator"><br>出现以下即代表成功：<br><img src="https://qiniu.xuyuyan.cn/QQ%E6%88%AA%E5%9B%BE20200421135002.png" alt="avator"><br>此时会弹出微信开发者工具和模拟器<br>(若没有弹出微信开发者工具请检查前面的所有操作或升级微信开发者工具版本)</li>
+</ol>
+<h2 id="编写自动化测试代码"><a href="#编写自动化测试代码" class="headerlink" title="编写自动化测试代码"></a>编写自动化测试代码</h2><ol>
+<li>新建一个js文件</li>
+<li>编写测试代码<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> automator = <span class="built_in">require</span>(<span class="string">&#x27;miniprogram-automator&#x27;</span>);<span class="comment">//引入自动化工具</span></span><br><span class="line">automator.connect(&#123;</span><br><span class="line">  wsEndpoint: <span class="string">&#x27;ws://localhost:9420&#x27;</span>,<span class="comment">//连接到9420端口</span></span><br><span class="line">&#125;).then(<span class="keyword">async</span> miniProgram =&gt; &#123;<span class="comment">//连接成功</span></span><br><span class="line">  <span class="comment">// 从首页重启</span></span><br><span class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> miniProgram.reLaunch(<span class="string">&#x27;/pages/index/index&#x27;</span>) </span><br><span class="line"><span class="comment">//   const joinBtn = await page.$$(&#x27;.index__card&#x27;)</span></span><br><span class="line"><span class="comment">//   await joinBtn[0].tap()//点击事件</span></span><br><span class="line"><span class="comment">//   let enterPage = await miniProgram.reLaunch(&#x27;/pages/joinConference/index&#x27;)//加入会议页面</span></span><br><span class="line">  <span class="keyword">const</span> img = <span class="keyword">await</span> page.$$(<span class="string">&#x27;image&#x27;</span>)<span class="comment">//获取标签名为image的集合</span></span><br><span class="line"><span class="comment">//   await input[0].trigger(&#x27;input&#x27;,&#123;value: 12312312&#125;)//input框输入事件，这里的第二个参数对应小程序event事件中的detail下的对象</span></span><br><span class="line"><span class="comment">//   await page.waitFor(500)//等待500ms</span></span><br><span class="line"><span class="comment">//   await input[0].trigger(&#x27;blur&#x27;)</span></span><br><span class="line"><span class="comment">//   await page.waitFor(500)</span></span><br><span class="line"><span class="comment">//   await input[2].trigger(&#x27;input&#x27;,&#123;value: 1234&#125;)</span></span><br><span class="line"><span class="comment">//   await page.waitFor(500)</span></span><br><span class="line"><span class="comment">//   await input[2].trigger(&#x27;blur&#x27;)</span></span><br><span class="line"><span class="comment">//   await page.waitFor(500)</span></span><br><span class="line"><span class="comment">//   const button = await enterPage.$(&#x27;button&#x27;)</span></span><br><span class="line">  <span class="keyword">await</span> img[<span class="number">0</span>].tap()</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  <span class="comment">// const page = await miniProgram.reLaunch(&#x27;/pages/index/index&#x27;)</span></span><br><span class="line">  <span class="comment">// const input = await page.$(&#x27;input&#x27;)</span></span><br><span class="line">  <span class="comment">// // console.log(await page.data())//获取页面的data数据</span></span><br><span class="line">  <span class="comment">// await page.setData(&#123;motto: &#x27;12242342&#x27;&#125;)//通过修改直接修改data数据</span></span><br><span class="line">  <span class="comment">// await input.trigger(&#x27;change&#x27;,&#123;a: &#x27;23433534647687990&#x27;&#125;)//输入框改变的事件</span></span><br><span class="line">  <span class="comment">// const test = await page.$(&#x27;test&#x27;)//组件</span></span><br><span class="line">  <span class="comment">// await test.trigger(&#x27;test&#x27;,&#123;a: &#x27;12423423&#x27;&#125;)</span></span><br><span class="line">  <span class="comment">// console.log(await test.callMethod(&#x27;methods&#x27;))//组件的事件</span></span><br><span class="line"> </span><br><span class="line">&#125;).catch(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;catch a error&#x27;</span>, e);</span><br><span class="line">&#125;); </span><br></pre></td></tr></table></figure>
+以上脚本的改变于微信小程序官方文档，功能为打开首页，点击第一个image标签。</li>
+<li>运行代码<br>在js脚本编辑器终端输入命令：<code>node js脚本的路径</code>（编辑器IDE不限，webstorm等前端开发工具均可，此处展示的是VSCode）<br><img src="https://qiniu.xuyuyan.cn/QQ%E6%88%AA%E5%9B%BE20200421141930.png" alt="avator"><br>将会看到用户头像被点击，跳转到logs界面（使用的微信小程序代码为官方样例代码，新建工程时默认）</li>
+</ol>
+<blockquote>
+<p>更多资料见：<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/devtools/auto/quick-start.html">https://developers.weixin.qq.com/miniprogram/dev/devtools/auto/quick-start.html</a><br>底部有界面元素的提取规则</p>
+</blockquote>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2020/04/21/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">http://www.xuyuyan.cn/2020/04/21/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"># 微信小程序</a>
+                    
+                        <a href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"># UI自动化测试</a>
+                    
+                        <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"># 软件测试</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/04/24/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a>
+            
+            
+            <a class="next" rel="next" href="/2020/02/14/hello-world/">Hello World</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;>
+        <div> <a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = 'https://cdn.webpushr.com/app.min.js';fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BGhEaFYyuyVcWwM03F9-Abl8obA4cFqpft60ZXG9lf4wvlsPEYTdMMY84KD3yaZ1kxjDaVoqQbVvjRJAG2fqVfU');</script></body>
+</html>
