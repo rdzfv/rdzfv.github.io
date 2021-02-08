@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>小解图算法·图的定义与实现 | xyy爱吃番茄</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">小解图算法·图的定义与实现</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">二月 8, 2021&nbsp;&nbsp;17:15:48</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%9B%BE%E7%AE%97%E6%B3%95/">图算法</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>本文为图算法的先导篇，将会介绍和图相关的概念以及代码实现。</p>
+<a id="more"></a>
+<h1 id="小解图算法-·-图的定义和实现"><a href="#小解图算法-·-图的定义和实现" class="headerlink" title="小解图算法 · 图的定义和实现"></a>小解图算法 · 图的定义和实现</h1><h3 id="一、图的定义"><a href="#一、图的定义" class="headerlink" title="一、图的定义"></a>一、图的定义</h3><p>图 G 由顶点集 V 和边集 E 组成，记作 $G=(V,E)$。</p>
+<ul>
+<li><p>$V(G)$ 表示图 G 中<strong>顶点</strong>的有限非空集合</p>
+</li>
+<li><p>E(G) 表示图 G 中顶点之间的<strong>边</strong>关系集合。</p>
+</li>
+<li><p>$V={v_1,v_2,…,v_n}$ ，用 |V| 表示图 G 中<strong>顶点的个数，也称图 G 的阶</strong>。</p>
+</li>
+<li><p>$E={(u,v)|u\in V,v\in V}$，用 |E| 表示图 G 中<strong>边的条数</strong>。</p>
+</li>
+</ul>
+<p>线性表可以是空表，树可以是孔数，但图不能是空图（图的顶点集不能为空，边集可以为空）</p>
+<br>
+
+<p>以下是图的基本概念和术语：</p>
+<ol>
+<li><p><strong>有向图</strong>：</p>
+<p>$G_1=(V_1,E_1)$</p>
+<p>$V_1={1,2,3}$</p>
+<p>$E_1={&lt;1,2&gt;,&lt;2,1&gt;,&lt;2,3&gt;}$</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210208145422908.png" alt="image-20210208145422908" style="zoom:50%;" />
+</li>
+<li><p><strong>无向图</strong>：</p>
+<p>$G_2=(V_2,E_2)$</p>
+<p>$V_2={1,2,3}$</p>
+<p>$E_2={(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)}$</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210208145655017.png" alt="image-20210208145655017" style="zoom:50%;" />
+</li>
+<li><p><strong>简单图</strong>：</p>
+<p>若一个图满足： (I) 不存咋重复边；(II) 不存在从顶点到自身的边；</p>
+<p>则称为简单图。（一般数据结构中只讨论简单图）</p>
+</li>
+<li><p><strong>多重图</strong>：</p>
+<p>若图 G 中某两点之间的边多于一条，又允许顶点通过一条边和自己关联，则 G 为多重图。（多重图的定义和简单图相对）</p>
+</li>
+<li><p><strong>简单完全图</strong>：</p>
+<p>对于无向图，任意两个顶点之间都存在边（共 $n(n-1)/2$ 条）</p>
+<p>对于有向图，任意两个顶点之间同时存在出边和入边（共 $n(n-1)$ 条）</p>
+</li>
+<li><p><strong>子图</strong>：</p>
+<p>边集和顶点集都为原图的子集，同时需要格外注意，新的顶点集和边集必须可以构成图</p>
+</li>
+<li><p><strong>连通、连通图、连通分量</strong>：</p>
+<p>在无向图中，若从顶点 v 到顶点 w 有路径存在，则称 v 和 w 是<strong>连通</strong>的。</p>
+<p>若图 G 中任意两个顶点都是连通的，则称图 G 为<strong>连通图</strong>，否则为<strong>非连通图</strong>。</p>
+<p>无向图中极大连通子图称为<strong>连通分量</strong>。（极大要求该连通子图需要包含原图所有的边）</p>
+</li>
+<li><p><strong>强连通图、强连通分量</strong>：</p>
+<p>在有向图中，若两不同顶点之间互相都有路径，则称这两个顶点是<strong>强连通</strong>的。</p>
+<p>若图中的任意一对顶点都是强连通的，则将图称为<strong>强连通分量</strong>。</p>
+</li>
+<li><p><strong>生成树、生成森林</strong>：</p>
+<p>对于<strong>生成树</strong>而言，如果砍去它的一条边，图将从连通图变成非连通图；如果加上一条边则会形成一个回路。</p>
+<p>在非连通图中，连通分量的生成树构成了非连通图的<strong>生成森林</strong>。</p>
+</li>
+</ol>
+<h3 id="二、图的存储："><a href="#二、图的存储：" class="headerlink" title="二、图的存储："></a>二、图的存储：</h3><h4 id="1-邻接矩阵法："><a href="#1-邻接矩阵法：" class="headerlink" title="1. 邻接矩阵法："></a>1. 邻接矩阵法：</h4><p>所谓邻接矩阵，就是用一个<strong>一维数组存储图中顶点信息</strong>，用一个<strong>二维数组存储图中边的信息</strong>（各顶点之间的邻接关系）。其中，存储顶点之间邻接关系的二维数组称为邻接矩阵。</p>
+<p>$A[i][j]=\begin{cases} 1&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 是 E(G) 中的边} \\0&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 不是 E(G) 中的边} \end{cases}$</p>
+<p>对于带权图来说，若顶点 $v_i$ 和 $v_j$ 之间有边相连，则邻接矩阵中应存放边对应的权值。</p>
+<p>$A[i][j]=\begin{cases} w_{ij}&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 是 E(G) 中的边} \\0\ 或\ \infty&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 不是 E(G) 中的边} \end{cases}$</p>
+<p>使用 c/c++ 语言描述为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> VertexTtype;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> EdgeType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    VertextType Vex[MaxVertexNum];  <span class="comment">// 顶点表</span></span><br><span class="line">    EdgeType Edge[MaxVertexNum][MaxVertexNum];  <span class="comment">// 邻接矩阵（边表）</span></span><br><span class="line">    <span class="keyword">int</span> vexnum,arcnum;   <span class="comment">// 弧当前的顶点数和弧数</span></span><br><span class="line">&#125; MGraph;</span><br></pre></td></tr></table></figure>
+<h4 id="2-邻接表法："><a href="#2-邻接表法：" class="headerlink" title="2. 邻接表法："></a>2. 邻接表法：</h4><p>当一个图的边集较少时（即顶点间的关系不复杂），使用邻接矩阵方法会浪费大量的存储空间，此时，图的邻接表法结合了顺序存储和链式存储的方法，<strong>大大减少了空间开销</strong>。</p>
+<p>所谓邻接表，是指对图 G 中的每个顶点建立一个单链表，链表存储依附于该结点的其他结点（这个单链表就成为顶点的<strong>边表</strong>）。各边表的头指针和顶点数据采用顺序存储（称为<strong>顶点表</strong>）。</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210208163013602.png" alt="image-20210208163013602" style="zoom: 50%;" />
+
+<p>以下是为读者更为清晰地理解邻接表法存储而举出的例子：</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210208163149663.png" alt="image-20210208163013602" style="zoom: 50%;" />
+
+<p>使用 c/c++ 语言描述为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> &#123;</span>  <span class="comment">//// 边表节点</span></span><br><span class="line">    <span class="keyword">int</span> adjvex;             <span class="comment">// 该弧指向的顶点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> *<span class="title">next</span>;</span>   <span class="comment">// 指向下一条弧的指针</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span> &#123;</span>    <span class="comment">//// 顶点表节点</span></span><br><span class="line">    VertexType data;        <span class="comment">// 顶点信息</span></span><br><span class="line">    ArcNode *first;         <span class="comment">// 指向第一条依附于该顶点的弧指针</span></span><br><span class="line">&#125;VNode,AdjList[MaxVertexNum];</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    VAdjList vertices;   <span class="comment">// 邻接表</span></span><br><span class="line">    <span class="keyword">int</span> vexnum,arcnum;   <span class="comment">// 图的顶点数和弧数</span></span><br><span class="line">&#125; MGraph;</span><br></pre></td></tr></table></figure>
+<h3 id="三、图的基本操作"><a href="#三、图的基本操作" class="headerlink" title="三、图的基本操作"></a>三、图的基本操作</h3><ol>
+<li>Adjacent(G, x, y)：判断是否存在边 &lt;x, y&gt; 或 (x, y)</li>
+<li>Neighbors(G, x)：列出图 G 中与节点 x 邻接的边</li>
+<li>InsertVertex(G, x)：在图 G 中插入顶点 x</li>
+<li>DeleteVertex(G, x)：在图 G 中删除顶点 x</li>
+<li>AddEdge(G, x, y)：若无向边 (x, y) 或有向边 &lt;x, y&gt; 不存在，则向图 G 中添加该边</li>
+<li>RemoveEdge(G, x, y)：若无向边 (x, y) 或有向边 &lt;x, y&gt; 存在，则在图 G 中删除该边</li>
+<li>FirstNeighbor(G, x)：求图 G 中顶点 x 的第一个邻接点，若有则返回顶点号。</li>
+<li>NextNeighbor(G, x, y)：假设图 G 中顶点 y 是顶点 x 的一个邻接点，返回除 y 外顶点 x 的下一个邻接顶点号</li>
+<li>GetEdgeValue(G, x, y)：获取图 G 中边 (x, y) 或 &lt;x, y&gt; 对应的权值</li>
+<li>SetEdgeValue(G, x, y, v)：设置图 G 中边 (x, y) 或 &lt;x, y&gt; 对应的权值为 v</li>
+</ol>
+<p>（由于操作的实现基于数据结构，而实现图的数据结构复杂多样，此处不提供代码）</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2021/02/08/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0/">http://www.xuyuyan.cn/2021/02/08/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%9B%BE/"># 图</a>
+                    
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"># 数据结构</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/02/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%C2%B7%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">操作系统·计算机系统概述</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;>
+        <div> <a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = 'https://cdn.webpushr.com/app.min.js';fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BGhEaFYyuyVcWwM03F9-Abl8obA4cFqpft60ZXG9lf4wvlsPEYTdMMY84KD3yaZ1kxjDaVoqQbVvjRJAG2fqVfU');</script></body>
+</html>
