@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>小解图算法·DFS+回溯 | xyy爱吃番茄</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">小解图算法·DFS+回溯</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">二月 15, 2021&nbsp;&nbsp;15:42:29</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>三道题熟练写出回溯算法，记得要看最后的总结~</p>
+<a id="more"></a>
+<h1 id="小解图算法-·-DFS-回溯"><a href="#小解图算法-·-DFS-回溯" class="headerlink" title="小解图算法 · DFS+回溯"></a>小解图算法 · DFS+回溯</h1><h3 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h3><p><strong>深度优先搜索</strong>总是对最近才发现的结点 v 的出发边进行探索，直到该节点的所有出发边都被发现为止。如果还存在着尚未发现的结点，则深度优先搜索将从这些未发现的节点任选一个作为新的源节点，并重复同样的搜索过程。以上过程被不断重复，直至图中的所有节点都被发现。</p>
+<p>此处我们先给出伪代码示意：（因为大部分情况我们并不会真的去构造图节点，这样开销太大，而是使用 DFS 深度优先的思想）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">bool visited[MAX_VERTEX_NUM];  &#x2F;&#x2F; 访问标记数组（true为已访，false为未访）</span><br><span class="line">void DFSTraverse(Graph G) &#123;</span><br><span class="line">	for (v &#x3D; 0; v &lt; G.vexnum; v++) visited[v] &#x3D; false; &#x2F;&#x2F; 初始化标记数组</span><br><span class="line">	&#x2F;&#x2F; 依次访问图G的节点，如果是未访问节点，则对该节点执行DFS（作用于非连通图）</span><br><span class="line">	for (v &#x3D; 0; v &lt; G.vexnum; v++) &#123;  </span><br><span class="line">		if (!visited[v]) DFS(G, v);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void DFS(Graph G, int v) &#123; &#x2F;&#x2F; 从顶点v出发，深度优先遍历图G</span><br><span class="line">	visit(v);           &#x2F;&#x2F; 访问顶点v</span><br><span class="line">	visited[v] &#x3D; true;  &#x2F;&#x2F; 标记v顶点为已访问</span><br><span class="line">	&#x2F;&#x2F; 依次访问与v相邻的节点，如果节点未访问，则对新的节点执行DFS</span><br><span class="line">	for (w &#x3D; FirstNeighbor(G, v); w &gt;&#x3D; 0; w &#x3D; NextNeighor(G, v, w)) &#123;</span><br><span class="line">		if (!visited[w]) DFS(G, w);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="二、第一个例子：全排列"><a href="#二、第一个例子：全排列" class="headerlink" title="二、第一个例子：全排列"></a>二、第一个例子：全排列</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">https://leetcode-cn.com/problems/permutations/</a></p>
+<blockquote>
+<p>给定一个 <strong>没有重复</strong> 数字的序列，返回其所有可能的全排列。</p>
+</blockquote>
+<p>对题干不多做分析，是很“朴实”的全排列题。我们可以利用手动分析的办法，画出如下树形图：</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210209121113393.png" alt="image-20210209121113393" style="zoom:30%;" />
+
+<p>很容易发现我们可以利用 DFS 的思想：其中题目要求我们不能填入已经填过的数字，所以应当为给出数据的标记数组，来标记数字是否已经被使用，并动态维护。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; output, <span class="keyword">int</span> first, <span class="keyword">int</span> len, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tag, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 所有数都填完了</span></span><br><span class="line">    <span class="keyword">if</span> (first == len) &#123;</span><br><span class="line">        res.push_back(output);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = first; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (tag[j] != <span class="number">1</span>) &#123;  <span class="comment">// 如果是未访问数</span></span><br><span class="line">                tag[j] = <span class="number">1</span>;</span><br><span class="line">                output.push_back(nums[j]);</span><br><span class="line">                dfs(res, output, first + <span class="number">1</span>, len, tag, nums);</span><br><span class="line">                <span class="comment">// 撤回标记和结果数组</span></span><br><span class="line">                tag[j] = <span class="number">0</span>;  </span><br><span class="line">                output.pop_back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; permute(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">    <span class="keyword">int</span> len = nums.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">tag</span><span class="params">(len)</span></span>;  <span class="comment">// 访问标记数组</span></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">output</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    dfs(res, output, <span class="number">0</span>, nums.size(), tag, nums);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用标记数组来处理填过的数是一个很直观的思路，但是可不可以<strong>去掉这个标记数组</strong>呢？毕竟标记数组也增加了我们算法的空间复杂度。我们可以将题目给定的 n 个数的<strong>数组 nums 划分成左右两个部分，左边的表示已经填过的数，右边表示待填的数</strong>，我们在回溯的时候只要动态维护这个数组即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; output, <span class="keyword">int</span> first, <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 所有数都填完了</span></span><br><span class="line">    <span class="keyword">if</span> (first == len) &#123;</span><br><span class="line">        res.emplace_back(output);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = first; i &lt; len; ++i) &#123;</span><br><span class="line">        <span class="comment">// 动态维护数组</span></span><br><span class="line">        swap(output[i], output[first]);</span><br><span class="line">        <span class="comment">// 继续递归填下一个数</span></span><br><span class="line">        dfs(res, output, first + <span class="number">1</span>, len);</span><br><span class="line">        <span class="comment">// 撤销操作</span></span><br><span class="line">        swap(output[i], output[first]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; permute(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</span><br><span class="line">    dfs(res, nums, <span class="number">0</span>, nums.size());</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><ul>
+<li><p>时间复杂度：$O(n \times n!)$，其中 n 为序列的长度。<br>算法的复杂度首先受 dfs 的调用次数制约，dfs 的调用次数为 $\sum_{k = 1}^{n}{P(n, k)}$ 次，其中 $P(n, k) = \frac{n!}{(n - k)!} = n (n - 1) … (n - k + 1)$ 式被称作 n 的 k 排列，或者部分排列。<br>而 $\sum_{k = 1}^{n}{P(n, k)} = n! + \frac{n!}{1!} + \frac{n!}{2!} + \frac{n!}{3!} + … + \frac{n!}{(n-1)!} &lt; 2n! + \frac{n!}{2} + \frac{n!}{2^2} + \frac{n!}{2^{n-2}} &lt; 3n!$。<br>这说明 dfs 的调用次数是 $O(n!)$ 的。<br>而对于 dfs 调用的每个叶结点（共 $n!$ 个），我们需要将当前答案使用 $O(n)$ 的时间复制到答案数组中，相乘得时间复杂度为 $O(n \times n!)$。</p>
+</li>
+<li><p>空间复杂度：$O(n)$，其中 n 为序列的长度。除答案数组以外，递归函数在递归过程中需要为每一层递归函数分配栈空间，所以这里需要额外的空间且该空间取决于递归的深度，这里可知递归调用深度为 $O(n)$。</p>
+</li>
+</ul>
+<h3 id="三、第二个例子：组合"><a href="#三、第二个例子：组合" class="headerlink" title="三、第二个例子：组合"></a>三、第二个例子：组合</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/</a></p>
+<blockquote>
+<p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。</p>
+<p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210210090811994.png" alt="image-20210210090811994" style="zoom:100%;" />
+</blockquote>
+<p>以例子 “23” 字符串为例，数字 2 可以代表字符 a、b、c，数字 3 可以代表字符 d、e、f。凭借朴素的数学知识，我们知道这是一个组合问题，并可以简单地写出答案：</p>
+<table>
+<thead>
+<tr>
+<th>a 开头</th>
+<th>b 开头</th>
+<th>c 开头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ad</td>
+<td>bd</td>
+<td>cd</td>
+</tr>
+<tr>
+<td>ae</td>
+<td>be</td>
+<td>ce</td>
+</tr>
+<tr>
+<td>af</td>
+<td>bf</td>
+<td>cf</td>
+</tr>
+</tbody></table>
+<p>在计算机编程中我们通常使用 DFS 回溯的办法，先将上述过程用图的形式展示：</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210210092424586.png" alt="image-20210210092424586" style="zoom:25%;" />
+
+<p>图的遍历可以用 DFS 解决。因此我们另一个需要解决的是：如何将数字和字符对应（同时需要注意，部分数字对应3个字符，部分数字对应4个字符）。此处我给出的解决方案是：将一个数字对应的字符组成字符串，并用哈希表使数字和字符对应。</p>
+<p>以下为代码表示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;  // unordered_map 对应的头文件</span></span></span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="built_in">string</span>&gt; phoneMap&#123;</span><br><span class="line">    &#123;<span class="string">&#x27;2&#x27;</span>, <span class="string">&quot;abc&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;3&#x27;</span>, <span class="string">&quot;def&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;4&#x27;</span>, <span class="string">&quot;ghi&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;5&#x27;</span>, <span class="string">&quot;jkl&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;6&#x27;</span>, <span class="string">&quot;mno&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;7&#x27;</span>, <span class="string">&quot;pqrs&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;8&#x27;</span>, <span class="string">&quot;tuv&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;9&#x27;</span>, <span class="string">&quot;wxyz&quot;</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>接下来我们需要设计 DFS 函数来实现图的深度优先遍历（字符组合）。因为是递归函数，所以有一些必要的参数：phoneMap 哈希表、结果字符串向量 results、给定的数字串输入 digits、正在组合的字符串 result。此外，我们还需要一个<strong>位置标记 index</strong> 来标记正在组合的位置下标（一般用来控制递归规模）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; results, <span class="keyword">const</span> <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="built_in">string</span>&gt;&amp; phoneMap, <span class="keyword">const</span> <span class="built_in">string</span>&amp; digits, </span></span></span><br><span class="line"><span class="function"><span class="params">         <span class="keyword">int</span> index, <span class="built_in">string</span>&amp; result)</span></span></span><br></pre></td></tr></table></figure>
+<p>DFS 算法有一个很明显的特征：<strong>回溯</strong>。我们一般先尝试性地走向一个分支，如果分支不合法或分支走到尽头，则需要 “回头走” （回溯）。在本题中即为，我们为一个数字尝试性地分配一个字符，当分支走到尽头时，则撤销之前的一次操作；然后分配下一个字符。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; results, <span class="keyword">const</span> <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="built_in">string</span>&gt;&amp; phoneMap, <span class="keyword">const</span> <span class="built_in">string</span>&amp; digits, </span></span></span><br><span class="line"><span class="function"><span class="params">         <span class="keyword">int</span> index, <span class="built_in">string</span>&amp; result)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 递归最小规模（完成所有数字的组合）</span></span><br><span class="line">    <span class="keyword">if</span> (index == digits.length()) &#123;</span><br><span class="line">        results.push_back(result);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">char</span> digit = digits[index];</span><br><span class="line">        <span class="keyword">const</span> <span class="built_in">string</span>&amp; letters = phoneMap.at(digit);  <span class="comment">// 获取当前数字对应的字符串</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">char</span>&amp; letter: letters) &#123;</span><br><span class="line">            result.push_back(letter); </span><br><span class="line">            dfs(results, phoneMap, digits, index + <span class="number">1</span>, result);</span><br><span class="line">            result.pop_back(); <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后将代码进行整合：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; results, <span class="keyword">const</span> <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="built_in">string</span>&gt;&amp; phoneMap, <span class="keyword">const</span> <span class="built_in">string</span>&amp; digits, <span class="keyword">int</span> index, <span class="built_in">string</span>&amp; result)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (index == digits.length()) &#123;</span><br><span class="line">        results.push_back(result);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">char</span> digit = digits[index];</span><br><span class="line">        <span class="keyword">const</span> <span class="built_in">string</span>&amp; letters = phoneMap.at(digit);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">char</span>&amp; letter: letters) &#123;</span><br><span class="line">            result.push_back(letter);</span><br><span class="line">            dfs(results, phoneMap, digits, index + <span class="number">1</span>, result);</span><br><span class="line">            result.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">letterCombinations</span><span class="params">(<span class="built_in">string</span> digits)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; results;</span><br><span class="line">    <span class="keyword">if</span> (digits.empty()) &#123;   <span class="comment">// 判空</span></span><br><span class="line">        <span class="keyword">return</span> results;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="built_in">string</span>&gt; phoneMap&#123;</span><br><span class="line">            &#123;<span class="string">&#x27;2&#x27;</span>, <span class="string">&quot;abc&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;3&#x27;</span>, <span class="string">&quot;def&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;4&#x27;</span>, <span class="string">&quot;ghi&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;5&#x27;</span>, <span class="string">&quot;jkl&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;6&#x27;</span>, <span class="string">&quot;mno&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;7&#x27;</span>, <span class="string">&quot;pqrs&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;8&#x27;</span>, <span class="string">&quot;tuv&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;9&#x27;</span>, <span class="string">&quot;wxyz&quot;</span>&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">string</span> result;</span><br><span class="line">    dfs(results, phoneMap, digits, <span class="number">0</span>, result);   <span class="comment">// index从0开始</span></span><br><span class="line">    <span class="keyword">return</span> results;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="四、第三个例子-·-单词搜索"><a href="#四、第三个例子-·-单词搜索" class="headerlink" title="四、第三个例子 · 单词搜索"></a>四、第三个例子 · 单词搜索</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-search/">https://leetcode-cn.com/problems/word-search/</a></p>
+<blockquote>
+<p>给定一个二维网格和一个单词，找出该单词是否存在于网格中。</p>
+<p>单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。</p>
+</blockquote>
+<p>此处举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">board &#x3D;</span><br><span class="line">[</span><br><span class="line">  [&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;E&#39;],</span><br><span class="line">  [&#39;S&#39;,&#39;F&#39;,&#39;C&#39;,&#39;S&#39;],</span><br><span class="line">  [&#39;A&#39;,&#39;D&#39;,&#39;E&#39;,&#39;E&#39;]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>当 word = “ABFC” 时，我们用人工观察的方法会从字母“A”开始上下左右地匹配下一个字母，如果中途发现上下左右的字母都无法匹配则回退一个字符。我们可以将上述过程化成一个树状图：</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210215151124924.png" alt="image-20210215151124924" style="zoom:40%;" />
+
+<p>其中向上下左右（UDLR）匹配即为每一个决策节点的分支，向四方搜寻的操作用代码表述为：（体现为当前字符在字符矩阵中的横纵左边的变化）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">backtrack(board, word, wordIndex + <span class="number">1</span>, x - <span class="number">1</span>, y);  <span class="comment">// 向上走</span></span><br><span class="line">backtrack(board, word, wordIndex + <span class="number">1</span>, x + <span class="number">1</span>, y);  <span class="comment">// 向下走</span></span><br><span class="line">backtrack(board, word, wordIndex + <span class="number">1</span>, x, y - <span class="number">1</span>);  <span class="comment">// 向左走</span></span><br><span class="line">backtrack(board, word, wordIndex + <span class="number">1</span>, x, y + <span class="number">1</span>);  <span class="comment">// 向右走</span></span><br></pre></td></tr></table></figure>
+<p>由于题干要求同一位置的字符只能使用一次，因此需要建立一个同字符矩阵相同大小的访问标记矩阵，每次匹配一位字符就将对应位置标记为已访问；每次回退一步需将对应位置修改为未访问。同时，字符矩阵存在上下左右的边限，因此需要对上下左右访问的<strong>合法性</strong>进行<strong>判断</strong>（即不能访问界外数据）。用代码表述为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> tmp = board[x][y];  <span class="comment">// 构建访问标记数组</span></span><br><span class="line">board[x][y] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>((x &gt; <span class="number">0</span> &amp;&amp; backtrack(board, word, wordIndex, x - <span class="number">1</span>, y)) <span class="comment">// 往上走</span></span><br><span class="line">   || (y &gt; <span class="number">0</span> &amp;&amp; backtrack(board, word, wordIndex, x, y - <span class="number">1</span>)) <span class="comment">// 往左走</span></span><br><span class="line">   || (x &lt; board.size() - <span class="number">1</span> &amp;&amp; backtrack(board, word, wordIndex, x + <span class="number">1</span>, y)) <span class="comment">// 往下走</span></span><br><span class="line">   || (y &lt; board[<span class="number">0</span>].size() - <span class="number">1</span> &amp;&amp; backtrack(board, word, wordIndex, x, y + <span class="number">1</span>)))&#123; <span class="comment">// 往右走</span></span><br><span class="line">    <span class="keyword">return</span>  <span class="literal">true</span>; <span class="comment">// 其中一条能走通，就算成功</span></span><br><span class="line">&#125;</span><br><span class="line">board[x][y] = tmp; <span class="comment">// 如果都不通，则回溯上一状态</span></span><br></pre></td></tr></table></figure>
+<p>最后对之前代码所涉及的 backtrack 函数进行说明：</p>
+<p><code>bool backtrack(vector&lt;vector&lt;char&gt;&gt;&amp; board, string&amp; word, int wordIndex, int x, int y)</code></p>
+<p>board 和 word 为输入给定的字符矩阵和目标字符串，wordIndex 为当前匹配到的字符的下标，x 和 y 为当前匹配的字符在字符矩阵中的位置（横纵坐标）。完整的 backrack 函数如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">backtrack</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; board, <span class="built_in">string</span>&amp; word, </span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="keyword">int</span> wordIndex, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 当前位的字母不相等，此路不通</span></span><br><span class="line">    <span class="keyword">if</span>( board[x][y] != word[wordIndex]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// 最后一个字母也相等, 返回成功</span></span><br><span class="line">    <span class="keyword">if</span>(word.size() - <span class="number">1</span>  == wordIndex) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">char</span> tmp = board[x][y]; </span><br><span class="line">    board[x][y] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>((x &gt; <span class="number">0</span> &amp;&amp; backtrack(board, word, wordIndex + <span class="number">1</span>, x - <span class="number">1</span>, y)) <span class="comment">// 往上走</span></span><br><span class="line">       || (y &gt; <span class="number">0</span> &amp;&amp; backtrack(board, word, wordIndex + <span class="number">1</span>, x, y - <span class="number">1</span>)) <span class="comment">// 往左走</span></span><br><span class="line">       || (x &lt; board.size() - <span class="number">1</span> &amp;&amp; backtrack(board, word, wordIndex + <span class="number">1</span>, x + <span class="number">1</span>, y)) <span class="comment">// 往下走</span></span><br><span class="line">       || (y &lt; board[<span class="number">0</span>].size() - <span class="number">1</span> &amp;&amp; backtrack(board, word, wordIndex + <span class="number">1</span>, x, y + <span class="number">1</span>)))&#123; <span class="comment">// 往右走</span></span><br><span class="line">        <span class="keyword">return</span>  <span class="literal">true</span>; <span class="comment">// 其中一条能走通，就算成功</span></span><br><span class="line">    &#125;</span><br><span class="line">    board[x][y] = tmp; <span class="comment">// 如果都不通，则回溯上一状态</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述 backtrack 函数可以解决在同一连通分量中的深度优先搜索，对于不同的连通分量（起始字符位置不同）仅需在循环中调用 backtrack 函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">exist</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; board, <span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; board.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; board[<span class="number">0</span>].size(); j++)&#123;</span><br><span class="line">            <span class="comment">// 从二维表格的每一个格子出发</span></span><br><span class="line">            <span class="keyword">if</span>(backtrack(board, word, <span class="number">0</span>, i , j)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><p>​    深度优先遍历+回溯算法具有明显的特征，通常具有二维性。可以<strong>通过人工推演的方式，画出决策树</strong>。一般需要设计两个函数，backtrack 函数（递归）和外层函数。</p>
+<ul>
+<li><p>backtrack 函数一般需要考虑：</p>
+<ul>
+<li>传递<strong>原始数据</strong>、<strong>标记数据</strong></li>
+<li>标识并传递<strong>递归深度</strong>（每次递归深度加深）</li>
+<li>每次进入更深层次的递归，需要<strong>更进</strong>标记数据、递归深度；每次回溯需要<strong>撤销</strong>之前对标记数据的操作</li>
+</ul>
+</li>
+<li><p>外层函数一般需要考虑：</p>
+<ul>
+<li>调用 backtrack 递归函数并<strong>为顶层递归赋初值</strong> </li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2021/02/15/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7DFS-%E5%9B%9E%E6%BA%AF/">http://www.xuyuyan.cn/2021/02/15/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7DFS-%E5%9B%9E%E6%BA%AF/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AE%97%E6%B3%95/"># 算法</a>
+                    
+                        <a href="/tags/DFS/"># DFS</a>
+                    
+                        <a href="/tags/%E5%9B%9E%E6%BA%AF/"># 回溯</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/02/08/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0/">小解图算法·图的定义与实现</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;>
+        <div> <a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = 'https://cdn.webpushr.com/app.min.js';fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BGhEaFYyuyVcWwM03F9-Abl8obA4cFqpft60ZXG9lf4wvlsPEYTdMMY84KD3yaZ1kxjDaVoqQbVvjRJAG2fqVfU');</script></body>
+</html>
