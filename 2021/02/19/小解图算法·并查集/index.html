@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>小解图算法·并查集 | xyy爱吃番茄</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">小解图算法·并查集</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">二月 19, 2021&nbsp;&nbsp;20:41:13</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>三题带你了解并查集，记得要看最后的总结哦~</p>
+<a id="more"></a>
+<h1 id="小解图算法-·-并查集"><a href="#小解图算法-·-并查集" class="headerlink" title="小解图算法 · 并查集"></a>小解图算法 · 并查集</h1><h3 id="一、引入-·-省份的数量"><a href="#一、引入-·-省份的数量" class="headerlink" title="一、引入 · 省份的数量"></a>一、引入 · 省份的数量</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-provinces/">https://leetcode-cn.com/problems/number-of-provinces/</a></p>
+<blockquote>
+<p>有 n 个城市，其中一些彼此相连，另一些没有相连。如果城市 a 与城市 b 直接相连，且城市 b 与城市 c 直接相连，那么城市 a 与城市 c 间接相连。</p>
+<p>省份 是一组直接或间接相连的城市，组内不含其他没有相连的城市。</p>
+<p>给你一个 n x n 的矩阵 isConnected ，其中 isConnected[i][j] = 1 表示第 i 个城市和第 j 个城市直接相连，而 isConnected[i][j] = 0 表示二者不直接相连。</p>
+<p>返回矩阵中省份的数量。</p>
+</blockquote>
+<p>这是一题并查集入门题，我们主要通过此题来了解<strong>并查集用于解决怎样的问题</strong>。</p>
+<p>我们可以利用集合的思想，<strong>将相连的城市并入一个集合</strong>（题意中的省），则求省份的数量就是求合并完成后集合的数量。</p>
+<p>因此，我们可以理解为，并查集可以作为一个<strong>少数据量下分类和聚类</strong>的一个工具。</p>
+<h3 id="二、定义"><a href="#二、定义" class="headerlink" title="二、定义"></a>二、定义</h3><p>​    并查集的取名来源于“并”（Union）、“查”（Find）、“集”（Set），因此并查集主要解决两个问题：</p>
+<ul>
+<li>合并：将两个集合合并</li>
+<li>查找：判断两个元素是否在同一个集合中</li>
+</ul>
+<p>为了节省开销，并查集一般<strong>用树来表示集合</strong>，一棵树代表一个集合。数据结构上使用一维数组，利用<strong>树顺序存储时父子节点的下标关系</strong> <code>x = y / 2</code> 来实现快速遍历。</p>
+<p>一般设计 father[index] 数组，下标 index 表示元素的下标，father[index] 是下标为 index 的父节点的下标。</p>
+<p><font color=#FF0000>【注意】：树的顺序存储下标从 1 开始。</font></p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a><code>初始化</code></h4><p>一开始，每一个元素都是一个独立的集合，则每一个数的父节点都是其本身。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">    father[i] = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a><code>查找</code></h4><p>查找操作就是对给定节点通过父子关系，不断向上查找父节点，直至根节点。<strong>如果两个给定节点具有相同的根节点，则两节点隶属于同一集合</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findFather</span> <span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (x != father[x]) &#123;  <span class="comment">// 如果不是根节点，则需不断向上查找</span></span><br><span class="line">        x = father[x];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>亦可以使用递归的写法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findFather</span> <span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == father[x]) <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> findFather(father[x]);  <span class="comment">// 如果不是根节点，则需不断向上查找</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a><code>合并</code></h3><p>合并就是把两个集合合并为一个集合。合并的步骤分为两步：</p>
+<ol>
+<li>判断给定的两元素是否属于同一集合（操作同 <code>查找</code>）</li>
+<li>如不属于同一集合则合并：将两元素的根元素 faA 和 faB 相连（即 <code>father[faA] = faB</code> 或 <code>father[faB] = faA</code>）</li>
+</ol>
+<p>用代码表述：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> faA = findFather(a);  <span class="comment">// 查找a的根节点</span></span><br><span class="line">    <span class="keyword">int</span> faB = findFather(b);  <span class="comment">// 查找b的根节点</span></span><br><span class="line">    <span class="keyword">if</span> (faA != faB) &#123;   <span class="comment">// 如果两元素不属于同一集合（根节点不同），则合并</span></span><br><span class="line">        father[faA] = faB;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、路径压缩与按秩合并"><a href="#三、路径压缩与按秩合并" class="headerlink" title="三、路径压缩与按秩合并"></a>三、路径压缩与按秩合并</h3><h4 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a><code>路径压缩</code></h4><p>​    第二章所述的并查集存储结构是没有经过优化的，一般如下图左侧所示。单链状的结构会增加查询的次数；优化的目的是为了减少查询次数（即树的高度），所以我们可以将单链转化为 N 叉树，如下右图所示。</p>
+<img src="C:\Users\xyy\AppData\Roaming\Typora\typora-user-images\image-20210217165052335.png" alt="image-20210217165052335" style="zoom:25%;" />
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findFather</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = x;</span><br><span class="line">    <span class="keyword">while</span> (x != father[x]) x = father[x]; <span class="comment">// 不断寻找根节点，最后根节点为x</span></span><br><span class="line">    <span class="keyword">while</span> (a != father[a]) &#123;  <span class="comment">// 将每一个普通节点指向根节点</span></span><br><span class="line">        <span class="keyword">int</span> z = a;</span><br><span class="line">        a = father[a];</span><br><span class="line">        father[z] = x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>路径压缩后的查找操作复杂度可视为 O(1) 。</p>
+<h4 id="按秩合并"><a href="#按秩合并" class="headerlink" title="按秩合并"></a><code>按秩合并</code></h4><p>因为层数越多，搜索代价越大，因此按秩合并的目的就在于<strong>减少层数</strong>。因此我们若将层数低的树作为父节点，则相比层数高度作为父节点，合并后的层数可能较少。如下图所示。</p>
+<img src="C:\Users\xyy\AppData\Roaming\Typora\typora-user-images\image-20210217171313257.png" alt="image-20210217171313257" style="zoom:35%;" />
+
+<p>用代码表述：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> faA = findFather(a);  <span class="comment">// 查找a的根节点</span></span><br><span class="line">    <span class="keyword">int</span> faB = findFather(b);  <span class="comment">// 查找b的根节点</span></span><br><span class="line">    <span class="keyword">if</span> (rank[faA] &gt; rank[faB]) father[faB] = faA;  <span class="comment">// 小秩为父节点</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (rank[faA] == rank[faB]) rank[faB]++;</span><br><span class="line">        pre[faA] = faB;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="四、再次回到第一题"><a href="#四、再次回到第一题" class="headerlink" title="四、再次回到第一题"></a>四、再次回到第一题</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-provinces/">https://leetcode-cn.com/problems/number-of-provinces/</a></p>
+<blockquote>
+<p>有 n 个城市，其中一些彼此相连，另一些没有相连。如果城市 a 与城市 b 直接相连，且城市 b 与城市 c 直接相连，那么城市 a 与城市 c 间接相连。</p>
+<p>省份 是一组直接或间接相连的城市，组内不含其他没有相连的城市。</p>
+<p>给你一个 n x n 的矩阵 isConnected ，其中 isConnected[i][j] = 1 表示第 i 个城市和第 j 个城市直接相连，而 isConnected[i][j] = 0 表示二者不直接相连。</p>
+<p>返回矩阵中省份的数量。</p>
+</blockquote>
+<p>在 <code>引入</code> 章节我们已经对题意进行了简单分析：<strong>将相连的城市并入一个集合</strong>（题意中的省），求合并完成后集合的数量（题意中省份的数量）。</p>
+<p>以下为代码表示（find 函数与 union 函数省略）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findCircleNum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; isConnected)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> provinces = isConnected.size();</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">parent</span><span class="params">(provinces)</span></span>;    <span class="comment">// 创建father关系数组</span></span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; provinces; i++) parent[i] = i;</span><br><span class="line">    <span class="comment">// 遍历给出的连通关系矩阵</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; provinces; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; provinces; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (isConnected[i][j] == <span class="number">1</span>) &#123;  <span class="comment">// 对每两个连通的节点做合并操作</span></span><br><span class="line">                Union(parent, i, j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> circles = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; provinces; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (parent[i] == i) &#123;  <span class="comment">// 输出每一个根节点（即集合的个数）</span></span><br><span class="line">            circles++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> circles;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="五、第二个例子-·-岛屿的数量"><a href="#五、第二个例子-·-岛屿的数量" class="headerlink" title="五、第二个例子 · 岛屿的数量"></a>五、第二个例子 · 岛屿的数量</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-islands/">https://leetcode-cn.com/problems/number-of-islands/</a></p>
+<blockquote>
+<p>给你一个由 ‘1’（陆地）和 ‘0’（水）组成的的二维网格，请你计算网格中岛屿的数量。</p>
+<p>岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。</p>
+<p>此外，你可以假设该网格的四条边均被水包围。</p>
+</blockquote>
+<p>​    用并查集的思想可以很快整理出思路：<strong>最开始将每一个 <code>1</code> 视为一个岛屿，如果两个 <code>1</code> 相邻则并入一个集合，最后剩余集合的数量就是岛屿的数量。</strong></p>
+<p>​    需要强调的是，我们在上一题（一维）的时候构建了一维的 father 数组，此题为了让读者可以更加简单地理解还是采用了<strong>一维的 father 数组</strong>，father[index] 的值表示：<strong>顺序存储时下标为 Index 的元素的父节点在顺序存储时的下标</strong>。</p>
+<p>​    首先写出 Find 和 Union 函数:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;father, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> colNum)</span> </span>&#123; <span class="comment">// i和j为元素在二维数组中的下标</span></span><br><span class="line">    <span class="keyword">if</span> (father[i * colNum + j] != i * colNum + j) &#123;   <span class="comment">// 不断递归找到根节点</span></span><br><span class="line">        <span class="keyword">int</span> rowNo = father[i * colNum + j] / colNum;</span><br><span class="line">        <span class="keyword">int</span> colNo = father[i * colNum + j] % colNum;</span><br><span class="line">        father[i * colNum + j] = Find(father, rowNo, colNo, colNum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> father[i * colNum + j]; <span class="comment">// 返回根节点</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;father, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> i1, <span class="keyword">int</span> j1, <span class="keyword">int</span> colNum)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result1 = Find(father, i1, j1, colNum);  <span class="comment">// 找到传入的（相邻元素）的根节点</span></span><br><span class="line">    <span class="keyword">int</span> result2 = Find(father, i, j, colNum);  <span class="comment">// 找到当前元素的根节点</span></span><br><span class="line">    <span class="keyword">if</span> (result1 != result2) &#123;</span><br><span class="line">        father[result1] = result2; <span class="comment">// 建立两个根节点的父子关系</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于<strong>外层函数</strong>，我们有三个步骤：</p>
+<p>第一：构造 father 数组并初始化</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">father</span><span class="params">(rowNum * colNum)</span></span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rowNum; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colNum; j++) &#123;</span><br><span class="line">        father[i * colNum + j] = i * colNum + j;  <span class="comment">// 最开始将每个元素的父元素设置为其本身</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二：遍历二维向量以及合并（自然只有当前元素是“陆地”节点才有合并一说）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rowNum; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colNum; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (grid[i][j] == <span class="string">&#x27;1&#x27;</span>) &#123; </span><br><span class="line">            <span class="comment">// 检查上下左右的节点是否也是陆地（陆地是否相连），同时需要注意验证上下左右节点是否越界</span></span><br><span class="line">            <span class="keyword">if</span> (i + <span class="number">1</span> &lt; rowNum &amp;&amp; grid[i + <span class="number">1</span>][j] == <span class="string">&#x27;1&#x27;</span>) Union(father, i, j, i + <span class="number">1</span>, j, colNum);</span><br><span class="line">            <span class="keyword">if</span> (i - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; grid[i - <span class="number">1</span>][j] == <span class="string">&#x27;1&#x27;</span>) Union(father, i, j, i - <span class="number">1</span>, j, colNum);</span><br><span class="line">            <span class="keyword">if</span> (j + <span class="number">1</span> &lt; colNum &amp;&amp; grid[i][j + <span class="number">1</span>] == <span class="string">&#x27;1&#x27;</span>) Union(father, i, j, i, j + <span class="number">1</span>, colNum);</span><br><span class="line">            <span class="keyword">if</span> (j - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; grid[i][j - <span class="number">1</span>] == <span class="string">&#x27;1&#x27;</span>) Union(father, i, j, i, j - <span class="number">1</span>, colNum);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第三：遍历 father 数组，对根节点计数（岛屿数量）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rowNum; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colNum; j++) &#123;</span><br><span class="line">        <span class="comment">// 岛屿需要满足两个条件：第一当前节点是陆地节点；第二当前节点是根节点</span></span><br><span class="line">        <span class="keyword">if</span> (Find(father, i, j, colNum) == i * colNum + j &amp;&amp; grid[i][j] == <span class="string">&#x27;1&#x27;</span>) count++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后将外层函数整合：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">numIslands</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rowNum = grid.size();</span><br><span class="line">    <span class="keyword">int</span> colNum = grid[<span class="number">0</span>].size();</span><br><span class="line">    <span class="comment">// 构造father[]数组（结构为grid[][]的顺序存储）并初始化</span></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">father</span><span class="params">(rowNum * colNum)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rowNum; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colNum; j++) &#123;</span><br><span class="line">            father[i * colNum + j] = i * colNum + j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 遍历矩阵，合并相连的节点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rowNum; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colNum; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (grid[i][j] == <span class="string">&#x27;1&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (i + <span class="number">1</span> &lt; rowNum &amp;&amp; grid[i + <span class="number">1</span>][j] == <span class="string">&#x27;1&#x27;</span>) Union(father, i, j, i + <span class="number">1</span>, j, colNum);</span><br><span class="line">                <span class="keyword">if</span> (i - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; grid[i - <span class="number">1</span>][j] == <span class="string">&#x27;1&#x27;</span>) Union(father, i, j, i - <span class="number">1</span>, j, colNum);</span><br><span class="line">                <span class="keyword">if</span> (j + <span class="number">1</span> &lt; colNum &amp;&amp; grid[i][j + <span class="number">1</span>] == <span class="string">&#x27;1&#x27;</span>) Union(father, i, j, i, j + <span class="number">1</span>, colNum);</span><br><span class="line">                <span class="keyword">if</span> (j - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; grid[i][j - <span class="number">1</span>] == <span class="string">&#x27;1&#x27;</span>) Union(father, i, j, i, j - <span class="number">1</span>, colNum);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    print(father);</span><br><span class="line">    <span class="comment">// 遍历，输出集合数量</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rowNum; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colNum; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Find(father, i, j, colNum) == i * colNum + j &amp;&amp; grid[i][j] == <span class="string">&#x27;1&#x27;</span>) count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="六、最长连续序列"><a href="#六、最长连续序列" class="headerlink" title="六、最长连续序列"></a>六、最长连续序列</h3><blockquote>
+<p>给定一个未排序的整数数组 <code>nums</code> ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。</p>
+</blockquote>
+<p><font color=#FF0000>【这一题如果没有列入并查集专题，你能想到并查集吗？】</font></p>
+<p>可以肯定是可以通过排序的方法来做。过程简单，此处不多说。我们主要介绍<strong>并查集</strong>的做法：</p>
+<p>我们可以<strong>将所有连续的数纳入同一个集合</strong>（具体操作是：对于当前数，在给定的数组中寻找比当前数大 1 的数。如果存在则合并。），再用一个变量记录最大集合的元素数并及时更新。</p>
+<p>首先我们写出 Find 和 Union 函数：（较第五章的例子更为简单，因此不做解释）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;father, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (father[index] != index) Find(father, father[index]);</span><br><span class="line">    <span class="keyword">return</span> index;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;father, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;count, </span></span></span><br><span class="line"><span class="function"><span class="params">           <span class="keyword">int</span> index1, <span class="keyword">int</span> index2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result1 = Find(father, index1);</span><br><span class="line">    <span class="keyword">int</span> result2 = Find(father, index2);</span><br><span class="line">    <span class="keyword">if</span> (result1 != result2) &#123;</span><br><span class="line">        father[result2] = result1;</span><br><span class="line">        <span class="keyword">int</span> num1 = count[result1];</span><br><span class="line">        <span class="keyword">int</span> num2 = count[result2];</span><br><span class="line">        count[result1] = num1 + num2;</span><br><span class="line">        count[result2] = num1 + num2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后写出外层函数：</p>
+<p>第一步：定义 father[] 数组 和 count[] 数组 并初始化（count 数组用于记录集合内的元素数量）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">father</span><span class="params">(size)</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">count</span><span class="params">(size)</span></span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">    father[i] = i;</span><br><span class="line">    count[i] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二步：遍历数组，如果存在比当前数大 1 的，就合并</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j&lt; size; j++) &#123;</span><br><span class="line">        <span class="comment">// 如果数组中存在着比当前数大1的，就合并</span></span><br><span class="line">        <span class="keyword">if</span> (nums[j] == nums[i] + <span class="number">1</span>) Union(father, count, i, j);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第三步：再次遍历数组，选出 count 值最大的根节点（即拥有最多元素的集合）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> countMax = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (Find(father, i) == i) countMax = (count[i] &gt; countMax ? count[i] : countMax);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<p><font color=#FF0000>【似乎是一题水题啊，可真的是这样吗？】</font></p>
+<p>先不说在外层函数的第二步中，<strong>寻找比当前数大 1 的数的时间代价</strong>有多大。请各位读者思考：如果数组中出现<strong>重复数字</strong>上述算法还能否给出正确答案？</p>
+<p>显然我们合并的是某一个值为 value 的节点 和 某一个值为 value+1 的节点，但是<strong>如果存在多个值为 value 和 值为 value + 1 的节点，我们需要将他们全部合并</strong>。此时，我们的代码就出现了问题。</p>
+<p>似乎这是一个棘手的问题，但是，使用<strong>哈希表</strong>可以轻松解决并一举多得：</p>
+<ul>
+<li>使用哈希表可以将查找值为 value+1 节点的操作变成 O(1) 操作</li>
+<li>使用哈希表可以消除重复数字带来的困扰</li>
+</ul>
+<p>具体实现和用普通向量的实现大同小异，只需多一步将给定的数组插入哈希表即可，此处不在给出重复的代码。</p>
+<h3 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h3><p>在了解并查集思想以后我们会发现并查集的思想并不难，对于一些可以明显看出并查集思想的题目几乎可以认定为水题；但是，我们通过第六章可以知道有些题披着外衣但也可以用并查集的思想解决。【需要练习来加强敏感度】</p>
+<p><font color=#FF0000>当然本专题的例题并未使用按秩合并和路径压缩进行优化，因为在【第三章】中已详细讲解，作者不希望提供给读者过长的示例代码。</font></p>
+<p>在本专题末尾希望提醒读者注意：</p>
+<ol>
+<li>可以更多地考虑使用哈希表来代替普通数组，有时会有意想不到的惊喜【见第六章】</li>
+<li>在一些较为复杂的题目背景下，希望读者可以仔细地推理，减少逻辑出错【见第五章】</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2021/02/19/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7%E5%B9%B6%E6%9F%A5%E9%9B%86/">http://www.xuyuyan.cn/2021/02/19/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7%E5%B9%B6%E6%9F%A5%E9%9B%86/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AE%97%E6%B3%95/"># 算法</a>
+                    
+                        <a href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/"># 图算法</a>
+                    
+                        <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/"># 并查集</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/02/15/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7DFS-%E5%9B%9E%E6%BA%AF/">小解图算法·DFS+回溯</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;>
+        <div> <a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = 'https://cdn.webpushr.com/app.min.js';fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BGhEaFYyuyVcWwM03F9-Abl8obA4cFqpft60ZXG9lf4wvlsPEYTdMMY84KD3yaZ1kxjDaVoqQbVvjRJAG2fqVfU');</script></body>
+</html>
