@@ -207,14 +207,14 @@
 <a id="more"></a>
 <h1 id="电魂一面"><a href="#电魂一面" class="headerlink" title="电魂一面"></a>电魂一面</h1><h3 id="算法部分"><a href="#算法部分" class="headerlink" title="算法部分"></a>算法部分</h3><h4 id="Q1：如何用两个栈实现一个队列？"><a href="#Q1：如何用两个栈实现一个队列？" class="headerlink" title="Q1：如何用两个栈实现一个队列？"></a>Q1：如何用两个栈实现一个队列？</h4><p>（小许暗喜，前几天水群刚见过这题，这也是一道leetcode的经典题）</p>
 <p>假装抬头沉思片刻：我大致有思路了，能不能给我一张草稿纸和一支笔？</p>
-<p><img src="https://qiniu.xuyuyan.cn/image-20210316082911177.png" alt="image-20210316082911177" style="zoom:33%;" />.</p>
+<p><img src="https://qiniu.xuyuyan.cn/IMG_1813%2820210316-082823%29.PNG" alt="image-20210316082911177" style="zoom:33%;" />.</p>
 <p>我们可以将入队出队操作分为三种情况：</p>
 <ol>
 <li><p>A出队 &lt;=&gt; 栈A弹出栈顶元素</p>
 <img src="https://qiniu.xuyuyan.cn/IMG_1814(20210316-083223).PNG" alt="IMG_1814(20210316-083223)" style="zoom:33%;" />
 </li>
 <li><p>C入队 &lt;=&gt; 栈B压入元素C</p>
-<img src="D:\QQ\QQ消息数据\2835535340\FileRecv\MobileFile\IMG_1815(20210316-083236).PNG" alt="IMG_1815(20210316-083236)" style="zoom:33%;" />
+<img src="https://qiniu.xuyuyan.cn/IMG_1815(20210316-083236).PNG" alt="IMG_1815(20210316-083236)" style="zoom:33%;" />
 </li>
 <li><p>B出队 </p>
 <p>此时栈A为空，需将栈B的元素依次出栈、入栈A，直至栈B为空。</p>
