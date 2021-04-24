@@ -353,7 +353,7 @@ input[type="radio"]:not(:checked) + label:after {
 }
 
 .icon-wangpan:before {
-  content: "\e88d";
+  content: "&#xe6e1";
 }
 
 .icon-publish:before {
