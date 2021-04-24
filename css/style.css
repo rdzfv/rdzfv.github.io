@@ -392,6 +392,9 @@ input[type="radio"]:not(:checked) + label:after {
   content: "\e87c";
 }
 
+.icon-wangpan:before {
+  content: "\e6e1"
+
 .icon-zhihu:before {
   content: "\e87d";
 }
