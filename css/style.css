@@ -352,6 +352,10 @@ input[type="radio"]:not(:checked) + label:after {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-wangpan:before {
+  content: "\e88d";
+}
+
 .icon-publish:before {
   content: "\e7b3";
 }
