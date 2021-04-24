@@ -15,6 +15,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-wangpan:before {
+  content: "\e6e1";
+}
+
 .icon-publish:before {
   content: "\e7b3";
 }
