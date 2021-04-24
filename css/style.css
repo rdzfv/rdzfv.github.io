@@ -392,9 +392,6 @@ input[type="radio"]:not(:checked) + label:after {
   content: "\e87c";
 }
 
-.icon-wangpan:before {
-  content: "\e6e1"
-
 .icon-zhihu:before {
   content: "\e87d";
 }
@@ -1362,12 +1359,4 @@ header label {
 .post-content pre .keyword,
 .post-content pre .javascript .function {
   color: #8959a8;
-}
-.gt-container {
-  max-width: 780px;
-  margin: auto;
-}
-.gt-container {
-  max-width: 780px;
-  margin: auto;
 }
