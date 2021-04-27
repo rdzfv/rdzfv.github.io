@@ -260,7 +260,7 @@
 
 <h3 id="1-感知机模型简介"><a href="#1-感知机模型简介" class="headerlink" title="1. 感知机模型简介"></a>1. 感知机模型简介</h3><blockquote>
 <p><strong>定义（感知机）</strong>：假设输入空间是 $\chi \in R^n$，输出空间是 $y = {+1, -1}$。输入 $x \in \chi$ 表示实例的特征向量，对应于输入空间。</p>
-<p>则感知机的由输入空间到输出空间的映射函数为：*<em>$f(x) = sign(w</em>x+b)$**</p>
+<p>则感知机的由输入空间到输出空间的映射函数为：$f(x) = sign(w*x+b)$</p>
 <p>其中，$w$ 和 $b$ 为感知机参数，$w \in R^n$ 叫做权值向量，$b \in R$ 叫做偏置。</p>
 <p>$sign$ 为符号函数，即：$sign = \begin{cases} +1 &amp;\text{x &gt;=0} \\-1 &amp;\text{x&lt;0} \end{cases}$</p>
 </blockquote>
@@ -310,7 +310,7 @@
 <h3 id="4-感知机学习算法（对偶形式）"><a href="#4-感知机学习算法（对偶形式）" class="headerlink" title="4. 感知机学习算法（对偶形式）"></a>4. 感知机学习算法（对偶形式）</h3><h4 id="4-1-对偶形式介绍"><a href="#4-1-对偶形式介绍" class="headerlink" title="4.1 对偶形式介绍"></a>4.1 对偶形式介绍</h4><p>我们知道在原始形式中，感知机模型参数 $w$ 和 $b$ 的每一次迭代为：$w \leftarrow w + \eta y_i x_i$ 和 $b \leftarrow b + \eta y_i$。</p>
 <p>那我们<font style="background: #F9EDA6">整合 n 次迭代，可以得到 $w$ 和 $b$ 关于 $(x_i, y_i)$ 的增量分别是 $\alpha_i y_i x_i$ 和 $\alpha_i y_i$ </font>（为了简洁 $\alpha$ 在这里视作一个新的常量，为 $n_i \eta$）</p>
 <p>所以最后学习到的就是：<font style="background: #F9EDA6">$w = \sum_{i=1}^{N} \alpha_i y_i x_i$</font> 和 <font style="background: #F9EDA6">$b = \sum_{i=1}^{N} \alpha_i y_i$ </font></p>
-<p>然后将上式<strong>代入</strong>感知机的输入空间至输出空间的映射关系 $f(x)=sign(w<em>x+b)$ 得到 <font style="background: #F9EDA6">**$f(x)=sign(\sum_{j=1}^{N} \alpha_jy_jx_j * x + b)$*</em></font></p>
+<p>然后将上式<strong>代入</strong>感知机的输入空间至输出空间的映射关系 $f(x)=sign(w*x+b)$ 得到 <font style="background: #F9EDA6">$f(x)=sign(\sum_{j=1}^{N} \alpha_jy_jx_j * x + b)$</font></p>
 <p>至此我们得到了感知机学习的对偶模式的学习算法。</p>
 <h4 id="4-2-对偶模式学习步骤"><a href="#4-2-对偶模式学习步骤" class="headerlink" title="4.2 对偶模式学习步骤"></a>4.2 对偶模式学习步骤</h4><p>对偶模式学习步骤总体和传统模型相近：</p>
 <ol>
@@ -372,7 +372,7 @@
 <p><strong>定理（Novikoff）：</strong>设训练数据集 $T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$ 是线性可分的，其中 $x_i \in \chi = R^n$，$y_i \in {+1, -1}$，$i=1,2,…,N$，则：</p>
 <ol>
 <li>存在满足条件 $||\hat w <em>{opt}||=1$ 的超平面 $\hat w <em>{opt} * \hat x = w</em>{opt} * x + b</em>{opt} = 0$ 将训练数据集完全分开；且存在 $\gamma &gt; 0$，对所有 $i=1,2,…,N$ 有 $y_i(\hat w_{opt}* \hat x_i) = y_i (w_{opt} * x_i + b_{opt}) &gt;= \gamma$</li>
-<li>令 $R = max_{1 \leq i \leq N} ||\hat x_i||$，则感知机算法在训练数据集上的<strong>误分类次数 $k$ 满足不等式 $k \leq (\frac{R}{\gamma})^2$</strong></li>
+<li>令 $R = max_{1 \leq i \leq N} ||\hat x_i||$，则感知机算法在训练数据集上的误分类次数 $k$ 满足不等式 $k \leq (\frac{R}{\gamma})^2$</li>
 </ol>
 </blockquote>
 <p>Novikoff 定理主要<font style="background: #F9EDA6">为感知机在理论上的可行性做了证明</font>，误分类次数具有优先上限，意味着在训练集线性可分的情况下，感知机通过有限次迭代参数，最终可以完全分类。</p>
