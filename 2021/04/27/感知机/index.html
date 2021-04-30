@@ -371,7 +371,7 @@
 <h4 id="5-2-Novikoff-定理"><a href="#5-2-Novikoff-定理" class="headerlink" title="5.2 Novikoff 定理"></a>5.2 Novikoff 定理</h4><blockquote>
 <p><strong>定理（Novikoff）：</strong>设训练数据集 $T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$ 是线性可分的，其中 $x_i \in \chi = R^n$，$y_i \in {+1, -1}$，$i=1,2,…,N$，则：</p>
 <ol>
-<li>存在满足条件 $||\hat w <em>{opt}||=1$ 的超平面 $\hat w <em>{opt} * \hat x = w</em>{opt} * x + b</em>{opt} = 0$ 将训练数据集完全分开；且存在 $\gamma &gt; 0$，对所有 $i=1,2,…,N$ 有 $y_i(\hat w_{opt}* \hat x_i) = y_i (w_{opt} * x_i + b_{opt}) &gt;= \gamma$</li>
+<li>存在满足条件 $||\hat w <em>{opt}||=1$ 的超平面 $\hat w <em>{opt} \hat x = w</em>{opt} x + b</em>{opt} = 0$ 将训练数据集完全分开；且存在 $\gamma &gt; 0$，对所有 $i=1,2,…,N$ 有 $y_i(\hat w_{opt} \hat x_i) = y_i (w_{opt}  x_i + b_{opt}) &gt;= \gamma$</li>
 <li>令 $R = max_{1 \leq i \leq N} ||\hat x_i||$，则感知机算法在训练数据集上的误分类次数 $k$ 满足不等式 $k \leq (\frac{R}{\gamma})^2$</li>
 </ol>
 </blockquote>
@@ -379,12 +379,12 @@
 <p>接下来进行证明：</p>
 <ol>
 <li><p>由于假定了前提条件训练集是线性可分的</p>
-<p>因此，设将训练数据集完全正确分开的超平面为 $\hat w_{opt} * \hat x = w_{opt} * x + b_{opt} = 0$，使 $||\hat w_{opt}|| = 1$</p>
-<p>由于对 $i = 1,2,..,N$ 均有 $y_i (\hat w_{opt} * \hat x_i) = y_i (w_{opt} * x_i + b_{opt}) &gt; 0$</p>
-<p>所以必定存在 $\gamma = min_i {y_i (w_{opt} * x_i + b_{opt})}$ 使 $y_i (\hat w_{opt} * \hat x_i) = y_i(w_{opt} * x_i + b_{opt}) \geq \gamma$</p>
+<p>因此，设将训练数据集完全正确分开的超平面为 $\hat w_{opt}  \hat x = w_{opt}  x + b_{opt} = 0$，使 $||\hat w_{opt}|| = 1$</p>
+<p>由于对 $i = 1,2,..,N$ 均有 $y_i (\hat w_{opt}  \hat x_i) = y_i (w_{opt}  x_i + b_{opt}) &gt; 0$</p>
+<p>所以必定存在 $\gamma = min_i {y_i (w_{opt}  x_i + b_{opt})}$ 使 $y_i (\hat w_{opt}  \hat x_i) = y_i(w_{opt}  x_i + b_{opt}) \geq \gamma$</p>
 </li>
 <li><p>令 $\hat w_{k-1}$ 是第 $k$ 个误分类实例之前的扩充权重向量，即 $\hat w_{k-1} = (w_{k-1}^{T}, b_{k-1})^T$</p>
-<p>则第 $k$ 个误分类实例的条件是 $y_i (\hat w_{k-1} * \hat x_i) = y_i (w_{k-1} * x_i + b_{k-1}) \leq 0$</p>
+<p>则第 $k$ 个误分类实例的条件是 $y_i (\hat w_{k-1}  \hat x_i) = y_i (w_{k-1}  x_i + b_{k-1}) \leq 0$</p>
 <p>$w$ 和 $b$ 的更新为 $w_k \leftarrow w_{k-1} + \eta y_i x_i$ 和 $b_k \leftarrow b_{k-1}+\eta y_i$</p>
 <p>借助上节推导的两个不等式可得：</p>
 <p>$k \eta \gamma \leq \hat w_k * \hat w_{opt} \leq ||\hat w_k||||\hat w_{opt}|| \leq \sqrt{k}\eta R$</p>
