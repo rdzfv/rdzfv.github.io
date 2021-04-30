@@ -371,7 +371,7 @@
 <h4 id="5-2-Novikoff-定理"><a href="#5-2-Novikoff-定理" class="headerlink" title="5.2 Novikoff 定理"></a>5.2 Novikoff 定理</h4><blockquote>
 <p><strong>定理（Novikoff）：</strong>设训练数据集 $T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$ 是线性可分的，其中 $x_i \in \chi = R^n$，$y_i \in {+1, -1}$，$i=1,2,…,N$，则：</p>
 <ol>
-<li>存在满足条件 $||\hat w <em>{opt}||=1$ 的超平面 $\hat w <em>{opt} \hat x = w</em>{opt} x + b</em>{opt} = 0$ 将训练数据集完全分开；且存在 $\gamma &gt; 0$，对所有 $i=1,2,…,N$ 有 $y_i(\hat w_{opt} \hat x_i) = y_i (w_{opt}  x_i + b_{opt}) &gt;= \gamma$</li>
+<li>存在满足条件 $||\hat w_{opt}||=1$ 的超平面 $\hat w_{opt} \hat x = w_{opt} x + b_{opt} = 0$ 将训练数据集完全分开；<br>  且存在 $\gamma &gt; 0$，对所有 $i=1,2,…,N$ 有 $y_i(\hat w_{opt} \hat x_i) = y_i (w_{opt}  x_i + b_{opt}) &gt;= \gamma$</li>
 <li>令 $R = max_{1 \leq i \leq N} ||\hat x_i||$，则感知机算法在训练数据集上的误分类次数 $k$ 满足不等式 $k \leq (\frac{R}{\gamma})^2$</li>
 </ol>
 </blockquote>
