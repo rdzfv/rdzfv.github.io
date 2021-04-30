@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<!-- <title>《统计学习方法》读书笔记 · 朴素贝叶斯 | xyy爱吃番茄</title> -->
+
+
+
+    <link rel="icon" href="https://qiniu.xuyuyan.cn/XYY.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">《统计学习方法》读书笔记 · 朴素贝叶斯</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">四月 30, 2021&nbsp;&nbsp;19:36:26</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>《统计学习方法》朴素贝叶斯部分读书笔记</p>
+<a id="more"></a>
+
+<h3 id="0-铺垫"><a href="#0-铺垫" class="headerlink" title="0. 铺垫"></a>0. 铺垫</h3><p>先来回顾一些基础的概率知识：</p>
+<ul>
+<li><p><font style="background: #F9EDA6">联合概率分布</font></p>
+<p>联合概率分布就是涉及两个随机变量的概率分布，比如打靶时命中坐标 $(x,y)$</p>
+<p>以二维离散型随机向量为例：</p>
+<ul>
+<li><p>联合概率分布可用函数形式 $P{X=x_i,Y=y_i}=p_{ij}$ 来表示</p>
+</li>
+<li><p>样本对于某一个维度的概率分布称为<font style="background: #F9EDA6">联合分布的边缘分布</font>：</p>
+<p>$P{X=x_i}=\sum_jP{X=x_i,Y=y_i}=\sum_j p_{ij}=p_i$</p>
+<p>$P{Y=y_i}=\sum_jP{X=x_i,Y=y_i}=\sum_j p_{ij}=p_j$</p>
+</li>
+</ul>
+</li>
+<li><p><font style="background: #F9EDA6">条件概率</font></p>
+<p>$P(A|B)$：在 $B$ 发生的条件下，发生 $A$ 的概率</p>
+<p>$P(A|B)=\frac{P(AB)}{P(B)}=\frac{P(B|A)*P(A)}{P(B)}$</p>
+</li>
+<li><p><font style="background: #F9EDA6">联合概率和条件概率的关系</font>：</p>
+<p>$P(A,B)=P(A|B)*P(B)=P(B|A)*P(A)$</p>
+</li>
+</ul>
+<br>
+
+<h3 id="1-朴素贝叶斯法的学习与分类"><a href="#1-朴素贝叶斯法的学习与分类" class="headerlink" title="1. 朴素贝叶斯法的学习与分类"></a>1. 朴素贝叶斯法的学习与分类</h3><p>设输入空间 $X \in R^n$ 为 n 维向量的集合，输出空间为类标记集合 $Y={c_1,c_2,…,c_K}$，训练数据集 $T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$。</p>
+<p>朴素贝叶斯法通过训练数据集学习联合概率分布 $P(X,Y)$</p>
+<ul>
+<li>先验概率分布：$P(Y=c_k),\ \ k=1,2,…,K$</li>
+<li>条件概率分布：$P(X=x|Y=c_k)=P(X^{(1)}=x^{(1)},x^{(2)},..,x^{(n)}|Y=c_k),\ \ k=1,2,..,K$</li>
+</ul>
+<p>朴素贝叶斯法对条件分布概率做了<font style="background: #FBD4D0">条件独立性的假设</font>。（这是一个强假设！！！）</p>
+<p>朴素贝叶斯法分类时，对于给定输入 $x$，<font style="background: #F9EDA6">通过学习到的模型计算后验概率分布 $P(Y=c_k|X=x)$，将其后验概率最大的 类作为 $x$ 的类输出</font>。</p>
+<h4 id="1-1-后验概率计算"><a href="#1-1-后验概率计算" class="headerlink" title="1.1 后验概率计算"></a>1.1 后验概率计算</h4><p>后验概率的计算根据贝叶斯定理进行：</p>
+<p><font style="background: #F9EDA6">$P(Y=c_k|X=x)$</font> $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  $ （使用条件概率公式）</p>
+<p>$=\frac{P(X=x|Y=C_k)*P(Y=C_k)}{P(X=x)}$ $\ \ \ \ \ \ \ \ \ $  (分子不变，分母用联合概率公式展开)</p>
+<p>$=\frac{P(X=x|Y=C_K)*P(Y=C_k)}{\sum_kP(X=x,Y=C_k)}$ $\ \ \ \ \ \ \ \ $ （将 $P(X=x,Y=C_k)$ 联合概率用条件概率表示）</p>
+<p>$=\frac{P(X=x|Y=c_k)*P(Y=c_k)}{\sum_kP(X=x|Y=c_k)P(Y=c_k)}$ $\ \ \ \ \ \ \ \ $ <font style="background: #FBD4D0">（加入前提条件：各特征为相互独立分布）</font></p>
+<p><font style="background: #F9EDA6">$=\frac{P(Y=C_k) \prod_j P(X^{(j)}=x^{(j)}|Y=C_k)}{\sum_kP(Y=C_k) \prod_j P(X^{(j)}=x^{(j)}|Y=C_k)}$ </font></p>
+<p>此处，对最后一步做一些解释：对于分子 $P(X=x|Y=c_k)$<br>可以写成 $P(X_1=x_1,X_2=x_2,…,X_k=x_k|Y=c_k)$ 基于前提条件“各特征为相互独立分布”，<br>可以得到 $P(X_1=x_1|Y=c_k)<em>P(X_2=x_2|Y=c_k)</em>…*P(X_k=x_k|Y=c_k)$，<br>换一种写法就是 $\prod_j P(X^{(j)}=x^{(j)}|Y=c_k)$；分母的变换也是同理。</p>
+<p>至此我们得到了朴素贝叶斯分类的基本公式。</p>
+<blockquote>
+<p>补充介绍：<font style="background: #d4e9d6">先验概率与后验概率</font></p>
+<ul>
+<li><strong>先验概率（prior probability）：</strong>指根据以往经验和分析。在实验或采样前就可以得到的概率。</li>
+<li><strong>后验概率（posterior probability）：</strong>指某件事已经发生，想要计算这件事发生的原因是由某个因素引起的概率。</li>
+</ul>
+<p>举一个简单的例子，喜羊羊喜欢睡觉。通过对喜羊羊每天早上的统计，得到的喜羊羊起晚了的事件发生的概率 $P(起晚了)$ 就是先验概率；但是已知某一天喜羊羊早上上课迟到了（已知结果）反推原因 $P(起晚了|迟到)$ 就是后验概率。</p>
+</blockquote>
+<h4 id="1-2-朴素贝叶斯分类器"><a href="#1-2-朴素贝叶斯分类器" class="headerlink" title="1.2 朴素贝叶斯分类器"></a>1.2 朴素贝叶斯分类器</h4><p>于是，朴素贝叶斯分类器可以表示为：<font style="background: #F9EDA6">$y=f(x)=arg \ max_{c_k} \frac{P(Y=c_k) \prod_j P(X^{(j)}=x^{(j)}|Y=c_k)}{\sum_k P(Y=c_k) \prod_j P(X^{(j)}=x^{(j)})|Y=c_k)}$</font></p>
+<p>在上式中，分母对于所有 $c_k$ 都是相同的</p>
+<p>所以<font style="background: #F9EDA6"> $y=arg \ max_{c_k} P(Y=c_k) \prod_j P(X^{(j)}=x^{(j)}|Y=c_k)$</font></p>
+<br>
+
+<h3 id="2-极大似然估计"><a href="#2-极大似然估计" class="headerlink" title="2. 极大似然估计"></a>2. 极大似然估计</h3><p>在朴素贝叶斯法中，学习意味着<font style="background: #F9EDA6">求 $P(Y=c_k)$ 和 $P(X^{(j)}=x^{(j)}|Y=c_k)$</font>，可以用极大似然估计法来进行计算</p>
+<blockquote>
+<p>补充说明：接下来要用到的$I(x)$ 为<font style="background: #d4e9d6">指示函数</font>，即当条件 $x$ 为真时，函数值为 1；反之函数值为 0。</p>
+</blockquote>
+<p>先验概率 $P(Y=c_k)=\frac{\sum_{i=1}^N I(y_i=c_k)}{N}$，$k=1,2,…,K$  （1）</p>
+<p>设第 $j$ 个特征 $x^{(j)}$ 可能取值的集合为 ${a_{j1},a_{j2},…,a_{jS_j},}$，</p>
+<p>条件概率 $P(X^{(j)}=a_{jl}|Y=c_k)$ 的极大似然估计是 $P(X^{(j)}=a_{jl}|Y=c_k)=\frac{\sum_{i=1}^N I(x_i^{(j)}=a_{jl},y_i=c_k)}{\sum_{i=1}^{N}I(y_i=c_k)}$  （2）</p>
+<p>其中，$x_i^{(j)}$ 是第 $i$ 个样本的第 $j$ 个特征；$a_{jl}$ 是第 $j$ 个特征可能取的第 $l$ 个值；$I$ 为指示函数</p>
+<p>【如果读者对理解式（2）存在一定的困难，可以再次理解一遍式（1），两者本质一致】</p>
+<br>
+
+<h3 id="3-贝叶斯估计"><a href="#3-贝叶斯估计" class="headerlink" title="3. 贝叶斯估计"></a>3. 贝叶斯估计</h3><p>上一章的<font style="background: #FBD4D0">极大似然估计存在一个问题，就是分母可能为 0</font>。具体地来说，分母 $\sum_{i=1}^N I(y_i=c_k)$ 在每一个 $y_i=c_k$ 都不成立的时候，值为 0。</p>
+<p>因此，引入了贝叶斯估计。具体地，条件概率的贝叶斯估计式：<font style="background: #F9EDA6">$P_{\lambda}(X^{(j)}=a_{jl}|Y=c_k)=\frac{\sum_{i=1}^N I(x_i^{(j)}=a_{jl},y_i=c_k)+\lambda}{\sum_{i=1}^{N}I(y_i=c_k)+S_j\lambda}$</font></p>
+<p>其中 $\lambda$ 为一个给定正数，$S_j$ 为 $x_j$ 可取特征数目。<font style="background: #d4e9d6">当 $\lambda=0$ 时为极大似然估计；常取 $\lambda=1$ 为拉普拉斯平滑</font>。 </p>
+<p>对比极大似然估计，贝叶斯估计在分子和分母上分别增加了 $\lambda$ 和 $S_j \lambda$。</p>
+<p>同理，先验概率的贝叶斯估计是 <font style="background: #F9EDA6">$P_{\lambda}(Y=c_k)=\frac{\sum_{i=1}^N I(y_i=c_k)+\lambda}{N+K\lambda}$</font></p>
+<br>
+
+<h3 id="4-总结-·-朴素贝叶斯算法流程"><a href="#4-总结-·-朴素贝叶斯算法流程" class="headerlink" title="4. 总结 · 朴素贝叶斯算法流程"></a>4. 总结 · 朴素贝叶斯算法流程</h3><ol>
+<li><p><font style="background: #CCE0F1">计算先验概率以及条件概率</font></font>（此处以贝叶斯估计为例）</p>
+<p>先验概率：$P_{\lambda}(Y=c_k)=\frac{\sum_{i=1}^N I(y_i=c_k)+\lambda}{N+K\lambda}$</p>
+<p>条件概率：$P_{\lambda}(X^{(j)}=a_{jl}|Y=c_k)=\frac{\sum_{i=1}^N I(x_i^{(j)}=a_{jl},y_i=c_k)+\lambda}{\sum_{i=1}^{N}I(y_i=c_k)+S_j\lambda}$</p>
+</li>
+<li><p>对于给定的实例 $x=(x^{(1)},x^{(2)},…,x^{(N)})^T$，<font style="background: #CCE0F1">计算条件概率 </font> $P(Y=c_k|X=x)=prod_j P(X^{(j)}=x^{(j)}|Y=c_k)$</p>
+<p>（表达式的推导见 1.1）</p>
+</li>
+<li><p><font style="background: #CCE0F1">确定实例 $x$ 的类</font>：$y=arg \ max_{c_k} P(Y=c_k) \prod_j P(X^{(j)}=x^{(j)}|Y=c_k)$</p>
+<p>（表达式的推导见 1.2）</p>
+</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2021/04/30/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/">http://www.xuyuyan.cn/2021/04/30/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"># 机器学习</a>
+                    
+                        <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"># 统计学习方法</a>
+                    
+                        <a href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/"># 极大似然估计</a>
+                    
+                        <a href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/"># 贝叶斯估计</a>
+                    
+                        <a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/"># 朴素贝叶斯算法</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/04/29/%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/">《统计学习方法》读书笔记 · k 近邻算法</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;>
+        <div> <a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = 'https://cdn.webpushr.com/app.min.js';fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BGhEaFYyuyVcWwM03F9-Abl8obA4cFqpft60ZXG9lf4wvlsPEYTdMMY84KD3yaZ1kxjDaVoqQbVvjRJAG2fqVfU');</script></body>
+</html>
