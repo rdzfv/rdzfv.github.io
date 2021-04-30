@@ -283,7 +283,7 @@
 <p>$=\frac{P(X=x|Y=C_K)*P(Y=C_k)}{\sum_kP(X=x,Y=C_k)}$ $\ \ \ \ \ \ \ \ $ （将 $P(X=x,Y=C_k)$ 联合概率用条件概率表示）</p>
 <p>$=\frac{P(X=x|Y=c_k)*P(Y=c_k)}{\sum_kP(X=x|Y=c_k)P(Y=c_k)}$ $\ \ \ \ \ \ \ \ $ <font style="background: #FBD4D0">（加入前提条件：各特征为相互独立分布）</font></p>
 <p><font style="background: #F9EDA6">$=\frac{P(Y=C_k) \prod_j P(X^{(j)}=x^{(j)}|Y=C_k)}{\sum_kP(Y=C_k) \prod_j P(X^{(j)}=x^{(j)}|Y=C_k)}$ </font></p>
-<p>此处，对最后一步做一些解释：对于分子 $P(X=x|Y=c_k)$<br>可以写成 $P(X_1=x_1,X_2=x_2,…,X_k=x_k|Y=c_k)$ 基于前提条件“各特征为相互独立分布”，<br>可以得到 $P(X_1=x_1|Y=c_k)<em>P(X_2=x_2|Y=c_k)</em>…*P(X_k=x_k|Y=c_k)$，<br>换一种写法就是 $\prod_j P(X^{(j)}=x^{(j)}|Y=c_k)$；分母的变换也是同理。</p>
+<p>此处，对最后一步做一些解释：对于分子 $P(X=x|Y=c_k)$<br>可以写成 $P(X_1=x_1,X_2=x_2,…,X_k=x_k|Y=c_k)$ 基于前提条件“各特征为相互独立分布”，<br>可以得到 $P(X_1=x_1|Y=c_k)*P(X_2=x_2|Y=c_k)…P(X_k=x_k|Y=c_k)$，<br>换一种写法就是 $\prod_j P(X^{(j)}=x^{(j)}|Y=c_k)$；<br>分母的变换也是同理。</p>
 <p>至此我们得到了朴素贝叶斯分类的基本公式。</p>
 <blockquote>
 <p>补充介绍：<font style="background: #d4e9d6">先验概率与后验概率</font></p>
