@@ -12,7 +12,7 @@
 
 
 
-<!-- <title>《统计机器学习读书笔记》 · EM算法及其推广 | xyy爱吃番茄</title> -->
+<!-- <title>《统计机器学习》读书笔记 · EM算法及其推广 | xyy爱吃番茄</title> -->
 
 
 
@@ -217,7 +217,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">《统计机器学习读书笔记》 · EM算法及其推广</h1>
+            <h1 class="post-title">《统计机器学习》读书笔记 · EM算法及其推广</h1>
             
                 <div class="post-meta">
                     
@@ -269,18 +269,18 @@
 </blockquote>
 <p>接下来对 EM 算法进行推导：</p>
 <p>我们的目标是<font style="background: #F9EDA6">极大化观测数据 Y 关于参数 $\theta$ 的对数似然函数</font>，也就是 $L(\theta)=log P(Y|\theta)$</p>
-<img src="https://qiniu,xuyuyan.cn/image-20210530150836548.png" alt="image-20210530150836548" style="zoom:33%;" /> 
+<img src="https://qiniu.xuyuyan.cn/image-20210530150836548.png" alt="image-20210530150836548" style="zoom:33%;" /> 
 
 <p>将上面的不等式进行整理：</p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530151122965.png" alt="image-20210530151122965" style="zoom:33%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530151122965.png" alt="image-20210530151122965" style="zoom:33%;" />
 
 <p>为了使 $L(\theta)$ 有尽可能大的增长，选择 $\theta^{(i+1)}$ 使 $B(\theta, \theta^{(i)})$ 达到极大：$\theta^{(i+1)}=arg\ max_{\theta}B(\theta, \theta^{(i)})$</p>
 <p>对这个表达式进行化简：</p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530155612639.png" alt="image-20210530155612639" style="zoom:33%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530155612639.png" alt="image-20210530155612639" style="zoom:33%;" />
 
 <p>EM 算法就是<font style="background: #F9EDA6">通过不断对 Q 函数（下界）求极大，逼近求解对数似然函数极大化</font>。</p>
 <p>将上述算法步骤进行总结：</p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530164519762.png" alt="image-20210530164519762" style="zoom:33%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530164519762.png" alt="image-20210530164519762" style="zoom:33%;" />
 
 <br>
 
@@ -296,10 +296,10 @@
 <p>定理：设 $P(Y|\theta)$ 为观测数据的似然函数，$\theta^{(i)}$ 为 EM 算法得到的参数估计序列，$P(Y|\theta^{(i)})$ 为对应的似然函数序列，则 <font style="background: #d4e9d6">$P(Y|\theta^{(i)})$ 是单调递增的</font>。</p>
 </blockquote>
 <p>接下来我们进行证明：</p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530191432219.png" alt="image-20210530191432219" style="zoom:33%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530191432219.png" alt="image-20210530191432219" style="zoom:33%;" />
 
 <p>若要证明 $P(Y|\theta)$ 是单调递增的，只需证明上式大于等于 0。</p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530191902761.png" alt="image-20210530191902761" style="zoom:33%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530191902761.png" alt="image-20210530191902761" style="zoom:33%;" />
 
 <p>至此， $P(Y|\theta)$ 是单调递增得证。</p>
 <h4 id="3-2-收敛到极大值"><a href="#3-2-收敛到极大值" class="headerlink" title="3.2 收敛到极大值"></a>3.2 收敛到极大值</h4><blockquote>
@@ -324,25 +324,25 @@
 <p>$\gamma_{jk}=\begin{cases} 1 &amp;\text{第 j 个观测来自第 k 个模型} \\ 0 &amp;\text{否则} \end{cases}$ </p>
 <p>通过观测数据 $y_j$ 和未观测数据 $\gamma_{jk}$，得到完全数据 $(y_j,\gamma_{j1},\gamma_{j2},…,\gamma_{jK})$</p>
 <p>因此可以写出完全数据的<font style="background: #F9EDA6">似然函数</font>：</p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530200004997.png" alt="image-20210530200004997" style="zoom:33%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530200004997.png" alt="image-20210530200004997" style="zoom:33%;" />
 
 <p>令 $n_k=\sum_{j=1}^N\gamma_{jk}$ 可得：</p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530200754651.png" alt="image-20210530200754651" style="zoom:33%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530200754651.png" alt="image-20210530200754651" style="zoom:33%;" />
 
 <p>则完全数据的<font style="background: #F9EDA6">对数似然函数</font>为：</p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530202113984.png" alt="image-20210530202113984" style="zoom:33%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530202113984.png" alt="image-20210530202113984" style="zoom:33%;" />
 </li>
 <li><p><font style="background: #CCE0F1">步骤二：（E）确定 Q 函数</font></p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530203611888.png" alt="image-20210530203611888" style="zoom:33%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530203611888.png" alt="image-20210530203611888" style="zoom:33%;" />
 
 <p>此处需要<font style="background: #F9EDA6">计算 $E(\gamma_{jk},\theta)$</font>，记作 $\hat{\gamma_{jk}}$</p>
-<p> &lt;<a target="_blank" rel="noopener" href="https://qiniu,xuyuyan.cn/image-20210530204919283.png&quot;">https://qiniu,xuyuyan.cn/image-20210530204919283.png&quot;</a> alt=”image-20210530204919283” style=”zoom:33%;” /&gt;</p>
+ <img src="https://qiniu.xuyuyan.cn/image-20210530204919283.png" alt="image-20210530204919283" style="zoom:33%;" />
 </li>
 <li><p><font style="background: #CCE0F1">步骤三：（M）迭代求 Q 函数对 $\theta$ 的最大值（即求新一轮迭代的参数）</font></p>
 <p>求 Q 函数的极大值，仅需<font style="background: #F9EDA6">对各参数（$\mu_k$，$\sigma_k^2$）求偏导并令其为 0</font>（拉格朗日参数法）</p>
 <p>求 $\hat{\alpha_k}$ 是在 $\sum_{k=1}^K\alpha_k=1$ 下求偏导数并令其为 0（拉格朗日参数法）</p>
 <p>可以得到如下结果</p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530205311712.png" alt="image-20210530205311712" style="zoom:60%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530205311712.png" alt="image-20210530205311712" style="zoom:60%;" />
 
 </li>
 </ul>
@@ -357,7 +357,7 @@
 <p>$\hat{\gamma_{jk}}=\frac{\alpha_k\phi(y_j|\theta_k)}{\sum_{k=1}^K\alpha_k\phi(y_j|\theta_k)}$</p>
 </li>
 <li><p>M 步：计算新一轮迭代的模型参数</p>
- <img src="https://qiniu,xuyuyan.cn/image-20210530205311712.png" alt="image-20210530205311712" style="zoom:60%;" />
+ <img src="https://qiniu.xuyuyan.cn/image-20210530205311712.png" alt="image-20210530205311712" style="zoom:60%;" />
 </li>
 <li><p>重复步骤（2）和（3），直至收敛</p>
 </li>
