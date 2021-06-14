@@ -284,10 +284,10 @@
 <li><p>构造并求解约束最优化问题</p>
 <p><font style="background: #d4e9d6">$\begin{cases} min_{w,b} \frac{1}{2}||w||^2  \\ s.t.\ y_i(wx_i+b)-1\geq0 \end{cases}$</font> 求得最优解 $w^*$ 和 $b^*$</p>
 </li>
-<li><p>由此得到分离超平面：$w^<em>x+b^</em>=0$</p>
+<li><p>由此得到分离超平面：$wx+b=0$</p>
 </li>
 </ol>
-<p>因此，分类决策函数 $f(x)=sign(w^<em>x+b^</em>)$</p>
+<p>因此，分类决策函数 $f(x)=sign(wx+b)$</p>
 </blockquote>
 <h4 id="2-4-最大间隔分离超平面存在唯一性"><a href="#2-4-最大间隔分离超平面存在唯一性" class="headerlink" title="2.4 最大间隔分离超平面存在唯一性"></a>2.4 最大间隔分离超平面存在唯一性</h4><blockquote>
 <p><font style="background: #d4e9d6">定理（最大间隔分离超平面存在唯一性）</font>：若训练数据集 T 线性可分，则可将训练数据集中的样本点完全正确分开的最大间隔分离超平面存在且唯一。</p>
@@ -338,7 +338,7 @@
 <p>由此可以解出 $\alpha$</p>
 </li>
 </ul>
-<p>再由 $w^*=\sum_{i=1}^N \alpha_i^<em>y_ix_i$ 和 $b^</em>=y_j-\sum_{i=1}^N\alpha_i^<em>y_i(x_ix_j)$ 可以解得 $w</em>$ 和 $b*$</p>
+<p>再由 $w=\sum_{i=1}^N \alpha_iy_ix_i$ 和 $b=y_j-\sum_{i=1}^N\alpha_iy_i(x_ix_j)$ 可以解得 $w*$ 和 $b*$</p>
 <br>
 
 <h3 id="4-线性支持向量机学习算法——软间隔最大化"><a href="#4-线性支持向量机学习算法——软间隔最大化" class="headerlink" title="4. 线性支持向量机学习算法——软间隔最大化"></a>4. 线性支持向量机学习算法——软间隔最大化</h3><p>我们<font style="background: #F9EDA6">在硬间隔的约束条件 $y_i(wx_i+b)\geq 1$ 加上一个松弛变量 $\xi$ 得到 $y_i(wx_i+b)\geq1-\xi$。</font></p>
@@ -354,7 +354,7 @@
  <img src="https://qiniu.xuyuyan.cn/image-20210513204756685.png" alt="image-20210513204756685" style="zoom:50%;" />
 
 <p>然后求解对偶问题：</p>
-<p>$\begin{cases} w^*=\sum_{i=1}^N\alpha_i^<em>y_ix_i \\ b</em>=y_j-\sum_{i=1}^N y_i\alpha_i^*(x_ix_j) \end{cases}$ 就可以得到原问题的解，从而确定分离超平面和决策函数。</p>
+<p>$\begin{cases} w=\sum_{i=1}^N\alpha_iy_ix_i \\ b=y_j-\sum_{i=1}^N y_i\alpha_i(x_ix_j) \end{cases}$ 就可以得到原问题的解，从而确定分离超平面和决策函数。</p>
 <h4 id="4-2-线性支持向量机学习算法"><a href="#4-2-线性支持向量机学习算法" class="headerlink" title="4.2 线性支持向量机学习算法"></a>4.2 线性支持向量机学习算法</h4><blockquote>
 <p><font style="background: #d4e9d6">算法（线性支持向量机学习算法）</font>：</p>
 <p>输入：线性可分训练数据集 $T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中 $x_i \in R^n$，$y_i \in {-1,+1}$，$i=1,2,…,N$</p>
@@ -365,12 +365,12 @@
 <p>得到最优解 $\alpha^*=(\alpha_1^*,\alpha_2^*,…,\alpha_N^*)^T$</p>
 </li>
 <li><p>计算 $w^*$ 和 $b^*$</p>
-<p>$\begin{cases} w^*=\sum_{i=1}^N\alpha_i^<em>y_ix_i \\ b</em>=y_j-\sum_{i=1}^N y_i\alpha_i^*(x_ix_j) \end{cases}$</p>
+<p>$\begin{cases} w=\sum_{i=1}^N\alpha_iy_ix_i \\ b=y_j-\sum_{i=1}^N y_i\alpha_i(x_ix_j) \end{cases}$</p>
 </li>
-<li><p>由此得到分离超平面：$w^<em>x+b^</em>=0$</p>
+<li><p>由此得到分离超平面：$wx+b=0$</p>
 </li>
 </ol>
-<p>因此，分类决策函数 $f(x)=sign(w^<em>x+b^</em>)$</p>
+<p>因此，分类决策函数 $f(x)=sign(wx+b)$</p>
 </blockquote>
 <h4 id="4-3-线性支持向量机的另一种解释"><a href="#4-3-线性支持向量机的另一种解释" class="headerlink" title="4.3 线性支持向量机的另一种解释"></a>4.3 线性支持向量机的另一种解释</h4><p>就是最小化如下目标函数 $\sum_{i=1}^N[1-y_i(wx_i+b)]_++\lambda||w||^2$</p>
 <ul>
@@ -395,16 +395,16 @@
 <p>换言之，<font style="background: #F9EDA6">因为非线性问题不好求解，我们通常将其升维，使之成为线性问题</font>。同时 <font style="background: #F9EDA6">$K(x,z)$ 的选取原则是计算较容易（因为 $\phi(x)*\phi(z)$ 的点积计算比较复杂）</font></p>
 <p>我们再次写出线性支持向量机要解决的最优化问题：$\begin{cases} min_{\alpha} \frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N\alpha_i\alpha_jy_iy_j(x_ix_j)-\sum_{i=1}^N\alpha_i \\s.t. \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ 0\leq \alpha_i \leq C  \end{cases}$</p>
 <p>使用核函数 $K(x_i,x_j)=\phi(x_i)*\phi(x_j)$ 代替得到新的目标函数 $W(\alpha)=\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^N\alpha_i$</p>
-<p>同样地，分类决策函数 $f(x)=sign(\sum_{i=1}^{N_s}\alpha_i^<em>y_i\phi(x_i)\phi(x)+b^</em>)$ 也可以写成  $sign(\sum_{i=1}^{N_s}\alpha_i^<em>y_iK(x_i,x)+b^</em>)$</p>
+<p>同样地，分类决策函数 $f(x)=sign(\sum_{i=1}^{N_s}\alpha_iy_i\phi(x_i)\phi(x)+b)$ 也可以写成  $sign(\sum_{i=1}^{N_s}\alpha_i^*y_iK(x_i,x)+b)$</p>
 <p><font style="background: #F9EDA6">【热知识：一般在 SVM 中，我们通常使用高斯核 $K(x,z)=exp(-\frac{||x-z||^2}{2\sigma^2})$】</font></p>
 <h4 id="5-2-常用核函数"><a href="#5-2-常用核函数" class="headerlink" title="5.2 常用核函数"></a>5.2 常用核函数</h4><ol>
 <li><p><font style="background: #d4e9d6">多项核函数：</font></p>
 <p> $K(x,z)=(xz+1)^p$ 对应的支持向量机是一个 $p$ 次多项式分类器。</p>
-<p>在此情景下，分类决策函数为 $f(x)=sign(\sum_{i=1}^{N_*}a_i^<em>y_i(x_ix+1)^p+b^</em>)$</p>
+<p>在此情景下，分类决策函数为 $f(x)=sign(\sum_{i=1}^{N_*}a_iy_i(x_ix+1)^p+b)$</p>
 </li>
 <li><p><font style="background: #d4e9d6">高斯核函数：</font></p>
 <p>$K(x,z)=exp(-\frac{||x-z||^2}{2\sigma^2})$ 对应的支持向量机是高斯径向基函数分类器</p>
-<p>在此情景下，分类决策函数为 $f(x)=sign(\sum_{i=1}^{N_*}a_i^<em>y_iexp(-\frac{||x-z||^2}{2\sigma^2})+b^</em>)$</p>
+<p>在此情景下，分类决策函数为 $f(x)=sign(\sum_{i=1}^{N_*}a_iy_iexp(-\frac{||x-z||^2}{2\sigma^2})+b)$</p>
 </li>
 <li><p><font style="background: #d4e9d6">字符串核函数：</font></p>
 <p>是定义在离散数据集合上的核函数。</p>
