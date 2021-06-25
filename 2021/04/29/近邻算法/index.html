@@ -244,7 +244,7 @@
         <div class="post-content">
             <p>《统计学习方法》 k 近邻算法部分的读书笔记</p>
 <a id="more"></a>
-<h3 id="1-k-近邻算法简介"><a class="header-anchor" href="#1-k-近邻算法简介">null</a>1. k 近邻算法简介</h3>
+<h3 id="1-k-近邻算法简介"><a class="header-anchor" href="#1-k-近邻算法简介">¶</a>1. k 近邻算法简介</h3>
 <p>给定数据集 $T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中，$x_i \in R^n$ 为实例的特征向量，$y_i \in {c_1, c_2,…, c_K}$ 为实例的类别。</p>
 <p><code>k 近邻算法</code> 认为“物以类聚”——“<font style="background: #F9EDA6">红豆附近是红豆</font>”，因此当需要判定某一实例 $(x_i,y_i)$ 的类别时，可以通过在训练集 $T$ 中找到与实例 $(x_i,y_i)$ 距离最近的 $k$ 个点（将涵盖这 $k$ 个点的邻域记作 $N_k(x)$）。<font style="background: #F9EDA6">通过邻域 $N_k(x)$ 的类别特性来决定实例 $(x_i,y_i)$ 的类别。</font></p>
 <p>简单来说，如果有两类实例群：绿豆和红豆，现在要判定某一个豆子的类别。利用 k 近邻的思想，只需要知道离这颗豆子最近的三颗豆子（取 k=3）的类别，就可以判定新的豆子的类别。如果最近三颗全部为绿豆，自然新豆子为绿豆；如果最近三颗豆子有两颗为绿豆，一颗为红豆，则根据多数表决定理，新豆子为绿豆。<br>
@@ -263,7 +263,7 @@
 </ul>
 </blockquote>
 <br>
-<h3 id="2-距离度量"><a class="header-anchor" href="#2-距离度量">null</a>2. 距离度量</h3>
+<h3 id="2-距离度量"><a class="header-anchor" href="#2-距离度量">¶</a>2. 距离度量</h3>
 <p>在第一章我们介绍 k 近邻算法中需要选取距离实例 “距离最近” 的 k 个实例，那如何来度量距离？</p>
 <p>令 $x_i = (x_i^{(1)}, x_i^{(2)}, … ,x_i^{(n)})$，$x_j = (x_j^{(1)}, x_j^{(2)}, … ,x_j^{(n)})$</p>
 <ul>
@@ -292,7 +292,7 @@
 </ul>
 <img src="https://qiniu.xuyuyan.cn/image-20210429105847785.png" alt="image-20210429105847785" style="zoom:40%;" />
 <br>
-<h3 id="3-分类决策规则（多项表决规则）"><a class="header-anchor" href="#3-分类决策规则（多项表决规则）">null</a>3. 分类决策规则（多项表决规则）</h3>
+<h3 id="3-分类决策规则（多项表决规则）"><a class="header-anchor" href="#3-分类决策规则（多项表决规则）">¶</a>3. 分类决策规则（多项表决规则）</h3>
 <p>用通俗的语言来说，多项表决规则就是<font style="background: #F9EDA6">少数服从多数</font>。<strong>如果在邻域内，属于某一类的实例数量更多，则输入实例就属于哪一类。</strong></p>
 <blockquote>
 <p>定义<font style="background: #FBD4D0">（多项表决规则）</font>：如果分类的损失函数为 0-1 损失函数，分类函数为 $f:R^n \rightarrow {c_1,c_2, …,c_K}$<br>
@@ -304,10 +304,10 @@
 <p>上述定义中，$I(y_i \neq c_j)$ 为指示函数，$I(x)= \begin{cases} 1 &amp;\text{x为真} \\0 &amp;\text{x为假} \end{cases}$</p>
 <p>$\sum_{x_i \in N_k(x)}I(y_i=c_j)$ 最大（<font style="background: #F9EDA6">经验风险最小</font>），也就对应了多数表决。</p>
 <br>
-<h3 id="4-kd-树（k-近邻方法的实现）"><a class="header-anchor" href="#4-kd-树（k-近邻方法的实现）">null</a>4. kd 树（k 近邻方法的实现）</h3>
+<h3 id="4-kd-树（k-近邻方法的实现）"><a class="header-anchor" href="#4-kd-树（k-近邻方法的实现）">¶</a>4. kd 树（k 近邻方法的实现）</h3>
 <p>k 近邻方法中，采用线性扫描（逐个计算）的方式计算实例之间的距离。当特征空间的维数大或者训练数据容量大时，运算量极大。</p>
 <p>因此，为了<font style="background: #F9EDA6">提高搜索效率</font>，提出了 kd 树。<strong>kd 树在结构上是二叉树，因此在搜索时的时间复杂度为 O(log n)</strong>。</p>
-<h4 id="4-1-构造-kd-树"><a class="header-anchor" href="#4-1-构造-kd-树">null</a>4.1 构造 kd 树</h4>
+<h4 id="4-1-构造-kd-树"><a class="header-anchor" href="#4-1-构造-kd-树">¶</a>4.1 构造 kd 树</h4>
 <p>给定二维数据集 $T={x_1, x_2,…,x_N}$，其中 $x_i=(x_i<sup>{(1)},x_i</sup>{(2)},…,x_i<sup>{(k)})</sup>T$</p>
 <p>因为比较抽象，所以通过一个简单的例子来描述：<font color="grey">给定二维数据集 $T={(1, 2), (2, 3), (3,4), (4,5), (5,6)}$</font></p>
 <ol>
@@ -327,7 +327,7 @@
 <p><font style="background: #CCE0F1">直到两个子区域没有实例存在时停止。</font></p>
 </li>
 </ol>
-<h4 id="4-2-kd-树的几何意义"><a class="header-anchor" href="#4-2-kd-树的几何意义">null</a>4.2 kd 树的几何意义</h4>
+<h4 id="4-2-kd-树的几何意义"><a class="header-anchor" href="#4-2-kd-树的几何意义">¶</a>4.2 kd 树的几何意义</h4>
 <p>同时，我们用上述这个二维的例子来讲述 kd 树的几何意义。<font style="background: #F9EDA6">每一次划分就是通过切分点做与坐标轴 $x^{(l)}$ 垂直的超平面。</font></p>
 <ol>
 <li>第一次切分，切分点为 $(3,4)$，坐标轴为 $x^{(1)}$</li>
@@ -335,7 +335,7 @@
 <img display="inline-block" src="https://qiniu.xuyuyan.cn/image-20210429144600175.png" alt="image-20210429144600175" style="zoom:20%;" /> <img display="inline-block" src="https://qiniu.xuyuyan.cn/image-20210429144615071.png" alt="image-20210429144615071" style="zoom:20%;" /><img display="inline-block" src="https://qiniu.xuyuyan.cn/image-20210429144630913.png" alt="image-20210429144630913" style="zoom:20%;" /></li>
 </ol>
 <p>通过对比 4.1 中的 kd 树结构和 4.2 中的区域划分图，不难发现，<font style="background: #F9EDA6">所有的非叶节点都落在超平面上，所有叶子节点都落在超矩形区间内</font>。</p>
-<h4 id="4-3-kd-搜索树"><a class="header-anchor" href="#4-3-kd-搜索树">null</a>4.3 kd 搜索树</h4>
+<h4 id="4-3-kd-搜索树"><a class="header-anchor" href="#4-3-kd-搜索树">¶</a>4.3 kd 搜索树</h4>
 <p>下面介绍如何通过 kd 树进行 k 近邻搜索。</p>
 <ol>
 <li>
@@ -360,7 +360,7 @@
 </li>
 </ol>
 <br>
-<h3 id="5-总结"><a class="header-anchor" href="#5-总结">null</a>5. 总结</h3>
+<h3 id="5-总结"><a class="header-anchor" href="#5-总结">¶</a>5. 总结</h3>
 <ul>
 <li>
 <p>k 近邻算法</p>

@@ -244,11 +244,11 @@
         <div class="post-content">
             <p>《统计学习方法》EM 算法的部分读书笔记</p>
 <a id="more"></a>
-<h3 id="1-引入-·-三硬币模型"><a class="header-anchor" href="#1-引入-·-三硬币模型">null</a>1. 引入 · 三硬币模型</h3>
+<h3 id="1-引入-·-三硬币模型"><a class="header-anchor" href="#1-引入-·-三硬币模型">¶</a>1. 引入 · 三硬币模型</h3>
 <p>​	假设有三枚硬币，分别记作A、B、C。这三枚硬币正面朝上的概率分别为 $\pi$、$p$ 和 $q$。进行如下掷硬币实验：先掷硬币 A，如果 A 为正面则下一个掷 B，反面掷 C；以第二枚硬币的结果为最终结果。进行独立重复实验。</p>
 <p>​	我们将独立重复实验得到的结果记作 “<font style="background: #F9EDA6">观测结果</font>”；将每次硬币 A 的结果记为 “<font style="background: #F9EDA6">不可观测数据（隐变量）</font>”。假设我们只能知道观测结果，如何去估计隐变量？这就是 EM 算法解决的问题。（<font style="background: #FBD4D0">用于含有隐变量的概率模型参数的极大似然估计</font>）</p>
 <br>
-<h3 id="2-EM-算法的导出"><a class="header-anchor" href="#2-EM-算法的导出">null</a>2. EM 算法的导出</h3>
+<h3 id="2-EM-算法的导出"><a class="header-anchor" href="#2-EM-算法的导出">¶</a>2. EM 算法的导出</h3>
 <blockquote>
 <p>算法：<font style="background: #d4e9d6">（EM算法）</font></p>
 <p>输入：模型参数 $\theta$</p>
@@ -283,7 +283,7 @@
 <p>将上述算法步骤进行总结：</p>
  <img src="https://qiniu.xuyuyan.cn/image-20210530164519762.png" alt="image-20210530164519762" style="zoom:33%;" />
 <br>
-<h3 id="3-EM-算法的收敛性"><a class="header-anchor" href="#3-EM-算法的收敛性">null</a>3. EM 算法的收敛性</h3>
+<h3 id="3-EM-算法的收敛性"><a class="header-anchor" href="#3-EM-算法的收敛性">¶</a>3. EM 算法的收敛性</h3>
 <p>​	在第二章中，我们并未对以下两个问题进行分析：</p>
 <ol>
 <li>
@@ -294,7 +294,7 @@
 <p>我们将通过以下两个定理进行介绍。</p>
 </li>
 </ol>
-<h4 id="3-1-递增性"><a class="header-anchor" href="#3-1-递增性">null</a>3.1 递增性</h4>
+<h4 id="3-1-递增性"><a class="header-anchor" href="#3-1-递增性">¶</a>3.1 递增性</h4>
 <blockquote>
 <p>定理：设 $P(Y|\theta)$ 为观测数据的似然函数，$\theta^{(i)}$ 为 EM 算法得到的参数估计序列，$P(Y|\theta^{(i)})$ 为对应的似然函数序列，则 <font style="background: #d4e9d6">$P(Y|\theta^{(i)})$ 是单调递增的</font>。</p>
 </blockquote>
@@ -303,7 +303,7 @@
 <p>若要证明 $P(Y|\theta)$ 是单调递增的，只需证明上式大于等于 0。</p>
  <img src="https://qiniu.xuyuyan.cn/image-20210530191902761.png" alt="image-20210530191902761" style="zoom:33%;" />
 <p>至此， $P(Y|\theta)$ 是单调递增得证。</p>
-<h4 id="3-2-收敛到极大值"><a class="header-anchor" href="#3-2-收敛到极大值">null</a>3.2 收敛到极大值</h4>
+<h4 id="3-2-收敛到极大值"><a class="header-anchor" href="#3-2-收敛到极大值">¶</a>3.2 收敛到极大值</h4>
 <blockquote>
 <p>定理：设 $L(\theta)=logP(Y|\theta)$ 为观测数据的对数似然函数，$\theta^{(i)}$ 为 EM 算法得到的参数估计序列，$L(\theta^{(i)})$ 为对应的对数似然函数序列。</p>
 <ol>
@@ -312,16 +312,16 @@
 </blockquote>
 <p>由 $L(\theta)=logP(Y|\theta^{(i)})$ 的单调性及 $P(Y|\theta)$ 的有界性可以立即得到。</p>
 <br>
-<h3 id="4-EM-算法在高斯混合模型学习中的应用"><a class="header-anchor" href="#4-EM-算法在高斯混合模型学习中的应用">null</a>4. EM 算法在高斯混合模型学习中的应用</h3>
-<h4 id="4-1-高斯分布"><a class="header-anchor" href="#4-1-高斯分布">null</a>4.1 高斯分布</h4>
+<h3 id="4-EM-算法在高斯混合模型学习中的应用"><a class="header-anchor" href="#4-EM-算法在高斯混合模型学习中的应用">¶</a>4. EM 算法在高斯混合模型学习中的应用</h3>
+<h4 id="4-1-高斯分布"><a class="header-anchor" href="#4-1-高斯分布">¶</a>4.1 高斯分布</h4>
 <p>先简单介绍一下<font style="background: #d4e9d6">高斯分布</font></p>
 <p>$\phi(y|\theta)=\frac{1}{\sigma\sqrt{2\pi}}e<sup>{-\frac{(x-\mu)</sup>2}{2\sigma^2}}$</p>
 <p>其中，$\mu$ 决定分布的位置；$\sigma^2$ 为方差，决定分布的幅度。</p>
-<h4 id="4-2-高斯混合模型"><a class="header-anchor" href="#4-2-高斯混合模型">null</a>4.2 高斯混合模型</h4>
+<h4 id="4-2-高斯混合模型"><a class="header-anchor" href="#4-2-高斯混合模型">¶</a>4.2 高斯混合模型</h4>
 <p>高斯混合模型可以理解为<font style="background: #F9EDA6">由多个高斯分布叠加得到</font>，具有如下概率分布：</p>
 <p>$P(y|\theta)=\sum_{k=1}^K\alpha_k\phi(y|\theta_k)$</p>
 <p>其中 K 为 K 个叠加的高斯模型，$\alpha_k$ 为每个高斯模型的权重，$\phi(y|\theta_k)$ 为每个高斯模型。</p>
-<h4 id="4-3-高斯混合模型参数估计的-EM-算法"><a class="header-anchor" href="#4-3-高斯混合模型参数估计的-EM-算法">null</a>4.3 高斯混合模型参数估计的 EM 算法</h4>
+<h4 id="4-3-高斯混合模型参数估计的-EM-算法"><a class="header-anchor" href="#4-3-高斯混合模型参数估计的-EM-算法">¶</a>4.3 高斯混合模型参数估计的 EM 算法</h4>
 <ul>
 <li>
 <p><font style="background: #CCE0F1">步骤一：明确隐变量 </font></p>
@@ -351,7 +351,7 @@
 </li>
 </ul>
 <p><font style="background: #F9EDA6">重复步骤二和步骤三，直到对数似然函数值不再有明显的变化。</font></p>
-<h4 id="4-5-高斯混合模型参数估计-EM-算法总结"><a class="header-anchor" href="#4-5-高斯混合模型参数估计-EM-算法总结">null</a>4.5 高斯混合模型参数估计 EM 算法总结</h4>
+<h4 id="4-5-高斯混合模型参数估计-EM-算法总结"><a class="header-anchor" href="#4-5-高斯混合模型参数估计-EM-算法总结">¶</a>4.5 高斯混合模型参数估计 EM 算法总结</h4>
 <blockquote>
 <p>输入：观测数据 $y_1$，$y_2$，…，$y_N$；高斯混合模型</p>
 <p>输出：高斯混合模型参数</p>
@@ -373,7 +373,7 @@
 </ol>
 </blockquote>
 <br>
-<h3 id="5-总结"><a class="header-anchor" href="#5-总结">null</a>5. 总结</h3>
+<h3 id="5-总结"><a class="header-anchor" href="#5-总结">¶</a>5. 总结</h3>
 <p>本章主要介绍了 EM 算法，其本质就是<font style="background: #FBD4D0">通过不断迭代参数逼近似然函数的极大值</font></p>
 <p>在第二章我们<font style="background: #FBD4D0">介绍了 EM 算法</font>，EM 算法顾名思义分为两步：</p>
 <ol>

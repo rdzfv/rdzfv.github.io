@@ -244,7 +244,7 @@
         <div class="post-content">
             <p>本文为图算法的先导篇，将会介绍和图相关的概念以及代码实现。</p>
 <a id="more"></a>
-<h3 id="一、图的定义"><a class="header-anchor" href="#一、图的定义">null</a>一、图的定义</h3>
+<h3 id="一、图的定义"><a class="header-anchor" href="#一、图的定义">¶</a>一、图的定义</h3>
 <p>图 G 由顶点集 V 和边集 E 组成，记作 $G=(V,E)$。</p>
 <ul>
 <li>
@@ -313,15 +313,15 @@
 <p>在非连通图中，连通分量的生成树构成了非连通图的<strong>生成森林</strong>。</p>
 </li>
 </ol>
-<h3 id="二、图的存储："><a class="header-anchor" href="#二、图的存储：">null</a>二、图的存储：</h3>
-<h4 id="1-邻接矩阵法："><a class="header-anchor" href="#1-邻接矩阵法：">null</a>1. 邻接矩阵法：</h4>
+<h3 id="二、图的存储："><a class="header-anchor" href="#二、图的存储：">¶</a>二、图的存储：</h3>
+<h4 id="1-邻接矩阵法："><a class="header-anchor" href="#1-邻接矩阵法：">¶</a>1. 邻接矩阵法：</h4>
 <p>所谓邻接矩阵，就是用一个<strong>一维数组存储图中顶点信息</strong>，用一个<strong>二维数组存储图中边的信息</strong>（各顶点之间的邻接关系）。其中，存储顶点之间邻接关系的二维数组称为邻接矩阵。</p>
 <p>$A[i][j]=\begin{cases} 1&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 是 E(G) 中的边} \\0&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 不是 E(G) 中的边} \end{cases}$</p>
 <p>对于带权图来说，若顶点 $v_i$ 和 $v_j$ 之间有边相连，则邻接矩阵中应存放边对应的权值。</p>
 <p>$A[i][j]=\begin{cases} w_{ij}&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 是 E(G) 中的边} \\0\ 或\ \infty&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 不是 E(G) 中的边} \end{cases}$</p>
 <p>使用 c/c++ 语言描述为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> VertexTtype;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> EdgeType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    VertextType Vex[MaxVertexNum];  <span class="comment">// 顶点表</span></span><br><span class="line">    EdgeType Edge[MaxVertexNum][MaxVertexNum];  <span class="comment">// 邻接矩阵（边表）</span></span><br><span class="line">    <span class="keyword">int</span> vexnum,arcnum;   <span class="comment">// 弧当前的顶点数和弧数</span></span><br><span class="line">&#125; MGraph;</span><br></pre></td></tr></table></figure>
-<h4 id="2-邻接表法："><a class="header-anchor" href="#2-邻接表法：">null</a>2. 邻接表法：</h4>
+<h4 id="2-邻接表法："><a class="header-anchor" href="#2-邻接表法：">¶</a>2. 邻接表法：</h4>
 <p>当一个图的边集较少时（即顶点间的关系不复杂），使用邻接矩阵方法会浪费大量的存储空间，此时，图的邻接表法结合了顺序存储和链式存储的方法，<strong>大大减少了空间开销</strong>。</p>
 <p>所谓邻接表，是指对图 G 中的每个顶点建立一个单链表，链表存储依附于该结点的其他结点（这个单链表就成为顶点的<strong>边表</strong>）。各边表的头指针和顶点数据采用顺序存储（称为<strong>顶点表</strong>）。</p>
 <img src="https://qiniu.xuyuyan.cn/image-20210208163013602.png" alt="image-20210208163013602" style="zoom: 50%;" />
@@ -329,7 +329,7 @@
 <img src="https://qiniu.xuyuyan.cn/image-20210208163149663.png" alt="image-20210208163013602" style="zoom: 50%;" />
 <p>使用 c/c++ 语言描述为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> &#123;</span>  <span class="comment">//// 边表节点</span></span><br><span class="line">    <span class="keyword">int</span> adjvex;             <span class="comment">// 该弧指向的顶点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> *<span class="title">next</span>;</span>   <span class="comment">// 指向下一条弧的指针</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span> &#123;</span>    <span class="comment">//// 顶点表节点</span></span><br><span class="line">    VertexType data;        <span class="comment">// 顶点信息</span></span><br><span class="line">    ArcNode *first;         <span class="comment">// 指向第一条依附于该顶点的弧指针</span></span><br><span class="line">&#125;VNode,AdjList[MaxVertexNum];</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    VAdjList vertices;   <span class="comment">// 邻接表</span></span><br><span class="line">    <span class="keyword">int</span> vexnum,arcnum;   <span class="comment">// 图的顶点数和弧数</span></span><br><span class="line">&#125; MGraph;</span><br></pre></td></tr></table></figure>
-<h3 id="三、图的基本操作"><a class="header-anchor" href="#三、图的基本操作">null</a>三、图的基本操作</h3>
+<h3 id="三、图的基本操作"><a class="header-anchor" href="#三、图的基本操作">¶</a>三、图的基本操作</h3>
 <ol>
 <li>Adjacent(G, x, y)：判断是否存在边 &lt;x, y&gt; 或 (x, y)</li>
 <li>Neighbors(G, x)：列出图 G 中与节点 x 邻接的边</li>

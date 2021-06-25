@@ -206,20 +206,20 @@
             <blockquote>
 <p>先给出一个情景：编写一个商店收银软件，根据单价和数量计算价格</p>
 </blockquote>
-<h2 id="我们要考虑的"><a class="header-anchor" href="#我们要考虑的">null</a>我们要考虑的</h2>
+<h2 id="我们要考虑的"><a class="header-anchor" href="#我们要考虑的">¶</a>我们要考虑的</h2>
 <ul>
 <li>在上面所述的情景中，可能出现商品打折情况</li>
 <li>可能出现满减等新情况</li>
 </ul>
-<h2 id="使用简单工厂实现"><a class="header-anchor" href="#使用简单工厂实现">null</a>使用简单工厂实现</h2>
+<h2 id="使用简单工厂实现"><a class="header-anchor" href="#使用简单工厂实现">¶</a>使用简单工厂实现</h2>
 <p><img src="https://qiniu.xuyuyan.cn/52461EA6CE81E2625AF6698047ACF2A4.png" alt="avatar"><br>
 此处仅给出类图，工厂模式详解见<br>
 <a href="https://www.xuyuyan.cn/2020/04/23/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">https://www.xuyuyan.cn/2020/04/23/简单工厂模式</a><br>
 <strong>此处使用简单工厂模式存在明显缺陷：</strong><br>
 商场会经常性地更改打折额度，每次维护或扩展新的收费方式都要改动工厂</p>
-<h2 id="策略模式UML图"><a class="header-anchor" href="#策略模式UML图">null</a>策略模式UML图</h2>
+<h2 id="策略模式UML图"><a class="header-anchor" href="#策略模式UML图">¶</a>策略模式UML图</h2>
 <p><img src="https://qiniu.xuyuyan.cn/C7D1D727DD628276B08327CD35346E73.png" alt="avator"></p>
-<h2 id="策略模式代码实现（Java）"><a class="header-anchor" href="#策略模式代码实现（Java）">null</a>策略模式代码实现（Java）</h2>
+<h2 id="策略模式代码实现（Java）"><a class="header-anchor" href="#策略模式代码实现（Java）">¶</a>策略模式代码实现（Java）</h2>
 <p><strong>策略接口</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PriceStrategy</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 价格计算</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">getPrice</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">double</span> price)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>策略方法</strong></p>
@@ -230,19 +230,19 @@
 <p><strong>客户端</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Context context = <span class="keyword">new</span> Context(<span class="keyword">new</span> ConcretePriceStrategyA());</span><br><span class="line">    <span class="keyword">double</span> price = context.ContextInterface(<span class="number">2</span>, <span class="number">9.9</span>);</span><br><span class="line">    <span class="comment">// System.out.println(&quot;价格是：&quot; + price);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过以上代码可以发现若是算法较多时，客户端将会存在较复杂的swtich语句，所以通常在<strong>算法较多时</strong>将策略模式和简单工厂模式结合。</p>
-<h2 id="策略模式-简单工厂模式"><a class="header-anchor" href="#策略模式-简单工厂模式">null</a>策略模式+简单工厂模式</h2>
+<h2 id="策略模式-简单工厂模式"><a class="header-anchor" href="#策略模式-简单工厂模式">¶</a>策略模式+简单工厂模式</h2>
 <p>策略接口和策略类不变<br>
 <strong>上下文工厂</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContextFactory</span> </span>&#123;</span><br><span class="line">    PriceStrategy priceStrategy = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ContextFactory</span><span class="params">(String type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;正常收费&quot;</span> : &#123;</span><br><span class="line">                priceStrategy = <span class="keyword">new</span> ConcretePriceStrategyB();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;8折&quot;</span> : &#123;</span><br><span class="line">                priceStrategy = <span class="keyword">new</span> ConcretePriceStrategyA();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">ContextInterface</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">double</span> price)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> priceStrategy.getPrice(num, price);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>客户端</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ContextFactory contextFactory = <span class="keyword">new</span> ContextFactory(<span class="string">&quot;正常收费&quot;</span>);</span><br><span class="line">    <span class="keyword">double</span> price = contextFactory.ContextInterface(<span class="number">2</span>, <span class="number">9.9</span>);</span><br><span class="line">    <span class="comment">// System.out.println(&quot;价格是：&quot; + price);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="策略模式的优势"><a class="header-anchor" href="#策略模式的优势">null</a>策略模式的优势</h2>
+<h2 id="策略模式的优势"><a class="header-anchor" href="#策略模式的优势">¶</a>策略模式的优势</h2>
 <ol>
 <li>减少耦合：以相同的方式j调用所有算法，减少了算法类和使用算法类张子健的耦合</li>
 <li>可重用：Strategy类层次为Conext定义了可重用的d算法，继承有助于析取公共功能</li>
 <li>简化单元测试：每个算法都有独立的类，可以单独测试</li>
 </ol>
-<h2 id="策略模式的缺点"><a class="header-anchor" href="#策略模式的缺点">null</a>策略模式的缺点</h2>
+<h2 id="策略模式的缺点"><a class="header-anchor" href="#策略模式的缺点">¶</a>策略模式的缺点</h2>
 <ol>
 <li>即使和工厂模式结合后仍存在工厂模式的缺点：工厂类的变动频率过高</li>
 </ol>
