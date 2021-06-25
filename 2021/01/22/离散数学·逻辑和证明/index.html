@@ -244,8 +244,8 @@
         <div class="post-content">
             <p>《离散数学及其应用》第一章·逻辑和证明 学习笔记</p>
 <a id="more"></a>
-
-<h3 id="一、先导概念"><a href="#一、先导概念" class="headerlink" title="一、先导概念"></a>一、先导概念</h3><ul>
+<h3 id="一、先导概念"><a class="header-anchor" href="#一、先导概念">null</a>一、先导概念</h3>
+<ul>
 <li><strong>命题</strong>：是一个陈述句，或真或假，但不能既真又假。</li>
 </ul>
 <p>接下来我们字母表示命题变元，例如 p，q，r，s 等。后文所述<strong>真值</strong>可理解为命题的真假性，命题为真记作 T，命题为假记作 F。</p>
@@ -259,7 +259,8 @@
 <th>$\lnot p$</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>T</td>
 <td>F</td>
 </tr>
@@ -267,8 +268,9 @@
 <td>F</td>
 <td>T</td>
 </tr>
-</tbody></table>
-<p>  从真值表中可以看出，命题 p 和 命题 p 的否定真值相反。</p>
+</tbody>
+</table>
+<p>从真值表中可以看出，命题 p 和 命题 p 的否定真值相反。</p>
 <ul>
 <li><strong>p，q 的合取命题</strong>（AND）：$p \bigwedge q$，读作 “p 并且 q”</li>
 </ul>
@@ -280,7 +282,8 @@
 <th>output</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>T</td>
 <td>T</td>
 <td>T</td>
@@ -300,7 +303,8 @@
 <td>F</td>
 <td>F</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>从真值表可以看出，当且仅当合取的两命题均为真时，结果为真。</p>
 <ul>
 <li><strong>p，q 的析取命题</strong>（OR）：$p \bigvee q$，读作 “p 或 q”</li>
@@ -313,7 +317,8 @@
 <th>output</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>T</td>
 <td>T</td>
 <td>T</td>
@@ -333,7 +338,8 @@
 <td>F</td>
 <td>F</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>从真值表可以看出，只要两个合取的两命题有一个为真时，结果为真。</p>
 <ul>
 <li><strong>p，q 的异或命题</strong>（XOR）：$p \bigoplus  q$，读作 “p 异或 q”</li>
@@ -346,7 +352,8 @@
 <th>output</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>T</td>
 <td>T</td>
 <td>T</td>
@@ -366,7 +373,8 @@
 <td>F</td>
 <td>F</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>从真值表可以看出，当异或的两个命题中恰好只有一个为真（两命题的真值不同），结果为真。</p>
 <ul>
 <li><strong>条件语句</strong>：$p \rightarrow q$，读作 “如果 p，则 q”。我们通常将 p 称为 （前提）前件，将 q 称为（结论）后件。</li>
@@ -379,7 +387,8 @@
 <th>output</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>T</td>
 <td>T</td>
 <td>T</td>
@@ -399,7 +408,8 @@
 <td>F</td>
 <td>T</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>相比之前的概念，这个真值表可能较难理解，在此举一个例子：设 p 为命题 “天下雨”，命题 q 为 “我不去打球”。则条件语句 “$p \rightarrow q$” 可以翻译为 “如果天下雨，我就不去打球”。将不同的真值带入：</p>
 <table>
 <thead>
@@ -411,7 +421,8 @@
 <th>output</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>T</td>
 <td>天下雨</td>
 <td>T</td>
@@ -439,7 +450,8 @@
 <td>我不去打球</td>
 <td>T</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>可以发现，只有当 p（前提） 的真值为 T ，q（结论） 的真值为 F，条件语句才为 F。</p>
 <ul>
 <li><strong>逆命题</strong>：$p \rightarrow q$ 和  $q \rightarrow p$ 互为逆命题，也就是<strong>交换前提和结论</strong>。</li>
@@ -463,7 +475,8 @@
 <th>output</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>T</td>
 <td>T</td>
 <td>T</td>
@@ -483,7 +496,8 @@
 <td>F</td>
 <td>T</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>较为容易理解，因为双条件语句的定义是 p 和 q 等价，所以只有当 p 和 q 的真值相同时结果才为 T 。</p>
 <p>至此我们介绍了部分逻辑运算符，我们希望你可以了解一下<strong>逻辑运算符的优先级</strong>：</p>
 <table>
@@ -493,7 +507,8 @@
 <th>优先级</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>$\lnot$</td>
 <td>1</td>
 </tr>
@@ -513,8 +528,10 @@
 <td>$\leftarrow \rightarrow$</td>
 <td>5</td>
 </tr>
-</tbody></table>
-<h3 id="二、一些逻辑恒等式"><a href="#二、一些逻辑恒等式" class="headerlink" title="二、一些逻辑恒等式"></a>二、一些逻辑恒等式</h3><table>
+</tbody>
+</table>
+<h3 id="二、一些逻辑恒等式"><a class="header-anchor" href="#二、一些逻辑恒等式">null</a>二、一些逻辑恒等式</h3>
+<table>
 <thead>
 <tr>
 <th>等价式</th>
@@ -522,7 +539,8 @@
 <th>名称</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>$p \bigwedge T \equiv p$ <br>$p \bigvee F \equiv p$</td>
 <td></td>
 <td>恒等律</td>
@@ -582,30 +600,38 @@
 <td>$\lnot$ 可以挪到双条件表达式的后项</td>
 <td>双条件命题的逻辑等价式</td>
 </tr>
-</tbody></table>
-<h3 id="三、谓词、量词"><a href="#三、谓词、量词" class="headerlink" title="三、谓词、量词"></a>三、谓词、量词</h3><ul>
+</tbody>
+</table>
+<h3 id="三、谓词、量词"><a class="header-anchor" href="#三、谓词、量词">null</a>三、谓词、量词</h3>
+<ul>
 <li><strong>谓词</strong></li>
 </ul>
 <p>一般地，<strong>涉及 n 个变量</strong> $x_1$，$x_2$，…，$x_n$ 的语句可以表示为 $P(x_1，x_2，…，x_n)$ ，我们将其称为命题函数 P 在 n 元组 ( $x_1$，$x_2$，…，$x_n$) 的值，P 也称为 <strong>n 元谓词</strong>。</p>
 <ul>
-<li><p><strong>量词</strong>：量词比命题演算中所有逻辑运算符的<strong>优先级</strong>都更高</p>
+<li>
+<p><strong>量词</strong>：量词比命题演算中所有逻辑运算符的<strong>优先级</strong>都更高</p>
 <ul>
 <li><strong>全称量词</strong>：全体域均可使命题成立。用符号 $\forall$ 表示。</li>
 <li><strong>存在量词</strong>：存在一个个体使命题成立。用符号 $\exists$ 表示。</li>
 </ul>
 </li>
-<li><p><strong>量化表达式的否定</strong>：$\forall x P(x) \equiv \exists x \lnot P(x)$</p>
+<li>
+<p><strong>量化表达式的否定</strong>：$\forall x P(x) \equiv \exists x \lnot P(x)$</p>
 </li>
-<li><p><strong>嵌套量词</strong>：一个量词出现在另一个量词的作用域中，例如 $\forall x \forall y (x + y = y + x)$</p>
+<li>
+<p><strong>嵌套量词</strong>：一个量词出现在另一个量词的作用域中，例如 $\forall x \forall y (x + y = y + x)$</p>
 </li>
-<li><p><strong>量词的顺序</strong>：量词的顺序十分重要，除非所有的量词均为全称量词或者存在量词。（言下之意：如果只有全称量词或存在量词，则可前后交换顺序）</p>
+<li>
+<p><strong>量词的顺序</strong>：量词的顺序十分重要，除非所有的量词均为全称量词或者存在量词。（言下之意：如果只有全称量词或存在量词，则可前后交换顺序）</p>
 </li>
-<li><p><strong>嵌套量词的否定</strong></p>
+<li>
+<p><strong>嵌套量词的否定</strong></p>
 <p>$\lnot (\forall x \exists y (xy = 1)) = \exists x \lnot \exists y (xy = 1)$  (将否定词移入所有量词之中)</p>
 <p>= $\exists x \forall y \lnot (xy  = 1)$ = $\exists x \forall y \lnot (xy \not= 1)$</p>
 </li>
 </ul>
-<h3 id="四、推理"><a href="#四、推理" class="headerlink" title="四、推理"></a>四、推理</h3><ul>
+<h3 id="四、推理"><a class="header-anchor" href="#四、推理">null</a>四、推理</h3>
+<ul>
 <li><strong>推理规则：</strong></li>
 </ul>
 <table>
@@ -616,7 +642,8 @@
 <th>理解</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>假言推理</td>
 <td>$p \bigwedge ( p \rightarrow q)) \rightarrow q$</td>
 <td>已知 p ，$p \rightarrow q$，可以推得 q</td>
@@ -648,7 +675,7 @@
 </tr>
 <tr>
 <td>合取律</td>
-<td>$((p) \bigwedge (q)) \rightarrow (p \bigwedge q)$</td>
+<td>$(§ \bigwedge (q)) \rightarrow (p \bigwedge q)$</td>
 <td>已知 p，q，可以推得 $p \bigwedge q$</td>
 </tr>
 <tr>
@@ -656,32 +683,41 @@
 <td>$((p \bigvee q) \bigwedge (\lnot p \bigwedge r)) \rightarrow (q \bigvee r)$</td>
 <td>已知 $p \bigvee q$，$\lnot p \bigvee r$，可以推得 $q \bigvee r$</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
 <li><strong>量化命题的推理规则：</strong></li>
 </ul>
 <ol>
-<li><strong>全称实例</strong>：由 $\forall x P(x)$ 得出 $P(c)$</li>
-<li><strong>全称引入</strong>：由 论域中所有元素 c 都存在$P(c)$，得出 $\forall x P(x)$ </li>
-<li><strong>存在实例</strong>：由 $\exists x P(x)$，得出 $P(c)$。但是 c 不知道确切的值，仅知道存在。</li>
-<li><strong>存在引入</strong>：由 $P(c)$，得出 $\exists x P(x)$</li>
+<li><strong>全称实例</strong>：由 $\forall x P(x)$ 得出 $P©$</li>
+<li><strong>全称引入</strong>：由 论域中所有元素 c 都存在$P©$，得出 $\forall x P(x)$</li>
+<li><strong>存在实例</strong>：由 $\exists x P(x)$，得出 $P©$。但是 c 不知道确切的值，仅知道存在。</li>
+<li><strong>存在引入</strong>：由 $P©$，得出 $\exists x P(x)$</li>
 </ol>
-<h3 id="五、证明"><a href="#五、证明" class="headerlink" title="五、证明"></a>五、证明</h3><ol>
-<li><p><strong>直接证明法</strong>：（$p \rightarrow q$）</p>
+<h3 id="五、证明"><a class="header-anchor" href="#五、证明">null</a>五、证明</h3>
+<ol>
+<li>
+<p><strong>直接证明法</strong>：（$p \rightarrow q$）</p>
 <p>第一步：假设 p 为真；第二步：用推理规则构造；第三步：推导出 q 为真。</p>
 </li>
-<li><p><strong>反证法</strong>：（$p \rightarrow q$ 等价于 $\lnot q \rightarrow \lnot p$）</p>
+<li>
+<p><strong>反证法</strong>：（$p \rightarrow q$ 等价于 $\lnot q \rightarrow \lnot p$）</p>
 <p>第一步：假设 $\lnot q$；第二步：用推理规则构造；第三步：推导出 $\lnot p$ 为真。</p>
 </li>
-<li><p><strong>空证明</strong>：如果能证明 p 为假，则我们就有了一个 $p \rightarrow q$ 的证明方法</p>
+<li>
+<p><strong>空证明</strong>：如果能证明 p 为假，则我们就有了一个 $p \rightarrow q$ 的证明方法</p>
 </li>
-<li><p><strong>平凡证明</strong>：如果能证明 p 为真，则我们也可以很快证明出 $p \rightarrow q$</p>
+<li>
+<p><strong>平凡证明</strong>：如果能证明 p 为真，则我们也可以很快证明出 $p \rightarrow q$</p>
 </li>
-<li><p><strong>归谬证明</strong>：如果我们能证明对于某个命题 r，$\lnot p \rightarrow (r \bigwedge \lnot r)$为真，则可以得出：p 是真的</p>
+<li>
+<p><strong>归谬证明</strong>：如果我们能证明对于某个命题 r，$\lnot p \rightarrow (r \bigwedge \lnot r)$为真，则可以得出：p 是真的</p>
 </li>
-<li><p><strong>等价证明法：</strong>为了证明双命题条件 $p \leftarrow \rightarrow q$，则需要证明 $p \rightarrow q$ 和 $q \rightarrow p$</p>
+<li>
+<p>**等价证明法：**为了证明双命题条件 $p \leftarrow \rightarrow q$，则需要证明 $p \rightarrow q$ 和 $q \rightarrow p$</p>
 </li>
-<li><p><strong>唯一性证明</strong>：（存在性：P(c)）&amp;&amp;（唯一性：如果 $b \not= c$，则 P(b) 不成立）</p>
+<li>
+<p><strong>唯一性证明</strong>：（存在性：P©）&amp;&amp;（唯一性：如果 $b \not= c$，则 P(b) 不成立）</p>
 </li>
 </ol>
 <blockquote>

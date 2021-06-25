@@ -244,8 +244,8 @@
         <div class="post-content">
             <p>本文为《离散数学及其应用》第四章的阅读笔记</p>
 <a id="more"></a>
-
-<h3 id="一、数论"><a href="#一、数论" class="headerlink" title="一、数论"></a>一、数论</h3><ul>
+<h3 id="一、数论"><a class="header-anchor" href="#一、数论">null</a>一、数论</h3>
+<ul>
 <li><strong>整除</strong>：使用记号 a| b 表示 a 能整除 b；可以用量词表达为：$\exists c (ac = b)$</li>
 </ul>
 <p>此处希望读者留意：<strong>a 整除 b</strong> 的含义是 <strong>b 是 a 的整数倍</strong>；而不是 a 是 b 的整数倍。</p>
@@ -295,27 +295,29 @@
 <p><strong>乘法的模</strong>：$a ·_m b = (a · b) mod\ m$</p>
 <p>运算 加法的模、乘法的模 满足如下性质：</p>
 <ol>
-<li> <strong>封闭性</strong>：如果 a 和 b 属于 $Z_m$，则 $a +_m b$ 和 $a ·_m b$ 也属于 $Z_m$</li>
+<li><strong>封闭性</strong>：如果 a 和 b 属于 $Z_m$，则 $a +_m b$ 和 $a ·_m b$ 也属于 $Z_m$</li>
 <li><strong>结合律</strong>：如果 a 、b 和 c 属于 $Z_m$，则有 $（a +_m b） +_m c = a +_m (b +_m c)$ 和 $（a ·_m b） ·_m c = a ·_m (b ·_m c)$</li>
 <li><strong>交换律</strong>：如果 a 和 b 属于 $Z_m$，则有 $a +_m b = b +_m a$ 和 $a ·_m b = b ·_m a$</li>
 <li><strong>单位元</strong>：如果 a 属于 $Z_m$，则有 $a +_m 0 = 0 +_m a = a$ 和 $a ·_m 0 = 0 ·_m a = a$</li>
 <li><strong>加法逆元</strong>：如果 $a \not= 0$ 属于 $Z_m$，则 m - a 是 a 的模 m 加法逆元，则有 $a +_m (m - a) = 0$ 且 $0 +_m 0 = 0$</li>
-<li><strong>分配律</strong>：如果 a 、b 和 c 属于 $Z_m$，则有 $a ·_m (b +_m c) = (a ·_m b) +_m (a ·_m c)$ 和 $a +_m (b ·_m c) = (a +_m b) ·_m (a +_m c)$ </li>
+<li><strong>分配律</strong>：如果 a 、b 和 c 属于 $Z_m$，则有 $a ·_m (b +_m c) = (a ·_m b) +_m (a ·_m c)$ 和 $a +_m (b ·_m c) = (a +_m b) ·_m (a +_m c)$</li>
 </ol>
 <p>以上性质均较易理解，此处不多做解释。</p>
 <ul>
 <li><strong>数的表示</strong>：</li>
 </ul>
 <blockquote>
-<p>定理1：令 b 是一个大于 1 的整数。则如果 n 是一个正整数，就可以唯一地表示下面的形式<br>$n = a_kb^k + a_{k-1}b^{k-1} + … + a_1b + a_0$<br>其中 k 为非负整数，$a_0$，$a_1$，…，$a_k$ 是小于 b 的非负整数，且$a_k \not= 0$</p>
+<p>定理1：令 b 是一个大于 1 的整数。则如果 n 是一个正整数，就可以唯一地表示下面的形式<br>
+$n = a_kb^k + a_{k-1}b^{k-1} + … + a_1b + a_0$<br>
+其中 k 为非负整数，$a_0$，$a_1$，…，$a_k$ 是小于 b 的非负整数，且$a_k \not= 0$</p>
 </blockquote>
 <p>我们也将上述表达式称为 <strong>n 的 b 进制表达式</strong>。</p>
 <ul>
 <li><strong>模指数运算</strong></li>
 </ul>
 <p>在密码学中能够有效的计算 $b^n mod \ m$ 非常重要，其中 b、n、m 是大整数。先计算 $b^n$ 再求余数显然是不可行的。我们将介绍一种利用指数 n 的二进制展开式的一个算法：</p>
-<p>例如对于 $n = (a_{k-1} … a_1a_0)$，计算 $b_n$：$b^n = b^{a_{k-1}2^{k-1} +…+a_1·2+a_0} = b^{a_{k-1}2^{k-1}}…b^{a_1·2}·b^{a_0}$</p>
-<p>因此我们需要计算 $b^{a_{k-1}2^{k-1}}，…b^{a_1·2}，b^{a_0}$ ，并依次相乘。为了提高效率，每乘一项就可以进行一次模运算。</p>
+<p>例如对于 $n = (a_{k-1} … a_1a_0)$，计算 $b_n$：$b^n = b<sup>{a_{k-1}2</sup>{k-1} +…+a_1·2+a_0} = b<sup>{a_{k-1}2</sup>{k-1}}…b<sup>{a_1·2}·b</sup>{a_0}$</p>
+<p>因此我们需要计算 $b<sup>{a_{k-1}2</sup>{k-1}}，…b<sup>{a_1·2}，b</sup>{a_0}$ ，并依次相乘。为了提高效率，每乘一项就可以进行一次模运算。</p>
 <p>以下为伪代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">procedure modular exponentiation (b: 整数, n, m：正整数) &#123;</span><br><span class="line">    x :&#x3D; 1</span><br><span class="line">    power :&#x3D; b mod m</span><br><span class="line">    for i :&#x3D; 0 to k - 1</span><br><span class="line">        if a_i &#x3D; 1 then x :&#x3D; (x · power) mod m</span><br><span class="line">        power :&#x3D; (power · power) mod m</span><br><span class="line">    return x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
@@ -331,17 +333,22 @@
 <blockquote>
 <p>引理：令 a = bq + r，其中 a，b，q 和 r 均为整数。则 gcd(a, b) = gcd(b, r)。</p>
 </blockquote>
-<p> 假定 a 和 b 为正整数，且 $b \leq a$。令 $r_0 = a$ 和 $r_1 = b$。当连续运用整除运算时。可得：</p>
+<p>假定 a 和 b 为正整数，且 $b \leq a$。令 $r_0 = a$ 和 $r_1 = b$。当连续运用整除运算时。可得：</p>
 <ul>
-<li><p>$r_0 = r_1q_1 + r_2$      ($0 \leq r_2 &lt; r_1$)</p>
+<li>
+<p>$r_0 = r_1q_1 + r_2$      ($0 \leq r_2 &lt; r_1$)</p>
 </li>
-<li><p>$r_1 = r_2q_2 + r_3$      ($0 \leq r_3 &lt; r_2$)</p>
+<li>
+<p>$r_1 = r_2q_2 + r_3$      ($0 \leq r_3 &lt; r_2$)</p>
 </li>
-<li><p>……</p>
+<li>
+<p>…</p>
 </li>
-<li><p>$r_{n-2} = r_{n-1}q_{n-1} + r_n$      ($0 \leq r_n &lt; r_{n-1}$)</p>
+<li>
+<p>$r_{n-2} = r_{n-1}q_{n-1} + r_n$      ($0 \leq r_n &lt; r_{n-1}$)</p>
 </li>
-<li><p>$r_{n-1} = r_nq_n$</p>
+<li>
+<p>$r_{n-1} = r_nq_n$</p>
 </li>
 </ul>
 <p>最终在这一连续相除序列中出现余数 0，因为在余数序列 $a = r_0 &gt; r_1 &gt; r_2 &gt; … \geq 0$ 中至多包含 a 项。由引理可推出：</p>
@@ -352,7 +359,7 @@
 </ul>
 <p>形如：$ax \equiv b(mod \ m)$，其中 m 为正整数，a 和 b 为整数，而 x 为变量，称为线性同余方程。</p>
 <p>如何求解线性同余方程？即如何找出所有满足同余方程的整数解。我们将介绍一种方法，利用使得 $\overline aa \equiv 1(mod \ m)$ 成立的整数 $\overline a$。如果这样的整数存在，我们也称 $\overline a$ 为 a 模 m 的逆。当 a 和 m 互素时，a 模 m 的逆一定存在。</p>
-<p>不知各位读者是否发现，线性同余方程组可以用来解决我们熟悉的<strong>“中国剩余定理”</strong>：有物不知其数，三分之余二，五分之余三，七分之余二，此物为几何？我们可以用线性同余方程来重新表述：$x \equiv 2(mod \ 3)$；$x \equiv 3(mod \ 5)$；$x \equiv 2(mod \ 7)$。</p>
+<p>不知各位读者是否发现，线性同余方程组可以用来解决我们熟悉的**“中国剩余定理”**：有物不知其数，三分之余二，五分之余三，七分之余二，此物为几何？我们可以用线性同余方程来重新表述：$x \equiv 2(mod \ 3)$；$x \equiv 3(mod \ 5)$；$x \equiv 2(mod \ 7)$。</p>
 <ul>
 <li><strong>费马小定理</strong></li>
 </ul>
@@ -360,8 +367,9 @@
 <p>如果 p 为素数，a 时一个不能被 p 整除的整数，则 $a^{p-1} \equiv 1(mod \ p)$。再者，对每一个整数 a 都有：$a^p \equiv a(mod \ p)$</p>
 </blockquote>
 <p>费马小定理告诉我们：如果 $a \in Z_p$，则 $a^{p-1} = 1$ 也在 $Z_p$ 中。</p>
-<h3 id="二、密码学"><a href="#二、密码学" class="headerlink" title="二、密码学"></a>二、密码学</h3><p>数论在密码学（将信息作转换使得在没有特殊知识的情况下不能很容易恢复出来）中起到关键的作用。</p>
-<p>最早使用密码学的人之一是尤利乌斯 · 恺撒。它通过把字母表众多的每个字母正向移动三位来加密消息。用数学表达式表达就是：$f(p) = (p + 3) mod \ 26$ 。当然我们也可以对恺撒密码进行扩展：$f(p) = (p + k) mod \ 26$，此处 k 可被称为密钥。</p>
+<h3 id="二、密码学"><a class="header-anchor" href="#二、密码学">null</a>二、密码学</h3>
+<p>数论在密码学（将信息作转换使得在没有特殊知识的情况下不能很容易恢复出来）中起到关键的作用。</p>
+<p>最早使用密码学的人之一是尤利乌斯 · 恺撒。它通过把字母表众多的每个字母正向移动三位来加密消息。用数学表达式表达就是：$f§ = (p + 3) mod \ 26$ 。当然我们也可以对恺撒密码进行扩展：$f§ = (p + k) mod \ 26$，此处 k 可被称为密钥。</p>
 <ul>
 <li><strong>私钥密码学</strong>：</li>
 </ul>
@@ -380,13 +388,15 @@
 <li>接下来，将这个串分成 2N 位数字登场的分组，这里 2N 是一个大偶数使得 2N 位数字的整数不超过 n</li>
 <li>接下来进行加密。加密过程是将每个分组 $m_i$ 转换成密文分组 $c_i$。由函数 $C = M^e \ mod \ n$</li>
 </ol>
-<p>当已知解密密钥 d 就是 e 模 (p - 1)(q - 1) 的逆时，就可以很快地对密文<strong>解密</strong>：$C^d \equiv (M^e)^{d} \equiv M^{de} \equiv M^{1+k(p-1)(q-1)}(mod \ n)$</p>
+<p>当已知解密密钥 d 就是 e 模 (p - 1)(q - 1) 的逆时，就可以很快地对密文<strong>解密</strong>：$C^d \equiv (M<sup>e)</sup>{d} \equiv M^{de} \equiv M^{1+k(p-1)(q-1)}(mod \ n)$</p>
 <p><strong>为什么 RSA 密码系统适合作为公钥密码系统呢？</strong></p>
 <ol>
-<li><p>公钥构造简单：</p>
-<p>首先，通过需按照两个各有 200 多位地大素数 p 和 q，再寻找一个与 (p - 1)(q - 1) 互素的整数 e，就可以迅速构造一个公钥。 </p>
+<li>
+<p>公钥构造简单：</p>
+<p>首先，通过需按照两个各有 200 多位地大素数 p 和 q，再寻找一个与 (p - 1)(q - 1) 互素的整数 e，就可以迅速构造一个公钥。</p>
 </li>
-<li><p>解密可行：</p>
+<li>
+<p>解密可行：</p>
 <p>当知道模数 n 的因子分解，即知道素数 p 和 q 时，我们可以迅速找到 e 模 (p - 1)(q - 1) 的逆 d。（可以利用欧几里得算法寻找 d 和 (p-1)(q-1) 的贝族系数 s 和 t）</p>
 </li>
 </ol>

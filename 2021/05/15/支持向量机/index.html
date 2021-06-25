@@ -242,10 +242,11 @@
         </header>
 
         <div class="post-content">
-            <p>《统计学习方法》支持向量机部分读书笔记<br>由于渲染可能存在问题，本文也以 xyyPan 的分享链接形式给出 <a href="http://www.xuyuyan.cn:5212/s/KWcM">http://www.xuyuyan.cn:5212/s/KWcM</a></p>
+            <p>《统计学习方法》支持向量机部分读书笔记<br>
+由于渲染可能存在问题，本文也以 xyyPan 的分享链接形式给出 <a href="http://www.xuyuyan.cn:5212/s/KWcM">http://www.xuyuyan.cn:5212/s/KWcM</a></p>
 <a id="more"></a>
-
-<h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><p>支持向量机（support vector machines, SVM）是一种 <font style="background: #F9EDA6">二分类模型</font>，支持向量机的学习算法就是 <font style="background: #F9EDA6">求解凸二次规划的最优算法</font>。</p>
+<h3 id="1-简介"><a class="header-anchor" href="#1-简介">null</a>1. 简介</h3>
+<p>支持向量机（support vector machines, SVM）是一种 <font style="background: #F9EDA6">二分类模型</font>，支持向量机的学习算法就是 <font style="background: #F9EDA6">求解凸二次规划的最优算法</font>。</p>
 <p>支持向量机可以按照数据集的特性分为三类：</p>
 <ul>
 <li>当数据集<font style="background: #FBD4D0">线性可分</font>时，采用 <code>硬间隔最大化</code> 找到最优超平面</li>
@@ -253,21 +254,23 @@
 <li>当数据集<font style="background: #FBD4D0">非线性可分</font>时：采用 <code>核技巧</code> + <code>软间隔最大化</code> 找到超平面</li>
 </ul>
 <img src="https://qiniu.xuyuyan.cn/image-20210513100939640.png" alt="image-20210513100939640" style="zoom:40%;" />
-
 <br>
-
-<h3 id="2-线性可分支持向量机学习算法——最大间隔法"><a href="#2-线性可分支持向量机学习算法——最大间隔法" class="headerlink" title="2. 线性可分支持向量机学习算法——最大间隔法"></a>2. 线性可分支持向量机学习算法——最大间隔法</h3><p>假设有 A，B，C 三个实例点，和一个分离超平面。<font style="background: #F9EDA6">实例点到超平面的距离表现出分类器对预测正确行的确信度</font>。假设点 A 是三点间距离超平面最远的一个，则模型对于预测正确的确信度最高；点 C 距离分离超平面较近，则表示模型对预测正确不那么确定；点 B 位于 A 和 C 之间，表示确信度在 A 和 C 之间。</p>
+<h3 id="2-线性可分支持向量机学习算法——最大间隔法"><a class="header-anchor" href="#2-线性可分支持向量机学习算法——最大间隔法">null</a>2. 线性可分支持向量机学习算法——最大间隔法</h3>
+<p>假设有 A，B，C 三个实例点，和一个分离超平面。<font style="background: #F9EDA6">实例点到超平面的距离表现出分类器对预测正确行的确信度</font>。假设点 A 是三点间距离超平面最远的一个，则模型对于预测正确的确信度最高；点 C 距离分离超平面较近，则表示模型对预测正确不那么确定；点 B 位于 A 和 C 之间，表示确信度在 A 和 C 之间。</p>
 <p>一般，在 $wx+b=0$ 确定的情况下可以<font style="background: #F9EDA6">用 $|wx+b|$ 表示点 x 距离超平面的远近</font>；而 <font style="background: #F9EDA6">$wx+b$ 的符号与类标记 y 的符号是否一致能够表示分类是否正确</font>。</p>
-<h4 id="2-1-函数间隔"><a href="#2-1-函数间隔" class="headerlink" title="2.1 函数间隔"></a>2.1 函数间隔</h4><blockquote>
+<h4 id="2-1-函数间隔"><a class="header-anchor" href="#2-1-函数间隔">null</a>2.1 函数间隔</h4>
+<blockquote>
 <p><font style="background: #d4e9d6">定义（函数间隔）</font>：对于给定的训练数据集 T 和 超平面 w*x+b=0，定义超平面 (w, b) 关于样本点 $(x_i,y_i)$ 的函数间隔为：<font style="background: #d4e9d6">$\breve \gamma_i=y_i(w*\breve x_i+b)$</font></p>
 </blockquote>
 <p>函数间隔可以表示分类预测的正确性和确信度（间隔越大，确信度越大）。</p>
 <p>但是函数距离存在一个问题 ，如果我们成比例地改变 w 和 b，超平面并没有改变，但是函数间隔却变成了原来的两倍。</p>
-<h4 id="2-2-几何距离"><a href="#2-2-几何距离" class="headerlink" title="2.2 几何距离"></a>2.2 几何距离</h4><blockquote>
+<h4 id="2-2-几何距离"><a class="header-anchor" href="#2-2-几何距离">null</a>2.2 几何距离</h4>
+<blockquote>
 <p><font style="background: #d4e9d6">定义（几何距离）</font>：对于给定的训练数据集 T 和 超平面 w*x+b=0，定义超平面 (w, b) 关于样本点 $(x_i,y_i)$ 的函数间隔为：<font style="background: #d4e9d6">$\breve \gamma_i=y_i(\frac{w}{||w||}x_i+\frac{b}{||w||})$，其中 $||w||$ 为 w 的 $L_2$ 范数。</font></p>
 </blockquote>
 <p>超平面 (w, b) 关于样本点 $(x_i,y_i)$ 的几何距离一般是实例点到超平面的带符号的距离（即 $y_i$ 可取值为 +1 或 -1）</p>
-<h4 id="2-3-间隔最大化"><a href="#2-3-间隔最大化" class="headerlink" title="2.3 间隔最大化"></a>2.3 间隔最大化</h4><p>线性可分支持向量机学习的基本思想是<font style="background: #F9EDA6">求解能够正确划分训练数据集并且几何间隔最大的分离超平面</font>。</p>
+<h4 id="2-3-间隔最大化"><a class="header-anchor" href="#2-3-间隔最大化">null</a>2.3 间隔最大化</h4>
+<p>线性可分支持向量机学习的基本思想是<font style="background: #F9EDA6">求解能够正确划分训练数据集并且几何间隔最大的分离超平面</font>。</p>
 <p>对于线性可分的训练数据集而言，线性可分分离超平面有无穷多个（等价于感知机），但是几何间隔最大的分离超平面是唯一的。</p>
 <p>求解最大间隔分离超平面可以转换为一个约束最优化问题：</p>
 <p>$$\begin{cases} max_{w,b}\ \gamma  \\s.t.\ y_i(\frac{w}{||w||}x_i+\frac{b}{||w||})\geq \gamma, i=1,2,…,N \end{cases}$$ 最大化几何间隔 $\gamma$</p>
@@ -281,168 +284,187 @@
 <p><font style="background: #d4e9d6">算法（线性可分支持向量机学习算法——最大间隔法）：</font></p>
 <p>输入：线性可分训练数据集 $T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中 $x_i \in R^n$，$y_i \in {-1,+1}$，$i=1,2,…,N$</p>
 <ol>
-<li><p>构造并求解约束最优化问题</p>
-<p><font style="background: #d4e9d6">$\begin{cases} min_{w,b} \frac{1}{2}||w||^2  \\ s.t.\ y_i(wx_i+b)-1\geq0 \end{cases}$</font> 求得最优解 $w^*$ 和 $b^*$</p>
+<li>
+<p>构造并求解约束最优化问题</p>
+<p><font style="background: #d4e9d6">$\begin{cases} min_{w,b} \frac{1}{2}||w||^2  \\ s.t.\ y_i(wx_i+b)-1\geq0 \end{cases}$</font> 求得最优解 $w^<em>$ 和 $b^</em>$</p>
 </li>
-<li><p>由此得到分离超平面：$wx+b=0$</p>
+<li>
+<p>由此得到分离超平面：$wx+b=0$</p>
 </li>
 </ol>
 <p>因此，分类决策函数 $f(x)=sign(wx+b)$</p>
 </blockquote>
-<h4 id="2-4-最大间隔分离超平面存在唯一性"><a href="#2-4-最大间隔分离超平面存在唯一性" class="headerlink" title="2.4 最大间隔分离超平面存在唯一性"></a>2.4 最大间隔分离超平面存在唯一性</h4><blockquote>
+<h4 id="2-4-最大间隔分离超平面存在唯一性"><a class="header-anchor" href="#2-4-最大间隔分离超平面存在唯一性">null</a>2.4 最大间隔分离超平面存在唯一性</h4>
+<blockquote>
 <p><font style="background: #d4e9d6">定理（最大间隔分离超平面存在唯一性）</font>：若训练数据集 T 线性可分，则可将训练数据集中的样本点完全正确分开的最大间隔分离超平面存在且唯一。</p>
 </blockquote>
 <p>证明：</p>
 <ul>
-<li><p>存在性</p>
-<p>由于训练数据集线性可分，所以使用最大间隔法的线性可分支持向量机总能找到一个可行解，记作 $(w^*,b^*)$。</p>
+<li>
+<p>存在性</p>
+<p>由于训练数据集线性可分，所以使用最大间隔法的线性可分支持向量机总能找到一个可行解，记作 $(w<sup>*,b</sup>*)$。</p>
 <p>由于训练数据集中既有正类点又有负类点，所以 $(w,b)=(0,b)$ 不是最优化的可行解。</p>
-<p>因而最优解 $(w^*,b^*)$ 必满足 $w^* \neq 0$</p>
+<p>因而最优解 $(w<sup>*,b</sup><em>)$ 必满足 $w^</em> \neq 0$</p>
 </li>
-<li><p>唯一性</p>
-<p>假设使用最大间隔法的支持向量机存在两个最优解 $(w_1^*,b_1^*)$ 和 $(w_2^*,b_2^*)$</p>
-<p>要证最大间隔分离超平面就具有唯一性，则需要证 $w_1^*=w_2^*$ 且 $b_1^*=b_2^*$。</p>
+<li>
+<p>唯一性</p>
+<p>假设使用最大间隔法的支持向量机存在两个最优解 $(w_1<sup>*,b_1</sup><em>)$ 和 $(w_2<sup>*,b_2</sup></em>)$</p>
+<p>要证最大间隔分离超平面就具有唯一性，则需要证 $w_1<sup>*=w_2</sup><em>$ 且 $b_1<sup>*=b_2</sup></em>$。</p>
 <ul>
-<li><p>先证 $w_1^*=w_2^*$ </p>
+<li>
+<p>先证 $w_1<sup>*=w_2</sup>*$</p>
   <img src="https://qiniu.xuyuyan.cn/image-20210513163810640.png" alt="image-20210513163810640" style="zoom:50%;" />
 </li>
-<li><p>再证 $b_1^*=b_2^*$</p>
+<li>
+<p>再证 $b_1<sup>*=b_2</sup>*$</p>
   <img src="https://qiniu.xuyuyan.cn/image-20210513182922610.png" alt="image-20210513182922610" style="zoom:50%;" />
-
 <blockquote>
 <p>【补充】</p>
 <blockquote>
 <p><font style="background: #d4e9d6">支持向量</font>：我们将训练数据集中对应于 $\alpha_i^* &gt; 0$ 的样本点 $(x_i,y_i)$ 的实例 $x_i \in R_n$</p>
 </blockquote>
 <p>（在上图中就是两条虚线上的实例）</p>
-<p>根据这一定义，支持向量一定在间隔边界上。由 KKT 互补条件可知，$\alpha^*(y_i(w^<em>x_i+b^</em>)-1)=0$，</p>
-<p>对应于 $\alpha_i^*&gt;0$ 的实例 $x_i$，有 $y_i(w^<em>x_i+b^</em>)-1=0$，即 $|w^<em>x_i+b^</em>|=1$</p>
+<p>根据这一定义，支持向量一定在间隔边界上。由 KKT 互补条件可知，$\alpha<sup>*(y_i(w</sup><em>x_i+b^</em>)-1)=0$，</p>
+<p>对应于 $\alpha_i^<em>&gt;0$ 的实例 $x_i$，有 $y_i(w<sup>*x_i+b</sup></em>)-1=0$，即 $|w<sup>*x_i+b</sup>*|=1$</p>
 </blockquote>
 </li>
 </ul>
 <br>
-
 </li>
 </ul>
-<h4 id="2-5-线性可分支持向量机学习算法"><a href="#2-5-线性可分支持向量机学习算法" class="headerlink" title="2.5 线性可分支持向量机学习算法"></a>2.5 线性可分支持向量机学习算法</h4> <img src="https://qiniu.xuyuyan.cn/image-20210513143234159.png" alt="image-20210513143234159" style="zoom:45%;" style="float: left;"/>
-
+<h4 id="2-5-线性可分支持向量机学习算法"><a class="header-anchor" href="#2-5-线性可分支持向量机学习算法">null</a>2.5 线性可分支持向量机学习算法</h4>
+ <img src="https://qiniu.xuyuyan.cn/image-20210513143234159.png" alt="image-20210513143234159" style="zoom:45%;" style="float: left;"/>
 <ul>
-<li><p>先求 $min_{w,b} L(w,b,\alpha)$</p>
+<li>
+<p>先求 $min_{w,b} L(w,b,\alpha)$</p>
 <p>将拉格朗日函数 $L(w,b,\alpha)$ 分为对 $w$ 和 $b$ 求导并令其等于 0，可以得到 $w=\sum_{i=1}^N\alpha_iy_ix_i$ 和 $\sum_{i=1}^N \alpha_i y_i=0$</p>
  <img src="https://qiniu.xuyuyan.cn/image-20210513191559651.png" alt="image-20210513191559651" style="zoom:50%;" />
 </li>
-<li><p>再求 $max_{\alpha} L(w,b,\alpha)$</p>
-<p>$\begin{cases} max_{\alpha}-\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N\alpha_i\alpha_jy_iy_j(x_ix_j)+\sum_{i=1}^N\alpha_i \\ s.t.\ \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ \alpha_i \geq 0  \end{cases}$</p>
+<li>
+<p>再求 $max_{\alpha} L(w,b,\alpha)$</p>
+<p>$\begin{cases} max_{\alpha}-\frac{1}{2}\sum_{i=1}<sup>N\sum_{j=1}</sup>N\alpha_i\alpha_jy_iy_j(x_ix_j)+\sum_{i=1}^N\alpha_i \\ s.t.\ \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ \alpha_i \geq 0  \end{cases}$</p>
 <p>将目标函数由极大转换为极小：</p>
-<p>$\begin{cases} min_{\alpha}\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N\alpha_i\alpha_jy_iy_j(x_ix_j)-\sum_{i=1}^N\alpha_i \\ s.t.\ \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ \alpha_i \geq 0  \end{cases}$</p>
+<p>$\begin{cases} min_{\alpha}\frac{1}{2}\sum_{i=1}<sup>N\sum_{j=1}</sup>N\alpha_i\alpha_jy_iy_j(x_ix_j)-\sum_{i=1}^N\alpha_i \\ s.t.\ \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ \alpha_i \geq 0  \end{cases}$</p>
 <p>由此可以解出 $\alpha$</p>
 </li>
 </ul>
 <p>再由 $w=\sum_{i=1}^N \alpha_iy_ix_i$ 和 $b=y_j-\sum_{i=1}^N\alpha_iy_i(x_ix_j)$ 可以解得 $w*$ 和 $b*$</p>
 <br>
-
-<h3 id="4-线性支持向量机学习算法——软间隔最大化"><a href="#4-线性支持向量机学习算法——软间隔最大化" class="headerlink" title="4. 线性支持向量机学习算法——软间隔最大化"></a>4. 线性支持向量机学习算法——软间隔最大化</h3><p>我们<font style="background: #F9EDA6">在硬间隔的约束条件 $y_i(wx_i+b)\geq 1$ 加上一个松弛变量 $\xi$ 得到 $y_i(wx_i+b)\geq1-\xi$。</font></p>
-<p>目标函数由原来的 $\frac{1}{2}||w||^2+C\sum_{i=1}^N\xi_i$，此处 $C&gt;0$ 为惩罚函数，$C$ 值大时对误分类的惩罚增大。</p>
+<h3 id="4-线性支持向量机学习算法——软间隔最大化"><a class="header-anchor" href="#4-线性支持向量机学习算法——软间隔最大化">null</a>4. 线性支持向量机学习算法——软间隔最大化</h3>
+<p>我们<font style="background: #F9EDA6">在硬间隔的约束条件 $y_i(wx_i+b)\geq 1$ 加上一个松弛变量 $\xi$ 得到 $y_i(wx_i+b)\geq1-\xi$。</font></p>
+<p>目标函数由原来的 $\frac{1}{2}||w||<sup>2+C\sum_{i=1}</sup>N\xi_i$，此处 $C&gt;0$ 为惩罚函数，$C$ 值大时对误分类的惩罚增大。</p>
 <p>现在的最小化目标函数包含两层含义：</p>
 <ul>
 <li>间隔尽量大，即 $\frac{1}{2}||w||^2$ 尽量小</li>
 <li>误分类点的个数尽量小</li>
 <li>$C$ 是调和二者的系数</li>
 </ul>
-<p>因此我们得到如下的凸二次规划问题 <font style="background: #F9EDA6">$\begin{cases} min_{w,b,\xi} \frac{1}{2}||w||^2+C\sum_{i=1}^N\xi_i \\s.t. y_i(wx_i+b)\geq1-\xi_i\ &amp;&amp;\ \xi_i\geq 0  \end{cases}$</font></p>
-<h4 id="4-1-线性支持向量机学习方法推导"><a href="#4-1-线性支持向量机学习方法推导" class="headerlink" title="4.1 线性支持向量机学习方法推导"></a>4.1 线性支持向量机学习方法推导</h4><p>先求出原问题的对偶问题：</p>
+<p>因此我们得到如下的凸二次规划问题 <font style="background: #F9EDA6">$\begin{cases} min_{w,b,\xi} \frac{1}{2}||w||<sup>2+C\sum_{i=1}</sup>N\xi_i \\s.t. y_i(wx_i+b)\geq1-\xi_i\ &amp;&amp;\ \xi_i\geq 0  \end{cases}$</font></p>
+<h4 id="4-1-线性支持向量机学习方法推导"><a class="header-anchor" href="#4-1-线性支持向量机学习方法推导">null</a>4.1 线性支持向量机学习方法推导</h4>
+<p>先求出原问题的对偶问题：</p>
  <img src="https://qiniu.xuyuyan.cn/image-20210513204756685.png" alt="image-20210513204756685" style="zoom:50%;" />
-
 <p>然后求解对偶问题：</p>
 <p>$\begin{cases} w=\sum_{i=1}^N\alpha_iy_ix_i \\ b=y_j-\sum_{i=1}^N y_i\alpha_i(x_ix_j) \end{cases}$ 就可以得到原问题的解，从而确定分离超平面和决策函数。</p>
-<h4 id="4-2-线性支持向量机学习算法"><a href="#4-2-线性支持向量机学习算法" class="headerlink" title="4.2 线性支持向量机学习算法"></a>4.2 线性支持向量机学习算法</h4><blockquote>
+<h4 id="4-2-线性支持向量机学习算法"><a class="header-anchor" href="#4-2-线性支持向量机学习算法">null</a>4.2 线性支持向量机学习算法</h4>
+<blockquote>
 <p><font style="background: #d4e9d6">算法（线性支持向量机学习算法）</font>：</p>
 <p>输入：线性可分训练数据集 $T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中 $x_i \in R^n$，$y_i \in {-1,+1}$，$i=1,2,…,N$</p>
 <p>输出：分离超平面和分类决策函数</p>
 <ol>
-<li><p>选择惩罚参数 $C&gt;0$，构造并求解凸二次规划问题</p>
-<p>$\begin{cases} min_{\alpha} \frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N\alpha_i\alpha_jy_iy_j(x_ix_j)-\sum_{i=1}^N\alpha_i \\s.t. \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ 0\leq \alpha_i \leq C  \end{cases}$</p>
-<p>得到最优解 $\alpha^*=(\alpha_1^*,\alpha_2^*,…,\alpha_N^*)^T$</p>
+<li>
+<p>选择惩罚参数 $C&gt;0$，构造并求解凸二次规划问题</p>
+<p>$\begin{cases} min_{\alpha} \frac{1}{2}\sum_{i=1}<sup>N\sum_{j=1}</sup>N\alpha_i\alpha_jy_iy_j(x_ix_j)-\sum_{i=1}^N\alpha_i \\s.t. \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ 0\leq \alpha_i \leq C  \end{cases}$</p>
+<p>得到最优解 $\alpha<sup>*=(\alpha_1</sup><em>,\alpha_2<sup>*,…,\alpha_N</sup></em>)^T$</p>
 </li>
-<li><p>计算 $w^*$ 和 $b^*$</p>
+<li>
+<p>计算 $w^<em>$ 和 $b^</em>$</p>
 <p>$\begin{cases} w=\sum_{i=1}^N\alpha_iy_ix_i \\ b=y_j-\sum_{i=1}^N y_i\alpha_i(x_ix_j) \end{cases}$</p>
 </li>
-<li><p>由此得到分离超平面：$wx+b=0$</p>
+<li>
+<p>由此得到分离超平面：$wx+b=0$</p>
 </li>
 </ol>
 <p>因此，分类决策函数 $f(x)=sign(wx+b)$</p>
 </blockquote>
-<h4 id="4-3-线性支持向量机的另一种解释"><a href="#4-3-线性支持向量机的另一种解释" class="headerlink" title="4.3 线性支持向量机的另一种解释"></a>4.3 线性支持向量机的另一种解释</h4><p>就是最小化如下目标函数 $\sum_{i=1}^N[1-y_i(wx_i+b)]_++\lambda||w||^2$</p>
+<h4 id="4-3-线性支持向量机的另一种解释"><a class="header-anchor" href="#4-3-线性支持向量机的另一种解释">null</a>4.3 线性支持向量机的另一种解释</h4>
+<p>就是最小化如下目标函数 $\sum_{i=1}<sup>N[1-y_i(wx_i+b)]_++\lambda||w||</sup>2$</p>
 <ul>
-<li><p>目标函数的第一项是经验损失，函数为 $L(y(wx+b))=[1-y(wx+b)]_+$，称为<font style="background: #d4e9d6">合页损失函数</font></p>
+<li>
+<p>目标函数的第一项是经验损失，函数为 $L(y(wx+b))=[1-y(wx+b)]_+$，称为<font style="background: #d4e9d6">合页损失函数</font></p>
 <p>下标 “+” 表示以下取正值的函数 $[z]_+=\begin{cases} z &amp;\text{$z&gt;0$} \\0 &amp;\text{$z \leq 0$} \end{cases}$</p>
 <p>也就是说当样本点 $(x_i,y_i)$ 被正确分类且函数间隔（确信度）$y_i(wx_i+b)$ 大于 1 时损失为 0；否则损失为 $1-y_i(wx_i+b)$</p>
 </li>
-<li><p>目标函数第二项为系数是 $\lambda$ 的 $w$ 的 $L_2$ 范数，是正则化项</p>
+<li>
+<p>目标函数第二项为系数是 $\lambda$ 的 $w$ 的 $L_2$ 范数，是正则化项</p>
 </li>
 </ul>
 <p>接下来进行目标函数的推导：</p>
  <img src="https://qiniu.xuyuyan.cn/image-20210514095512015.png" alt="image-20210514095512015" style="zoom:40%;" />
-
 <br>
-
-<h3 id="5-非线性支持向量机学习算法——核技巧"><a href="#5-非线性支持向量机学习算法——核技巧" class="headerlink" title="5. 非线性支持向量机学习算法——核技巧"></a>5. 非线性支持向量机学习算法——核技巧</h3><h4 id="5-1-核函数"><a href="#5-1-核函数" class="headerlink" title="5.1 核函数"></a>5.1 核函数</h4><p>非线性问题往往不好求解，因此我们通常采用非线性变换，将非线性问题转换为线性问题。</p>
+<h3 id="5-非线性支持向量机学习算法——核技巧"><a class="header-anchor" href="#5-非线性支持向量机学习算法——核技巧">null</a>5. 非线性支持向量机学习算法——核技巧</h3>
+<h4 id="5-1-核函数"><a class="header-anchor" href="#5-1-核函数">null</a>5.1 核函数</h4>
+<p>非线性问题往往不好求解，因此我们通常采用非线性变换，将非线性问题转换为线性问题。</p>
 <p>将此思想运用到支持向量机，其基本想法就是通过一个非线性变换将输入空间对应于一个特征空间，使得在输入空间 $R^n$ 中的超曲面模型对应于特征空间的超平面模型。</p>
 <blockquote>
 <p><font style="background: #d4e9d6">定义（核函数）</font>：设 $\chi$ 是输入空间（欧氏空间 $R^n$ 的子集或离散集合），又设 $H$ 为特征空间（希尔伯特空间），如果存在一个从 $\chi$ 到 $H$ 的映射 $\phi(x):\chi \rightarrow H$。使得对所有 $x,z \in \chi$，函数 $K(x,z)$ 满足条件 $K(x,z)=\phi(x)\phi(z)$。</p>
 <p>我们称 $K(x,z)$ 为核函数，$\phi(x)$ 为映射函数。 式中 $\phi(x)*\phi(z)$ 为内积。</p>
 </blockquote>
 <p>换言之，<font style="background: #F9EDA6">因为非线性问题不好求解，我们通常将其升维，使之成为线性问题</font>。同时 <font style="background: #F9EDA6">$K(x,z)$ 的选取原则是计算较容易（因为 $\phi(x)*\phi(z)$ 的点积计算比较复杂）</font></p>
-<p>我们再次写出线性支持向量机要解决的最优化问题：$\begin{cases} min_{\alpha} \frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N\alpha_i\alpha_jy_iy_j(x_ix_j)-\sum_{i=1}^N\alpha_i \\s.t. \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ 0\leq \alpha_i \leq C  \end{cases}$</p>
-<p>使用核函数 $K(x_i,x_j)=\phi(x_i)*\phi(x_j)$ 代替得到新的目标函数 $W(\alpha)=\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^N\alpha_i$</p>
-<p>同样地，分类决策函数 $f(x)=sign(\sum_{i=1}^{N_s}\alpha_iy_i\phi(x_i)\phi(x)+b)$ 也可以写成  $sign(\sum_{i=1}^{N_s}\alpha_i^*y_iK(x_i,x)+b)$</p>
-<p><font style="background: #F9EDA6">【热知识：一般在 SVM 中，我们通常使用高斯核 $K(x,z)=exp(-\frac{||x-z||^2}{2\sigma^2})$】</font></p>
-<h4 id="5-2-常用核函数"><a href="#5-2-常用核函数" class="headerlink" title="5.2 常用核函数"></a>5.2 常用核函数</h4><ol>
-<li><p><font style="background: #d4e9d6">多项核函数：</font></p>
-<p> $K(x,z)=(xz+1)^p$ 对应的支持向量机是一个 $p$ 次多项式分类器。</p>
-<p>在此情景下，分类决策函数为 $f(x)=sign(\sum_{i=1}^{N_*}a_iy_i(x_ix+1)^p+b)$</p>
+<p>我们再次写出线性支持向量机要解决的最优化问题：$\begin{cases} min_{\alpha} \frac{1}{2}\sum_{i=1}<sup>N\sum_{j=1}</sup>N\alpha_i\alpha_jy_iy_j(x_ix_j)-\sum_{i=1}^N\alpha_i \\s.t. \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ 0\leq \alpha_i \leq C  \end{cases}$</p>
+<p>使用核函数 $K(x_i,x_j)=\phi(x_i)*\phi(x_j)$ 代替得到新的目标函数 $W(\alpha)=\frac{1}{2}\sum_{i=1}<sup>N\sum_{j=1}</sup>N\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^N\alpha_i$</p>
+<p>同样地，分类决策函数 $f(x)=sign(\sum_{i=1}^{N_s}\alpha_iy_i\phi(x_i)\phi(x)+b)$ 也可以写成  $sign(\sum_{i=1}<sup>{N_s}\alpha_i</sup>*y_iK(x_i,x)+b)$</p>
+<p><font style="background: #F9EDA6">【热知识：一般在 SVM 中，我们通常使用高斯核 $K(x,z)=exp(-\frac{||x-z||<sup>2}{2\sigma</sup>2})$】</font></p>
+<h4 id="5-2-常用核函数"><a class="header-anchor" href="#5-2-常用核函数">null</a>5.2 常用核函数</h4>
+<ol>
+<li>
+<p><font style="background: #d4e9d6">多项核函数：</font></p>
+<p>$K(x,z)=(xz+1)^p$ 对应的支持向量机是一个 $p$ 次多项式分类器。</p>
+<p>在此情景下，分类决策函数为 $f(x)=sign(\sum_{i=1}<sup>{N_*}a_iy_i(x_ix+1)</sup>p+b)$</p>
 </li>
-<li><p><font style="background: #d4e9d6">高斯核函数：</font></p>
-<p>$K(x,z)=exp(-\frac{||x-z||^2}{2\sigma^2})$ 对应的支持向量机是高斯径向基函数分类器</p>
-<p>在此情景下，分类决策函数为 $f(x)=sign(\sum_{i=1}^{N_*}a_iy_iexp(-\frac{||x-z||^2}{2\sigma^2})+b)$</p>
+<li>
+<p><font style="background: #d4e9d6">高斯核函数：</font></p>
+<p>$K(x,z)=exp(-\frac{||x-z||<sup>2}{2\sigma</sup>2})$ 对应的支持向量机是高斯径向基函数分类器</p>
+<p>在此情景下，分类决策函数为 $f(x)=sign(\sum_{i=1}<sup>{N_*}a_iy_iexp(-\frac{||x-z||</sup>2}{2\sigma^2})+b)$</p>
 </li>
-<li><p><font style="background: #d4e9d6">字符串核函数：</font></p>
+<li>
+<p><font style="background: #d4e9d6">字符串核函数：</font></p>
 <p>是定义在离散数据集合上的核函数。</p>
 </li>
 </ol>
-<h4 id="5-3-非线性向量分类机的学习"><a href="#5-3-非线性向量分类机的学习" class="headerlink" title="5.3 非线性向量分类机的学习"></a>5.3 非线性向量分类机的学习</h4><blockquote>
-<p><font style="background: #d4e9d6">定义（非线性支持向量机）</font>：从非线性分类训练集，通过核函数与软间隔最大化，学习得到分类决策函数：$f(x)=sign(\sum_{i=1}^N\alpha_i^<em>y_iK(x,x_i)+b^</em>)$ 称为非线性支持向量机，$K(x,z)$ 是正定核函数。</p>
+<h4 id="5-3-非线性向量分类机的学习"><a class="header-anchor" href="#5-3-非线性向量分类机的学习">null</a>5.3 非线性向量分类机的学习</h4>
+<blockquote>
+<p><font style="background: #d4e9d6">定义（非线性支持向量机）</font>：从非线性分类训练集，通过核函数与软间隔最大化，学习得到分类决策函数：$f(x)=sign(\sum_{i=1}<sup>N\alpha_i</sup><em>y_iK(x,x_i)+b^</em>)$ 称为非线性支持向量机，$K(x,z)$ 是正定核函数。</p>
 </blockquote>
 <p>接下来对非线性支持向量机的学习算法进行推导：</p>
  <img src="https://qiniu.xuyuyan.cn/image-20210515092749040.png" alt="image-20210515092749040" style="zoom:50%;" />
-
-<p>至此，SMO 的最优化问题可以写成 $\begin{cases}min_{\alpha_1,\alpha_2}W(\alpha_1,\alpha_2)=\frac{1}{2}K_{11}\alpha_1^2+\frac{1}{2}K_{22}\alpha_2^2+y_1y_2K_{12}\alpha_1\alpha_2-(\alpha_1+\alpha_2)+y_1\alpha_1\sum_{i=3}^Ny_i\alpha_iK_{i1}+y_2\alpha_2\sum_{i=3}^Ny_i\alpha_iK_{i2} \\ \alpha_1y_1+\alpha_2y_2=-\sum_{i=3}^Ny_i\alpha_i=c \ &amp;&amp;\ 0\leq\alpha_i\leq C\end{cases}$</p>
+<p>至此，SMO 的最优化问题可以写成 $\begin{cases}min_{\alpha_1,\alpha_2}W(\alpha_1,\alpha_2)=\frac{1}{2}K_{11}\alpha_1<sup>2+\frac{1}{2}K_{22}\alpha_2</sup>2+y_1y_2K_{12}\alpha_1\alpha_2-(\alpha_1+\alpha_2)+y_1\alpha_1\sum_{i=3}<sup>Ny_i\alpha_iK_{i1}+y_2\alpha_2\sum_{i=3}</sup>Ny_i\alpha_iK_{i2} \\ \alpha_1y_1+\alpha_2y_2=-\sum_{i=3}^Ny_i\alpha_i=c \ &amp;&amp;\ 0\leq\alpha_i\leq C\end{cases}$</p>
 <p>因为只有两个变量 $(\alpha_1,\alpha_2)$ 所以用二维空间中的图形表示：</p>
  <img src="https://qiniu.xuyuyan.cn/image-20210515101514836.png" alt="image-20210515101514836" style="zoom:35%;" />
-
 <p>我们已经知道如何对两个 $\alpha$ 进行优化，那如何从众多的 $\alpha$ 中挑选两个合适的来进行优化？—— 找违反 KKT 最严重的</p>
  <img src="https://qiniu.xuyuyan.cn/image-20210515104552996.png" alt="image-20210515104552996" style="zoom:35%;" />
-
 <p>并不断地重复选择两个 $\alpha$ 进行优化，直至找不到违反 KKT 条件的 $\alpha$</p>
-<p>由此求出 $w^*$ 和 $b^*$</p>
+<p>由此求出 $w^<em>$ 和 $b^</em>$</p>
 <blockquote>
 <p><font style="background: #d4e9d6">算法（非线性支持向量机学习算法）：</font></p>
 <p>输入：线性可分训练数据集 $T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中 $x_i \in R^n$，$y_i \in {-1,+1}$，$i=1,2,…,N$</p>
 <p>输出：分类决策函数</p>
 <ol>
-<li><p>选择适当核函数 $K(x,z)$ 和适当参数 C，构造并求解最优化问题</p>
-<p>$\begin{cases} min_{\alpha} \frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N\alpha_i\alpha_jy_iy_j(x_ix_j)-\sum_{i=1}^N\alpha_i \\s.t. \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ 0\leq \alpha_i \leq C  \end{cases}$</p>
-<p>得到最优解 $\alpha^*=(\alpha_1^*,\alpha_2^*,…,\alpha_N^*)^T$</p>
+<li>
+<p>选择适当核函数 $K(x,z)$ 和适当参数 C，构造并求解最优化问题</p>
+<p>$\begin{cases} min_{\alpha} \frac{1}{2}\sum_{i=1}<sup>N\sum_{j=1}</sup>N\alpha_i\alpha_jy_iy_j(x_ix_j)-\sum_{i=1}^N\alpha_i \\s.t. \sum_{i=1}^N\alpha_iy_i=0\ &amp;&amp;\ 0\leq \alpha_i \leq C  \end{cases}$</p>
+<p>得到最优解 $\alpha<sup>*=(\alpha_1</sup><em>,\alpha_2<sup>*,…,\alpha_N</sup></em>)^T$</p>
 </li>
-<li><p>选择 $\alpha^*$ 的一个正分量 $0&lt;\alpha_j^*&lt;C$，计算 $b^*=y_j-\sum_{i=1}^N\alpha_i^*y_iK(x_i,x_j)$</p>
+<li>
+<p>选择 $\alpha^<em>$ 的一个正分量 $0&lt;\alpha_j^</em>&lt;C$，计算 $b<sup>*=y_j-\sum_{i=1}</sup>N\alpha_i^*y_iK(x_i,x_j)$</p>
 </li>
-<li><p>构造分类决策函数 $f(x)=sign(\sum_{i=1}^N\alpha_i^<em>y_iK(x,x_i)+b^</em>)$</p>
+<li>
+<p>构造分类决策函数 $f(x)=sign(\sum_{i=1}<sup>N\alpha_i</sup><em>y_iK(x,x_i)+b^</em>)$</p>
 </li>
 </ol>
 </blockquote>
 <br>
-
-<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h3><p>支持向量机（support vector machines, SVM）是一种二分类模型，支持向量机的学习算法就是求解凸二次规划的最优算法。</p>
+<h3 id="6-总结"><a class="header-anchor" href="#6-总结">null</a>6. 总结</h3>
+<p>支持向量机（support vector machines, SVM）是一种二分类模型，支持向量机的学习算法就是求解凸二次规划的最优算法。</p>
 <p>支持向量机可以按照数据集的特性分为三类：</p>
 <ul>
 <li>当数据集线性可分时，采用 <code>硬间隔最大化</code> 找到最优超平面</li>
@@ -450,7 +472,6 @@
 <li>当数据集非线性可分时：采用 <code>核技巧</code> + <code>软间隔最大化</code> 找到超平面</li>
 </ul>
 <img src="https://qiniu.xuyuyan.cn/image-20210513100939640.png" alt="image-20210513100939640" style="zoom:40%;" />
-
 <p>（其实这个总结和第一章一样hhhh，因为第一章讲的听清楚了。不过还是觉得应该有一章来总结hh）</p>
 
         </div>
