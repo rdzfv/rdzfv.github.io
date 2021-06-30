@@ -244,7 +244,7 @@
         <div class="post-content">
             <p>《统计学习方法》决策树相关内容的学习笔记</p>
 <a id="more"></a>
-<h3 id="1-决策树简介"><a class="header-anchor" href="#1-决策树简介">¶</a>1. 决策树简介</h3>
+<h3 id="1-决策树简介">1. 决策树简介</h3>
 <blockquote>
 <p><font style="background: #d4e9d6">定义（决策树）</font>：分类决策树模型是一种描述<font style="background: #d4e9d6">对实例进行分类的树形结构</font>。</p>
 <ul>
@@ -360,12 +360,12 @@
 </blockquote>
 <p>我们也可以<font style="background: #F9EDA6">从概率学角度来理解决策树</font>，就是<font style="background: #F9EDA6">在给定特征条件下的条件概率分布</font>。例如从根节点经过判断，进入“品质好”的子树，再进行熟度的判断，其实等价于求 P(全熟|品质好)、P(半熟|品质好)、P(生|品质好)。</p>
 <br>
-<h3 id="2-决策树学习"><a class="header-anchor" href="#2-决策树学习">¶</a>2. 决策树学习</h3>
+<h3 id="2-决策树学习">2. 决策树学习</h3>
 <blockquote>
 <p>决策树学习本质上是从训练集中归纳出一组分类规则。</p>
 <p>与训练集不相矛盾的决策树可能有多个，也可能没有。我们需要的是<font style="background: #F9EDA6">一个与训练集矛盾较小的决策树，同时具有较好的泛化能力</font>。</p>
 </blockquote>
-<h4 id="2-1-信息增益"><a class="header-anchor" href="#2-1-信息增益">¶</a>2.1 信息增益</h4>
+<h4 id="2-1-信息增益">2.1 信息增益</h4>
 <p>首先先来介绍一个概念：熵。</p>
 <blockquote>
 <p>在信息论与概率统计中，<font style="background: #d4e9d6">熵</font>是表示<font style="background: #d4e9d6">随机变量不确定性的度量</font>。假设 $X$ 是一个取有限个值的离散随机变量，其概率分布为 $P(X=x_i)=p_i, \ i=1,2,…,n$，则随机变量 $X$ 的熵定义为 <font style="background: #d4e9d6">$H(x)=-\sum_{i=1}^n p_i log\ p_i$</font>（通常底数为 2 或 e，此时熵的单位为比特（bit）或者纳特（nat））</p>
@@ -386,7 +386,7 @@
 </ul>
 <p>则 $g(D,A)=H(D)-H(D|A)=g(D,A)=H(D)-[H(D_1|A)+H(D_2|A)]=\frac{4}{10} log \frac{4}{10}-\frac{4}{5}log \frac{4}{5}-\frac{2}{5}log \frac{2}{5}$</p>
 <img src="https://qiniu.xuyuyan.cn/image-20210506153441696.png" alt="image-20210506153441696" style="zoom:33%;" />
-<h4 id="2-2-信息增益比"><a class="header-anchor" href="#2-2-信息增益比">¶</a>2.2 信息增益比</h4>
+<h4 id="2-2-信息增益比">2.2 信息增益比</h4>
 <p><font style="background: #F9EDA6">以信息增益为选择划分训练数据集特征的依据时，存在偏向选择取值较多的特征的问题</font>。</p>
 <p>举一个通俗的例子：要对人群进行是否提供借贷服务的划分，一般可以有以下特征可用于划分（是否拥有房产、是否拥有工作、年龄等）。但是聪明的决策树会发现，如果将身份证 id 作为分类特征，仅需一层就可以实现 100% 的经验正确率（将身份证号与是否提供借贷服务的结果一一对应）。但这显然是没有任何意义的，而且会产生极高的泛化误差。</p>
 <p>因此我们引入了信息增益比对这一问题进行校正。</p>
@@ -395,13 +395,13 @@
 <p>即：<font style="background: #d4e9d6">$g_R(D,A)=\frac{g(D,A)}{H_A(D)}$</font>，其中 $H_A(D)=-\sum_{i=1}^n \frac{|D_i|}{|D|}log_2 \frac{|D_i|}{|D|}$，$n$ 是特征 A 取值的个数</p>
 </blockquote>
 <p>其实我们很容易发现<font style="background: #F9EDA6">信息增益比就是在信息增益的基础上除以分母 $H_A(D)$</font></p>
-<h4 id="2-3-特征选择"><a class="header-anchor" href="#2-3-特征选择">¶</a>2.3 特征选择</h4>
+<h4 id="2-3-特征选择">2.3 特征选择</h4>
 <p><font style="background: #F9EDA6">从效率而言，我们希望</font>模型（决策树）可以通过一层一层的判断，尽快得到标签。换言之，就是<font style="background: #F9EDA6">每一层的信息增益都尽可能大（信息的不确定性下降得尽可能快）</font></p>
 <p>也就是说，我们希望<font style="background: #F9EDA6">优先使用分类效果更加显著的特征用于分类</font>（比如某特征 A 可以将 10 个样本分为两类，样本数量分别为 5个 与 5 个；某特征 B 会将 10 个样本分为为两类，样本数量分别为  1 个和 9 个。显然，特征 B 不是我们希望优先选用的分类特征）</p>
 <p>通常，特征选择的准则是信息增益或信息增益比。</p>
 <br>
-<h3 id="3-构建决策树"><a class="header-anchor" href="#3-构建决策树">¶</a>3. 构建决策树</h3>
-<h4 id="3-1-font-style-background-d4e9d6-ID3-算法-font"><a class="header-anchor" href="#3-1-font-style-background-d4e9d6-ID3-算法-font">¶</a>3.1 <font style="background: #d4e9d6">ID3 算法</font></h4>
+<h3 id="3-构建决策树">3. 构建决策树</h3>
+<h4 id="3-1-font-style-background-d4e9d6-ID3-算法-font">3.1 <font style="background: #d4e9d6">ID3 算法</font></h4>
 <blockquote>
 <p>输入：训练数据集 D，特征集 A 阈值 $\epsilon$；</p>
 <p>输出：决策树 T。</p>
@@ -432,14 +432,14 @@
 <li>步骤三中，选择增益最大的特征 A ，就是计算当前所有剩余分类特征的增益，选择增益最大的特征作为下一个分类特征。目的在于更快速地降低信息不确定性</li>
 <li>步骤四中，采用阈值的意义在于如果当前剩余特征中最大的信息增益都小于阈值（比如 0.01），则说明已经不具备继续分类的必要</li>
 </ul>
-<h4 id="3-2-font-style-background-d4e9d6-C4-5-算法-font"><a class="header-anchor" href="#3-2-font-style-background-d4e9d6-C4-5-算法-font">¶</a>3.2 <font style="background: #d4e9d6">C4.5 算法</font></h4>
+<h4 id="3-2-font-style-background-d4e9d6-C4-5-算法-font">3.2 <font style="background: #d4e9d6">C4.5 算法</font></h4>
 <p>C4.5 算法和 ID3 算法唯一不同之处在于，ID3 算法选择信息增益来选择特征，而 <font style="background: #FBD4D0">C4.5 算法选择信息增益比</font>。此处不过多赘述。</p>
 <br>
-<h3 id="4-决策树的剪枝"><a class="header-anchor" href="#4-决策树的剪枝">¶</a>4. 决策树的剪枝</h3>
+<h3 id="4-决策树的剪枝">4. 决策树的剪枝</h3>
 <p>一般模型产生的<font style="background: #F9EDA6">过拟合现象，来源于两个原因：</font>（1）训练过久；（2）模型过于复杂。</p>
 <p>对此我们一般采用如下对策：（1）尽早停止 early stop；（2）降低模型复杂度。</p>
 <p>在决策树模型下，上述<font style="background: #F9EDA6">两个对策</font>对应为：（1）添加正则项；（2）对决策树进行剪枝。</p>
-<h4 id="4-1-决策树整体损失函数"><a class="header-anchor" href="#4-1-决策树整体损失函数">¶</a>4.1 决策树整体损失函数</h4>
+<h4 id="4-1-决策树整体损失函数">4.1 决策树整体损失函数</h4>
 <img src="https://qiniu.xuyuyan.cn/image-20210506175058941.png" alt="image-20210506175058941" style="zoom:25%;" />
 <p>比如给出上图这样一棵决策树，根节点为 T，其中一个叶子节点为 t，叶子节点中有 $N_t$ 个样本点，其中 k 类样本有 $N_{tk}$ 个。</p>
 <p>我们可以得到叶节点 t 上的经验熵：$H_t(T)=-\sum_k \frac{N_{tk}}{N_t}log\frac{N_{tk}}{N_t}$</p>
@@ -454,7 +454,7 @@
 <li>当 $\alpha$ 取 0 时：不参考正则项，可劲儿 train</li>
 </ul>
 </blockquote>
-<h4 id="4-2-决策树的剪枝算法"><a class="header-anchor" href="#4-2-决策树的剪枝算法">¶</a>4.2 决策树的剪枝算法</h4>
+<h4 id="4-2-决策树的剪枝算法">4.2 决策树的剪枝算法</h4>
 <p>剪枝，简而言之就是选择损失函数最小的模型。</p>
 <blockquote>
 <p><font style="background: #d4e9d6">决策树的剪枝算法：</font></p>
@@ -469,9 +469,9 @@
 <p>当然，上述算法可以做一步优化，就是无需每次对整棵决策树的每个节点的经验熵进行求和。比如下面这个例子：</p>
 <img src="https://qiniu.xuyuyan.cn/image-20210506183109428.png" alt="image-20210506183109428" style="zoom:25%;" />
 <p>剪枝前后，绿色框框出的部分的经验熵是不会变化的。因此可以仅对剩余部分进行经验熵求和。所以这是一个局部求解最优解从而得到整体最优解。在代码上，可以采用动态规划的办法实现。</p>
-<h4 id="4-3-CART-算法"><a class="header-anchor" href="#4-3-CART-算法">¶</a>4.3 CART 算法</h4>
+<h4 id="4-3-CART-算法">4.3 CART 算法</h4>
 <p><font style="background: #d4e9d6">分类和回归树（classification and regression tree，CART）</font>模型是应用广泛的决策树学习方法。CART 同样由特征选择、树的生成以及剪枝组成，既可以用于分类也可以用于回归。</p>
-<h5 id="4-3-1-CART-生成"><a class="header-anchor" href="#4-3-1-CART-生成">¶</a>4.3.1 CART 生成</h5>
+<h5 id="4-3-1-CART-生成">4.3.1 CART 生成</h5>
 <p>CART 的生成是递归地构建<font style="background: #FBD4D0">二叉决策树</font>的过程。<font style="background: #F9EDA6">对回归树用平方误差最小化准则</font>，<font style="background: #F9EDA6">对分类树用基尼指数最小化准则</font>，进行特征选择，生成二叉树。</p>
 <p><code>回归树生成</code></p>
 <p>假设 X，Y 分别为输入和输出变量，并且 Y 为连续变量，给定数据集 $D={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$</p>
@@ -508,7 +508,7 @@
 </ul>
 <p>基尼系数 $Gini(D)$ 代表集合 D 的不确定性，基尼指数数值越大，代表样本集合的不确定性越大，和熵类似。</p>
 <p>因此，分类树的生成就是<font style="background: #F9EDA6">遍历所有的特征 A，寻找合适的切分点 a，使得基尼系数最小</font>。</p>
-<h5 id="4-3-2-CART-剪枝"><a class="header-anchor" href="#4-3-2-CART-剪枝">¶</a>4.3.2 CART 剪枝</h5>
+<h5 id="4-3-2-CART-剪枝">4.3.2 CART 剪枝</h5>
 <p>CART 剪枝的目的是从决策树减去一些子树，使决策树变小，降低模型复杂度。主要分为两个步骤：</p>
 <ol>
 <li>
@@ -533,7 +533,7 @@
 </li>
 </ol>
 <br>
-<h3 id="5-总结"><a class="header-anchor" href="#5-总结">¶</a>5. 总结</h3>
+<h3 id="5-总结">5. 总结</h3>
 <p><font style="background: #FBD4D0">决策树</font>是用于数据分类的常见模型，内部节点为每一次分类判断，不同类别的实例进入不同的子树，直到叶节点得到对应实例的标签。</p>
 <p>决策树的代价（损失函数）一般用信息增益或者信息增益比进行衡量。</p>
 <ul>

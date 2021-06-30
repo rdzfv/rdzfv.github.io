@@ -245,9 +245,9 @@
             <p>本文为《离散数学及其应用》的第九章的笔记</p>
 <a id="more"></a>
 <p>设 A 和 B 是集合，一个从 A到 B 的二元关系是 $A \times B$ 的子集。换句话说，一个从 A 到 B 的二元关系 R，其中每个有序对的第一个元素取自 A 而第二个元素取自 B。我们使用记号 aRb 表示 $(a, b) \in R$，称为 <strong>a 与 b 有关系 R</strong>。</p>
-<h3 id="一、集合的关系"><a class="header-anchor" href="#一、集合的关系">¶</a>一、集合的关系</h3>
+<h3 id="一、集合的关系">一、集合的关系</h3>
 <p>集合 A 上的关系是 A 到 A 的关系，也就是集合 A 上的关系是 $A \times A$ 的子集。</p>
-<h3 id="二、关系的性质"><a class="header-anchor" href="#二、关系的性质">¶</a>二、关系的性质</h3>
+<h3 id="二、关系的性质">二、关系的性质</h3>
 <ul>
 <li><strong>自反关系</strong>：</li>
 </ul>
@@ -268,7 +268,7 @@
 </ul>
 <p>若对于任意 $a, b, c \in A$，$(a, b) \in R$ 并且 $(b, c) \in R$ 则 $(a, c) \in R$，那么定义在集合 A 上的关系 R 称为传递的。</p>
 <p>用量词描述即为 $\forall a \forall b \forall c (((a, b) \in R \bigwedge (b, c) \in R) \rightarrow (a, c) \in R)$</p>
-<h3 id="三、关系的合成"><a class="header-anchor" href="#三、关系的合成">¶</a>三、关系的合成</h3>
+<h3 id="三、关系的合成">三、关系的合成</h3>
 <p>设 R 是从集合 A 到集合 B 的关系，S 是从集合 B 到集合 C 的关系。R 和 S 的合成是由有序对 (a, c) 的集合构成的关系，其中 $a \in A$，$c \in C$，并且存在一个 $b \in B$ 的元素，使得 $(a, b) \in R$ 且 $(b, c) \in S$。用符号 $S \circ R$ 表示 S 和 R 的合成。</p>
 <ul>
 <li>幂的合成</li>
@@ -278,9 +278,9 @@
 <li>传递关系的幂是该关系的子集</li>
 </ul>
 <p>集合 A 上的关系 R 是传递的，当且仅当对 n = 1, 2, 3, … 有 $R^n \subseteq R$。</p>
-<h3 id="四、n-元关系"><a class="header-anchor" href="#四、n-元关系">¶</a>四、n 元关系</h3>
+<h3 id="四、n-元关系">四、n 元关系</h3>
 <p>设 $A_1$，$A_2$，…，$A_n$ 是集合。定义在这些集合上的 <strong>n 元关系</strong>是 $A_1 \times A_2 \times … \times A_n$ 的子集。这些集合 $A_1$，$A_2$，…，$A_n$ 称为关系的域，n 称为关系的阶。</p>
-<h3 id="五、n-元关系的运算"><a class="header-anchor" href="#五、n-元关系的运算">¶</a>五、n 元关系的运算</h3>
+<h3 id="五、n-元关系的运算">五、n 元关系的运算</h3>
 <ul>
 <li><strong>投影</strong></li>
 </ul>
@@ -344,7 +344,7 @@
 <p>可以发现：连接运算 $J_p$ 将 m 元组的后 p 个分量与 n 元组的前 p 个分量相同的第一个关系中的所有 m 元组和第二个关系的所有 n 元组组合产生一个新的关系。</p>
 <p>不难发现，上述运算可以和我们熟悉的 SQL 多表查询做类比：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_a, column_b</span><br><span class="line"><span class="keyword">FROM</span> table_a, table_b</span><br><span class="line"><span class="keyword">WHERE</span> &quot;&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="六、关系的表示"><a class="header-anchor" href="#六、关系的表示">¶</a>六、关系的表示</h3>
+<h3 id="六、关系的表示">六、关系的表示</h3>
 <ul>
 <li><strong>用矩阵表示关系</strong></li>
 </ul>
@@ -373,7 +373,7 @@
 <li><strong>用图表示关系</strong></li>
 </ul>
 <p>我们将一个有穷集上的关系看作一个有向图，节点 a、b 如果存在一条由 a 到 b 的有向线段，则代表 a 和 b 之间存在关系。</p>
-<h3 id="七、关系的闭包"><a class="header-anchor" href="#七、关系的闭包">¶</a>七、关系的闭包</h3>
+<h3 id="七、关系的闭包">七、关系的闭包</h3>
 <p>如果存在包含 R 的具有性质 P 的关系 S，并且 S 是所有包含 R 且具有性质 P 的关系的子集，那么 S 叫做 <strong>R 的 关于性质 P 的闭包</strong>。</p>
 <p>上述 P 可取：自反、传递、对称。</p>
 <ul>
@@ -393,7 +393,7 @@
 <p>注意：$W_n = M_{R^<em>}$。因为 $M_{R^</em>}$ 的第 (i , j) 项是 1，当且仅当存在一条从 $v_i$ 到 $v_j$ 的路径，且全部内部顶点都在集合 ${v_1,v_2,…,v_n}$ 中。</p>
 </blockquote>
 <p>沃舍尔算法通过有效计算 $W_0 = M_R$，$W_1$，$W_2$，…，$W_n = M_{R^<em>}$ 来计算 $M_{R^</em>}$</p>
-<h3 id="八、等价关系"><a class="header-anchor" href="#八、等价关系">¶</a>八、等价关系</h3>
+<h3 id="八、等价关系">八、等价关系</h3>
 <blockquote>
 <p>定义在集合 A 上的关系叫做<strong>等价关系</strong>，如果他是<strong>自反的、对称的和传递的</strong>。</p>
 </blockquote>
@@ -421,7 +421,7 @@
 <blockquote>
 <p>定理：设 R 是定义在集合 S 上的等价关系。那么 R 的等价类构成 S 的划分。反过来，给定集合 S 的划分 ${A_i | i \in I}$，则存在一个等价关系 R，它以集合 $A_i(i \in I)$ 作为它的等价类。</p>
 </blockquote>
-<h3 id="九、偏序"><a class="header-anchor" href="#九、偏序">¶</a>九、偏序</h3>
+<h3 id="九、偏序">九、偏序</h3>
 <p>定义在集合 S 上的关系 R，如果它是自反的、反对称的、传递的，就称为<strong>偏序</strong>。集合 S 与定义在其上的偏序 R 一起称为<strong>偏序集</strong>，记作 (S, R)。集合 S 中的成员称为偏序集的元素。</p>
 <p>偏序集 (S, $\leq$) 中的元素 a 和 b 称为<strong>可比</strong>的。当 a 和 b 是 S 中的元素并且既没有 $a \leq b$，也没有 $b \leq a$，则称 a 和 b 是<strong>不可比</strong>的。</p>
 <p>偏序集 (S, $\leq$) 是偏序集，且 S 中的每对元素都是可比的，则 S 称为<strong>全序集</strong>或线序集，且 $\leq$ 被称为全序。</p>
@@ -431,7 +431,7 @@
 </ul>
 <p>我们可以从一个例子来理解哈塞图：已知集合 {1, 2, 3, 4} 上的偏序 {(a, b) | $a \leq b$}，则可以画出有向图如图a。由于这个关系是偏序的，所以必然是自反的，因此我们省略顶点到自身的环得到图 b。再者，我们假设所有的线段都是自下而上的，同时借助关系的传递性，我们可以得到图 c。</p>
 <img src="http://qiniu.xuyuyan.cn/20210125.png" style="zoom:40%;" />
-<h3 id="十、极大元和极小元"><a class="header-anchor" href="#十、极大元和极小元">¶</a>十、极大元和极小元</h3>
+<h3 id="十、极大元和极小元">十、极大元和极小元</h3>
 <p>如果偏序集中的一个元素不小于这个偏序集中的其他元素，则称为<strong>极大元</strong>。反之，称为<strong>极小元</strong>。</p>
 <p>通过哈塞图可以很容易识别极大元和极小元，分别为最顶部和最底部的元素。</p>
 <ul>
@@ -442,7 +442,7 @@
 <li><strong>格</strong>：</li>
 </ul>
 <p>如果一个偏序集的每对元素都有最小上界和最大下界，就称这个偏序集为<strong>格</strong>。</p>
-<h3 id="十一、拓扑排序"><a class="header-anchor" href="#十一、拓扑排序">¶</a>十一、拓扑排序</h3>
+<h3 id="十一、拓扑排序">十一、拓扑排序</h3>
 <p>我们定义：如果只要 $aRb$ 就有 $a \leq b$，则称一个全序 $\leq$ 与偏序 R 是<strong>相容</strong>的。</p>
 <p>从一个偏序构造一个相容的全序称为<strong>拓扑排序</strong>。</p>
 <blockquote>
