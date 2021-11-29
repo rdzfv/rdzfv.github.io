@@ -1,1224 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>xyy爱吃番茄</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="xyy爱吃番茄">
-<meta property="og:url" content="http://www.xuyuyan.cn/index.html">
-<meta property="og:site_name" content="xyy爱吃番茄">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="xyy">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>xyy爱吃番茄</title>
+
+
+
+    <link rel="icon" href="https://qiniu.xuyuyan.cn/XYY.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
     
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <link rel="stylesheet" href="/css/style.css">
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
 <meta name="generator" content="Hexo 5.4.0"></head>
-
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">xyy爱吃番茄</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.xuyuyan.cn"></form>
-      </div>
-    </div>
-  </div>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
 </header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-public/webpushr-sw" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/11/29/public/webpushr-sw/" class="article-date">
-  <time class="dt-published" datetime="2021-11-29T12:19:36.656Z" itemprop="datePublished">2021-11-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        importScripts('https://cdn.webpushr.com/sw-server.min.js');
-      
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            
+    <div class="container">
+    <div class="intro">
+        <div class="avatar">
+            <a href="/"><img src="/image/xyyxyy.jpg"></a>
+        </div>
+     
+        <div class="nickname">xyy</div>
+        <div class="description"><p>This is 爱吃番茄的 xyy ！</p>
+</div>
+        <div class="links">
+            
+                
+                    <a class="link-item" title="Github" target="_blank" rel="noopener" href="https://github.com/rdzfv">
+                        
+                        
+                            <i class="iconfont icon-github"></i>
+                        
+                    </a>
+                
+                    <a class="link-item" title="WangPan" href="http://www.xuyuyan.cn:5212/s/PATv">
+                        
+                        
+                            <i class="iconfont icon-wangpan"></i>
+                        
+                    </a>
+                
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://www.xuyuyan.cn/2021/11/29/public/webpushr-sw/" data-id="ckwknngri0045fcufhu8j5jds" data-title="" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
+</div>
 
 
-
-  
-    <article id="post-public/newPost" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/11/29/public/newPost/" class="article-date">
-  <time class="dt-published" datetime="2021-11-29T12:19:36.641Z" itemprop="datePublished">2021-11-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        {"title":"毕业旅行2021","id":"2021/06/24/毕业旅行2021/","date_published":"06/24/2021","summary":"xyy的长沙毕业之旅","url":"http://www.xuyuyan.cn/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/","tags":["长沙","毕业旅行"],"categories":["个人碎碎念"]}
-      
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://www.xuyuyan.cn/2021/11/29/public/newPost/" data-id="ckwknngrn004afcufg5dc5r86" data-title="" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-隐马尔科夫模型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/" class="article-date">
-  <time class="dt-published" datetime="2021-06-30T06:26:08.000Z" itemprop="datePublished">2021-06-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/">《统计学习方法》读书笔记 · 隐马尔可夫模型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>《统计学习方法》隐马尔可夫模型部分读书笔记</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/#more">Read More</a>
-          </p>
-        
-      
+    <div style="display:inline-block;>
+        <div> <a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://www.xuyuyan.cn/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/" data-id="ckwknngra003vfcuf2k998gfm" data-title="《统计学习方法》读书笔记 · 隐马尔可夫模型" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2021毕业碎碎念" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/" class="article-date">
-  <time class="dt-published" datetime="2021-06-24T08:15:46.000Z" itemprop="datePublished">2021-06-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%A2%8E%E7%A2%8E%E5%BF%B5/">个人碎碎念</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/">2021毕业碎碎念</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>xyy的本科毕业碎碎念</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.xuyuyan.cn/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/" data-id="ckwknngnv0003fcufbtyv1ajy" data-title="2021毕业碎碎念" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A/" rel="tag">毕业</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-毕业旅行2021" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/" class="article-date">
-  <time class="dt-published" datetime="2021-06-24T07:46:46.000Z" itemprop="datePublished">2021-06-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%A2%8E%E7%A2%8E%E5%BF%B5/">个人碎碎念</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/">毕业旅行2021</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><p>出发前当然是要记录体重啦</p>
- <img src="https://qiniu.xuyuyan.cn/IMG_20210615_090954_edit_427375752907182.jpg" alt="IMG_20210615_090954_edit_427375752907182" style="zoom:50%;" />
-
-<h3 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h3><ul>
-<li><p><del>7:15</del>（飞机延误）8:10 起飞</p>
-<p>在延误的时候舒舒服服地约了 20min 的按摩椅，吃了早饭。（感谢 hhr 小同学送的粽子！！）</p>
-</li>
-<li><p>9:50 降落于湖南长沙黄花机场</p>
-  <img src="https://qiniu.xuyuyan.cn/IMG_20210616_102731.jpg" alt="IMG_20210616_102731" style="zoom:10%;" />
-
-<p>嘤嘤嘤拍了好多照片，结果存储卡出问题了，忍痛格式化。</p>
-</li>
-<li><p>10:30 坐上了心心念念的磁浮列车</p>
-  <img src="https://qiniu.xuyuyan.cn/IMG_20210616_102502.jpg" alt="IMG_20210616_102502" style="zoom:10%;" />
-
-<p>其实有一点点平淡，乘坐感觉就像是普通的地铁（以前坐过上海的磁悬浮，但是年纪太小了，已经不记得了），感觉相比普通轨道似乎要更加平稳一些。</p>
-</li>
-<li><p>12:15 抵达民宿</p>
-  <img src="https://qiniu.xuyuyan.cn/IMG_20210616_121236_edit_501869277877586.jpg" alt="IMG_20210616_121236_edit_501869277877586" style="zoom:10%;" />
-
-<p>民宿相当不错！担心了很久的图片与实际不符的问题和卫生问题，但是真的超乎想象！民宿地理位置也很好，楼下就是黄花广场，很繁华，很热闹！</p>
-</li>
-<li><p>13:00 第一杯茶颜悦色！午饭：么子烤肉！</p>
-<ul>
-<li><p>小菜泡菜很好吃，甜辣酱加蜂蜜芥末酱简直绝配（我挤出了爱心的形状！），中间是干碟。</p>
-</li>
-<li><p>这家肉的调味真的不错！能吃鸭血的真的一定要试试鸭血，在我心里可以达到惊艳的地步！</p>
-</li>
-<li><p>在吃饭的时候，我们才开始规划接下来几天的行程（懒人就是我们），不过也很快决定了分区域分日游玩，并决定下午前去橘子洲。</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_133927.jpg" alt="IMG_20210616_133927" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_134739.jpg" alt="IMG_20210616_134739" style="zoom:10%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>14:30 正准备出门的时候，猝不及防迎面太阳雨。只有一把伞的我们只能分批回民宿收拾行李。</p>
-</li>
-<li><p>在去橘子洲之前去了一趟家门口的“辣条博物馆”。</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_154518.jpg" alt="IMG_20210616_154518" style="zoom:9%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_155550.jpg" alt="IMG_20210616_155550" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_162021.jpg" alt="IMG_20210616_162021" style="zoom:10%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>16:00 抵达橘子洲。</p>
-<ul>
-<li>在这里非常推荐大家买夜游套票！内含园区内观光小火车和夜游湘江游船票。其实也很想去坐水路两栖车，奈何时间上不允许了。同时还可以用船票换一张可 diy 的明信片！</li>
-<li>网上很火的书亦烧仙草真的不可（另，甜度不可调，味儿都是香精味）！我们三人买了三个口味都觉得不行。不过景区和外面倒是一个价，拿来当作消暑到也比 8 元的矿泉水不错。</li>
-<li>小火车有三款，蓝色的和绿色的是全包的，有些闷，也不太好看。红色托尼马斯 yyds！</li>
-<li>长沙的晴天云少天蓝（当然杭州天气好的时候也超级绝）</li>
-<li>三个人在湘江，顶着大太阳，【拍了游客照】哈哈</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th align="center"></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_172413.jpg" alt="IMG_20210616_172413" style="zoom:10%;" /></td>
-<td align="center"><img src="https://qiniu.xuyuyan.cn/InkedIMG_20210616_171926_LI.jpg" alt="InkedIMG_20210616_171926_LI" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_173333.jpg" alt="IMG_20210616_173333" style="zoom:10%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_180551.jpg" alt="IMG_20210616_180551" style="zoom:10%;" /></td>
-<td align="center"><img src="https://qiniu.xuyuyan.cn/IMG_20210616_180655.jpg" alt="IMG_20210616_180655" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_180843.jpg" alt="IMG_20210616_180843" style="zoom:10%;" /></td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>湘江的景色真是一绝！</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_175641.jpg" alt="IMG_20210616_175641" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_183115.jpg" alt="IMG_20210616_183115" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_190808.jpg" alt="IMG_20210616_190808" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_192252.jpg" alt="IMG_20210616_192252" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_193117.jpg" alt="IMG_20210616_193117" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_193454.jpg" alt="IMG_20210616_193454" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_193739.jpg" alt="IMG_20210616_193739" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_195129.jpg" alt="IMG_20210616_195129" style="zoom:12%;" /></td>
-</tr>
-</tbody></table>
-<p>  合照得有牌面！（请路人小姐姐拍的，小姐姐真的好会拍！）</p>
-<img src="https://qiniu.xuyuyan.cn/IMG_20210616_181029.jpg" alt="IMG_20210616_181029" style="zoom:10%;" />
-
-<ul>
-<li><p>20:40 做地铁回黄花广场，<del>计划恰文和友</del> 但是时间有点晚了，同行一个妹妹回去还要改论文，便在黄花广场随缘买点宵夜。</p>
-<table>
-<thead>
-<tr>
-<th>长沙的地铁高峰期真的不输杭州上海！</th>
-<th><del>珊</del> 姗 <del>珊</del> 姗便利店</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_205704.jpg" alt="IMG_20210616_205704" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_221546.jpg" alt="IMG_20210616_221546" style="zoom:9%;" /></td>
-</tr>
-<tr>
-<td>养猪综艺《台风少年行》！奶奶的轩轩真的我太爱了！</td>
-<td>随手买的夜宵，真的不戳！</td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_225759.jpg" alt="IMG_20210616_225759" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210616_230019.jpg" alt="IMG_20210616_230019" style="zoom:12%;" /></td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<br>
-
-<h3 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a>Day 2</h3><ul>
-<li><p>9:00 起床洗漱出门</p>
-</li>
-<li><p>10:30 早午饭肉饼蛋粉（<del>过几天还想吃</del> 事实证明后几天安排太满了，就没有机会去吃了嘤嘤嘤）</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_103822.jpg" alt="IMG_20210617_103822" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_102325.jpg" alt="IMG_20210617_102325" style="zoom:12%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>11:00 打车抵达岳麓山</p>
-<p><del>计划是做索道上山，坐滑道下山</del> 但是我们去的已经不早了，索道和滑道都停票了。所以买了观光车上山的票！（真的感谢我们当初只买了单程的上山票，而不是来回的票！在我们两三点准备下山的时候，滑道又开始售票了！真幸运啊！）</p>
-<img src="https://qiniu.xuyuyan.cn/IMG_20210617_105634.jpg" alt="IMG_20210617_105634" style="zoom:10%;" />
-
-<ul>
-<li>在排队买票的时候，顺便排了茶颜悦色的队，买了《栀晓》（真的很赞，这也是一款为了毕业季设计的茶）。</li>
-<li>13:00 坐观光车到山顶（观光车吹风 nice！）</li>
-<li>15:00 买了滑道的票下山</li>
-</ul>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_113721.jpg" alt="IMG_20210617_113721" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_120804.jpg" alt="IMG_20210617_120804" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_114430.jpg" alt="IMG_20210617_114430" style="zoom:10%;" /></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>—-</th>
-<th>—-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_122034.jpg" alt="IMG_20210617_122034" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_141450.jpg" alt="IMG_20210617_141450" style="zoom:12%;" /></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_131425.jpg" alt="IMG_20210617_131425" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_140541.jpg" alt="IMG_20210617_140541" style="zoom:9%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_151126.jpg" alt="IMG_20210617_151126" style="zoom:10%;" /></td>
-</tr>
-</tbody></table>
-<ul>
-<li><p>15:30 大学城小吃</p>
-<table>
-<thead>
-<tr>
-<th>—-</th>
-<th>—-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_153716.jpg" alt="IMG_20210617_153716" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_161052.jpg" alt="IMG_20210617_161052" style="zoom:12%;" /></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_160132_mh1623924784554.jpg" alt="IMG_20210617_160132_mh1623924784554" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_153745.jpg" alt="IMG_20210617_153745" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_162511.jpg" alt="IMG_20210617_162511" style="zoom:10%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>16:20 回民宿躺尸。挺累的，直接睡着了。</p>
-</li>
-<li><p>19:40 文和友（很幸运，直接打卡了张艺兴同款，而且时间也合适，没有排队）</p>
-<p>忍不住夸夸自己，民宿选的位置太好了，走路也就不到十分钟！</p>
-<p>但我觉得味道一般吧（甚至觉得不行），不过拍照真的很合适</p>
-<p>途中因为太辣了，跑去最近的茶颜悦色买了一杯喝的（终于轮到幽兰拿铁）。</p>
-<table>
-<thead>
-<tr>
-<th>民宿楼下街边的街景</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000081.jpg" alt="1000081" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_195754.jpg" alt="IMG_20210617_195754" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td>文和友一楼大堂</td>
-<td></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000087.jpg" alt="1000087" style="zoom:25%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210617_200707.jpg" alt="IMG_20210617_200707" style="zoom:25%;" /></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>—-</th>
-<th>—-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000082.jpg" alt="1000082" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000084.jpg" alt="1000084" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000093.jpg" alt="1000093" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000098.jpg" alt="1000098" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td>这是在黄花广场附近的一个小巷子里的酒馆门口。</td>
-<td>好喜欢这张！可惜事发突然，来不及对焦，焦是虚的嘤嘤嘤</td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000115.jpg" alt="1000115" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000119.jpg" alt="1000119" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>21:00 长沙今晚天气绝好，太适合刷街了！</p>
-<p>长沙晚上真的太好看了！！！！！！！！！</p>
-<p>（我什么时候可以拥有修片技能啊哭哭）</p>
-<table>
-<thead>
-<tr>
-<th>—-</th>
-<th>—-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000136.jpg" alt="1000136" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000128.jpg" alt="1000128" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000131.jpg" alt="1000131" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000141(0).jpg" alt="1000141(0)" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000144.jpg" alt="1000144" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000127.jpg" alt="1000127" style="zoom:8%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>23:00 回民宿躺尸</p>
-</li>
-</ul>
-<br>
-
-<h3 id="Day-3"><a href="#Day-3" class="headerlink" title="Day 3"></a>Day 3</h3><ul>
-<li><p>9:00 起床</p>
-</li>
-<li><p>10:00 楼下小吃店吃粉（居然格外好吃！）</p>
-  <img src="https://qiniu.xuyuyan.cn/IMG_20210618_100925.jpg" alt="IMG_20210618_100925" style="zoom:10%;" /></li>
-<li><p>11:00 打车抵达湖南省博物馆</p>
-<p>太大了！适合本地人常去看看！基本只认真看了两个馆就走不动了。<br>去了 马王堆汉墓展 和 限定众流归海文化展<br>马王堆展故事性很强，推荐（蹭了一个旅游团的讲解</p>
-<p>还在博物馆里遇到一个小学生小妹妹来问我手机壁纸是不是宋亚轩hhhhhhhhh<br>欢喜！儿子好可爱！妹妹也好可爱！！</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_111430.jpg" alt="IMG_20210618_111430" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_120824.jpg" alt="IMG_20210618_120824" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_122357.jpg" alt="IMG_20210618_122357" style="zoom:10%;" /></td>
-</tr>
-</tbody></table>
-<p>《众流归海》是一个湖南省博物馆近期的限定展。xyy 不懂画作和雕塑，但觉得里头的文字写的是真的非常好。才疏学浅，也写不出什么评论，不如把这些文字都留下来，保存起来。</p>
- <img src="https://qiniu.xuyuyan.cn/1000146.jpg" alt="1000146" style="zoom:10%;" />
-
-<table>
-<thead>
-<tr>
-<th>—</th>
-<th>—</th>
-<th>—</th>
-<th>—</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132402.jpg" alt="IMG_20210618_132402"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132417.jpg" alt="IMG_20210618_132417"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132433.jpg" alt="IMG_20210618_132433"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132450.jpg" alt="IMG_20210618_132450"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132505.jpg" alt="IMG_20210618_132505"></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132521.jpg" alt="IMG_20210618_132521"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132531.jpg" alt="IMG_20210618_132531"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132641.jpg" alt="IMG_20210618_132641"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132658.jpg" alt="IMG_20210618_132658"></td>
-<td></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132720.jpg" alt="IMG_20210618_132720"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_132800.jpg" alt="IMG_20210618_132800"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_133047.jpg" alt="IMG_20210618_133047"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_133147.jpg" alt="IMG_20210618_133147"></td>
-<td></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_133328.jpg" alt="IMG_20210618_133328"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_133341.jpg" alt="IMG_20210618_133341"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_133414.jpg" alt="IMG_20210618_133414"></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_133503.jpg" alt="IMG_20210618_133503"></td>
-<td></td>
-</tr>
-</tbody></table>
-<ul>
-<li><p>14:00 长沙有好多公共小电驴！决定尝试！</p>
-<p>但也是最后一次尝试。长沙这电驴可不比杭州的助力车（杭州也好久没见着助力车了）。这电驴啊，更加像电动车，驱动力强，比较害怕。而且长沙车流也比较乱，慌兮兮，不会再骑了。</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>—</th>
-<th>—</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_135306.jpg" alt="IMG_20210618_135306" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_141951.jpg" alt="IMG_20210618_141951" style="zoom:10%;" /></td>
-</tr>
-</tbody></table>
-<ul>
-<li><p>15:00 记不清第几杯茶颜<br>三季虫 （每次都被我说成三叶虫<img src="http://qzonestyle.gtimg.cn/qzone/em/e400342.gif" alt="img">）</p>
-</li>
-<li><p>15:20 打卡费大厨（小炒肉yyds！）<br>高估自己了，标三棵辣椒的真的好辣！</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_153853.jpg" alt="IMG_20210618_153853" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_152949.jpg" alt="IMG_20210618_152949" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_153900.jpg" alt="IMG_20210618_153900" style="zoom:10%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>16:30 吃饱喝足回民宿躺尸<img src="http://qzonestyle.gtimg.cn/qzone/em/e400271.gif" alt="img">（然后睡着了)</p>
-<img src="https://qiniu.xuyuyan.cn/1000153.jpg" alt="1000153" style="zoom:10%;" /></li>
-<li><p>20:00 起床去虎头局、谢主隆恩<br>mean while 点了茶颜的外卖<br>茶颜真的永不踩雷！茶酪很不戳<img src="http://qzonestyle.gtimg.cn/qzone/em/e400420.gif" alt="img"></p>
-<table>
-<thead>
-<tr>
-<th>—</th>
-<th>—</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000154.jpg" alt="1000154" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000160.jpg" alt="1000160" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000165.jpg" alt="1000165" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000169.jpg" alt="1000169" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_212628.jpg" alt="IMG_20210618_212628" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_213209.jpg" alt="IMG_20210618_213209" style="zoom:12%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>22:00 错过了贰伍捌禄豆糕的闭店时间<br>继续刷街买伴手礼</p>
-<table>
-<thead>
-<tr>
-<th>—</th>
-<th>—</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000159.jpg" alt="1000159" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000179.jpg" alt="1000179" style="zoom:12%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>23:00 回民宿！</p>
-</li>
-</ul>
-<br>
-
-<h3 id="Day-4"><a href="#Day-4" class="headerlink" title="Day 4"></a>Day 4</h3><ul>
-<li><p>7:45 起床，洗漱，去虎头局买点心</p>
-<table>
-<thead>
-<tr>
-<th>蛋挞 plus 真的可以！</th>
-<th>—-</th>
-<th>单号《520》</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210619_084816.jpg" alt="IMG_20210619_084816" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_205247.jpg" alt="IMG_20210618_205247" style="zoom:10%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210618_204718.jpg" alt="IMG_20210618_204718" style="zoom:10%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>8:50 好像着凉了，一个人跑回民宿休息<br>（然后路痴xyy找了很久回去的路<img src="http://qzonestyle.gtimg.cn/qzone/em/e400342.gif" alt="img"></p>
-</li>
-<li><p>10:00 收拾行李，出发去长沙 世界之窗<br>司机小哥哥的宝可梦巨可爱<br>（但是xyy搭讪失败，他很冷漠</p>
-<table>
-<thead>
-<tr>
-<th>—</th>
-<th>—</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210619_101813.jpg" alt="IMG_20210619_101813" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/IMG_20210619_102230.jpg" alt="IMG_20210619_102230" style="zoom:12%;" /></td>
-</tr>
-</tbody></table>
-<ul>
-<li><p>世界之窗其实就是游乐园<br>心脏脆弱人士选择远离大型项目<br>大转盘 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401142.gif" alt="img"> 过山车 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401142.gif" alt="img"> 跳楼机 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401142.gif" alt="img"> 蹦极 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401142.gif" alt="img"><br>做了很久的思想工作还是放弃了的鬼屋 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401142.gif" alt="img"></p>
-</li>
-<li><p>旋转木马 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401687.gif" alt="img"></p>
- <img src="https://qiniu.xuyuyan.cn/IMG_20210619_112149.jpg" alt="IMG_20210619_112149" style="zoom:10%;" /></li>
-<li><p>园区索道 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401687.gif" alt="img">（超爽！吹风无敌舒服！</p>
- <img src="https://qiniu.xuyuyan.cn/IMG_20210619_141224.jpg" alt="IMG_20210619_141224" style="zoom:9%;" /></li>
-<li><p>观光塔<img src="http://qzonestyle.gtimg.cn/qzone/em/e401687.gif" alt="img"> （海拔比摩天轮高！养老速度！</p>
-<p>缓缓上升，可以看到整个园区。有广播介绍世界之窗的分区，和每一处的设施。</p>
-</li>
-<li><p>园区小动物园 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401687.gif" alt="img">（孔雀真的一种可怕的生物<br>（鸵鸟也好可怕，会自己飞出栏杆在小路上走<br>（xyy —— 动物园最怂摄影师<br>（但小朋友真的好可爱！！！</p>
-<table>
-<thead>
-<tr>
-<th>鸵鸟好凶悍</th>
-<th>觉得这张有动物世界的感觉了</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000207.jpg" alt="1000207" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000208.jpg" alt="1000208" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000225.jpg" alt="1000225" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000221.jpg" alt="1000221" style="zoom:12%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>迪士尼城堡<img src="http://qzonestyle.gtimg.cn/qzone/em/e400286.gif" alt="img"> <img src="http://qzonestyle.gtimg.cn/qzone/em/e401687.gif" alt="img"></p>
- <img src="https://qiniu.xuyuyan.cn/1000182(0)_edit_83743745607012.jpg" alt="1000182(0)_edit_83743745607012" style="zoom:10%;" /></li>
-<li><p>儿童小火车 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401687.gif" alt="img">（养老！拍小朋友好快乐！</p>
- <img src="https://qiniu.xuyuyan.cn/1000246.jpg" alt="1000246" style="zoom:10%;" /></li>
-<li><p>到处走走走 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401687.gif" alt="img"></p>
-<table>
-<thead>
-<tr>
-<th>—</th>
-<th>—</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000194.jpg" alt="1000194" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000185(0)_edit_83716872107016.jpg" alt="1000185(0)_edit_83716872107016" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000231.jpg" alt="1000231" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000232.jpg" alt="1000232" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000255.jpg" alt="1000255" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000230.jpg" alt="1000230" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000259.jpg" alt="1000259" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000260.jpg" alt="1000260" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000267_edit_83171546908141.jpg" alt="1000267_edit_83171546908141" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000271_edit_83231063036777.jpg" alt="1000271_edit_83231063036777" style="zoom:12%;" /></td>
-</tr>
-<tr>
-<td><img src="https://qiniu.xuyuyan.cn/1000273_edit_83251517926358.jpg" alt="1000273_edit_83251517926358" style="zoom:12%;" /></td>
-<td><img src="https://qiniu.xuyuyan.cn/1000277.jpg" alt="1000277" style="zoom:12%;" /></td>
-</tr>
-</tbody></table>
-</li>
-<li><p>还有一个叫不出名字的项目 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401687.gif" alt="img">，排队的都是小朋友，我就超自信地去了。但全程痛苦面具。来丢人了<img src="http://qzonestyle.gtimg.cn/qzone/em/e400823.gif" alt="img"></p>
-</li>
-<li><p>最后打卡长沙世界之窗雪糕 <img src="http://qzonestyle.gtimg.cn/qzone/em/e401687.gif" alt="img">（好吃的！</p>
- <img src="https://qiniu.xuyuyan.cn/IMG_20210619_154749.jpg" alt="IMG_20210619_154749" style="zoom:10%;" /></li>
-</ul>
-</li>
-<li><p>16:00 打车去长沙南火车站</p>
-</li>
-<li><p>22:10 到杭州真好啊！疲惫 <img src="http://qzonestyle.gtimg.cn/qzone/em/e400774.gif" alt="img"></p>
- <img src="https://qiniu.xuyuyan.cn/IMG_20210619_221918.jpg" alt="IMG_20210619_221918" style="zoom:10%;" /></li>
-</ul>
-<br>
-
-<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><p>结尾当然是要首尾呼应！长了两斤，不枉这些天吃的美食、喝的茶颜悦色！</p>
- <img src="https://qiniu.xuyuyan.cn/IMG_20210620_104308_edit_105530259128166.jpg" alt="IMG_20210620_104308_edit_105530259128166" style="zoom:50%;" />
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.xuyuyan.cn/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/" data-id="ckwknngrw004kfcufh6vraam2" data-title="毕业旅行2021" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" rel="tag">毕业旅行</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%95%BF%E6%B2%99/" rel="tag">长沙</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="《统计机器学习》读书笔记 · EM算法及其推广-EM算法及其推广" class="h-entry article article-type-《统计机器学习》读书笔记 · EM算法及其推广" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/30/EM%E7%AE%97%E6%B3%95%E5%8F%8A%E5%85%B6%E6%8E%A8%E5%B9%BF/" class="article-date">
-  <time class="dt-published" datetime="2021-05-30T13:40:43.000Z" itemprop="datePublished">2021-05-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/30/EM%E7%AE%97%E6%B3%95%E5%8F%8A%E5%85%B6%E6%8E%A8%E5%B9%BF/">《统计机器学习》读书笔记 · EM算法及其推广</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>《统计学习方法》EM 算法的部分读书笔记</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/05/30/EM%E7%AE%97%E6%B3%95%E5%8F%8A%E5%85%B6%E6%8E%A8%E5%B9%BF/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.xuyuyan.cn/2021/05/30/EM%E7%AE%97%E6%B3%95%E5%8F%8A%E5%85%B6%E6%8E%A8%E5%B9%BF/" data-id="ckwknngo40006fcuf1cgs0b5j" data-title="《统计机器学习》读书笔记 · EM算法及其推广" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EM-%E7%AE%97%E6%B3%95/" rel="tag">EM 算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag">高斯分布</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="《统计学习方法》读书笔记 · 提升方法-提升方法" class="h-entry article article-type-《统计学习方法》读书笔记 · 提升方法" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/21/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2021-05-21T10:12:57.000Z" itemprop="datePublished">2021-05-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/21/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/">《统计学习方法》读书笔记 · 提升方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>《统计学习方法》读书笔记提升方法部分</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/05/21/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.xuyuyan.cn/2021/05/21/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" data-id="ckwknngp2000tfcufa3im2tym" data-title="《统计学习方法》读书笔记 · 提升方法" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AdaBoost/" rel="tag">AdaBoost</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" rel="tag">前向分步方法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" rel="tag">提升方法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="《统计学习方法》读书笔记 · 支持向量机-支持向量机" class="h-entry article article-type-《统计学习方法》读书笔记 · 支持向量机" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/15/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" class="article-date">
-  <time class="dt-published" datetime="2021-05-15T03:10:55.000Z" itemprop="datePublished">2021-05-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/15/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">《统计学习方法》读书笔记 · 支持向量机</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>《统计学习方法》支持向量机部分读书笔记<br>由于渲染可能存在问题，本文也以 xyyPan 的分享链接形式给出 <a href="http://www.xuyuyan.cn:5212/s/KWcM">http://www.xuyuyan.cn:5212/s/KWcM</a></p>
-        
-          <p class="article-more-link">
-            <a href="/2021/05/15/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.xuyuyan.cn/2021/05/15/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" data-id="ckwknngru004hfcufh34va6mm" data-title="《统计学习方法》读书笔记 · 支持向量机" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" rel="tag">支持向量机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="《统计学习方法》读书笔记 · 逻辑斯谛回归与最大熵模型-逻辑斯谛回归与最大熵模型" class="h-entry article article-type-《统计学习方法》读书笔记 · 逻辑斯谛回归与最大熵模型" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/11/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92%E4%B8%8E%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" class="article-date">
-  <time class="dt-published" datetime="2021-05-11T07:09:16.000Z" itemprop="datePublished">2021-05-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/11/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92%E4%B8%8E%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/">《统计学习方法》读书笔记 · 逻辑斯谛回归与最大熵模型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>全程高能！因为数学表达式的推导和证明实在太多了，然后文章篇幅也比较长。导致我的markdown编辑器渲染公式无敌无敌卡，严重影响书写，所以后半篇基本以手写推导为主。（尽力在排版了TAT）之后的文章可能也会有很多的手写推导，具体排版形式我再斟酌斟酌。</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/05/11/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92%E4%B8%8E%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.xuyuyan.cn/2021/05/11/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92%E4%B8%8E%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" data-id="ckwknngsk005mfcuf4s8fep57" data-title="《统计学习方法》读书笔记 · 逻辑斯谛回归与最大熵模型" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" rel="tag">最大熵模型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" rel="tag">逻辑斯谛回归</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="《统计学习方法》读书笔记 · 决策树-决策树" class="h-entry article article-type-《统计学习方法》读书笔记 · 决策树" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/07/%E5%86%B3%E7%AD%96%E6%A0%91/" class="article-date">
-  <time class="dt-published" datetime="2021-05-07T11:46:54.000Z" itemprop="datePublished">2021-05-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/07/%E5%86%B3%E7%AD%96%E6%A0%91/">《统计学习方法》读书笔记 · 决策树</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>《统计学习方法》决策树相关内容的学习笔记</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/05/07/%E5%86%B3%E7%AD%96%E6%A0%91/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.xuyuyan.cn/2021/05/07/%E5%86%B3%E7%AD%96%E6%A0%91/" data-id="ckwknngrp004cfcuf6o81856c" data-title="《统计学习方法》读书笔记 · 决策树" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%A2%8E%E7%A2%8E%E5%BF%B5/">个人碎碎念</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AdaBoost/" rel="tag">AdaBoost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EM-%E7%AE%97%E6%B3%95/" rel="tag">EM 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">UI自动化测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k-%E8%BF%91%E9%82%BB/" rel="tag">k 近邻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kd-%E6%A0%91/" rel="tag">kd 树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" rel="tag">代理模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" rel="tag">分治算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" rel="tag">前向分步方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">原型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" rel="tag">因特网历史</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" rel="tag">图算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">工厂方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" rel="tag">感知机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" rel="tag">提升方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" rel="tag">支持向量机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" rel="tag">最大熵模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" rel="tag">朴素贝叶斯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" rel="tag">极大似然估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">模板方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A/" rel="tag">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" rel="tag">毕业旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag">离散数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" rel="tag">策略模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" rel="tag">装饰模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" rel="tag">设计原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" rel="tag">贝叶斯估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" rel="tag">软件测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" rel="tag">逻辑斯谛回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%B2%99/" rel="tag">长沙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag">高斯分布</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/AdaBoost/" style="font-size: 10px;">AdaBoost</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/EM-%E7%AE%97%E6%B3%95/" style="font-size: 10px;">EM 算法</a> <a href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">UI自动化测试</a> <a href="/tags/k-%E8%BF%91%E9%82%BB/" style="font-size: 10px;">k 近邻</a> <a href="/tags/kd-%E6%A0%91/" style="font-size: 10px;">kd 树</a> <a href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">代理模式</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 10px;">决策树</a> <a href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" style="font-size: 10px;">分治算法</a> <a href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" style="font-size: 10px;">前向分步方法</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">原型模式</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" style="font-size: 10px;">因特网历史</a> <a href="/tags/%E5%9B%BE/" style="font-size: 10px;">图</a> <a href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" style="font-size: 10px;">图算法</a> <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 10px;">密码学</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">工厂方法模式</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 10px;">并查集</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" style="font-size: 10px;">感知机</a> <a href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" style="font-size: 10px;">提升方法</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" style="font-size: 10px;">支持向量机</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 10px;">数论</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">最大熵模型</a> <a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">朴素贝叶斯算法</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">机器学习</a> <a href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">极大似然估计</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">模板方法模式</a> <a href="/tags/%E6%AF%95%E4%B8%9A/" style="font-size: 10px;">毕业</a> <a href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" style="font-size: 10px;">毕业旅行</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 15px;">离散数学</a> <a href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">策略模式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 20px;">统计学习方法</a> <a href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">装饰模式</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" style="font-size: 10px;">设计原则</a> <a href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">贝叶斯估计</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">软件测试</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" style="font-size: 10px;">逻辑斯谛回归</a> <a href="/tags/%E9%95%BF%E6%B2%99/" style="font-size: 10px;">长沙</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a> <a href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" style="font-size: 10px;">高斯分布</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/11/29/public/webpushr-sw/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/11/29/public/newPost/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/">《统计学习方法》读书笔记 · 隐马尔可夫模型</a>
-          </li>
-        
-          <li>
-            <a href="/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/">2021毕业碎碎念</a>
-          </li>
-        
-          <li>
-            <a href="/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/">毕业旅行2021</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2021 xyy<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
 
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
 </html>
