@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>小解分治 | xyy爱吃番茄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="分治算法就是简单递归？当然不是的，里边儿可有大学问。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小解分治">
+<meta property="og:url" content="http://www.xuyuyan.cn/2021/02/04/%E5%B0%8F%E8%A7%A3%E5%88%86%E6%B2%BB/index.html">
+<meta property="og:site_name" content="xyy爱吃番茄">
+<meta property="og:description" content="分治算法就是简单递归？当然不是的，里边儿可有大学问。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210204101001123.png">
+<meta property="article:published_time" content="2021-02-04T04:13:55.000Z">
+<meta property="article:modified_time" content="2021-04-05T11:48:29.000Z">
+<meta property="article:author" content="xyy">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="分治算法">
+<meta property="article:tag" content="递归">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qiniu.xuyuyan.cn/image-20210204101001123.png">
+  
+    <link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xyy爱吃番茄</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.xuyuyan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-小解分治" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/04/%E5%B0%8F%E8%A7%A3%E5%88%86%E6%B2%BB/" class="article-date">
+  <time class="dt-published" datetime="2021-02-04T04:13:55.000Z" itemprop="datePublished">2021-02-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      小解分治
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>分治算法就是简单递归？当然不是的，里边儿可有大学问。</p>
+<span id="more"></span>
+
+<h3 id="零、渐进记号："><a href="#零、渐进记号：" class="headerlink" title="零、渐进记号："></a>零、渐进记号：</h3><ul>
+<li><p>对一个给定函数 g(n)，用 Θ(g(n)) 来表达以下函数的集合:</p>
+<p>Θ(g(n)) = { f(n)：存在正常量 $C_1$，$C_2$ 和 $n_0$，使得对所有 $n \geq n_0$，有 $0 \leq C_1g(n) \leq C_2g(n)$ } </p>
+<p><strong>Θ 记号渐进地给出一个函数的上界和下界。</strong></p>
+</li>
+<li><p>对一个给定函数 g(n)，用 O(g(n)) 来表达以下函数的集合:</p>
+<p>O(g(n)) = { f(n)：存在正常量 $C$ 和 $n_0$，使得对所有 $n \geq n_0$，有 $0 \leq f(n) \leq Cg(n)$ } </p>
+<p><strong>O 记号渐进地给出一个函数的上界</strong>。</p>
+</li>
+<li><p>对一个给定函数 g(n)，用 Ω(g(n)) 来表达以下函数的集合:</p>
+<p>Ω(g(n)) = { f(n)：存在正常量 $C$ 和 $n_0$，使得对所有 $n \geq n_0$，有 $0\leq Cg(n) \leq f(n) $ } </p>
+<p><strong>Ω 记号渐进地给出一个函数的下界</strong>。</p>
+</li>
+<li><p>对一个给定函数 g(n)，用 o(g(n)) 来表达以下函数的集合:</p>
+<p>o(g(n)) = { f(n)：存在正常量 $C$ 和 $n_0$，使得对所有 $n \geq n_0$，有 $0 \leq f(n) &lt; Cg(n)$ } </p>
+<p><strong>o 记号表示一个非渐进紧确的上界</strong>。</p>
+</li>
+<li><p>对一个给定函数 g(n)，用 ω(g(n)) 来表达以下函数的集合:</p>
+<p>ω(g(n)) = { f(n)：存在正常量 $C$ 和 $n_0$，使得对所有 $n \geq n_0$，有 $0\leq Cg(n) &lt; f(n)$ } </p>
+<p><strong>ω 记号表示一个非渐进紧确的下界</strong>。</p>
+</li>
+</ul>
+<br>
+
+<h3 id="一、分治算法介绍："><a href="#一、分治算法介绍：" class="headerlink" title="一、分治算法介绍："></a>一、分治算法介绍：</h3><p>将原问题分解成几个规模较小但类似于原问题的子问题，递归地求解这些子问题，然后合并这些子问题地解来建立原问题的解。</p>
+<p>分治模式在每层递归时都有三个步骤：</p>
+<ul>
+<li><strong>分解</strong>原问题为若干子问题，这些子问题是原问题规模较小的实例。</li>
+<li><strong>解决</strong>这些子问题，递归地求解各子问题。然而，如果子问题的规模足够小，则直接求解。</li>
+<li><strong>合并</strong>这些子问题的解成原问题的解。</li>
+</ul>
+<p><strong>递归式</strong>是和分治方法密切相关的，因为使用递归式可以很自然地刻画分治算法的运行时间。一个递归式是一个恒等式或者不等式，它<strong>通过更小的输入上的函数值来描述一个函数</strong>。相信很多读者对递归的印象都是：时空开销大，确实，在一些情况下基于分治思想的递归算法并不优于平凡算法；但是在另外的情况递归算法有着不错的性能。因此，我们需要懂得如何评判递归算法的开销。</p>
+<p>此处将介绍三种<strong>求解递归式的渐进界</strong>方法：</p>
+<ol>
+<li><strong>代入法</strong>：我们猜测一个界，然后用数学归纳法证明这个界是正确的。</li>
+<li><strong>递归树法</strong>：将递归式转化为一棵树，其节点表示不同层次的递归调用产生的代价。然后采用边界和技术来求解递归式。</li>
+<li><strong>主方法</strong>（本文采用）：可求解形如下述公式的递归式的界：$T(n)=aT(n/b)+f(n)$。其中 $a \geq 1$，$b&gt;1$，f(n) 是一个给定常数。（上述递归式刻画了这样一个分治算法：生成 a 个子问题，每个子问题的规模是原问题的 1/b，分解和合并步骤总共花费时间为 f(n)）</li>
+</ol>
+<br>
+
+<p>接下来我们将运用上述三种方法来介绍<strong>如何求解递归式</strong>：</p>
+<h4 id="1-代入法："><a href="#1-代入法：" class="headerlink" title="1. 代入法："></a><code>1. 代入法</code>：</h4><ul>
+<li>Step1：猜测解的形式</li>
+<li>Step2：用数学归纳法求解的常数</li>
+</ul>
+<blockquote>
+<p>以式子 $T(n)=2T(\lfloor \frac{n}{2} \rfloor lg(\lfloor \frac{n}{2} \rfloor))$ 为例：</p>
+</blockquote>
+<p>首先我们依据经验进行猜测，<strong>猜测其解为</strong> $T(n)=O(nlgn)$。代入要求证明，恰当选择常数 $c&gt;0$，可有 $T(n) \leq cnlgn$。</p>
+<p>然后我们<strong>对此前的假设进行证明</strong>。</p>
+<ol>
+<li><p>我们假设此上界对所有正数 $m &lt; n$ 都成立，特别是对于 $m = \lfloor \frac{n}{2} \rfloor$，有 $T(\lfloor \frac{n}{2} \rfloor)\leq c\lfloor \frac{n}{2} \rfloor lg(\lfloor \frac{n}{2} \rfloor)$。</p>
+</li>
+<li><p>将其带入递归式，得：$T(n)\leq 2(c\lfloor \frac{n}{2} \rfloor lg\lfloor \frac{n}{2} \rfloor)+n \leq cnlg(\lfloor \frac{n}{2} \rfloor)+n = cnlgn-cnlg2+n = cnlgn-cn+n \leq cnlgn$（$c\geq 1$） </p>
+</li>
+<li><p>很容易发现上述推导存在边界限制条件 $c\geq 1$，而数学归纳法要求我们证明解在边界条件也成立：</p>
+<p>假设 $T(1)=1$ 是递归式唯一边界条件。则对于 $n=1$，边界条件 $T(n)\leq cnlgn \Rightarrow T(1)\leq c1lg1=0$，与 $T(1)=1$ 矛盾。 </p>
+</li>
+</ol>
+<p>发现矛盾之后，我们不应慌乱。因为渐进符号仅要求 $n \geq n_0$ 时 $T(n) \leq cnlgn$，其中 $n_0$ 是可自行选择的常数。我们可令 $n_0=2$，很容易算出 $T(2)=4$，$T(3)=5$，两式均能满足约束（选择足够大的 c 即可）。</p>
+<h4 id="2-用递归式求解："><a href="#2-用递归式求解：" class="headerlink" title="2. 用递归式求解："></a><code>2. 用递归式求解</code>：</h4><blockquote>
+<p>此处我们举例：$T(n)=3T(\lfloor \frac{n}{4} \rfloor) + \Theta(n^2)$</p>
+</blockquote>
+<p>可以将上式<strong>构造为如下递归树</strong>（小量 $\Theta(n^2)$ 可省略），每一个节点的数字为节点代价，左侧蓝色字迹为一层的节点代价之和。</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210204101001123.png" style="zoom:40%;" />
+
+<p>我们对上图的最底层进行分析：依据树的基础知识，树的最底层深度为 $log_4n$，有 $3^{log_4n}=n^{log_43}$ 个节点，每个节点的代价为 $T(1)$，因此，最底层总代价为 $n^{log_43}T(1)$，即 $\Theta(n^{log_43})$。</p>
+<p>现在让我们来<strong>求所有层次的代价之和，确定整棵树的代价</strong>：</p>
+<p>$T(n)=cn^2+\frac{3}{16}cn^2+{(\frac{3}{16})}^2cn^2+…+{(\frac{3}{16})}^{log_4{n-1}}cn^2+\Theta (n^{log_43})$</p>
+<p>$=\sum_{i=0}^{log_4{n-1}}{(\frac{3}{10})}^icn^2 + \Theta(n^{log_43}) $</p>
+<p>$&lt; \sum_{i=0}^{\infty}{(\frac{3}{16})}^icn^2+\Theta(n^{log_43})$</p>
+<p>$=\frac{1}{1-(\frac{3}{16})}cn^2+\Theta(n^{log_43})$</p>
+<p>$=\frac{16}{3}cn^2+\Theta(n^{log_43})$</p>
+<p>$=O(n^2)$</p>
+<p>至此，对于原始递归式 $T(n)=3T(\lfloor \frac{n}{4} \rfloor) + \Theta(n^2)$，我们<strong>推导出了一个猜测</strong> $T(n)=O(n^2)$</p>
+<p>现在<strong>利用代入法对猜测进行验证</strong>，即证明 $T(n)\leq dn^2 \  (d&gt;0)$：</p>
+<p>$T(n) \leq 3T(\lfloor \frac{n}{4}\rfloor)+cn^2$</p>
+<p>$\leq 3d(\frac{n}{4})^{2}+cn^2$</p>
+<p>$=\frac{3}{16}dn^2+cn^2$</p>
+<p>$\leq dn^2 \ \ \ \   (d\geq \frac{16}{3}c时)$</p>
+<h4 id="3-用主成分方法求解："><a href="#3-用主成分方法求解：" class="headerlink" title="3. 用主成分方法求解："></a><code>3. 用主成分方法求解</code>：</h4><p>主方法为<strong>形如 $T(n)=aT(\frac{n}{b})+f(n)\ \ (a\geq1,b&gt;1,f(n)为渐进正函数)$</strong> 形式的递归式提供了一种“<strong>菜谱式”的求解方法</strong>。</p>
+<p><strong>递归式的涵义</strong>为：将规模为 n 的问题分解为 a 个子问题，每个子问题的规模为 $\frac{n}{b}$。a 个子问题递归地进行求解，每个花费的时间为 $T(\frac{n}{b})$</p>
+<p>从技术正确性来看，此递归式实际上并不是良好定义的，因为 $\frac{n}{b}$ 可能并不是整数。但将  a 项 $T(\frac{n}{b})$ 都替换为 $T(\lceil \frac{n}  {b}\rceil)$ 或 $T(\lfloor \frac{n}  {b}\rfloor)$ 并不会影响递归式地渐进性质。</p>
+<blockquote>
+<p><strong>主定理</strong>：令 $a \geq 1$ 和 $b &gt; 1$ 是常数，f(n) 是一个函数，T(n) 是定义在非负整数上的递归式：$T(n)=aT(\frac{n}{b})+f(n)$</p>
+<p>$T(n)$ 有如下渐进界（三种情况）：</p>
+<ol>
+<li>若对某个常数 $\epsilon &gt; 0$ 有 $f(n)=O(n^{log_ba-\epsilon})$，则 $T(n)=\Theta(n^{log_ba})$</li>
+<li>若 $f(n)=\Theta(n^{log_ba})$，则 $T(n)=\Theta(n^{log_ba}lgn)$</li>
+<li>若对某个常数 $\epsilon &gt; 0$  有 $f(n)=\Omega(n^{log_ba-\epsilon})$，且对某个常数 $c &lt; 1$ 和所有足够大的 n 有 $af(\frac{n}{b})\leq cf(n)$，则 $T(n) = \Theta(f(n))$</li>
+</ol>
+</blockquote>
+<p>换句话说，就是**比较 $n^{log_ba}$ 和 $f(n)$**，凭借“朴素”的数学知识，如果 $f(n)$ 和 $n^{log_ba}$ 大小相当，则对应情况 2；如果 $f(n)$ 远小于 $n^{log_ba}$ ，则两者之和可以忽略 $f(n)$，对应情况 1；如果 $f(n)$ 远大于 $n^{log_ba}$ ，则两者之和可以忽略 $n^{log_ba}$，对应情况 3。</p>
+<blockquote>
+<p>举例：$T(n)=9T(\frac{n}{3})+n$ （此处 $a=9$，$b=3$，$f(n)=n$）</p>
+</blockquote>
+<p>则我们可以利用主成分方法，$n^{log_ba}=n^{log_39}=\Theta(n^2)$，可得 $f(n)=O(n^{log_39-\epsilon})$，其中 $\epsilon=1$，对应主定理的情况1，从而可以得到 $T(n)=\Theta(n^2)$</p>
+<br>
+
+<h3 id="二、分治算法-·-Strassen-矩阵乘法："><a href="#二、分治算法-·-Strassen-矩阵乘法：" class="headerlink" title="二、分治算法 · Strassen 矩阵乘法："></a>二、分治算法 · Strassen 矩阵乘法：</h3><p>我们熟知矩阵乘法的计算规则：$c_{ij}=\sum_{k=1}^{n} a_{ik}b_{kj}$，</p>
+<p>常规方法进行编码（伪代码）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for i = 1 to n</span><br><span class="line">	for j = 1 to n</span><br><span class="line">	cij = 0</span><br><span class="line">	for k = 1 to n</span><br><span class="line">	Cij = Cij +	aij * bij</span><br></pre></td></tr></table></figure>
+
+<p>这种方法的时间复杂度为 $O(n^3)$。而使用 <strong>Strassen 方法可以得到 $O(n^{2.81})$ 的时间复杂度。</strong></p>
+<p>Strassen 方法采用了分治的思想，对矩阵 A，B，C 和 C = A $\times$ B进行分解：</p>
+<p>C = A $\times$ B  $\Rightarrow $ $\begin{bmatrix}C_{11}&amp;C_{12}\\C_{21}&amp;C_{22}\end{bmatrix} = \begin{bmatrix}A_{11}&amp;A_{12}\\A_{21}&amp;A_{22}\end{bmatrix} \times \begin{bmatrix}B_{11}&amp;B_{12}\\B_{21}&amp;B_{22}\end{bmatrix}$</p>
+<p>如果直接将矩阵的乘法展开，我们可以得到下式：</p>
+<p>$\begin{cases} C_{11}=A_{11}\times B_{11} + A_{12}\times B_{21}   \\C_{12}=A_{11}\times B_{12} + A_{12}\times B_{22} \\C_{21}=A_{21}\times B_{11} + A_{22}\times B_{21}       \\C_{22}=A_{21}\times B_{12} + A_{22}\times B_{22}\end{cases}    $</p>
+<p>但不难发现，展开式并不能帮助我们减少时间复杂度（因为没有减少举证乘法的计算次数）。</p>
+<p>Strassen 方法提出了 7 个多项式：</p>
+<p>$\begin{cases} M_{1}=A_{11}(B_{12}-B_{22})                      \\M_{2}=(A_{11} + A_{12})\times B_{22}                         \\M_{3}=(A_{21}+A_{22})\times B_{11}                          \\M_{4}=A_{22}(B_{21}-B_{11})                                 \\M_{5}=(A_{11}+A_{22})(B_{11}+B_{22})                           \\M_{6}=(A_{12}-A_{22})(B_{21}+B_{22})                          \\M_{7}=(A_{11}-A_{21})(B_{11}+B_{12})\end{cases}    $</p>
+<p>将上述 7 个式子进行线性组合，即可得到 $C_1$，$C_2$，$C_3$，$C_4$。</p>
+<p>$\begin{cases} C_{11}=M_5+M_4-M_2+M_6                                  \\ c_{12}=M_1+M_2                                                   \\ c_{21}=M_3+M_4                                                    \\ c_{22}=M_5+M_1-M_3-M_7 \end{cases}$</p>
+<p>该算法的<strong>递归方程</strong>为：$T(n)=\begin{cases} O(1)&amp; \text{n=2}  \\7T(\frac{n}{2})+O(n^2)&amp; \text{n&gt;2}  \end{cases}$</p>
+<p>可以<strong>利用主成分方法求解递归式</strong>得到：$T(n)=O(n^{log7})=O(n^{2.81})$</p>
+<p>（本例涉及较多的矩阵运算，且算法以数学思想为主）</p>
+<p>（各主流编程语言均提供了矩阵运算的库函数，实现较为简单，此处不再提供代码实现。）</p>
+<br>
+
+
+<h3 id="三、分治算法-·-最大子序和："><a href="#三、分治算法-·-最大子序和：" class="headerlink" title="三、分治算法 · 最大子序和："></a>三、分治算法 · 最大子序和：</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-subarray/">https://leetcode-cn.com/problems/maximum-subarray/</a></p>
+<blockquote>
+<p>给定一个整数数组 <code>nums</code> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+</blockquote>
+<p>我们可以将上述问题视作求数组 $A[low,high]$ 的最大子序和，同时将最终解答最大子序和记作 $A[i, j]$。</p>
+<p>$A[i,j]$ 的位置有三种情况：</p>
+<ol>
+<li>完全位于子数组 $A[low,mid]$ 中</li>
+<li>完全位于子数组 $A[mid+1,high]$</li>
+<li>跨越了中点 mid</li>
+</ol>
+<p>对于情况 1 和 2，我们都可以递归求解，将子问题分解成规模更小的子子问题；对于情况 3，我们可以将 $A[i,…,mid,…,j]$ 视为 $A[i,mid]$ 和 $A[mid+1,j]$ 的并集，只需要将两侧的结果合并即可。</p>
+<p>我们**将对情况 3 的处理单独抽象为函数 <code>maxCrossingSum</code>**：因为是跨 mid 的区间，所以必然是包含 A[mid] 和 A[mid + 1]。因此，为了保证所求得的最大和为连续区间，我们将以 A[mid] 和 A[mid + 1] 为中心，分别向两边遍历。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">maxCrossingSum</span> <span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> leftSum = Integer.MIN_VALUE;</span><br><span class="line">    <span class="comment">// 处理[left, mid]间的数据（从mid开始自右向左，维护最大和）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = mid; i &gt;= left; i--) &#123;</span><br><span class="line">        sum += nums[i];</span><br><span class="line">        <span class="keyword">if</span> (sum &gt; leftSum) leftSum = sum; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 处理[mid+1, right]间的数据（从mid+1开始自左向右，维护最大和）</span></span><br><span class="line">    sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = mid; i &gt;= right; i--) &#123;</span><br><span class="line">        sum += nums[i];</span><br><span class="line">        <span class="keyword">if</span> (sum &gt; rightSum) rightSum = sum; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回两侧最大和的和</span></span><br><span class="line">    <span class="keyword">return</span> leftSum + rightSum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来这个函数是<strong>分治算法的核心部分</strong>：按照我们此前的分析，将研究对象以 mid 为中心，分成三种情况，<strong>不断递归，减小问题的规模</strong>。最后的所求即为三种情况的最大值。当递归至最小问题规模时（即研究区间仅一个元素），则最大子序和即为其本身。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">maxSubArraySum</span> <span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (left == right) <span class="keyword">return</span> nums[left]; <span class="comment">// 最小问题规模</span></span><br><span class="line">    <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> max3(maxSubArraySum(nums, left, mid), maxSubArraySum(nums, mid + <span class="number">1</span>, right), maxCrossingSum(nums, left, mid, right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此处的 max3(a, b, c) 函数即为求 a，b，c 之前的最大值，实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">max3</span><span class="params">(<span class="keyword">int</span> num1, <span class="keyword">int</span> num2, <span class="keyword">int</span> num3)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Math.max(num1, Math.max(num2, num3));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后将处理边界情况、计算数组长度和主算法的调用封装在一起，“为主函数减肥”。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = num.length;</span><br><span class="line">    <span class="keyword">if</span> (len == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> maxSubArraySum(nums, <span class="number">0</span>, len - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们对上述算法做一个总结：</p>
+<p>其<strong>递归式</strong>为 $T(n)=\begin{cases} \Theta(1)&amp; \text{若 n = 1} \\2T(\frac{n}{2})+\Theta(n)&amp; \text{若 n &gt; 1} \end{cases}$</p>
+<p><strong>使用主成分方法求解递归式</strong>得：$T(n)=\theta(nlnn)$</p>
+<br>
+
+<h3 id="四、总结："><a href="#四、总结：" class="headerlink" title="四、总结："></a>四、总结：</h3><p>​    分治的思想就是<strong>将复杂问题分解为数个相同但规模较小的子问题，不断递归，减小问题规模，直至可以简单解决</strong>。然而，有时分治递归会存在较高的时间复杂度，我们需要具备<strong>计算我们所提出的递归式的时间复杂度</strong>（见第一章）。本文详细介绍了三种方法，其中<code>代入法</code>、<code>递归式求解法</code>需要一定的数学基础，因此<strong>若递归式满足<code>主成分方法</code>的要求，我们一般使用主成分方法快速求解递归式</strong>。</p>
+<br>
+<br>
+> 参考资料：《算法导论（原书第三版）》、《计算机算法设计与分析（第五版）》
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.xuyuyan.cn/2021/02/04/%E5%B0%8F%E8%A7%A3%E5%88%86%E6%B2%BB/" data-id="ckwknngos000jfcuf4q4f90su" data-title="小解分治" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" rel="tag">分治算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/02/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%C2%B7%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          操作系统·计算机系统概述
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/25/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E5%85%B3%E7%B3%BB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">离散数学·关系</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%A2%8E%E7%A2%8E%E5%BF%B5/">个人碎碎念</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AdaBoost/" rel="tag">AdaBoost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EM-%E7%AE%97%E6%B3%95/" rel="tag">EM 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">UI自动化测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k-%E8%BF%91%E9%82%BB/" rel="tag">k 近邻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kd-%E6%A0%91/" rel="tag">kd 树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" rel="tag">代理模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" rel="tag">分治算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" rel="tag">前向分步方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">原型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" rel="tag">因特网历史</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" rel="tag">图算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">工厂方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" rel="tag">感知机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" rel="tag">提升方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" rel="tag">支持向量机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" rel="tag">最大熵模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" rel="tag">朴素贝叶斯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" rel="tag">极大似然估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">模板方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A/" rel="tag">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" rel="tag">毕业旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag">离散数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" rel="tag">策略模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" rel="tag">装饰模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" rel="tag">设计原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" rel="tag">贝叶斯估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" rel="tag">软件测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" rel="tag">逻辑斯谛回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%B2%99/" rel="tag">长沙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag">高斯分布</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AdaBoost/" style="font-size: 10px;">AdaBoost</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/EM-%E7%AE%97%E6%B3%95/" style="font-size: 10px;">EM 算法</a> <a href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">UI自动化测试</a> <a href="/tags/k-%E8%BF%91%E9%82%BB/" style="font-size: 10px;">k 近邻</a> <a href="/tags/kd-%E6%A0%91/" style="font-size: 10px;">kd 树</a> <a href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">代理模式</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 10px;">决策树</a> <a href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" style="font-size: 10px;">分治算法</a> <a href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" style="font-size: 10px;">前向分步方法</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">原型模式</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" style="font-size: 10px;">因特网历史</a> <a href="/tags/%E5%9B%BE/" style="font-size: 10px;">图</a> <a href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" style="font-size: 10px;">图算法</a> <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 10px;">密码学</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">工厂方法模式</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 10px;">并查集</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" style="font-size: 10px;">感知机</a> <a href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" style="font-size: 10px;">提升方法</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" style="font-size: 10px;">支持向量机</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 10px;">数论</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">最大熵模型</a> <a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">朴素贝叶斯算法</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">机器学习</a> <a href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">极大似然估计</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">模板方法模式</a> <a href="/tags/%E6%AF%95%E4%B8%9A/" style="font-size: 10px;">毕业</a> <a href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" style="font-size: 10px;">毕业旅行</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 15px;">离散数学</a> <a href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">策略模式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 20px;">统计学习方法</a> <a href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">装饰模式</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" style="font-size: 10px;">设计原则</a> <a href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">贝叶斯估计</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">软件测试</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" style="font-size: 10px;">逻辑斯谛回归</a> <a href="/tags/%E9%95%BF%E6%B2%99/" style="font-size: 10px;">长沙</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a> <a href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" style="font-size: 10px;">高斯分布</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/29/public/webpushr-sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/29/public/newPost/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/">《统计学习方法》读书笔记 · 隐马尔可夫模型</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/">2021毕业碎碎念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/">毕业旅行2021</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 xyy<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

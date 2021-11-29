@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>离散数学·数论和密码学 | xyy爱吃番茄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文为《离散数学及其应用》第四章的阅读笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离散数学·数论和密码学">
+<meta property="og:url" content="http://www.xuyuyan.cn/2021/01/24/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E6%95%B0%E8%AE%BA%E5%92%8C%E5%AF%86%E7%A0%81%E5%AD%A6/index.html">
+<meta property="og:site_name" content="xyy爱吃番茄">
+<meta property="og:description" content="本文为《离散数学及其应用》第四章的阅读笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-24T09:47:00.000Z">
+<meta property="article:modified_time" content="2021-04-05T11:57:37.000Z">
+<meta property="article:author" content="xyy">
+<meta property="article:tag" content="离散数学">
+<meta property="article:tag" content="数论">
+<meta property="article:tag" content="密码学">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xyy爱吃番茄</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.xuyuyan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-离散数学·数论和密码学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/01/24/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E6%95%B0%E8%AE%BA%E5%92%8C%E5%AF%86%E7%A0%81%E5%AD%A6/" class="article-date">
+  <time class="dt-published" datetime="2021-01-24T09:47:00.000Z" itemprop="datePublished">2021-01-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      离散数学·数论和密码学
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文为《离散数学及其应用》第四章的阅读笔记</p>
+<span id="more"></span>
+
+<h3 id="一、数论"><a href="#一、数论" class="headerlink" title="一、数论"></a>一、数论</h3><ul>
+<li><strong>整除</strong>：使用记号 a| b 表示 a 能整除 b；可以用量词表达为：$\exists c (ac = b)$</li>
+</ul>
+<p>此处希望读者留意：<strong>a 整除 b</strong> 的含义是 <strong>b 是 a 的整数倍</strong>；而不是 a 是 b 的整数倍。</p>
+<blockquote>
+<p>定理1：令 a，b，c 为整数，其中 $a \not= 0$。则</p>
+<ul>
+<li>如果 a | b 和 a | c，则 a | (b + c)</li>
+<li>如果 a | b，那么对所有整数 c 都有 a | bc</li>
+<li>如果 a | b，b | c，则 a| c</li>
+</ul>
+</blockquote>
+<p>此处对定理1 的第二条做出解释：</p>
+<p>定理1 存在一个实用的推论：</p>
+<blockquote>
+<p>推论1：如果 a，b，c 是整数，其中 $a \not= 0$，使得 a | b 和 a | c，那么当 m 和 n 是整数时有 a | mb + nc。</p>
+</blockquote>
+<ul>
+<li><strong>除法算法</strong>：</li>
+</ul>
+<blockquote>
+<p>定理2：令 a 为整数， d 为正整数。则存在唯一的整数 q 和 r，满足 $0 \leq r &lt; d$，使得 a = dq + r。</p>
+</blockquote>
+<p>虽然这个定理表述得十分复杂，但原理非常简单：被除数 = 除数 $\times$ 商 + 余数。</p>
+<ul>
+<li><strong>模算术</strong>：</li>
+</ul>
+<p>如果 a 和 b 为整数而 m 为正整数，则当 m 整除 (a - b) 时称为 a 模 m 余 b。用记号 $a \equiv b (mod \ m)$。</p>
+<p>我们称 $a \equiv b (mod \ m)$ 为同余式， m 为模。</p>
+<blockquote>
+<p>定理3：令 a 和 b 为整数，并令 m 为正整数。则 a $\equiv$ b (mod m) 当且仅当 a mod m = b mod m。</p>
+</blockquote>
+<p>定理三可以作如下理解：被除数除以除数得余数 等于 余数除以除数的余数。</p>
+<blockquote>
+<p>定理4：令 m 为正整数。整数 a 和 b 是模 m 同余的，当且仅当存在整数 k 使得 a = b + km</p>
+</blockquote>
+<p>定理四可以作如下理解：模相同的数同余的两数，差一定为模的整数倍。</p>
+<blockquote>
+<p>定理5：令 m 为正整数。如果 $a \equiv b (mod \ m)$，$c \equiv d (mod \ m)$，则 $(a + c) \equiv (b + d) (mod \ m)$</p>
+</blockquote>
+<p>定理五可由各位读者自行证明。</p>
+<blockquote>
+<p>推论1：令 m 是正整数，令 a 和 b 是整数。则 (a + b) mod m = ((a mod m) + (b mod m)) mod m，并且 ab mod m = ((a mod m)(b mod m)) mod m。</p>
+</blockquote>
+<p>推论一可以理解为：和的模 等于 模的和再做模运算；乘积的模 等于 模的乘积再做模运算。</p>
+<p>对于<strong>模 m 运算</strong>，我们可以用运算符 <strong>mod m</strong> 表示。</p>
+<p><strong>加法的模</strong>：$a +_m b = (a + b) mod\ m$</p>
+<p><strong>乘法的模</strong>：$a ·_m b = (a · b) mod\ m$</p>
+<p>运算 加法的模、乘法的模 满足如下性质：</p>
+<ol>
+<li> <strong>封闭性</strong>：如果 a 和 b 属于 $Z_m$，则 $a +_m b$ 和 $a ·_m b$ 也属于 $Z_m$</li>
+<li><strong>结合律</strong>：如果 a 、b 和 c 属于 $Z_m$，则有 $（a +_m b） +_m c = a +_m (b +_m c)$ 和 $（a ·_m b） ·_m c = a ·_m (b ·_m c)$</li>
+<li><strong>交换律</strong>：如果 a 和 b 属于 $Z_m$，则有 $a +_m b = b +_m a$ 和 $a ·_m b = b ·_m a$</li>
+<li><strong>单位元</strong>：如果 a 属于 $Z_m$，则有 $a +_m 0 = 0 +_m a = a$ 和 $a ·_m 0 = 0 ·_m a = a$</li>
+<li><strong>加法逆元</strong>：如果 $a \not= 0$ 属于 $Z_m$，则 m - a 是 a 的模 m 加法逆元，则有 $a +_m (m - a) = 0$ 且 $0 +_m 0 = 0$</li>
+<li><strong>分配律</strong>：如果 a 、b 和 c 属于 $Z_m$，则有 $a ·_m (b +_m c) = (a ·_m b) +_m (a ·_m c)$ 和 $a +_m (b ·_m c) = (a +_m b) ·_m (a +_m c)$ </li>
+</ol>
+<p>以上性质均较易理解，此处不多做解释。</p>
+<ul>
+<li><strong>数的表示</strong>：</li>
+</ul>
+<blockquote>
+<p>定理1：令 b 是一个大于 1 的整数。则如果 n 是一个正整数，就可以唯一地表示下面的形式<br>$n = a_kb^k + a_{k-1}b^{k-1} + … + a_1b + a_0$<br>其中 k 为非负整数，$a_0$，$a_1$，…，$a_k$ 是小于 b 的非负整数，且$a_k \not= 0$</p>
+</blockquote>
+<p>我们也将上述表达式称为 <strong>n 的 b 进制表达式</strong>。</p>
+<ul>
+<li><strong>模指数运算</strong></li>
+</ul>
+<p>在密码学中能够有效的计算 $b^n mod \ m$ 非常重要，其中 b、n、m 是大整数。先计算 $b^n$ 再求余数显然是不可行的。我们将介绍一种利用指数 n 的二进制展开式的一个算法：</p>
+<p>例如对于 $n = (a_{k-1} … a_1a_0)$，计算 $b_n$：$b^n = b^{a_{k-1}2^{k-1} +…+a_1·2+a_0} = b^{a_{k-1}2^{k-1}}…b^{a_1·2}·b^{a_0}$</p>
+<p>因此我们需要计算 $b^{a_{k-1}2^{k-1}}，…b^{a_1·2}，b^{a_0}$ ，并依次相乘。为了提高效率，每乘一项就可以进行一次模运算。</p>
+<p>以下为伪代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">procedure modular exponentiation (b: 整数, n, m：正整数) &#123;</span><br><span class="line">    x := 1</span><br><span class="line">    power := b mod m</span><br><span class="line">    for i := 0 to k - 1</span><br><span class="line">        if a_i = 1 then x := (x · power) mod m</span><br><span class="line">        power := (power · power) mod m</span><br><span class="line">    return x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>欧几里得算法求最大公约数</strong></li>
+</ul>
+<p>传统的方法也称辗转相除法，例如求 91 和 287 的最大公约数 gcd(a, b)。</p>
+<ol>
+<li>用大数 287 除以 小数 91，得到 287 = 91 · 3 + 14</li>
+<li>91 和 287 的任何公约数，也必定是 287 - 91 · 3 = 14 的因子；因此，求 gcd(91, 287)，转化为 gcd(91, 14)</li>
+<li>用大数 91 除以小数 14，…</li>
+</ol>
+<p>以此类推。下面介绍欧几里得算法：</p>
+<blockquote>
+<p>引理：令 a = bq + r，其中 a，b，q 和 r 均为整数。则 gcd(a, b) = gcd(b, r)。</p>
+</blockquote>
+<p> 假定 a 和 b 为正整数，且 $b \leq a$。令 $r_0 = a$ 和 $r_1 = b$。当连续运用整除运算时。可得：</p>
+<ul>
+<li><p>$r_0 = r_1q_1 + r_2$      ($0 \leq r_2 &lt; r_1$)</p>
+</li>
+<li><p>$r_1 = r_2q_2 + r_3$      ($0 \leq r_3 &lt; r_2$)</p>
+</li>
+<li><p>……</p>
+</li>
+<li><p>$r_{n-2} = r_{n-1}q_{n-1} + r_n$      ($0 \leq r_n &lt; r_{n-1}$)</p>
+</li>
+<li><p>$r_{n-1} = r_nq_n$</p>
+</li>
+</ul>
+<p>最终在这一连续相除序列中出现余数 0，因为在余数序列 $a = r_0 &gt; r_1 &gt; r_2 &gt; … \geq 0$ 中至多包含 a 项。由引理可推出：</p>
+<p>gcd(a, b) = gcd($r_0$, $r_1$) = gcd($r_1$, $r_2$) = … = gcd($r_{n-2}$, $r_{n-1}$) = gcd($r_{n-1}$, $r_{n}$) = gcd($r_n$,  0) = $r_n$</p>
+<p>因此，最大公约数是除法序列中最后一个非零余数。</p>
+<ul>
+<li><strong>线性同余方程</strong></li>
+</ul>
+<p>形如：$ax \equiv b(mod \ m)$，其中 m 为正整数，a 和 b 为整数，而 x 为变量，称为线性同余方程。</p>
+<p>如何求解线性同余方程？即如何找出所有满足同余方程的整数解。我们将介绍一种方法，利用使得 $\overline aa \equiv 1(mod \ m)$ 成立的整数 $\overline a$。如果这样的整数存在，我们也称 $\overline a$ 为 a 模 m 的逆。当 a 和 m 互素时，a 模 m 的逆一定存在。</p>
+<p>不知各位读者是否发现，线性同余方程组可以用来解决我们熟悉的<strong>“中国剩余定理”</strong>：有物不知其数，三分之余二，五分之余三，七分之余二，此物为几何？我们可以用线性同余方程来重新表述：$x \equiv 2(mod \ 3)$；$x \equiv 3(mod \ 5)$；$x \equiv 2(mod \ 7)$。</p>
+<ul>
+<li><strong>费马小定理</strong></li>
+</ul>
+<blockquote>
+<p>如果 p 为素数，a 时一个不能被 p 整除的整数，则 $a^{p-1} \equiv 1(mod \ p)$。再者，对每一个整数 a 都有：$a^p \equiv a(mod \ p)$</p>
+</blockquote>
+<p>费马小定理告诉我们：如果 $a \in Z_p$，则 $a^{p-1} = 1$ 也在 $Z_p$ 中。</p>
+<h3 id="二、密码学"><a href="#二、密码学" class="headerlink" title="二、密码学"></a>二、密码学</h3><p>数论在密码学（将信息作转换使得在没有特殊知识的情况下不能很容易恢复出来）中起到关键的作用。</p>
+<p>最早使用密码学的人之一是尤利乌斯 · 恺撒。它通过把字母表众多的每个字母正向移动三位来加密消息。用数学表达式表达就是：$f(p) = (p + 3) mod \ 26$ 。当然我们也可以对恺撒密码进行扩展：$f(p) = (p + k) mod \ 26$，此处 k 可被称为密钥。</p>
+<ul>
+<li><strong>私钥密码学</strong>：</li>
+</ul>
+<p>古典密码，包括移位密码和放射密码，都是私钥密码系统的实例。在私钥密码系统中，一旦你知道加密密钥，你就能很快找到解密密钥。当采用私钥密码系统时，通信的双方必须共享一个密钥。由于知道该密钥的仍和人都可以轻易地为消息加密和解密，所以通信地双方就需要安全地交换密钥。</p>
+<p>许多现代私钥密码系统却不然。特别是，现在私钥密码学的美国政府标准，高级加密标准（AES），非常复杂并被认为时能很好地抵御密码分析。但是它仍然具有共享安全通信密钥地特性。</p>
+<ul>
+<li><strong>公钥密码</strong>：</li>
+</ul>
+<p>为了避免每对希望安全通信地双方都需要共享密钥，20 世纪 70 年代密码学家引入了公钥密码系统的概念。当使用这种系统的时候，知道怎样发送加密消息的人并不能揭秘消息。在这样的系统中，每个人都可以由一个众所周知的加密密钥，但只有解密密钥时保密的，而且只有消息的预期接收人能解密消息。</p>
+<ul>
+<li><strong>RSA 密码系统 · 公钥密码系统</strong></li>
+</ul>
+<p>为了使用特定的密钥 (n, e) 对消息<strong>加密</strong>。</p>
+<ol>
+<li>首先将明文消息 M 翻译成整数序列。为此，可以先将每个明文字母翻译成两位数，并将这些两位数连接起来构成字符串。</li>
+<li>接下来，将这个串分成 2N 位数字登场的分组，这里 2N 是一个大偶数使得 2N 位数字的整数不超过 n</li>
+<li>接下来进行加密。加密过程是将每个分组 $m_i$ 转换成密文分组 $c_i$。由函数 $C = M^e \ mod \ n$</li>
+</ol>
+<p>当已知解密密钥 d 就是 e 模 (p - 1)(q - 1) 的逆时，就可以很快地对密文<strong>解密</strong>：$C^d \equiv (M^e)^{d} \equiv M^{de} \equiv M^{1+k(p-1)(q-1)}(mod \ n)$</p>
+<p><strong>为什么 RSA 密码系统适合作为公钥密码系统呢？</strong></p>
+<ol>
+<li><p>公钥构造简单：</p>
+<p>首先，通过需按照两个各有 200 多位地大素数 p 和 q，再寻找一个与 (p - 1)(q - 1) 互素的整数 e，就可以迅速构造一个公钥。 </p>
+</li>
+<li><p>解密可行：</p>
+<p>当知道模数 n 的因子分解，即知道素数 p 和 q 时，我们可以迅速找到 e 模 (p - 1)(q - 1) 的逆 d。（可以利用欧几里得算法寻找 d 和 (p-1)(q-1) 的贝族系数 s 和 t）</p>
+</li>
+</ol>
+<blockquote>
+<p>参考书籍：《离散数学及其应用》Kenneth H. Rosen 著</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.xuyuyan.cn/2021/01/24/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E6%95%B0%E8%AE%BA%E5%92%8C%E5%AF%86%E7%A0%81%E5%AD%A6/" data-id="ckwknngr0003lfcuf0xbl6du9" data-title="离散数学·数论和密码学" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag">离散数学</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/25/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E5%85%B3%E7%B3%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          离散数学·关系
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/23/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">离散数学·基本结构</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%A2%8E%E7%A2%8E%E5%BF%B5/">个人碎碎念</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AdaBoost/" rel="tag">AdaBoost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EM-%E7%AE%97%E6%B3%95/" rel="tag">EM 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">UI自动化测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k-%E8%BF%91%E9%82%BB/" rel="tag">k 近邻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kd-%E6%A0%91/" rel="tag">kd 树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" rel="tag">代理模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" rel="tag">分治算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" rel="tag">前向分步方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">原型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" rel="tag">因特网历史</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" rel="tag">图算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">工厂方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" rel="tag">感知机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" rel="tag">提升方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" rel="tag">支持向量机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" rel="tag">最大熵模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" rel="tag">朴素贝叶斯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" rel="tag">极大似然估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">模板方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A/" rel="tag">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" rel="tag">毕业旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag">离散数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" rel="tag">策略模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" rel="tag">装饰模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" rel="tag">设计原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" rel="tag">贝叶斯估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" rel="tag">软件测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" rel="tag">逻辑斯谛回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%B2%99/" rel="tag">长沙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag">高斯分布</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AdaBoost/" style="font-size: 10px;">AdaBoost</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/EM-%E7%AE%97%E6%B3%95/" style="font-size: 10px;">EM 算法</a> <a href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">UI自动化测试</a> <a href="/tags/k-%E8%BF%91%E9%82%BB/" style="font-size: 10px;">k 近邻</a> <a href="/tags/kd-%E6%A0%91/" style="font-size: 10px;">kd 树</a> <a href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">代理模式</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 10px;">决策树</a> <a href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" style="font-size: 10px;">分治算法</a> <a href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" style="font-size: 10px;">前向分步方法</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">原型模式</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" style="font-size: 10px;">因特网历史</a> <a href="/tags/%E5%9B%BE/" style="font-size: 10px;">图</a> <a href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" style="font-size: 10px;">图算法</a> <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 10px;">密码学</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">工厂方法模式</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 10px;">并查集</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" style="font-size: 10px;">感知机</a> <a href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" style="font-size: 10px;">提升方法</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" style="font-size: 10px;">支持向量机</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 10px;">数论</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">最大熵模型</a> <a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">朴素贝叶斯算法</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">机器学习</a> <a href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">极大似然估计</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">模板方法模式</a> <a href="/tags/%E6%AF%95%E4%B8%9A/" style="font-size: 10px;">毕业</a> <a href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" style="font-size: 10px;">毕业旅行</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 15px;">离散数学</a> <a href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">策略模式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 20px;">统计学习方法</a> <a href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">装饰模式</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" style="font-size: 10px;">设计原则</a> <a href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">贝叶斯估计</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">软件测试</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" style="font-size: 10px;">逻辑斯谛回归</a> <a href="/tags/%E9%95%BF%E6%B2%99/" style="font-size: 10px;">长沙</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a> <a href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" style="font-size: 10px;">高斯分布</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/29/public/webpushr-sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/29/public/newPost/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/">《统计学习方法》读书笔记 · 隐马尔可夫模型</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/">2021毕业碎碎念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/">毕业旅行2021</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 xyy<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

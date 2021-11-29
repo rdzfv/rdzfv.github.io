@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>小解图算法·图的定义与实现 | xyy爱吃番茄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文为图算法的先导篇，将会介绍和图相关的概念以及代码实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小解图算法·图的定义与实现">
+<meta property="og:url" content="http://www.xuyuyan.cn/2021/02/08/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="xyy爱吃番茄">
+<meta property="og:description" content="本文为图算法的先导篇，将会介绍和图相关的概念以及代码实现。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210208145422908.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210208145655017.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210208163013602.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210208163149663.png">
+<meta property="article:published_time" content="2021-02-08T09:15:48.000Z">
+<meta property="article:modified_time" content="2021-04-05T11:46:10.000Z">
+<meta property="article:author" content="xyy">
+<meta property="article:tag" content="图">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qiniu.xuyuyan.cn/image-20210208145422908.png">
+  
+    <link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xyy爱吃番茄</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.xuyuyan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-小解图算法·图的定义与实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/08/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time class="dt-published" datetime="2021-02-08T09:15:48.000Z" itemprop="datePublished">2021-02-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      小解图算法·图的定义与实现
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文为图算法的先导篇，将会介绍和图相关的概念以及代码实现。</p>
+<span id="more"></span>
+
+<h3 id="一、图的定义"><a href="#一、图的定义" class="headerlink" title="一、图的定义"></a>一、图的定义</h3><p>图 G 由顶点集 V 和边集 E 组成，记作 $G=(V,E)$。</p>
+<ul>
+<li><p>$V(G)$ 表示图 G 中<strong>顶点</strong>的有限非空集合</p>
+</li>
+<li><p>E(G) 表示图 G 中顶点之间的<strong>边</strong>关系集合。</p>
+</li>
+<li><p>$V={v_1,v_2,…,v_n}$ ，用 |V| 表示图 G 中<strong>顶点的个数，也称图 G 的阶</strong>。</p>
+</li>
+<li><p>$E={(u,v)|u\in V,v\in V}$，用 |E| 表示图 G 中<strong>边的条数</strong>。</p>
+</li>
+</ul>
+<p>线性表可以是空表，树可以是孔数，但图不能是空图（图的顶点集不能为空，边集可以为空）</p>
+<br>
+
+<p>以下是图的基本概念和术语：</p>
+<ol>
+<li><p><strong>有向图</strong>：</p>
+<p>$G_1=(V_1,E_1)$</p>
+<p>$V_1={1,2,3}$</p>
+<p>$E_1={&lt;1,2&gt;,&lt;2,1&gt;,&lt;2,3&gt;}$</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210208145422908.png" alt="image-20210208145422908" style="zoom:50%;" /></li>
+<li><p><strong>无向图</strong>：</p>
+<p>$G_2=(V_2,E_2)$</p>
+<p>$V_2={1,2,3}$</p>
+<p>$E_2={(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)}$</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210208145655017.png" alt="image-20210208145655017" style="zoom:50%;" /></li>
+<li><p><strong>简单图</strong>：</p>
+<p>若一个图满足： (I) 不存咋重复边；(II) 不存在从顶点到自身的边；</p>
+<p>则称为简单图。（一般数据结构中只讨论简单图）</p>
+</li>
+<li><p><strong>多重图</strong>：</p>
+<p>若图 G 中某两点之间的边多于一条，又允许顶点通过一条边和自己关联，则 G 为多重图。（多重图的定义和简单图相对）</p>
+</li>
+<li><p><strong>简单完全图</strong>：</p>
+<p>对于无向图，任意两个顶点之间都存在边（共 $n(n-1)/2$ 条）</p>
+<p>对于有向图，任意两个顶点之间同时存在出边和入边（共 $n(n-1)$ 条）</p>
+</li>
+<li><p><strong>子图</strong>：</p>
+<p>边集和顶点集都为原图的子集，同时需要格外注意，新的顶点集和边集必须可以构成图</p>
+</li>
+<li><p><strong>连通、连通图、连通分量</strong>：</p>
+<p>在无向图中，若从顶点 v 到顶点 w 有路径存在，则称 v 和 w 是<strong>连通</strong>的。</p>
+<p>若图 G 中任意两个顶点都是连通的，则称图 G 为<strong>连通图</strong>，否则为<strong>非连通图</strong>。</p>
+<p>无向图中极大连通子图称为<strong>连通分量</strong>。（极大要求该连通子图需要包含原图所有的边）</p>
+</li>
+<li><p><strong>强连通图、强连通分量</strong>：</p>
+<p>在有向图中，若两不同顶点之间互相都有路径，则称这两个顶点是<strong>强连通</strong>的。</p>
+<p>若图中的任意一对顶点都是强连通的，则将图称为<strong>强连通分量</strong>。</p>
+</li>
+<li><p><strong>生成树、生成森林</strong>：</p>
+<p>对于<strong>生成树</strong>而言，如果砍去它的一条边，图将从连通图变成非连通图；如果加上一条边则会形成一个回路。</p>
+<p>在非连通图中，连通分量的生成树构成了非连通图的<strong>生成森林</strong>。</p>
+</li>
+</ol>
+<h3 id="二、图的存储："><a href="#二、图的存储：" class="headerlink" title="二、图的存储："></a>二、图的存储：</h3><h4 id="1-邻接矩阵法："><a href="#1-邻接矩阵法：" class="headerlink" title="1. 邻接矩阵法："></a>1. 邻接矩阵法：</h4><p>所谓邻接矩阵，就是用一个<strong>一维数组存储图中顶点信息</strong>，用一个<strong>二维数组存储图中边的信息</strong>（各顶点之间的邻接关系）。其中，存储顶点之间邻接关系的二维数组称为邻接矩阵。</p>
+<p>$A[i][j]=\begin{cases} 1&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 是 E(G) 中的边} \\0&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 不是 E(G) 中的边} \end{cases}$</p>
+<p>对于带权图来说，若顶点 $v_i$ 和 $v_j$ 之间有边相连，则邻接矩阵中应存放边对应的权值。</p>
+<p>$A[i][j]=\begin{cases} w_{ij}&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 是 E(G) 中的边} \\0\ 或\ \infty&amp; \text{若 $(v_i,v_j)$ 或 $&lt;v_i,v_j&gt;$ 不是 E(G) 中的边} \end{cases}$</p>
+<p>使用 c/c++ 语言描述为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> VertexTtype;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> EdgeType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    VertextType Vex[MaxVertexNum];  <span class="comment">// 顶点表</span></span><br><span class="line">    EdgeType Edge[MaxVertexNum][MaxVertexNum];  <span class="comment">// 邻接矩阵（边表）</span></span><br><span class="line">    <span class="keyword">int</span> vexnum,arcnum;   <span class="comment">// 弧当前的顶点数和弧数</span></span><br><span class="line">&#125; MGraph;</span><br></pre></td></tr></table></figure>
+<h4 id="2-邻接表法："><a href="#2-邻接表法：" class="headerlink" title="2. 邻接表法："></a>2. 邻接表法：</h4><p>当一个图的边集较少时（即顶点间的关系不复杂），使用邻接矩阵方法会浪费大量的存储空间，此时，图的邻接表法结合了顺序存储和链式存储的方法，<strong>大大减少了空间开销</strong>。</p>
+<p>所谓邻接表，是指对图 G 中的每个顶点建立一个单链表，链表存储依附于该结点的其他结点（这个单链表就成为顶点的<strong>边表</strong>）。各边表的头指针和顶点数据采用顺序存储（称为<strong>顶点表</strong>）。</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210208163013602.png" alt="image-20210208163013602" style="zoom: 50%;" />
+
+<p>以下是为读者更为清晰地理解邻接表法存储而举出的例子：</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210208163149663.png" alt="image-20210208163013602" style="zoom: 50%;" />
+
+<p>使用 c/c++ 语言描述为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> &#123;</span>  <span class="comment">//// 边表节点</span></span><br><span class="line">    <span class="keyword">int</span> adjvex;             <span class="comment">// 该弧指向的顶点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> *<span class="title">next</span>;</span>   <span class="comment">// 指向下一条弧的指针</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span> &#123;</span>    <span class="comment">//// 顶点表节点</span></span><br><span class="line">    VertexType data;        <span class="comment">// 顶点信息</span></span><br><span class="line">    ArcNode *first;         <span class="comment">// 指向第一条依附于该顶点的弧指针</span></span><br><span class="line">&#125;VNode,AdjList[MaxVertexNum];</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    VAdjList vertices;   <span class="comment">// 邻接表</span></span><br><span class="line">    <span class="keyword">int</span> vexnum,arcnum;   <span class="comment">// 图的顶点数和弧数</span></span><br><span class="line">&#125; MGraph;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、图的基本操作"><a href="#三、图的基本操作" class="headerlink" title="三、图的基本操作"></a>三、图的基本操作</h3><ol>
+<li>Adjacent(G, x, y)：判断是否存在边 &lt;x, y&gt; 或 (x, y)</li>
+<li>Neighbors(G, x)：列出图 G 中与节点 x 邻接的边</li>
+<li>InsertVertex(G, x)：在图 G 中插入顶点 x</li>
+<li>DeleteVertex(G, x)：在图 G 中删除顶点 x</li>
+<li>AddEdge(G, x, y)：若无向边 (x, y) 或有向边 &lt;x, y&gt; 不存在，则向图 G 中添加该边</li>
+<li>RemoveEdge(G, x, y)：若无向边 (x, y) 或有向边 &lt;x, y&gt; 存在，则在图 G 中删除该边</li>
+<li>FirstNeighbor(G, x)：求图 G 中顶点 x 的第一个邻接点，若有则返回顶点号。</li>
+<li>NextNeighbor(G, x, y)：假设图 G 中顶点 y 是顶点 x 的一个邻接点，返回除 y 外顶点 x 的下一个邻接顶点号</li>
+<li>GetEdgeValue(G, x, y)：获取图 G 中边 (x, y) 或 &lt;x, y&gt; 对应的权值</li>
+<li>SetEdgeValue(G, x, y, v)：设置图 G 中边 (x, y) 或 &lt;x, y&gt; 对应的权值为 v</li>
+</ol>
+<p>（由于操作的实现基于数据结构，而实现图的数据结构复杂多样，此处不提供代码）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.xuyuyan.cn/2021/02/08/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0/" data-id="ckwknngow000ofcuf6llo9pb1" data-title="小解图算法·图的定义与实现" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/02/15/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7DFS-%E5%9B%9E%E6%BA%AF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          小解图算法·DFS-回溯
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/02/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%C2%B7%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">操作系统·计算机系统概述</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%A2%8E%E7%A2%8E%E5%BF%B5/">个人碎碎念</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AdaBoost/" rel="tag">AdaBoost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EM-%E7%AE%97%E6%B3%95/" rel="tag">EM 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">UI自动化测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k-%E8%BF%91%E9%82%BB/" rel="tag">k 近邻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kd-%E6%A0%91/" rel="tag">kd 树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" rel="tag">代理模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" rel="tag">分治算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" rel="tag">前向分步方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">原型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" rel="tag">因特网历史</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" rel="tag">图算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">工厂方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" rel="tag">感知机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" rel="tag">提升方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" rel="tag">支持向量机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" rel="tag">最大熵模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" rel="tag">朴素贝叶斯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" rel="tag">极大似然估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">模板方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A/" rel="tag">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" rel="tag">毕业旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag">离散数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" rel="tag">策略模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" rel="tag">装饰模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" rel="tag">设计原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" rel="tag">贝叶斯估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" rel="tag">软件测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" rel="tag">逻辑斯谛回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%B2%99/" rel="tag">长沙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag">高斯分布</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AdaBoost/" style="font-size: 10px;">AdaBoost</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/EM-%E7%AE%97%E6%B3%95/" style="font-size: 10px;">EM 算法</a> <a href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">UI自动化测试</a> <a href="/tags/k-%E8%BF%91%E9%82%BB/" style="font-size: 10px;">k 近邻</a> <a href="/tags/kd-%E6%A0%91/" style="font-size: 10px;">kd 树</a> <a href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">代理模式</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 10px;">决策树</a> <a href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" style="font-size: 10px;">分治算法</a> <a href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" style="font-size: 10px;">前向分步方法</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">原型模式</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" style="font-size: 10px;">因特网历史</a> <a href="/tags/%E5%9B%BE/" style="font-size: 10px;">图</a> <a href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" style="font-size: 10px;">图算法</a> <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 10px;">密码学</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">工厂方法模式</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 10px;">并查集</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" style="font-size: 10px;">感知机</a> <a href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" style="font-size: 10px;">提升方法</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" style="font-size: 10px;">支持向量机</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 10px;">数论</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">最大熵模型</a> <a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">朴素贝叶斯算法</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">机器学习</a> <a href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">极大似然估计</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">模板方法模式</a> <a href="/tags/%E6%AF%95%E4%B8%9A/" style="font-size: 10px;">毕业</a> <a href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" style="font-size: 10px;">毕业旅行</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 15px;">离散数学</a> <a href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">策略模式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 20px;">统计学习方法</a> <a href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">装饰模式</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" style="font-size: 10px;">设计原则</a> <a href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">贝叶斯估计</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">软件测试</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" style="font-size: 10px;">逻辑斯谛回归</a> <a href="/tags/%E9%95%BF%E6%B2%99/" style="font-size: 10px;">长沙</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a> <a href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" style="font-size: 10px;">高斯分布</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/29/public/webpushr-sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/29/public/newPost/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/">《统计学习方法》读书笔记 · 隐马尔可夫模型</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/">2021毕业碎碎念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/">毕业旅行2021</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 xyy<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>离散数学·逻辑和证明 | xyy爱吃番茄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="《离散数学及其应用》第一章·逻辑和证明 学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离散数学·逻辑和证明">
+<meta property="og:url" content="http://www.xuyuyan.cn/2021/01/22/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E9%80%BB%E8%BE%91%E5%92%8C%E8%AF%81%E6%98%8E/index.html">
+<meta property="og:site_name" content="xyy爱吃番茄">
+<meta property="og:description" content="《离散数学及其应用》第一章·逻辑和证明 学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-22T13:47:10.000Z">
+<meta property="article:modified_time" content="2021-04-05T11:59:55.000Z">
+<meta property="article:author" content="xyy">
+<meta property="article:tag" content="离散数学">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xyy爱吃番茄</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.xuyuyan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-离散数学·逻辑和证明" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/01/22/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E9%80%BB%E8%BE%91%E5%92%8C%E8%AF%81%E6%98%8E/" class="article-date">
+  <time class="dt-published" datetime="2021-01-22T13:47:10.000Z" itemprop="datePublished">2021-01-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      离散数学·逻辑和证明
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>《离散数学及其应用》第一章·逻辑和证明 学习笔记</p>
+<span id="more"></span>
+
+<h3 id="一、先导概念"><a href="#一、先导概念" class="headerlink" title="一、先导概念"></a>一、先导概念</h3><ul>
+<li><strong>命题</strong>：是一个陈述句，或真或假，但不能既真又假。</li>
+</ul>
+<p>接下来我们字母表示命题变元，例如 p，q，r，s 等。后文所述<strong>真值</strong>可理解为命题的真假性，命题为真记作 T，命题为假记作 F。</p>
+<ul>
+<li><strong>p的否定/逆命题</strong>：$\lnot p$ 或 $\overline{p}$ ，读作 “非 p”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>$\lnot p$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+</tr>
+</tbody></table>
+<p>  从真值表中可以看出，命题 p 和 命题 p 的否定真值相反。</p>
+<ul>
+<li><strong>p，q 的合取命题</strong>（AND）：$p \bigwedge q$，读作 “p 并且 q”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<p>从真值表可以看出，当且仅当合取的两命题均为真时，结果为真。</p>
+<ul>
+<li><strong>p，q 的析取命题</strong>（OR）：$p \bigvee q$，读作 “p 或 q”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<p>从真值表可以看出，只要两个合取的两命题有一个为真时，结果为真。</p>
+<ul>
+<li><strong>p，q 的异或命题</strong>（XOR）：$p \bigoplus  q$，读作 “p 异或 q”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<p>从真值表可以看出，当异或的两个命题中恰好只有一个为真（两命题的真值不同），结果为真。</p>
+<ul>
+<li><strong>条件语句</strong>：$p \rightarrow q$，读作 “如果 p，则 q”。我们通常将 p 称为 （前提）前件，将 q 称为（结论）后件。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+</tr>
+</tbody></table>
+<p>相比之前的概念，这个真值表可能较难理解，在此举一个例子：设 p 为命题 “天下雨”，命题 q 为 “我不去打球”。则条件语句 “$p \rightarrow q$” 可以翻译为 “如果天下雨，我就不去打球”。将不同的真值带入：</p>
+<table>
+<thead>
+<tr>
+<th>p 的真值</th>
+<th>命题</th>
+<th>q 的真值</th>
+<th>命题</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>天下雨</td>
+<td>T</td>
+<td>我不去打球</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>天下雨</td>
+<td>F</td>
+<td>我去打球</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>天不下雨</td>
+<td>T</td>
+<td>我去打球</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>天不下雨</td>
+<td>F</td>
+<td>我不去打球</td>
+<td>T</td>
+</tr>
+</tbody></table>
+<p>可以发现，只有当 p（前提） 的真值为 T ，q（结论） 的真值为 F，条件语句才为 F。</p>
+<ul>
+<li><strong>逆命题</strong>：$p \rightarrow q$ 和  $q \rightarrow p$ 互为逆命题，也就是<strong>交换前提和结论</strong>。</li>
+<li><strong>逆否命题</strong>： $p \rightarrow q$ 和  $\lnot q \rightarrow \lnot p$ 互为逆命题，也就是<strong>交换前提和结论</strong>，并且<strong>取条件和结论的逆命题</strong>。</li>
+<li><strong>反命题</strong>：$p \rightarrow q$ 和  $\lnot p \rightarrow \lnot q$ 互为反命题，也就是<strong>取条件和结论的逆命题</strong>。</li>
+</ul>
+<p>以下为有关逆命题、逆否命题、反命题的一些结论：</p>
+<ol>
+<li><strong>原命题和逆否命题的真值相同</strong></li>
+<li><strong>逆命题和反命题都不具有相同的真值</strong></li>
+</ol>
+<p>一般地，我们称两个总具有相同真值的复合命题为<strong>等价命题</strong>。同时，为表达命题的等价，我们同样也可以运用<strong>双条件语句</strong>。</p>
+<ul>
+<li><strong>双条件语句</strong>：$p \leftarrow\rightarrow q$，读作 “p 当且仅当 q”，也称 p 为 q 的充分必要条件。等价于 $(p \rightarrow q) \bigwedge (q \rightarrow p)$</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>p</th>
+<th>q</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+</tr>
+</tbody></table>
+<p>较为容易理解，因为双条件语句的定义是 p 和 q 等价，所以只有当 p 和 q 的真值相同时结果才为 T 。</p>
+<p>至此我们介绍了部分逻辑运算符，我们希望你可以了解一下<strong>逻辑运算符的优先级</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\lnot$</td>
+<td>1</td>
+</tr>
+<tr>
+<td>$\bigwedge$</td>
+<td>2</td>
+</tr>
+<tr>
+<td>$\bigvee$</td>
+<td>3</td>
+</tr>
+<tr>
+<td>$\rightarrow$</td>
+<td>4</td>
+</tr>
+<tr>
+<td>$\leftarrow \rightarrow$</td>
+<td>5</td>
+</tr>
+</tbody></table>
+<h3 id="二、一些逻辑恒等式"><a href="#二、一些逻辑恒等式" class="headerlink" title="二、一些逻辑恒等式"></a>二、一些逻辑恒等式</h3><table>
+<thead>
+<tr>
+<th>等价式</th>
+<th>解释</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$p \bigwedge T \equiv p$ <br>$p \bigvee F \equiv p$</td>
+<td></td>
+<td>恒等律</td>
+</tr>
+<tr>
+<td>$p \bigvee T \equiv T$ <br>$p \bigwedge F \equiv F$</td>
+<td></td>
+<td>支配律</td>
+</tr>
+<tr>
+<td>$p \bigvee p \equiv p$ <br>$p \bigwedge p \equiv p$</td>
+<td>对于合取与析取的幂运算，结果仍为论元本身</td>
+<td>幂等律</td>
+</tr>
+<tr>
+<td>$\lnot (\lnot p) \equiv p$</td>
+<td></td>
+<td>双重否定律</td>
+</tr>
+<tr>
+<td>$p \bigvee q \equiv q \bigvee p$ <br>$p \bigwedge q \equiv q \bigwedge p$</td>
+<td>合取与析取满足交换律</td>
+<td>交换律</td>
+</tr>
+<tr>
+<td>$(p \bigvee q) \bigvee r \equiv p \bigvee (q \bigvee r)$ <br>$(p \bigwedge q) \bigwedge r \equiv p \bigwedge (q \bigwedge r)$</td>
+<td>合取与析取满足结合律</td>
+<td>结合律</td>
+</tr>
+<tr>
+<td>$(p \bigvee q) \bigwedge r \equiv (p \bigvee r) \bigwedge (q \bigvee r)$ <br>$(p \bigwedge q) \bigvee r \equiv (p \bigwedge r) \bigvee (q \bigwedge r)$</td>
+<td>合取与析取满足分配律</td>
+<td>分配律</td>
+</tr>
+<tr>
+<td>$\lnot (p \bigwedge q) \equiv \lnot p \bigvee \lnot q$ <br>$\lnot (p \bigvee q) \equiv \lnot p \bigwedge \lnot q$</td>
+<td>将 $\lnot$ 分配到每个论元，合取与析取互换</td>
+<td>德·摩根律</td>
+</tr>
+<tr>
+<td>$p \bigvee \lnot p \equiv T$ <br>$p \bigwedge \lnot p \equiv F$</td>
+<td></td>
+<td>否定律</td>
+</tr>
+<tr>
+<td>$p \bigvee (p \bigwedge q) \equiv p$ <br>$p \bigwedge (p \bigvee q) \equiv p$</td>
+<td>p 并 （p和q的交集）还是 p<br>p 交 （p和q的并集）还是 p</td>
+<td>吸收律</td>
+</tr>
+<tr>
+<td>$p \rightarrow q \equiv \lnot p \bigvee q$<br>$p \rightarrow q \equiv \lnot q \rightarrow \lnot p$ <br>$p \bigvee q \equiv \lnot p \rightarrow q$ <br>$p \bigwedge q \equiv \lnot (p \rightarrow \lnot q)$<br>$\lnot(p \rightarrow q) \equiv p \bigwedge \lnot q$ <br>$(p\rightarrow q) \bigwedge (p \rightarrow r) \equiv p \rightarrow (q \bigwedge r)$<br>$(p \rightarrow r) \bigwedge (q \rightarrow r) \equiv (p \bigvee q) \rightarrow r$<br>$(p \rightarrow q) \bigvee (p \rightarrow r) \equiv p \rightarrow (q \bigvee r)$ <br>$(p \rightarrow r) \bigvee (q \rightarrow r) \equiv (p \bigwedge q) \rightarrow r$</td>
+<td>$\rightarrow$ 可以理解为 $\lnot \bigvee$ <br>第三个和第四个需要牢记</td>
+<td>条件命题的逻辑等价式</td>
+</tr>
+<tr>
+<td>$p \leftarrow \rightarrow q \equiv (p \rightarrow q) \bigwedge (q \rightarrow p)$ <br>$p \leftarrow \rightarrow q \equiv \lnot p \leftarrow \rightarrow \lnot q$ <br>$p \leftarrow \rightarrow q \equiv (p \bigwedge q) \bigvee (\lnot p \bigwedge \lnot q)$ <br>$\lnot (p \leftarrow \rightarrow q) \equiv p \leftarrow \rightarrow \lnot q$</td>
+<td>$\lnot$ 可以挪到双条件表达式的后项</td>
+<td>双条件命题的逻辑等价式</td>
+</tr>
+</tbody></table>
+<h3 id="三、谓词、量词"><a href="#三、谓词、量词" class="headerlink" title="三、谓词、量词"></a>三、谓词、量词</h3><ul>
+<li><strong>谓词</strong></li>
+</ul>
+<p>一般地，<strong>涉及 n 个变量</strong> $x_1$，$x_2$，…，$x_n$ 的语句可以表示为 $P(x_1，x_2，…，x_n)$ ，我们将其称为命题函数 P 在 n 元组 ( $x_1$，$x_2$，…，$x_n$) 的值，P 也称为 <strong>n 元谓词</strong>。</p>
+<ul>
+<li><p><strong>量词</strong>：量词比命题演算中所有逻辑运算符的<strong>优先级</strong>都更高</p>
+<ul>
+<li><strong>全称量词</strong>：全体域均可使命题成立。用符号 $\forall$ 表示。</li>
+<li><strong>存在量词</strong>：存在一个个体使命题成立。用符号 $\exists$ 表示。</li>
+</ul>
+</li>
+<li><p><strong>量化表达式的否定</strong>：$\forall x P(x) \equiv \exists x \lnot P(x)$</p>
+</li>
+<li><p><strong>嵌套量词</strong>：一个量词出现在另一个量词的作用域中，例如 $\forall x \forall y (x + y = y + x)$</p>
+</li>
+<li><p><strong>量词的顺序</strong>：量词的顺序十分重要，除非所有的量词均为全称量词或者存在量词。（言下之意：如果只有全称量词或存在量词，则可前后交换顺序）</p>
+</li>
+<li><p><strong>嵌套量词的否定</strong></p>
+<p>$\lnot (\forall x \exists y (xy = 1)) = \exists x \lnot \exists y (xy = 1)$  (将否定词移入所有量词之中)</p>
+<p>= $\exists x \forall y \lnot (xy  = 1)$ = $\exists x \forall y \lnot (xy \not= 1)$</p>
+</li>
+</ul>
+<h3 id="四、推理"><a href="#四、推理" class="headerlink" title="四、推理"></a>四、推理</h3><ul>
+<li><strong>推理规则：</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>永真式</th>
+<th>理解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>假言推理</td>
+<td>$p \bigwedge ( p \rightarrow q)) \rightarrow q$</td>
+<td>已知 p ，$p \rightarrow q$，可以推得 q</td>
+</tr>
+<tr>
+<td>取拒式</td>
+<td>$(\lnot q \bigwedge (p \rightarrow q)) \rightarrow \lnot p$</td>
+<td>已知 $\lnot q$，$p \rightarrow q$，可以推得 $\lnot p$</td>
+</tr>
+<tr>
+<td>假言三段论</td>
+<td>$((p \rightarrow q) \bigwedge (q \rightarrow r)) \rightarrow (p \rightarrow r)$</td>
+<td>已知 $p \rightarrow q$，$q \rightarrow r$，可以推得 $p \rightarrow r$</td>
+</tr>
+<tr>
+<td>析取三段论</td>
+<td>$((p \bigvee q) \bigwedge \lnot p) \rightarrow q$</td>
+<td>已知 $p \bigvee q$，$\lnot p$，可以推得 q</td>
+</tr>
+<tr>
+<td>附加律</td>
+<td>$p \rightarrow (p \bigvee q)$</td>
+<td>已知 p，可以推得 $p \bigvee q$</td>
+</tr>
+<tr>
+<td>化简律</td>
+<td>$(p \bigwedge q) \rightarrow p$</td>
+<td>已知 $p \bigwedge q$，可以推得 p</td>
+</tr>
+<tr>
+<td>合取律</td>
+<td>$((p) \bigwedge (q)) \rightarrow (p \bigwedge q)$</td>
+<td>已知 p，q，可以推得 $p \bigwedge q$</td>
+</tr>
+<tr>
+<td>消解律</td>
+<td>$((p \bigvee q) \bigwedge (\lnot p \bigwedge r)) \rightarrow (q \bigvee r)$</td>
+<td>已知 $p \bigvee q$，$\lnot p \bigvee r$，可以推得 $q \bigvee r$</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>量化命题的推理规则：</strong></li>
+</ul>
+<ol>
+<li><strong>全称实例</strong>：由 $\forall x P(x)$ 得出 $P(c)$</li>
+<li><strong>全称引入</strong>：由 论域中所有元素 c 都存在$P(c)$，得出 $\forall x P(x)$ </li>
+<li><strong>存在实例</strong>：由 $\exists x P(x)$，得出 $P(c)$。但是 c 不知道确切的值，仅知道存在。</li>
+<li><strong>存在引入</strong>：由 $P(c)$，得出 $\exists x P(x)$</li>
+</ol>
+<h3 id="五、证明"><a href="#五、证明" class="headerlink" title="五、证明"></a>五、证明</h3><ol>
+<li><p><strong>直接证明法</strong>：（$p \rightarrow q$）</p>
+<p>第一步：假设 p 为真；第二步：用推理规则构造；第三步：推导出 q 为真。</p>
+</li>
+<li><p><strong>反证法</strong>：（$p \rightarrow q$ 等价于 $\lnot q \rightarrow \lnot p$）</p>
+<p>第一步：假设 $\lnot q$；第二步：用推理规则构造；第三步：推导出 $\lnot p$ 为真。</p>
+</li>
+<li><p><strong>空证明</strong>：如果能证明 p 为假，则我们就有了一个 $p \rightarrow q$ 的证明方法</p>
+</li>
+<li><p><strong>平凡证明</strong>：如果能证明 p 为真，则我们也可以很快证明出 $p \rightarrow q$</p>
+</li>
+<li><p><strong>归谬证明</strong>：如果我们能证明对于某个命题 r，$\lnot p \rightarrow (r \bigwedge \lnot r)$为真，则可以得出：p 是真的</p>
+</li>
+<li><p><strong>等价证明法：</strong>为了证明双命题条件 $p \leftarrow \rightarrow q$，则需要证明 $p \rightarrow q$ 和 $q \rightarrow p$</p>
+</li>
+<li><p><strong>唯一性证明</strong>：（存在性：P(c)）&amp;&amp;（唯一性：如果 $b \not= c$，则 P(b) 不成立）</p>
+</li>
+</ol>
+<blockquote>
+<p>参考书籍：《离散数学及其应用》Kenneth H. Rosen 著</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.xuyuyan.cn/2021/01/22/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E9%80%BB%E8%BE%91%E5%92%8C%E8%AF%81%E6%98%8E/" data-id="ckwknngr1003mfcuf66jv25sf" data-title="离散数学·逻辑和证明" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag">离散数学</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/23/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%C2%B7%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          离散数学·基本结构
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/19/%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">因特网的前世今生</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%A2%8E%E7%A2%8E%E5%BF%B5/">个人碎碎念</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AdaBoost/" rel="tag">AdaBoost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EM-%E7%AE%97%E6%B3%95/" rel="tag">EM 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">UI自动化测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k-%E8%BF%91%E9%82%BB/" rel="tag">k 近邻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kd-%E6%A0%91/" rel="tag">kd 树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" rel="tag">代理模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" rel="tag">分治算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" rel="tag">前向分步方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">原型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" rel="tag">因特网历史</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" rel="tag">图算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">工厂方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" rel="tag">感知机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" rel="tag">提升方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" rel="tag">支持向量机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" rel="tag">最大熵模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" rel="tag">朴素贝叶斯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" rel="tag">极大似然估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">模板方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A/" rel="tag">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" rel="tag">毕业旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag">离散数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" rel="tag">策略模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" rel="tag">装饰模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" rel="tag">设计原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" rel="tag">贝叶斯估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" rel="tag">软件测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" rel="tag">逻辑斯谛回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%B2%99/" rel="tag">长沙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag">高斯分布</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AdaBoost/" style="font-size: 10px;">AdaBoost</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/EM-%E7%AE%97%E6%B3%95/" style="font-size: 10px;">EM 算法</a> <a href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">UI自动化测试</a> <a href="/tags/k-%E8%BF%91%E9%82%BB/" style="font-size: 10px;">k 近邻</a> <a href="/tags/kd-%E6%A0%91/" style="font-size: 10px;">kd 树</a> <a href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">代理模式</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 10px;">决策树</a> <a href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" style="font-size: 10px;">分治算法</a> <a href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" style="font-size: 10px;">前向分步方法</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">原型模式</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" style="font-size: 10px;">因特网历史</a> <a href="/tags/%E5%9B%BE/" style="font-size: 10px;">图</a> <a href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" style="font-size: 10px;">图算法</a> <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 10px;">密码学</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">工厂方法模式</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 10px;">并查集</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" style="font-size: 10px;">感知机</a> <a href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" style="font-size: 10px;">提升方法</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" style="font-size: 10px;">支持向量机</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 10px;">数论</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">最大熵模型</a> <a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">朴素贝叶斯算法</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">机器学习</a> <a href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">极大似然估计</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">模板方法模式</a> <a href="/tags/%E6%AF%95%E4%B8%9A/" style="font-size: 10px;">毕业</a> <a href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" style="font-size: 10px;">毕业旅行</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 15px;">离散数学</a> <a href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">策略模式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 20px;">统计学习方法</a> <a href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">装饰模式</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" style="font-size: 10px;">设计原则</a> <a href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">贝叶斯估计</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">软件测试</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" style="font-size: 10px;">逻辑斯谛回归</a> <a href="/tags/%E9%95%BF%E6%B2%99/" style="font-size: 10px;">长沙</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a> <a href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" style="font-size: 10px;">高斯分布</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/29/public/webpushr-sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/29/public/newPost/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/">《统计学习方法》读书笔记 · 隐马尔可夫模型</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/">2021毕业碎碎念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/">毕业旅行2021</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 xyy<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>《统计学习方法》读书笔记 · k 近邻算法 | xyy爱吃番茄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="《统计学习方法》 k 近邻算法部分的读书笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《统计学习方法》读书笔记 · k 近邻算法">
+<meta property="og:url" content="http://www.xuyuyan.cn/2021/04/29/%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="xyy爱吃番茄">
+<meta property="og:description" content="《统计学习方法》 k 近邻算法部分的读书笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210429104033799.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210429105847785.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210429143350270.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210429143407215.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210429144600175.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210429144615071.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210429144630913.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210429151237178.png">
+<meta property="article:published_time" content="2021-04-29T07:41:16.000Z">
+<meta property="article:modified_time" content="2021-04-29T07:58:04.000Z">
+<meta property="article:author" content="xyy">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="统计学习方法">
+<meta property="article:tag" content="k 近邻">
+<meta property="article:tag" content="kd 树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qiniu.xuyuyan.cn/image-20210429104033799.png">
+  
+    <link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xyy爱吃番茄</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.xuyuyan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="《统计学习方法》读书笔记 · k 近邻算法-近邻算法" class="h-entry article article-type-《统计学习方法》读书笔记 · k 近邻算法" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/29/%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2021-04-29T07:41:16.000Z" itemprop="datePublished">2021-04-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      《统计学习方法》读书笔记 · k 近邻算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>《统计学习方法》 k 近邻算法部分的读书笔记</p>
+<span id="more"></span>
+
+<h3 id="1-k-近邻算法简介"><a href="#1-k-近邻算法简介" class="headerlink" title="1. k 近邻算法简介"></a>1. k 近邻算法简介</h3><p>给定数据集 $T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$，其中，$x_i \in R^n$ 为实例的特征向量，$y_i \in {c_1, c_2,…, c_K}$ 为实例的类别。</p>
+<p><code>k 近邻算法</code> 认为“物以类聚”——“<font style="background: #F9EDA6">红豆附近是红豆</font>”，因此当需要判定某一实例 $(x_i,y_i)$ 的类别时，可以通过在训练集 $T$ 中找到与实例 $(x_i,y_i)$ 距离最近的 $k$ 个点（将涵盖这 $k$ 个点的邻域记作 $N_k(x)$）。<font style="background: #F9EDA6">通过邻域 $N_k(x)$ 的类别特性来决定实例 $(x_i,y_i)$ 的类别。</font></p>
+<p>简单来说，如果有两类实例群：绿豆和红豆，现在要判定某一个豆子的类别。利用 k 近邻的思想，只需要知道离这颗豆子最近的三颗豆子（取 k=3）的类别，就可以判定新的豆子的类别。如果最近三颗全部为绿豆，自然新豆子为绿豆；如果最近三颗豆子有两颗为绿豆，一颗为红豆，则根据多数表决定理，新豆子为绿豆。<br><img src="https://qiniu.xuyuyan.cn/image-20210429104033799.png" alt="image-20210429104033799" style="zoom:40%;" /></p>
+<blockquote>
+<p>补充介绍：对于 <font style="background: #FBD4D0">k 近邻算法中 $k$ 值的选择</font>会对算法结果产生重大影响</p>
+<ul>
+<li><p>如果选择了较小的 $k$</p>
+<p>学习的估计误差会增大。换句话说，预测结果对临近实例点非常敏感，如果临近的实例恰好是噪声，预测便容易出错。</p>
+</li>
+<li><p>如果选择了较大的 $k$</p>
+<p>学习的近似误差会增大。换句话说，此时与输入实例较远的训练实例也会起到预测的作用，带来误差。</p>
+</li>
+</ul>
+</blockquote>
+<br>
+
+<h3 id="2-距离度量"><a href="#2-距离度量" class="headerlink" title="2. 距离度量"></a>2. 距离度量</h3><p>在第一章我们介绍 k 近邻算法中需要选取距离实例 “距离最近” 的 k 个实例，那如何来度量距离？</p>
+<p>令 $x_i = (x_i^{(1)}, x_i^{(2)}, .. ,x_i^{(n)})$，$x_j = (x_j^{(1)}, x_j^{(2)}, .. ,x_j^{(n)})$</p>
+<ul>
+<li><p><font style="background: #F9EDA6">欧氏距离（二范数）</font></p>
+<p>$L_2 (x_i, x_j) = (\sum_{i=1}^n |x_i^{(l)} - x_j^{(l)}|^2)^{\frac{1}{2}}$</p>
+</li>
+<li><p><font style="background: #F9EDA6">曼哈顿距离（一范数）</font>，也称街区距离</p>
+<p>$L_1(x_i,x_j) = \sum_{i=1}^n |x_i^{(l)} - x_j^{(l)}|$</p>
+</li>
+</ul>
+<p>不难发现欧式距离和曼哈顿距离在格式上存在一些共性，其实他们都属于 P 范数下的一个特例</p>
+<ul>
+<li><p><font style="background: #F9EDA6">P 范数</font></p>
+<p>$L_p (x_i, x_j) = (\sum_{i=1}^n |x_i^{(l)} - x_j^{(l)}|^p)^{\frac{1}{p}}$</p>
+</li>
+</ul>
+<p>另外，还有切比雪夫距离，也称棋盘距离</p>
+<ul>
+<li><p><font style="background: #F9EDA6">切比雪夫距离</font></p>
+<p>$D_{chess} = max(|x_i^{(m)}-x_i^{(n)}|, |x_j^{(m)}-x_j^{(n)}|)$，简单来说就是各维度坐标数值差的最大值</p>
+</li>
+</ul>
+<img src="https://qiniu.xuyuyan.cn/image-20210429105847785.png" alt="image-20210429105847785" style="zoom:40%;" />
+
+<br>
+
+<h3 id="3-分类决策规则（多项表决规则）"><a href="#3-分类决策规则（多项表决规则）" class="headerlink" title="3. 分类决策规则（多项表决规则）"></a>3. 分类决策规则（多项表决规则）</h3><p>用通俗的语言来说，多项表决规则就是<font style="background: #F9EDA6">少数服从多数</font>。<strong>如果在邻域内，属于某一类的实例数量更多，则输入实例就属于哪一类。</strong></p>
+<blockquote>
+<p>定义<font style="background: #FBD4D0">（多项表决规则）</font>：如果分类的损失函数为 0-1 损失函数，分类函数为 $f:R^n \rightarrow {c_1,c_2, …,c_K}$<br>那么误分类的概率是 $P(Y \neq f(X))=1-P(Y=f(X))$<br>对于给定实例 $x \in \chi$，则其最邻近的 k 个训练实例点构成的集合 $N_k(x)$ 如果涵盖的区域类别为 $c_j$<br>则误分类率为$\frac{1}{k} \sum_{x_i \in N_k(x)} I(y_i \neq c_j) = 1- \frac{1}{k}\sum_{x_i \in N_k(x)}I(y_i=c_j)$<br>要使误分类率（经验风险）最小化，则 $\sum_{x_i \in N_k(x)}I(y_i=c_j)$ 应最大</p>
+</blockquote>
+<p>上述定义中，$I(y_i \neq c_j)$ 为指示函数，$I(x)= \begin{cases} 1 &amp;\text{x为真} \\0 &amp;\text{x为假} \end{cases}$</p>
+<p>$\sum_{x_i \in N_k(x)}I(y_i=c_j)$ 最大（<font style="background: #F9EDA6">经验风险最小</font>），也就对应了多数表决。</p>
+<br>
+
+<h3 id="4-kd-树（k-近邻方法的实现）"><a href="#4-kd-树（k-近邻方法的实现）" class="headerlink" title="4. kd 树（k 近邻方法的实现）"></a>4. kd 树（k 近邻方法的实现）</h3><p> k 近邻方法中，采用线性扫描（逐个计算）的方式计算实例之间的距离。当特征空间的维数大或者训练数据容量大时，运算量极大。</p>
+<p>因此，为了<font style="background: #F9EDA6">提高搜索效率</font>，提出了 kd 树。**kd 树在结构上是二叉树，因此在搜索时的时间复杂度为 O(log n)**。</p>
+<h4 id="4-1-构造-kd-树"><a href="#4-1-构造-kd-树" class="headerlink" title="4.1 构造 kd 树"></a>4.1 构造 kd 树</h4><p>给定二维数据集 $T={x_1, x_2,…,x_N}$，其中 $x_i=(x_i^{(1)},x_i^{(2)},…,x_i^{(k)})^T$</p>
+<p>因为比较抽象，所以通过一个简单的例子来描述：<font color="grey">给定二维数据集 $T={(1, 2), (2, 3), (3,4), (4,5), (5,6)}$</font></p>
+<ol>
+<li><p><font style="background: #CCE0F1">构造根节点和根节点下的左右子树</font></p>
+<p>以 $x^{(1)}$ 为坐标轴，以 $T$ 中所有实例的 $x^{(1)}$ 坐标的中位数为切分点，切分为两个子区域</p>
+<p><font color="grey">所有实例的 $x^{(1)}$ 坐标序列为 ${1,2,3,4,5}$，中位数为 3。因此 $(3,4)$ 为根节点，两个子区域分别为 ${(1,2),(2,3)}$ 和 ${(4,5),(5,6)}$</font> </p>
+<img src="https://qiniu.xuyuyan.cn/image-20210429143350270.png" alt="image-20210429143350270" style="zoom:30%;" /></li>
+<li><p><font style="background: #CCE0F1">对于深度为 $j$ 的节点，选择 $x^{(l)}$ 为切分坐标轴（$l=j(mod \ k) + 1$）继续划分</font></p>
+<p><font color="grey">对于区域 ${(1,2),(2,3)}$，$l=1(mod \ 2)+1=2$，因此以 $x^{(2)}$ 为坐标轴，列出序列 ${2,3}$，选取中位数 3（父节点${(2,3)}$），分为两个子区域 ${(1,2)}$ 和 $\emptyset$。</font></p>
+<p><font color="grey">对于区域 ${(4,5),(5,6)}$，$l=1(mod \ 2)+1=2$，因此以 $x^{(2)}$ 为坐标轴，列出序列 ${5,6}$，选取中位数 6（父节点${(5,6)}$），分为两个子区域 ${(4,5)}$ 和 $\emptyset$。</font></p>
+<img src="https://qiniu.xuyuyan.cn/image-20210429143407215.png" alt="image-20210429143407215" style="zoom:30%;" /></li>
+<li><p><font style="background: #CCE0F1">直到两个子区域没有实例存在时停止。</font></p>
+</li>
+</ol>
+<h4 id="4-2-kd-树的几何意义"><a href="#4-2-kd-树的几何意义" class="headerlink" title="4.2 kd 树的几何意义"></a>4.2 kd 树的几何意义</h4><p>同时，我们用上述这个二维的例子来讲述 kd 树的几何意义。<font style="background: #F9EDA6">每一次划分就是通过切分点做与坐标轴 $x^{(l)}$ 垂直的超平面。</font></p>
+<ol>
+<li>第一次切分，切分点为 $(3,4)$，坐标轴为 $x^{(1)}$</li>
+<li>第二次切分，切分点为 $(2,3)$ 和 $(5,6)$，坐标轴为 $x^{(2)}$<br><img display="inline-block" src="https://qiniu.xuyuyan.cn/image-20210429144600175.png" alt="image-20210429144600175" style="zoom:20%;" /> <img display="inline-block" src="https://qiniu.xuyuyan.cn/image-20210429144615071.png" alt="image-20210429144615071" style="zoom:20%;" /><img display="inline-block" src="https://qiniu.xuyuyan.cn/image-20210429144630913.png" alt="image-20210429144630913" style="zoom:20%;" /></li>
+</ol>
+<p>通过对比 4.1 中的 kd 树结构和 4.2 中的区域划分图，不难发现，<font style="background: #F9EDA6">所有的非叶节点都落在超平面上，所有叶子节点都落在超矩形区间内</font>。</p>
+<h4 id="4-3-kd-搜索树"><a href="#4-3-kd-搜索树" class="headerlink" title="4.3 kd 搜索树"></a>4.3 kd 搜索树</h4><p>下面介绍如何通过 kd 树进行 k 近邻搜索。</p>
+<ol>
+<li><p><font style="background: #CCE0F1">找出包含目标点 $x$ 的叶节点</font></p>
+<p>从根节点出发，若目标点 $x$ 当前维的坐标小于切分点的坐标，则移动到其左子节点；反之，移动到右子节点。直到子节点维叶子节点。（同二叉搜索树）</p>
+</li>
+<li><p><font style="background: #CCE0F1">以此叶节点为“当前最近点”。</font>创建一个大小为 k 的 List，用来存储 k 个距离目标点最近的点集。</p>
+</li>
+<li><p><font style="background: #CCE0F1">递归地向上回退</font></p>
+<ul>
+<li><p>检查当前遍历的子节点的兄弟节点对应的区域是否有更近的点。（检查<font style="background: #d4e9d6">兄弟节点对应的区域</font>是否与<font style="background: #d4e9d6">以目标点为球心、以目标点与“当前最近点”间的距离为半径的超球体</font>相交）</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210429151237178.png" alt="image-20210429151237178" style="zoom:33%;" />
+
+<p><font color="grey">从上图中可见超球体（粉色区域）和其兄弟节点对应的区域（蓝色区域）没有交集。因此在当前循环中，无需计算距离并更新点集。</font></p>
+</li>
+<li><p>如有交集，计算距离、更新点集。</p>
+</li>
+</ul>
+</li>
+</ol>
+<br>
+
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h3><ul>
+<li><p>k 近邻算法</p>
+<ul>
+<li>判定一个带标记集合中一个新实例的类别的算法</li>
+<li>一般采用线性扫描的方式计算实例点之间的距离</li>
+</ul>
+</li>
+<li><p>kd 树是 k 近邻算法的一种实现方式</p>
+<ul>
+<li>采用了特定的存储结构（二叉树）</li>
+<li>相比 k 近邻法减少了计算距离的次数</li>
+<li>但当空间维数接近训练样本数时，优势不明显。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.xuyuyan.cn/2021/04/29/%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" data-id="ckwknngrg0042fcufa2d61dk9" data-title="《统计学习方法》读书笔记 · k 近邻算法" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k-%E8%BF%91%E9%82%BB/" rel="tag">k 近邻</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kd-%E6%A0%91/" rel="tag">kd 树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/30/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          《统计学习方法》读书笔记 · 朴素贝叶斯
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/27/%E6%84%9F%E7%9F%A5%E6%9C%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">《统计学习方法》读书笔记 · 感知机</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%A2%8E%E7%A2%8E%E5%BF%B5/">个人碎碎念</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AdaBoost/" rel="tag">AdaBoost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EM-%E7%AE%97%E6%B3%95/" rel="tag">EM 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">UI自动化测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k-%E8%BF%91%E9%82%BB/" rel="tag">k 近邻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kd-%E6%A0%91/" rel="tag">kd 树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" rel="tag">代理模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" rel="tag">分治算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" rel="tag">前向分步方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">原型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" rel="tag">因特网历史</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" rel="tag">图算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">工厂方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" rel="tag">感知机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" rel="tag">提升方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" rel="tag">支持向量机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" rel="tag">最大熵模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" rel="tag">朴素贝叶斯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" rel="tag">极大似然估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">模板方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A/" rel="tag">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" rel="tag">毕业旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag">离散数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" rel="tag">策略模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" rel="tag">装饰模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" rel="tag">设计原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" rel="tag">贝叶斯估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" rel="tag">软件测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" rel="tag">逻辑斯谛回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%B2%99/" rel="tag">长沙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag">高斯分布</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AdaBoost/" style="font-size: 10px;">AdaBoost</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/EM-%E7%AE%97%E6%B3%95/" style="font-size: 10px;">EM 算法</a> <a href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">UI自动化测试</a> <a href="/tags/k-%E8%BF%91%E9%82%BB/" style="font-size: 10px;">k 近邻</a> <a href="/tags/kd-%E6%A0%91/" style="font-size: 10px;">kd 树</a> <a href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">代理模式</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 10px;">决策树</a> <a href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" style="font-size: 10px;">分治算法</a> <a href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" style="font-size: 10px;">前向分步方法</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">原型模式</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" style="font-size: 10px;">因特网历史</a> <a href="/tags/%E5%9B%BE/" style="font-size: 10px;">图</a> <a href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" style="font-size: 10px;">图算法</a> <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 10px;">密码学</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">工厂方法模式</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 10px;">并查集</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" style="font-size: 10px;">感知机</a> <a href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" style="font-size: 10px;">提升方法</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" style="font-size: 10px;">支持向量机</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 10px;">数论</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">最大熵模型</a> <a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">朴素贝叶斯算法</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">机器学习</a> <a href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">极大似然估计</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">模板方法模式</a> <a href="/tags/%E6%AF%95%E4%B8%9A/" style="font-size: 10px;">毕业</a> <a href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" style="font-size: 10px;">毕业旅行</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 15px;">离散数学</a> <a href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">策略模式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 20px;">统计学习方法</a> <a href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">装饰模式</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" style="font-size: 10px;">设计原则</a> <a href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">贝叶斯估计</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">软件测试</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" style="font-size: 10px;">逻辑斯谛回归</a> <a href="/tags/%E9%95%BF%E6%B2%99/" style="font-size: 10px;">长沙</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a> <a href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" style="font-size: 10px;">高斯分布</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/29/public/webpushr-sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/29/public/newPost/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/">《统计学习方法》读书笔记 · 隐马尔可夫模型</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/">2021毕业碎碎念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/">毕业旅行2021</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 xyy<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

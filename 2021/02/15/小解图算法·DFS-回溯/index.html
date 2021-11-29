@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>小解图算法·DFS-回溯 | xyy爱吃番茄</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="三道题熟练写出回溯算法，记得要看最后的总结~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小解图算法·DFS-回溯">
+<meta property="og:url" content="http://www.xuyuyan.cn/2021/02/15/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7DFS-%E5%9B%9E%E6%BA%AF/index.html">
+<meta property="og:site_name" content="xyy爱吃番茄">
+<meta property="og:description" content="三道题熟练写出回溯算法，记得要看最后的总结~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210209121113393.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210210090811994.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210210092424586.png">
+<meta property="og:image" content="https://qiniu.xuyuyan.cn/image-20210215151124924.png">
+<meta property="article:published_time" content="2021-02-15T07:42:29.000Z">
+<meta property="article:modified_time" content="2021-04-05T12:01:51.000Z">
+<meta property="article:author" content="xyy">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="回溯">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qiniu.xuyuyan.cn/image-20210209121113393.png">
+  
+    <link rel="alternate" href="/atom.xml" title="xyy爱吃番茄" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xyy爱吃番茄</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.xuyuyan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-小解图算法·DFS-回溯" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/15/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7DFS-%E5%9B%9E%E6%BA%AF/" class="article-date">
+  <time class="dt-published" datetime="2021-02-15T07:42:29.000Z" itemprop="datePublished">2021-02-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      小解图算法·DFS-回溯
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>三道题熟练写出回溯算法，记得要看最后的总结~</p>
+<span id="more"></span>
+
+<h3 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h3><p><strong>深度优先搜索</strong>总是对最近才发现的结点 v 的出发边进行探索，直到该节点的所有出发边都被发现为止。如果还存在着尚未发现的结点，则深度优先搜索将从这些未发现的节点任选一个作为新的源节点，并重复同样的搜索过程。以上过程被不断重复，直至图中的所有节点都被发现。</p>
+<p>此处我们先给出伪代码示意：（因为大部分情况我们并不会真的去构造图节点，这样开销太大，而是使用 DFS 深度优先的思想）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">bool visited[MAX_VERTEX_NUM];  // 访问标记数组（true为已访，false为未访）</span><br><span class="line">void DFSTraverse(Graph G) &#123;</span><br><span class="line">	for (v = 0; v &lt; G.vexnum; v++) visited[v] = false; // 初始化标记数组</span><br><span class="line">	// 依次访问图G的节点，如果是未访问节点，则对该节点执行DFS（作用于非连通图）</span><br><span class="line">	for (v = 0; v &lt; G.vexnum; v++) &#123;  </span><br><span class="line">		if (!visited[v]) DFS(G, v);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void DFS(Graph G, int v) &#123; // 从顶点v出发，深度优先遍历图G</span><br><span class="line">	visit(v);           // 访问顶点v</span><br><span class="line">	visited[v] = true;  // 标记v顶点为已访问</span><br><span class="line">	// 依次访问与v相邻的节点，如果节点未访问，则对新的节点执行DFS</span><br><span class="line">	for (w = FirstNeighbor(G, v); w &gt;= 0; w = NextNeighor(G, v, w)) &#123;</span><br><span class="line">		if (!visited[w]) DFS(G, w);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、第一个例子：全排列"><a href="#二、第一个例子：全排列" class="headerlink" title="二、第一个例子：全排列"></a>二、第一个例子：全排列</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">https://leetcode-cn.com/problems/permutations/</a></p>
+<blockquote>
+<p>给定一个 <strong>没有重复</strong> 数字的序列，返回其所有可能的全排列。</p>
+</blockquote>
+<p>对题干不多做分析，是很“朴实”的全排列题。我们可以利用手动分析的办法，画出如下树形图：</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210209121113393.png" alt="image-20210209121113393" style="zoom:30%;" />
+
+<p>很容易发现我们可以利用 DFS 的思想：其中题目要求我们不能填入已经填过的数字，所以应当为给出数据的标记数组，来标记数字是否已经被使用，并动态维护。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, vector&lt;<span class="keyword">int</span>&gt;&amp; output, <span class="keyword">int</span> first, <span class="keyword">int</span> len, vector&lt;<span class="keyword">int</span>&gt; tag, vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 所有数都填完了</span></span><br><span class="line">    <span class="keyword">if</span> (first == len) &#123;</span><br><span class="line">        res.<span class="built_in">push_back</span>(output);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = first; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (tag[j] != <span class="number">1</span>) &#123;  <span class="comment">// 如果是未访问数</span></span><br><span class="line">                tag[j] = <span class="number">1</span>;</span><br><span class="line">                output.<span class="built_in">push_back</span>(nums[j]);</span><br><span class="line">                <span class="built_in">dfs</span>(res, output, first + <span class="number">1</span>, len, tag, nums);</span><br><span class="line">                <span class="comment">// 撤回标记和结果数组</span></span><br><span class="line">                tag[j] = <span class="number">0</span>;  </span><br><span class="line">                output.<span class="built_in">pop_back</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">permute</span>(vector&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">    <span class="keyword">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt; &gt; res;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">tag</span><span class="params">(len)</span></span>;  <span class="comment">// 访问标记数组</span></span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">output</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="built_in">dfs</span>(res, output, <span class="number">0</span>, nums.<span class="built_in">size</span>(), tag, nums);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用标记数组来处理填过的数是一个很直观的思路，但是可不可以<strong>去掉这个标记数组</strong>呢？毕竟标记数组也增加了我们算法的空间复杂度。我们可以将题目给定的 n 个数的<strong>数组 nums 划分成左右两个部分，左边的表示已经填过的数，右边表示待填的数</strong>，我们在回溯的时候只要动态维护这个数组即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, vector&lt;<span class="keyword">int</span>&gt;&amp; output, <span class="keyword">int</span> first, <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 所有数都填完了</span></span><br><span class="line">    <span class="keyword">if</span> (first == len) &#123;</span><br><span class="line">        res.<span class="built_in">emplace_back</span>(output);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = first; i &lt; len; ++i) &#123;</span><br><span class="line">        <span class="comment">// 动态维护数组</span></span><br><span class="line">        <span class="built_in">swap</span>(output[i], output[first]);</span><br><span class="line">        <span class="comment">// 继续递归填下一个数</span></span><br><span class="line">        <span class="built_in">dfs</span>(res, output, first + <span class="number">1</span>, len);</span><br><span class="line">        <span class="comment">// 撤销操作</span></span><br><span class="line">        <span class="built_in">swap</span>(output[i], output[first]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">permute</span>(vector&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt; &gt; res;</span><br><span class="line">    <span class="built_in">dfs</span>(res, nums, <span class="number">0</span>, nums.<span class="built_in">size</span>());</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><ul>
+<li><p>时间复杂度：$O(n \times n!)$，其中 n 为序列的长度。<br>算法的复杂度首先受 dfs 的调用次数制约，dfs 的调用次数为 $\sum_{k = 1}^{n}{P(n, k)}$ 次，其中 $P(n, k) = \frac{n!}{(n - k)!} = n (n - 1) … (n - k + 1)$ 式被称作 n 的 k 排列，或者部分排列。<br>而 $\sum_{k = 1}^{n}{P(n, k)} = n! + \frac{n!}{1!} + \frac{n!}{2!} + \frac{n!}{3!} + … + \frac{n!}{(n-1)!} &lt; 2n! + \frac{n!}{2} + \frac{n!}{2^2} + \frac{n!}{2^{n-2}} &lt; 3n!$。<br>这说明 dfs 的调用次数是 $O(n!)$ 的。<br>而对于 dfs 调用的每个叶结点（共 $n!$ 个），我们需要将当前答案使用 $O(n)$ 的时间复制到答案数组中，相乘得时间复杂度为 $O(n \times n!)$。</p>
+</li>
+<li><p>空间复杂度：$O(n)$，其中 n 为序列的长度。除答案数组以外，递归函数在递归过程中需要为每一层递归函数分配栈空间，所以这里需要额外的空间且该空间取决于递归的深度，这里可知递归调用深度为 $O(n)$。</p>
+</li>
+</ul>
+<h3 id="三、第二个例子：组合"><a href="#三、第二个例子：组合" class="headerlink" title="三、第二个例子：组合"></a>三、第二个例子：组合</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/</a></p>
+<blockquote>
+<p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。</p>
+<p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210210090811994.png" alt="image-20210210090811994" style="zoom:100%;" />
+</blockquote>
+<p>以例子 “23” 字符串为例，数字 2 可以代表字符 a、b、c，数字 3 可以代表字符 d、e、f。凭借朴素的数学知识，我们知道这是一个组合问题，并可以简单地写出答案：</p>
+<table>
+<thead>
+<tr>
+<th>a 开头</th>
+<th>b 开头</th>
+<th>c 开头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ad</td>
+<td>bd</td>
+<td>cd</td>
+</tr>
+<tr>
+<td>ae</td>
+<td>be</td>
+<td>ce</td>
+</tr>
+<tr>
+<td>af</td>
+<td>bf</td>
+<td>cf</td>
+</tr>
+</tbody></table>
+<p>在计算机编程中我们通常使用 DFS 回溯的办法，先将上述过程用图的形式展示：</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210210092424586.png" alt="image-20210210092424586" style="zoom:25%;" />
+
+<p>图的遍历可以用 DFS 解决。因此我们另一个需要解决的是：如何将数字和字符对应（同时需要注意，部分数字对应3个字符，部分数字对应4个字符）。此处我给出的解决方案是：<strong>将一个数字对应的字符组成字符串，并用哈希表使数字和字符对应</strong>。</p>
+<p>以下为代码表示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span>  <span class="comment">// unordered_map 对应的头文件</span></span></span><br><span class="line">unordered_map&lt;<span class="keyword">char</span>, string&gt; phoneMap&#123;</span><br><span class="line">    &#123;<span class="string">&#x27;2&#x27;</span>, <span class="string">&quot;abc&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;3&#x27;</span>, <span class="string">&quot;def&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;4&#x27;</span>, <span class="string">&quot;ghi&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;5&#x27;</span>, <span class="string">&quot;jkl&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;6&#x27;</span>, <span class="string">&quot;mno&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;7&#x27;</span>, <span class="string">&quot;pqrs&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;8&#x27;</span>, <span class="string">&quot;tuv&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;9&#x27;</span>, <span class="string">&quot;wxyz&quot;</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们需要设计 DFS 函数来实现图的深度优先遍历（字符组合）。因为是递归函数，所以有一些必要的参数：phoneMap 哈希表、结果字符串向量 results、给定的数字串输入 digits、正在组合的字符串 result。此外，我们还需要一个<strong>位置标记 index</strong> 来标记正在组合的位置下标（一般用来控制递归规模）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(vector&lt;string&gt;&amp; results, <span class="keyword">const</span> unordered_map&lt;<span class="keyword">char</span>, string&gt;&amp; phoneMap, <span class="keyword">const</span> string&amp; digits, </span></span></span><br><span class="line"><span class="params"><span class="function">         <span class="keyword">int</span> index, string&amp; result)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>DFS 算法有一个很明显的特征：<strong>回溯</strong>。我们一般先尝试性地走向一个分支，如果分支不合法或分支走到尽头，则需要 “回头走” （回溯）。在本题中即为，我们为一个数字尝试性地分配一个字符，当分支走到尽头时，则撤销之前的一次操作；然后分配下一个字符。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(vector&lt;string&gt;&amp; results, <span class="keyword">const</span> unordered_map&lt;<span class="keyword">char</span>, string&gt;&amp; phoneMap, <span class="keyword">const</span> string&amp; digits, </span></span></span><br><span class="line"><span class="params"><span class="function">         <span class="keyword">int</span> index, string&amp; result)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 递归最小规模（完成所有数字的组合）</span></span><br><span class="line">    <span class="keyword">if</span> (index == digits.<span class="built_in">length</span>()) &#123;</span><br><span class="line">        results.<span class="built_in">push_back</span>(result);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">char</span> digit = digits[index];</span><br><span class="line">        <span class="keyword">const</span> string&amp; letters = phoneMap.<span class="built_in">at</span>(digit);  <span class="comment">// 获取当前数字对应的字符串</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">char</span>&amp; letter: letters) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(letter); </span><br><span class="line">            <span class="built_in">dfs</span>(results, phoneMap, digits, index + <span class="number">1</span>, result);</span><br><span class="line">            result.<span class="built_in">pop_back</span>(); <span class="comment">// 回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后将代码进行整合：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(vector&lt;string&gt;&amp; results, <span class="keyword">const</span> unordered_map&lt;<span class="keyword">char</span>, string&gt;&amp; phoneMap, <span class="keyword">const</span> string&amp; digits, <span class="keyword">int</span> index, string&amp; result)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (index == digits.<span class="built_in">length</span>()) &#123;</span><br><span class="line">        results.<span class="built_in">push_back</span>(result);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">char</span> digit = digits[index];</span><br><span class="line">        <span class="keyword">const</span> string&amp; letters = phoneMap.<span class="built_in">at</span>(digit);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">char</span>&amp; letter: letters) &#123;</span><br><span class="line">            result.<span class="built_in">push_back</span>(letter);</span><br><span class="line">            <span class="built_in">dfs</span>(results, phoneMap, digits, index + <span class="number">1</span>, result);</span><br><span class="line">            result.<span class="built_in">pop_back</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">vector&lt;string&gt; <span class="title">letterCombinations</span><span class="params">(string digits)</span> </span>&#123;</span><br><span class="line">    vector&lt;string&gt; results;</span><br><span class="line">    <span class="keyword">if</span> (digits.<span class="built_in">empty</span>()) &#123;   <span class="comment">// 判空</span></span><br><span class="line">        <span class="keyword">return</span> results;</span><br><span class="line">    &#125;</span><br><span class="line">    unordered_map&lt;<span class="keyword">char</span>, string&gt; phoneMap&#123;</span><br><span class="line">            &#123;<span class="string">&#x27;2&#x27;</span>, <span class="string">&quot;abc&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;3&#x27;</span>, <span class="string">&quot;def&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;4&#x27;</span>, <span class="string">&quot;ghi&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;5&#x27;</span>, <span class="string">&quot;jkl&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;6&#x27;</span>, <span class="string">&quot;mno&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;7&#x27;</span>, <span class="string">&quot;pqrs&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;8&#x27;</span>, <span class="string">&quot;tuv&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;9&#x27;</span>, <span class="string">&quot;wxyz&quot;</span>&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    string result;</span><br><span class="line">    <span class="built_in">dfs</span>(results, phoneMap, digits, <span class="number">0</span>, result);   <span class="comment">// index从0开始</span></span><br><span class="line">    <span class="keyword">return</span> results;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、第三个例子-·-单词搜索"><a href="#四、第三个例子-·-单词搜索" class="headerlink" title="四、第三个例子 · 单词搜索"></a>四、第三个例子 · 单词搜索</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-search/">https://leetcode-cn.com/problems/word-search/</a></p>
+<blockquote>
+<p>给定一个二维网格和一个单词，找出该单词是否存在于网格中。</p>
+<p>单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。</p>
+</blockquote>
+<p>此处举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">board =</span><br><span class="line">[</span><br><span class="line">  [&#x27;A&#x27;,&#x27;B&#x27;,&#x27;C&#x27;,&#x27;E&#x27;],</span><br><span class="line">  [&#x27;S&#x27;,&#x27;F&#x27;,&#x27;C&#x27;,&#x27;S&#x27;],</span><br><span class="line">  [&#x27;A&#x27;,&#x27;D&#x27;,&#x27;E&#x27;,&#x27;E&#x27;]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>当 word = “ABFC” 时，我们用人工观察的方法会从字母“A”开始上下左右地匹配下一个字母，如果中途发现上下左右的字母都无法匹配则回退一个字符。我们可以将上述过程化成一个树状图：</p>
+<img src="https://qiniu.xuyuyan.cn/image-20210215151124924.png" alt="image-20210215151124924" style="zoom:40%;" />
+
+<p>其中向上下左右（UDLR）匹配即为每一个决策节点的分支，向<strong>四方搜寻</strong>的操作用代码表述为：（体现为当前字符在字符矩阵中的横纵左边的变化）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">backtrack</span>(board, word, wordIndex + <span class="number">1</span>, x - <span class="number">1</span>, y);  <span class="comment">// 向上走</span></span><br><span class="line"><span class="built_in">backtrack</span>(board, word, wordIndex + <span class="number">1</span>, x + <span class="number">1</span>, y);  <span class="comment">// 向下走</span></span><br><span class="line"><span class="built_in">backtrack</span>(board, word, wordIndex + <span class="number">1</span>, x, y - <span class="number">1</span>);  <span class="comment">// 向左走</span></span><br><span class="line"><span class="built_in">backtrack</span>(board, word, wordIndex + <span class="number">1</span>, x, y + <span class="number">1</span>);  <span class="comment">// 向右走</span></span><br></pre></td></tr></table></figure>
+
+<p>由于题干要求同一位置的字符只能使用一次，因此需要建立一个同字符矩阵相同大小的访问标记矩阵，每次匹配一位字符就将对应位置标记为已访问；每次回退一步需将对应位置修改为未访问。同时，字符矩阵存在上下左右的边限，因此需要对上下左右访问的<strong>合法性</strong>进行<strong>判断</strong>（即不能访问界外数据）。用代码表述为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> tmp = board[x][y];  <span class="comment">// 构建访问标记数组</span></span><br><span class="line">board[x][y] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>((x &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">backtrack</span>(board, word, wordIndex, x - <span class="number">1</span>, y)) <span class="comment">// 往上走</span></span><br><span class="line">   || (y &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">backtrack</span>(board, word, wordIndex, x, y - <span class="number">1</span>)) <span class="comment">// 往左走</span></span><br><span class="line">   || (x &lt; board.<span class="built_in">size</span>() - <span class="number">1</span> &amp;&amp; <span class="built_in">backtrack</span>(board, word, wordIndex, x + <span class="number">1</span>, y)) <span class="comment">// 往下走</span></span><br><span class="line">   || (y &lt; board[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span> &amp;&amp; <span class="built_in">backtrack</span>(board, word, wordIndex, x, y + <span class="number">1</span>)))&#123; <span class="comment">// 往右走</span></span><br><span class="line">    <span class="keyword">return</span>  <span class="literal">true</span>; <span class="comment">// 其中一条能走通，就算成功</span></span><br><span class="line">&#125;</span><br><span class="line">board[x][y] = tmp; <span class="comment">// 如果都不通，则回溯上一状态</span></span><br></pre></td></tr></table></figure>
+
+<p>最后对之前代码所涉及的 backtrack 函数进行说明：</p>
+<p><code>bool backtrack(vector&lt;vector&lt;char&gt;&gt;&amp; board, string&amp; word, int wordIndex, int x, int y)</code></p>
+<p>board 和 word 为输入给定的字符矩阵和目标字符串，wordIndex 为当前匹配到的字符的下标，x 和 y 为当前匹配的字符在字符矩阵中的位置（横纵坐标）。完整的 backrack 函数如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">backtrack</span><span class="params">(vector&lt;vector&lt;<span class="keyword">char</span>&gt;&gt;&amp; board, string&amp; word, </span></span></span><br><span class="line"><span class="params"><span class="function">               <span class="keyword">int</span> wordIndex, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 当前位的字母不相等，此路不通</span></span><br><span class="line">    <span class="keyword">if</span>( board[x][y] != word[wordIndex]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// 最后一个字母也相等, 返回成功</span></span><br><span class="line">    <span class="keyword">if</span>(word.<span class="built_in">size</span>() - <span class="number">1</span>  == wordIndex) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">char</span> tmp = board[x][y]; </span><br><span class="line">    board[x][y] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>((x &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">backtrack</span>(board, word, wordIndex + <span class="number">1</span>, x - <span class="number">1</span>, y)) <span class="comment">// 往上走</span></span><br><span class="line">       || (y &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">backtrack</span>(board, word, wordIndex + <span class="number">1</span>, x, y - <span class="number">1</span>)) <span class="comment">// 往左走</span></span><br><span class="line">       || (x &lt; board.<span class="built_in">size</span>() - <span class="number">1</span> &amp;&amp; <span class="built_in">backtrack</span>(board, word, wordIndex + <span class="number">1</span>, x + <span class="number">1</span>, y)) <span class="comment">// 往下走</span></span><br><span class="line">       || (y &lt; board[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span> &amp;&amp; <span class="built_in">backtrack</span>(board, word, wordIndex + <span class="number">1</span>, x, y + <span class="number">1</span>)))&#123; <span class="comment">// 往右走</span></span><br><span class="line">        <span class="keyword">return</span>  <span class="literal">true</span>; <span class="comment">// 其中一条能走通，就算成功</span></span><br><span class="line">    &#125;</span><br><span class="line">    board[x][y] = tmp; <span class="comment">// 如果都不通，则回溯上一状态</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述 backtrack 函数可以解决在同一连通分量中的深度优先搜索，对于<strong>不同的连通分量</strong>（起始字符位置不同）仅需在循环中调用 backtrack 函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">exist</span><span class="params">(vector&lt;vector&lt;<span class="keyword">char</span>&gt;&gt;&amp; board, string word)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; board.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; board[<span class="number">0</span>].<span class="built_in">size</span>(); j++)&#123;</span><br><span class="line">            <span class="comment">// 从二维表格的每一个格子出发</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">backtrack</span>(board, word, <span class="number">0</span>, i , j)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><p>​    深度优先遍历+回溯算法具有明显的特征，通常具有二维性。可以<strong>通过人工推演的方式，画出决策树</strong>。一般需要设计两个函数，backtrack 函数（递归）和外层函数。</p>
+<ul>
+<li><p>backtrack 函数一般需要考虑：</p>
+<ul>
+<li>传递<strong>原始数据</strong>、<strong>标记数据</strong></li>
+<li>标识并传递<strong>递归深度</strong>（每次递归深度加深）</li>
+<li>每次进入更深层次的递归，需要<strong>更进</strong>标记数据、递归深度；每次回溯需要<strong>撤销</strong>之前对标记数据的操作</li>
+</ul>
+</li>
+<li><p>外层函数一般需要考虑：</p>
+<ul>
+<li>调用 backtrack 递归函数并<strong>为顶层递归赋初值</strong> </li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.xuyuyan.cn/2021/02/15/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7DFS-%E5%9B%9E%E6%BA%AF/" data-id="ckwknngou000lfcuf2ie5ccgp" data-title="小解图算法·DFS-回溯" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/02/19/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7%E5%B9%B6%E6%9F%A5%E9%9B%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          小解图算法·并查集
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/02/08/%E5%B0%8F%E8%A7%A3%E5%9B%BE%E7%AE%97%E6%B3%95%C2%B7%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">小解图算法·图的定义与实现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E3%80%8A%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《统计学习方法》读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%A2%8E%E7%A2%8E%E5%BF%B5/">个人碎碎念</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E7%BB%8F/">面经</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AdaBoost/" rel="tag">AdaBoost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EM-%E7%AE%97%E6%B3%95/" rel="tag">EM 算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">UI自动化测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k-%E8%BF%91%E9%82%BB/" rel="tag">k 近邻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kd-%E6%A0%91/" rel="tag">kd 树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" rel="tag">代理模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag">决策树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" rel="tag">分治算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" rel="tag">前向分步方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">原型模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" rel="tag">因特网历史</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" rel="tag">图算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">工厂方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" rel="tag">感知机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" rel="tag">提升方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" rel="tag">支持向量机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" rel="tag">最大熵模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" rel="tag">朴素贝叶斯算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" rel="tag">极大似然估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" rel="tag">模板方法模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A/" rel="tag">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" rel="tag">毕业旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag">离散数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" rel="tag">策略模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">统计学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" rel="tag">装饰模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" rel="tag">设计原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" rel="tag">贝叶斯估计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" rel="tag">软件测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" rel="tag">逻辑斯谛回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%B2%99/" rel="tag">长沙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" rel="tag">高斯分布</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AdaBoost/" style="font-size: 10px;">AdaBoost</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/EM-%E7%AE%97%E6%B3%95/" style="font-size: 10px;">EM 算法</a> <a href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">UI自动化测试</a> <a href="/tags/k-%E8%BF%91%E9%82%BB/" style="font-size: 10px;">k 近邻</a> <a href="/tags/kd-%E6%A0%91/" style="font-size: 10px;">kd 树</a> <a href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">代理模式</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 10px;">决策树</a> <a href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" style="font-size: 10px;">分治算法</a> <a href="/tags/%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E6%96%B9%E6%B3%95/" style="font-size: 10px;">前向分步方法</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">原型模式</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%9B%A0%E7%89%B9%E7%BD%91%E5%8E%86%E5%8F%B2/" style="font-size: 10px;">因特网历史</a> <a href="/tags/%E5%9B%BE/" style="font-size: 10px;">图</a> <a href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/" style="font-size: 10px;">图算法</a> <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 10px;">密码学</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">工厂方法模式</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 10px;">并查集</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" style="font-size: 10px;">感知机</a> <a href="/tags/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/" style="font-size: 10px;">提升方法</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" style="font-size: 10px;">支持向量机</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 10px;">数论</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">最大熵模型</a> <a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" style="font-size: 10px;">朴素贝叶斯算法</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">机器学习</a> <a href="/tags/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">极大似然估计</a> <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">模板方法模式</a> <a href="/tags/%E6%AF%95%E4%B8%9A/" style="font-size: 10px;">毕业</a> <a href="/tags/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C/" style="font-size: 10px;">毕业旅行</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 15px;">离散数学</a> <a href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">策略模式</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 20px;">统计学习方法</a> <a href="/tags/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">装饰模式</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" style="font-size: 10px;">设计原则</a> <a href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" style="font-size: 10px;">贝叶斯估计</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">软件测试</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%80%BB%E8%BE%91%E6%96%AF%E8%B0%9B%E5%9B%9E%E5%BD%92/" style="font-size: 10px;">逻辑斯谛回归</a> <a href="/tags/%E9%95%BF%E6%B2%99/" style="font-size: 10px;">长沙</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a> <a href="/tags/%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/" style="font-size: 10px;">高斯分布</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/29/public/webpushr-sw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/29/public/newPost/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/30/%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/">《统计学习方法》读书笔记 · 隐马尔可夫模型</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/2021%E6%AF%95%E4%B8%9A%E7%A2%8E%E7%A2%8E%E5%BF%B5/">2021毕业碎碎念</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/24/%E6%AF%95%E4%B8%9A%E6%97%85%E8%A1%8C2021/">毕业旅行2021</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 xyy<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
