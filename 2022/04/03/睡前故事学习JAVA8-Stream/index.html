@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>睡前故事学习JAVA8-Stream | xyy爱吃番茄</title>
+
+
+
+    <link rel="icon" href="https://qiniu.xuyuyan.cn/XYY.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">睡前故事学习JAVA8-Stream</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">四月 3, 2022&nbsp;&nbsp;20:56:41</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="喜咩咩和-Stream-的故事"><a href="#喜咩咩和-Stream-的故事" class="headerlink" title="喜咩咩和 Stream 的故事"></a>喜咩咩和 Stream 的故事</h1><h3 id="一、背景提要"><a href="#一、背景提要" class="headerlink" title="一、背景提要"></a>一、背景提要</h3><p>喜咩咩一家——喜咩咩、胡橘橘、大肥猫，因为胡橘橘和大肥猫日益肥胖，因而诞生了 “全家体重大普查计划” 。</p>
+<h3 id="二、第一次称重"><a href="#二、第一次称重" class="headerlink" title="二、第一次称重"></a>二、第一次称重</h3><p>喜咩咩家第一次称重开始啦，喜咩咩：100kg，胡橘橘：200kg，大肥猫：300kg；（在羊村100kg是标准体重！）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">int</span> weight;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">People</span><span class="params">(String name, <span class="keyword">int</span> weight)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.weight = weight;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;People&#123;&quot;</span> + <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> + <span class="string">&quot;, weight=&quot;</span> + weight +  <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们先记录一下数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;People&gt; peoples = List.of(</span><br><span class="line">		<span class="keyword">new</span> People(<span class="string">&quot;XYY&quot;</span>, <span class="number">100</span>),</span><br><span class="line">  	<span class="keyword">new</span> People(<span class="string">&quot;HHR&quot;</span>, <span class="number">200</span>),</span><br><span class="line">  	<span class="keyword">new</span> People(<span class="string">&quot;cat&quot;</span>, <span class="number">300</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>我们想要直接先看到体重最重的是谁：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// max方法可以通过传入一个比较器求最大值</span></span><br><span class="line">System.out.println(</span><br><span class="line">  peoples.stream().max((p1, p2) -&gt; p1.weight - p2.weight).map(it -&gt; it.name)</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 返回：Optional&lt;cat&gt;（最重的是大肥猫！！）   【注】Optional&lt;cat&gt;为可能为空的cat值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 现在请思考一个问题，如果peoples数组为空，执行上面一条语句会怎样？</span></span><br><span class="line"><span class="comment">// 因此，为加强代码的可靠性，我们也可以采取下面的写法</span></span><br><span class="line">peoples.stream()</span><br><span class="line">  	.max((p1, p2) -&gt; p1.weight - p2.weight)</span><br><span class="line">  	.orElse(<span class="keyword">new</span> People(<span class="string">&quot;none&quot;</span>, -<span class="number">1</span>))</span><br><span class="line">		.name;</span><br></pre></td></tr></table></figure>
+
+<p>然后对一家的体重进行降序排序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sorted可以实现排序功能</span></span><br><span class="line">peoples = peoples.stream().sorted((p1, p2) -&gt; p2.weight - p1.weight).toList(); </span><br></pre></td></tr></table></figure>
+
+<p>并依次输出他们的名字：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// map是实现对元素本身的修改，在这里将每个元素映射修改为他的name属性</span></span><br><span class="line">System.out.println(peoples.stream().map(p -&gt; p.name).toList());</span><br><span class="line"><span class="comment">// 输出：[cat, HHR, XYY]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="三、一个月后"><a href="#三、一个月后" class="headerlink" title="三、一个月后"></a>三、一个月后</h3><p>经过喜咩咩仔细认真地主持， “全家体重大普查计划” 得到了顺利地执行，一个月的体重数据全部存储在数组 <code>firstMonthData</code> 中。</p>
+<p>喜咩咩决定看看在这一个月中，体重超过 200kg 的分别有谁：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(</span><br><span class="line">  	firstMonthData.stream()</span><br><span class="line">  			.filter(it -&gt; it.weight &gt; <span class="number">200</span>)   	<span class="comment">// 使用filter方法，可以只留下满足条件的元素</span></span><br><span class="line">  			.map(it -&gt; it.name)</span><br><span class="line">  			.distinct()                       <span class="comment">// distinct方法，对流中的元素去重</span></span><br><span class="line">  			.toList()</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 输出：[cat, HHR]  (胡橘橘和大肥猫居然还是那么胖！)</span></span><br></pre></td></tr></table></figure>
+
+<p>喜咩咩决定看看这一个月来，胡橘橘和大肥猫的体重变化究竟是怎样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(</span><br><span class="line">  firstMonthData.stream().filter(it -&gt; <span class="string">&quot;HHR&quot;</span>.equals(it.name)).map(it -&gt; it.weight).toList()</span><br><span class="line">);</span><br><span class="line">System.out.println(</span><br><span class="line">  firstMonthData.stream().filter(it -&gt; <span class="string">&quot;cat&quot;</span>.equals(it.name)).map(it -&gt; it.weight).toList()</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 输出：[200, 300, 400, 500]</span></span><br><span class="line"><span class="comment">// 输出：[300, 300, 300, 300]</span></span><br></pre></td></tr></table></figure>
+
+<p>喜咩咩黑人问号？？？这胡橘橘怎么不减反增？？在喜咩咩的严刑拷打之下胡橘橘只能招供：胡橘橘在上个月每天都喝50瓶快乐水。喜咩咩心生一计，颁布喜咩咩家新政：胡橘橘和大肥猫比赛减肥，平均体重低的一方可以得到快乐水奖励。</p>
+<h3 id="四、又是一次-”秋后算账“"><a href="#四、又是一次-”秋后算账“" class="headerlink" title="四、又是一次 ”秋后算账“"></a>四、又是一次 ”秋后算账“</h3><p>胡橘橘在上个月痛改前非，视快乐水为粪土（实际上是觊觎最后的终极快乐水奖励），趁着大肥猫每次干饭、睡觉的时候，都出门跑步，跑五公里。这一次，胡橘橘非常自信地开始算自己的平均体重：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> System.out.println(</span><br><span class="line">   	secondMonthData.stream()</span><br><span class="line">				.filter(it -&gt; <span class="string">&quot;HHR&quot;</span>.equals(it.name))</span><br><span class="line">        .mapToInt(it -&gt; it.weight)                <span class="comment">// 将对象映射为int</span></span><br><span class="line">        .average()                                <span class="comment">// 可对流中的数据求平均值</span></span><br><span class="line">        .orElse(<span class="number">0</span>)</span><br><span class="line"> );</span><br><span class="line"><span class="comment">// 输出：280.0</span></span><br></pre></td></tr></table></figure>
+
+<p>同时大肥猫的平均体重为 300kg，让我们恭喜胡橘橘获得胜利！奖品一箱快乐水，分期限量发放，每天一瓶。</p>
+<h3 id="五、请你查查大乌龙事件"><a href="#五、请你查查大乌龙事件" class="headerlink" title="五、请你查查大乌龙事件"></a>五、请你查查大乌龙事件</h3><p>“聪明”的胡橘橘心中暗波汹涌，他发现了一个规定盲区：既然比的是平均体重，那我何不在前半个月胡吃海喝满足自己，同时逃称；在后半个月积极减肥，上称减肥后的体重；那么这样算下来，我既可以享受半个月的食物，又可以拿到快乐水奖励。</p>
+<p>于是胡橘橘就开始逃称。</p>
+<p>很明显，第三个月的快乐水奖励又属于胡橘橘。但是大肥猫提出异议，他说胡橘橘经常在外和小姐姐彻夜不归，胡吃海喝，胡作非为，怎么可能一个月不长胖？大肥猫要求喜咩咩彻查此事。</p>
+<p>喜咩咩在咨询了韩探长后，决定按照韩探长说的来，先查查有没有人逃称：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Long&gt; result = thirdMonthData.stream()</span><br><span class="line">  	.collect(  <span class="comment">// 收集操作，需要传入一个收集器</span></span><br><span class="line">  			Collectors.groupingBy(  <span class="comment">// 我们传入的groupingBy收集器</span></span><br><span class="line">          it -&gt; it.name, Collectors.counting()  <span class="comment">// 传入收集器的收集方法，箭头后为Map对应的(key, value)</span></span><br><span class="line">        )</span><br><span class="line">		);</span><br><span class="line">System.out.println(result);</span><br><span class="line"><span class="comment">// 输出：&#123;HHR=3, cat=5, XYY=5&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>嗯？胡橘橘竟然逃称了两次，没收一切快乐水，取消购买充电头资格两个月。</p>
+<h3 id="六、好转"><a href="#六、好转" class="headerlink" title="六、好转"></a>六、好转</h3><p>很快，在喜咩咩的监督下，胡橘橘和大肥猫逐渐向健康体重发展。喜咩咩同学及时提出下一步规划：</p>
+<ol>
+<li>在下个月只要胡橘橘和大肥猫<strong>任何一个人低于</strong>110kg就可以奖励全家一次KFC；</li>
+<li>在下个月只要胡橘橘和大肥猫<strong>都低于</strong>180kg，就举家去上海旁的小海岛！</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(</span><br><span class="line">  	forthMonthData.stream()</span><br><span class="line">  			.filter(it -&gt; !<span class="string">&quot;XYY&quot;</span>.equals(it.name))</span><br><span class="line">  			.anyMatch(it -&gt; it.weight &lt;= <span class="number">110</span>)     <span class="comment">// anyMatch：流中任何一个元素满足lambda表达式则返回true</span></span><br><span class="line">);</span><br><span class="line">System.out.println(</span><br><span class="line">  	forthMonthData.stream()</span><br><span class="line">  			.allMatch(it -&gt; it.weight &lt;= <span class="number">180</span>)     <span class="comment">// allMatch：流中所有元素都满足lambda表达式则返回true</span></span><br><span class="line">);</span><br><span class="line"><span class="comment">// 输出： true</span></span><br><span class="line"><span class="comment">//       true   </span></span><br></pre></td></tr></table></figure>
+
+<p>那么？下个月去上海旁边的小海岛吃KFC！（格局打开，去野炊吧！）</p>
+<h3 id="七、公示"><a href="#七、公示" class="headerlink" title="七、公示"></a>七、公示</h3><p>最后，喜咩咩一家都拥有了健康体重，不会脂肪肝。全剧终。</p>
+<table>
+<thead>
+<tr>
+<th>喜咩咩</th>
+<th>胡橘橘</th>
+<th>大肥猫</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100kg</td>
+<td>110kg</td>
+<td>120kg</td>
+</tr>
+</tbody></table>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2022/04/03/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B%E5%AD%A6%E4%B9%A0JAVA8-Stream/">http://www.xuyuyan.cn/2022/04/03/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B%E5%AD%A6%E4%B9%A0JAVA8-Stream/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Java/"># Java</a>
+                    
+                        <a href="/tags/Stream/"># Stream</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/12/31/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">2021年终总结</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;>
+        <div> <a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
