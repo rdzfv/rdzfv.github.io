@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>xyy爱吃番茄（个人分享）</title>
+
+
+
+    <link rel="icon" href="https://qiniu.xuyuyan.cn/XYY.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！(个人分享)</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！(个人分享)</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title"></h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">九月 21, 2022&nbsp;&nbsp;11:28:19</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="网易有道日常实习面试记录"><a href="#网易有道日常实习面试记录" class="headerlink" title="网易有道日常实习面试记录"></a>网易有道日常实习面试记录</h2><h3 id="一面（通过）"><a href="#一面（通过）" class="headerlink" title="一面（通过）"></a>一面（通过）</h3><p>先<font style="background: #d4e9d6">自我介绍</font>，我的自我介绍比较短，所以直接自己cue项目了。</p>
+<p><font style="background: #d4e9d6">介绍项目</font>，我分成了三块：网络结构、前端、后端。面试官围绕项目问了一些问题：</p>
+<ol>
+<li>说说你在项目中遇到的难点</li>
+<li>这些都是你自己搭建的吗，可以说说你在搭建frp服务的一些过程吗</li>
+<li>你这个项目大概实施到什么程度了，有上线吗，多少人在用</li>
+</ol>
+<p>我介绍的项目后端是基于Python的Flask，所以面试官开始对着另外一个项目问了一些<font style="background: #d4e9d6">SpringBoot</font>的问题：</p>
+<ol>
+<li>你可以说说你在项目里用过哪些注解吗</li>
+<li>（或许还问了别的但我忘记了）</li>
+</ol>
+<p><font style="background: #d4e9d6">Git：</font></p>
+<ol>
+<li>用过git吗？处理过冲突吗？</li>
+</ol>
+<p><font style="background: #d4e9d6">Java：</font></p>
+<ol>
+<li>Java的集合类了解吗？比如HashMap知道他原理吗？</li>
+<li>那HashMap是线程安全的吗？</li>
+<li>HashTable了解吗？他的结构是怎样的？</li>
+<li>创建线程/多线程这一些了解吗</li>
+<li>你说你用过线程池，他的好处在于什么？可以说几个创建线程池的参数吗？</li>
+<li>synchronized关键词了解吗</li>
+</ol>
+<p><font style="background: #d4e9d6">计网：</font></p>
+<ol>
+<li><p>自顶向下说说每一层的功能吧？</p>
+<p> 问面试官OSI吗？还是TCP/IP？ </p>
+<p> 面试官：笑。你自己定吧。</p>
+</li>
+<li><p>数据链路层有哪些功能，那物理层呢？</p>
+</li>
+</ol>
+<p><font style="background: #d4e9d6">数据库：</font></p>
+<ol>
+<li>MySQL的索引了解不？知道InnoDB的索引结构吗？</li>
+<li>知道SQL语句的优化吗？</li>
+<li>你知道怎么去查看一张表他的索引是怎样的，某一条SQL的执行时间是多少，SQL的执行顺序是怎样的</li>
+<li>（可能还有其他问题，有些记不得了）</li>
+</ol>
+<p><font style="background: #d4e9d6">代码题：</font></p>
+<ol>
+<li><p>给出一张数据表，大致结构如下</p>
+<table>
+<thead>
+<tr>
+<th>Clazz</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>小甲</td>
+</tr>
+<tr>
+<td>A</td>
+<td>小乙</td>
+</tr>
+<tr>
+<td>A</td>
+<td>小丙</td>
+</tr>
+<tr>
+<td>B</td>
+<td>小丁</td>
+</tr>
+</tbody></table>
+<p> 请找出人数最多的五个班级</p>
+</li>
+<li><p>手写快排</p>
+</li>
+</ol>
+<blockquote>
+<p>一面小结：</p>
+<ol>
+<li>面试官的问题比较开放，虽然问题不长数量也不多，但是如果展开讲的话还是能讲很多东西；</li>
+<li>没有预期到会有SQL的代码题，准备的比较少，加上本人的复杂SQL锻炼的比较少，可能表现不太好；</li>
+<li>第一次面试总体太紧张了，有很多小插曲（不过面试官人真的很好）</li>
+<li>（PS）初面面试官好帅！真希望有机会能见面！</li>
+</ol>
+</blockquote>
+<h3 id="二面（挂了）"><a href="#二面（挂了）" class="headerlink" title="二面（挂了）"></a>二面（挂了）</h3><blockquote>
+<p>次日电话联系的hr，面试官的记录是逻辑和表达比较清晰，但是准备的不够充分。（八股背的不够熟哭哭）</p>
+</blockquote>
+<p><font style="background: #d4e9d6">自我介绍+介绍项目：</font>面试官没有追问项目，直接开始问八股了;</p>
+<blockquote>
+<p>面试题比我整理的多，可能是面试官小姐姐有点凶，我被吓到了，都不太记得她问了啥。</p>
+</blockquote>
+<p><font style="background: #d4e9d6">Java:</font></p>
+<ol>
+<li><p>设计模式了解哪些？举一些开源项目或者是经典项目里设计模型的应用吧。</p>
+<p> 我答的是Spring里设计模式的应用，不过讲到后来思路开了，有些也不是Spring里的了。</p>
+</li>
+<li><p>锁机制了解吗？（我讲了一些 synchronized）面试官继续问，那知道 JVM 对 synchronized 做了什么优化吗？（不太了解）</p>
+</li>
+<li><p>说说一个线程的生命周期</p>
+</li>
+</ol>
+<p><font style="background: #d4e9d6">Mysql：</font></p>
+<ol>
+<li><p>了解Mysql的行锁吗？怎么实现一个行锁？</p>
+</li>
+<li><p>MySQL是怎么实现事务的</p>
+<p> 我没太听懂这个问题（也有可能就是单纯不知道）</p>
+<p> 和面试官确认是不是MySQL如何处理事务和redo log以及bin log的同步？面试官认可了（但我还是觉得这两个不是一个问题）</p>
+<p> 遂讲了MySQL的两段式提交</p>
+</li>
+<li><p>MySQL的事务隔离级别</p>
+<p> 回答的时候顺便也讲了四个隔离级别分别解决了哪些并发访问数据库带来的问题</p>
+</li>
+<li><p>知道MySQL的索引失效吗？什么时候会失效？</p>
+</li>
+</ol>
+<p><font style="background: #d4e9d6">SpringBoot:</font></p>
+<ol>
+<li><p>知道SpringBoot框架内部的执行流程吗？（不是很理解，请求面试官换一个表述方式）比如一个http请求到达，对于SpringBoot框架他是怎么处理的？</p>
+<p> 我觉得我答得不好，仅围绕分层讲了讲，问了朋友说觉得应该说servlet这些的。</p>
+</li>
+<li><p>IoC和AOP了解吗？说说应用场景。</p>
+</li>
+<li><p>知道过滤器和拦截器吗？他们分别在什么阶段工作？</p>
+</li>
+</ol>
+<p><font style="background: #d4e9d6">代码题：</font></p>
+<ol>
+<li><p>找到平均成绩大于60分的同学学号和平均成绩</p>
+<table>
+<thead>
+<tr>
+<th>学号</th>
+<th>姓名</th>
+<th>课程名称</th>
+<th>课程成绩</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10001</td>
+<td>张一</td>
+<td>数据结构</td>
+<td>88</td>
+</tr>
+<tr>
+<td>10001</td>
+<td>张一</td>
+<td>Java程序设计</td>
+<td>60</td>
+</tr>
+<tr>
+<td>10002</td>
+<td>李二</td>
+<td>数据结构</td>
+<td>90</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>之字型打印二叉树 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/">剑指 Offer 32 - III. 从上到下打印二叉树 III - 力扣（LeetCode）</a></p>
+</li>
+</ol>
+<blockquote>
+<p>二面小结：</p>
+<ol>
+<li><p>二面的问题相比一面明显深多了，感觉如果只看看市面上的八股虽然大部分能cover住，但还是会有一些没见过的东西</p>
+</li>
+<li><p>面试官的要求也更高了，虽然依靠八股cover住了大部分的问题，代码题也过了，但是面试官还是不满意（说明大家太卷了）</p>
+</li>
+<li><p>感觉自己的SQL相对还是薄弱，需要加强训练</p>
+</li>
+<li><p>面试的代码题相比笔试的更简单一些，考察的更多是代码基本功（据说字节除外）</p>
+</li>
+<li><p>在一方面提高对市面上八股的熟悉度上，比如并发编程、JVM还是最好看看相关的书《深入理解Java虚拟机》《Java并发编程的艺术》</p>
+</li>
+<li><p>在MySQL方面除了要背八股，最好涉及到的词儿（比如我这次被问的行锁），都去自己用一用，了解一下实现。不然只会理论 不会用就很尴尬。</p>
+</li>
+</ol>
+</blockquote>
+<p>其他的如果想到还会再补充</p>
+<p>希望下一次面试更加进步！（毕竟这是我的第一次面试和第二次面试，暴露问题很正常，要继续进步！）</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2022/09/21/%E7%BD%91%E6%98%93%E6%9C%89%E9%81%93%E6%97%A5%E5%B8%B8%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">http://www.xuyuyan.cn/2022/09/21/%E7%BD%91%E6%98%93%E6%9C%89%E9%81%93%E6%97%A5%E5%B8%B8%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2022/04/03/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B%E5%AD%A6%E4%B9%A0JAVA8-Stream/">睡前故事学习JAVA8-Stream</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;">
+        <div> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
