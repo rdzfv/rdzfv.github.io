@@ -12,7 +12,7 @@
 
 
 
-<title>网易有道日常实习面试记录 | xyy爱吃番茄（个人分享）</title>
+<title>bilibili日常实习面试记录 | xyy爱吃番茄（个人分享）</title>
 
 
 
@@ -177,7 +177,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">网易有道日常实习面试记录</h1>
+            <h1 class="post-title">bilibili日常实习面试记录</h1>
             
                 <div class="post-meta">
                     
@@ -186,7 +186,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">九月 23, 2022&nbsp;&nbsp;11:59:48</a>
+                        Date: <a href="#">十月 18, 2022&nbsp;&nbsp;23:34:57</a>
                         </span>
                     
                     
@@ -202,187 +202,53 @@
         </header>
 
         <div class="post-content">
-            <h3 id="一面（通过）"><a href="#一面（通过）" class="headerlink" title="一面（通过）"></a>一面（通过）</h3><p>先<font style="background: #d4e9d6">自我介绍</font>，我的自我介绍比较短，所以直接自己cue项目了。</p>
-<p><font style="background: #d4e9d6">介绍项目</font>，我分成了三块：网络结构、前端、后端。面试官围绕项目问了一些问题：</p>
+            <h3 id="一面（30min-通过）"><a href="#一面（30min-通过）" class="headerlink" title="一面（30min 通过）"></a>一面（30min 通过）</h3><p>自我介绍：我个人习惯自我介绍里简单介绍一个项目。这是一个go的岗，所以我加了一点最近对go的学习体会。</p>
+<p>围绕项目让我选一个难点详细介绍</p>
+<p>问项目里有没有使用索引？对索引了解吗？介绍一下覆盖索引？还有哪些索引？</p>
+<p>问项目有没有用到redis？在什么情况下使用的，用了redis的哪些功能？</p>
+<p>熟悉linux系统吗？说说自己平常在服务器上做过哪些操作？</p>
+<p>写题：M个水果放到N个篮子里，有几种放法？注意如果交换篮子的顺序后如重复则不重复计算，（5，1，1）和（1，5，1）只能算一种</p>
+<p>反问：部门业务？对go日常实习生的要求和期待？对这场面试的评价？</p>
+<blockquote>
+<p>总结：</p>
+<p>感觉大公司一面的风格都非常一致，了解一下你的基本能力，做过哪些事情。问的不深，对回答的要求也不是很高，点到就可以了。</p>
+<p>比较难过的是写题没写出来，我给出的方法是不能解决重复排列的。</p>
+<p>非常感谢B站面试官给了我二面的机会！！！（虽然知道大概率二面就得挂了），我还是会努力加油准备的！</p>
+</blockquote>
+<h3 id="二面（60min-通过）"><a href="#二面（60min-通过）" class="headerlink" title="二面（60min 通过）"></a>二面（60min 通过）</h3><p>介绍项目，面试官围绕项目问问题：</p>
 <ol>
-<li>说说你在项目中遇到的难点</li>
-<li>这些都是你自己搭建的吗，可以说说你在搭建frp服务的一些过程吗</li>
-<li>你这个项目大概实施到什么程度了，有上线吗，多少人在用</li>
+<li>你为什么会想到用内网穿透呢？</li>
+<li>你项目里使用frp的部分，结构是怎样的？</li>
+<li>你的项目涉及学生的一些账号密码之类的，你是在数据库里建表存储吗？（不存，保护隐私，存在用户本地）</li>
+<li>你说你是用vpn挂在一台主机上，那如果vpn断连了怎么办？</li>
+<li>你说你们学校用的是Oauth2，那有没有验证码之类的？如果登录过程中学校站点出错会怎么样？</li>
+<li>你在模拟请求的时候，用的是怎样的技术？无头浏览器？网络库？（说了requests）面试官又问，哪还有什么办法呢？</li>
+<li>如果你是你们学校的技术人员，你要用什么方法来防住你这样的行为呢（不考虑添加验证码方向）？（说了对ip的监管，对数据部分的加密）面试官：还能想出来别的吗？最后他自己补了，比如还可以对用户行为进行分析，是不是符合人的操作、是不是符合历史行为。</li>
 </ol>
-<p>我介绍的项目后端是基于Python的Flask，所以面试官开始对着另外一个项目问了一些<font style="background: #d4e9d6">SpringBoot</font>的问题：</p>
+<p>看到你有自己的博客诶，你的博客的框架是什么？(hexo）面试官表示了解（然后我补充：在一年前做了一个整体结构的调整，实现了本地动态生成、写博客，使用generate命令生成至github仓库，再由云服务器定时pull，完成部署）</p>
+<p>写题：</p>
 <ol>
-<li>你可以说说你在项目里用过哪些注解吗</li>
-<li>（或许还问了别的但我忘记了）</li>
-</ol>
-<p><font style="background: #d4e9d6">Git：</font></p>
-<ol>
-<li>用过git吗？处理过冲突吗？</li>
-</ol>
-<p><font style="background: #d4e9d6">Java：</font></p>
-<ol>
-<li>Java的集合类了解吗？比如HashMap知道他原理吗？</li>
-<li>那HashMap是线程安全的吗？</li>
-<li>HashTable了解吗？他的结构是怎样的？</li>
-<li>创建线程/多线程这一些了解吗</li>
-<li>你说你用过线程池，他的好处在于什么？可以说几个创建线程池的参数吗？</li>
-<li>synchronized关键词了解吗</li>
-</ol>
-<p><font style="background: #d4e9d6">计网：</font></p>
-<ol>
-<li><p>自顶向下说说每一层的功能吧？</p>
-<p> 问面试官OSI吗？还是TCP/IP？ </p>
-<p> 面试官：笑。你自己定吧。</p>
+<li><p>函数执行栈，根据函数的出栈入栈日志，计算每一个函数的执行时间。（可能存在重复调用和递归调用，允许自己调用自己）（没要求我写，让我说一下思路）</p>
 </li>
-<li><p>数据链路层有哪些功能，那物理层呢？</p>
+<li><p>升序排列链表（要求时间复杂度nlogn，常数级空间复杂度）</p>
+<p> （卡了，不断地通过讲思路问面试官要提示）</p>
+<ul>
+<li>提示一：归并排序（然后写了核心的两个有序链表的归并当作工具函数，但是卡在了主函数，感觉要随机访问）</li>
+<li>提示二：归并排序主函数需要做什么？（不断的划分，直到只剩两个节点）那链表怎么找中点？（快慢指针，然后就满一个小时了，来不及写了）</li>
+</ul>
 </li>
 </ol>
-<p><font style="background: #d4e9d6">数据库：</font></p>
+<p>反问：</p>
 <ol>
-<li>MySQL的索引了解不？知道InnoDB的索引结构吗？</li>
-<li>知道SQL语句的优化吗？</li>
-<li>你知道怎么去查看一张表他的索引是怎样的，某一条SQL的执行时间是多少，SQL的执行顺序是怎样的</li>
-<li>（可能还有其他问题，有些记不得了）</li>
-</ol>
-<p><font style="background: #d4e9d6">代码题：</font></p>
-<ol>
-<li><p>给出一张数据表，大致结构如下</p>
-<table>
-<thead>
-<tr>
-<th>Clazz</th>
-<th>Name</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A</td>
-<td>小甲</td>
-</tr>
-<tr>
-<td>A</td>
-<td>小乙</td>
-</tr>
-<tr>
-<td>A</td>
-<td>小丙</td>
-</tr>
-<tr>
-<td>B</td>
-<td>小丁</td>
-</tr>
-</tbody></table>
-<p> 请找出人数最多的五个班级</p>
-</li>
-<li><p>手写快排</p>
-</li>
+<li>昨天也问了面试官，但好像网络问题没听清楚，想再听一下部门的业务。（这次面试官讲的非常非常详细）</li>
+<li>再问，刚才你说的业务里xxxx和xxxx感觉都是非常偏算法的，所以想问一下为什么会选择go这个技术栈呢？我的认知里面好像这方面python用的更多一些？（面试官回答有python的，说我如果对算法感兴趣也可以，然后问我是更偏向开发还是算法）</li>
+<li>问了实习生缺口（面试官很含蓄，我们现在还在招就说明还是有岗位的嘛）</li>
 </ol>
 <blockquote>
-<p>一面小结：</p>
-<ol>
-<li>面试官的问题比较开放，虽然问题不长数量也不多，但是如果展开讲的话还是能讲很多东西；</li>
-<li>没有预期到会有SQL的代码题，准备的比较少，加上本人的复杂SQL锻炼的比较少，可能表现不太好；</li>
-<li>第一次面试总体太紧张了，有很多小插曲（不过面试官人真的很好）</li>
-<li>（PS）初面面试官好帅！真希望有机会能见面！</li>
-</ol>
+<p>总结：</p>
+<p>面试官真的很强很nice！围绕项目几乎问了30min，我的项目不算主流挂的，所以之前很少有面试官抓着我的项目问那么多，并且他对我项目涉及到的东西都非常熟悉！非常强！！！</p>
+<p>感觉主要破防在了写题上，没想到链表的归并那么难写。面试官给了非常多的提示才能够抓到思路</p>
 </blockquote>
-<h3 id="二面（挂）"><a href="#二面（挂）" class="headerlink" title="二面（挂）"></a>二面（挂）</h3><p><font style="background: #d4e9d6">自我介绍+介绍项目：</font>面试官没有追问项目，直接开始问八股了;</p>
-<blockquote>
-<p>面试题比我整理的多，可能是面试官小姐姐有点凶，我被吓到了，都不太记得她问了啥。</p>
-</blockquote>
-<p><font style="background: #d4e9d6">Java:</font></p>
-<ol>
-<li><p>设计模式了解哪些？举一些开源项目或者是经典项目里设计模型的应用吧。</p>
-<p> 我答的是Spring里设计模式的应用，不过讲到后来思路开了，有些也不是Spring里的了。</p>
-</li>
-<li><p>锁机制了解吗？（我讲了一些 synchronized）面试官继续问，那知道 JVM 对 synchronized 做了什么优化吗？（不太了解）</p>
-</li>
-<li><p>说说一个线程的生命周期</p>
-</li>
-</ol>
-<p><font style="background: #d4e9d6">Mysql：</font></p>
-<ol>
-<li><p>了解Mysql的行锁吗？怎么实现一个行锁？</p>
-</li>
-<li><p>MySQL是怎么实现事务的</p>
-<p> 我没太听懂这个问题（也有可能就是单纯不知道）</p>
-<p> 和面试官确认是不是MySQL如何处理事务和redo log以及bin log的同步？面试官认可了（但我还是觉得这两个不是一个问题）</p>
-<p> 遂讲了MySQL的两段式提交</p>
-</li>
-<li><p>MySQL的事务隔离级别</p>
-<p> 回答的时候顺便也讲了四个隔离级别分别解决了哪些并发访问数据库带来的问题</p>
-</li>
-<li><p>知道MySQL的索引失效吗？什么时候会失效？</p>
-</li>
-</ol>
-<p><font style="background: #d4e9d6">SpringBoot:</font></p>
-<ol>
-<li><p>知道SpringBoot框架内部的执行流程吗？（不是很理解，请求面试官换一个表述方式）比如一个http请求到达，对于SpringBoot框架他是怎么处理的？</p>
-<p> 我觉得我答得不好，仅围绕分层讲了讲，问了朋友说觉得应该说servlet这些的。</p>
-</li>
-<li><p>IoC和AOP了解吗？说说应用场景。</p>
-</li>
-<li><p>知道过滤器和拦截器吗？他们分别在什么阶段工作？</p>
-</li>
-</ol>
-<p><font style="background: #d4e9d6">代码题：</font></p>
-<ol>
-<li><p>找到平均成绩大于60分的同学学号和平均成绩</p>
-<table>
-<thead>
-<tr>
-<th>学号</th>
-<th>姓名</th>
-<th>课程名称</th>
-<th>课程成绩</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>10001</td>
-<td>张一</td>
-<td>数据结构</td>
-<td>88</td>
-</tr>
-<tr>
-<td>10001</td>
-<td>张一</td>
-<td>Java程序设计</td>
-<td>60</td>
-</tr>
-<tr>
-<td>10002</td>
-<td>李二</td>
-<td>数据结构</td>
-<td>90</td>
-</tr>
-<tr>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>之字型打印二叉树 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/">剑指 Offer 32 - III. 从上到下打印二叉树 III - 力扣（LeetCode）</a></p>
-</li>
-</ol>
-<blockquote>
-<p>二面小结：</p>
-<ol>
-<li><p>二面的问题相比一面明显深多了，感觉如果只看看市面上的八股虽然大部分能cover住，但还是会有一些没见过的东西</p>
-</li>
-<li><p>面试官的要求也更高了，虽然依靠八股cover住了大部分的问题，代码题也过了，但是面试官还是不满意（说明大家太卷了）</p>
-</li>
-<li><p>感觉自己的SQL相对还是薄弱，需要加强训练</p>
-</li>
-<li><p>面试的代码题相比笔试的更简单一些，考察的更多是代码基本功（据说字节除外）</p>
-</li>
-<li><p>在一方面提高对市面上八股的熟悉度上，比如并发编程、JVM还是最好看看相关的书《深入理解Java虚拟机》《Java并发编程的艺术》</p>
-</li>
-<li><p>在MySQL方面除了要背八股，最好涉及到的词儿（比如我这次被问的行锁），都去自己用一用，了解一下实现。不然只会理论 不会用就很尴尬。</p>
-</li>
-</ol>
-</blockquote>
-<p>其他的如果想到还会再补充</p>
-<p>希望下一次面试更加进步！（毕竟这是我的第一次面试和第二次面试，暴露问题很正常，要继续进步！）</p>
 
         </div>
 
@@ -397,7 +263,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://www.xuyuyan.cn/2022/09/23/%E7%BD%91%E6%98%93%E6%9C%89%E9%81%93%E6%97%A5%E5%B8%B8%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">http://www.xuyuyan.cn/2022/09/23/%E7%BD%91%E6%98%93%E6%9C%89%E9%81%93%E6%97%A5%E5%B8%B8%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</a></span>
+                        <span><a href="http://www.xuyuyan.cn/2022/10/18/bilibili%E6%97%A5%E5%B8%B8%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">http://www.xuyuyan.cn/2022/10/18/bilibili%E6%97%A5%E5%B8%B8%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/</a></span>
                     </p>
                 
                 
@@ -424,10 +290,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/10/18/bilibili%E6%97%A5%E5%B8%B8%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">bilibili日常实习面试记录</a>
+                <a class="prev" rel="prev" href="/2022/12/04/2022%E5%8D%81%E4%B8%80%E6%9C%88%E5%B0%8F%E8%AE%B0/">2022十一月小记</a>
             
             
-            <a class="next" rel="next" href="/2022/04/03/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B%E5%AD%A6%E4%B9%A0JAVA8-Stream/">睡前故事学习JAVA8-Stream</a>
+            <a class="next" rel="next" href="/2022/09/23/%E7%BD%91%E6%98%93%E6%9C%89%E9%81%93%E6%97%A5%E5%B8%B8%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">网易有道日常实习面试记录</a>
             
         </section>
 
