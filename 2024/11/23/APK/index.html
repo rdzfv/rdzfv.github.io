@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="xyy">
+
+
+
+
+
+<title>APK | xyy爱吃番茄（个人分享）</title>
+
+
+
+    <link rel="icon" href="https://qiniu.xuyuyan.cn/XYY.png">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">xyy爱吃番茄！(个人分享)</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">xyy爱吃番茄！(个人分享)</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于我</a>
+                
+                    <a class="menu-item" href="/friends">友链</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">APK</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">xyy</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十一月 23, 2024&nbsp;&nbsp;9:13:20</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="1-Android-开发基础"><a href="#1-Android-开发基础" class="headerlink" title="1. Android 开发基础"></a>1. Android 开发基础</h2><h3 id="1-1-Android-四大组件"><a href="#1-1-Android-四大组件" class="headerlink" title="1.1 Android 四大组件"></a>1.1 Android 四大组件</h3><ol>
+<li>Activity：面向用户的应用组件或用户操作的可视化界面，由ActivityManager统一管理；也负责处理应用内或应用间发的Intent消息</li>
+<li>Broadcast Receiver：接受并过滤广播消息</li>
+<li>Service：处理后台耗时逻辑</li>
+<li>Content Provider：应用程序间数据共享</li>
+</ol>
+<h3 id="1-2-APK-文件结构"><a href="#1-2-APK-文件结构" class="headerlink" title="1.2 APK 文件结构"></a>1.2 APK 文件结构</h3><ol>
+<li><p>meta-inf</p>
+<ul>
+<li>manifest.mf：清单文件</li>
+<li>cert.rsa：应用签名</li>
+<li>cert.sf：资源列表及对应的SHA-1签名</li>
+</ul>
+</li>
+<li><p>lib</p>
+<ul>
+<li>armeabi：所有arm处理器相关文件</li>
+<li>armeabi-v7a：armv7以上处理器相关文件</li>
+<li>arm64-v8a：所有armv8处理器下的arm64相关文件</li>
+<li>x86：所有x86处理器相关文件</li>
+<li>x86_64：所有x86_64处理器相关文件</li>
+<li>mips：MIPS处理器相关文件</li>
+</ul>
+</li>
+<li><p>res：没有编译至resource.arsc中的其他资源文件</p>
+</li>
+<li><p>assets：可以通过AssetMannager访问到的资源文件</p>
+</li>
+<li><p>AndroidManifest.xml：安卓组件清单文件，以二进制形式存储在apk中，可以通过apktool、AXMLPrinter2等工具转换成明文文件</p>
+</li>
+<li><p>classed.dex：安卓运行时的可执行文件</p>
+</li>
+<li><p>resources.arsc：包含编译好的部分资源文件</p>
+</li>
+</ol>
+<h2 id="2-APK-逆向工具"><a href="#2-APK-逆向工具" class="headerlink" title="2. APK 逆向工具"></a>2. APK 逆向工具</h2><blockquote>
+<p>先做一个简单罗列，之后针对题目进行练习的时候再进行详细的补充～</p>
+</blockquote>
+<h3 id="2-1-JEB"><a href="#2-1-JEB" class="headerlink" title="2.1 JEB"></a>2.1 JEB</h3><p>支持Android APK反编译，还支持MIPS、ARM、ARM64、x86、x86-64、WebAssembly、EVM等反编译</p>
+<h3 id="2-2-IDA"><a href="#2-2-IDA" class="headerlink" title="2.2 IDA"></a>2.2 IDA</h3><p>遇到Native（本地服务）逆向是，IDA优于JEB等其他逆向工具</p>
+<h3 id="2-3-Xposed-Hook"><a href="#2-3-Xposed-Hook" class="headerlink" title="2.3 Xposed Hook"></a>2.3 Xposed Hook</h3><p>在root设备下可以不修改源码的情况下影响程序运行的Android Hook</p>
+<h3 id="2-4-Frida-Hook"><a href="#2-4-Frida-Hook" class="headerlink" title="2.4 Frida Hook"></a>2.4 Frida Hook</h3><p>跨平台Hook框架，支持IOS、Android</p>
+<h2 id="3-APK逆向-反调试"><a href="#3-APK逆向-反调试" class="headerlink" title="3. APK逆向 - 反调试"></a>3. APK逆向 - 反调试</h2><p>为了保护应用关键代码，开发者会采用一些技术增加关键代码逆向的难度。调试技术是逆向人员理解代码的重要手段，对此开发者衍生出很多“反调试技术”。Android下的反调试技术大多从Windows平台衍生而来。</p>
+<ol>
+<li>检测调试器特征<ul>
+<li>检测调试器端口，如IDA调试默认占用23946端口</li>
+<li>检测常用调试器进程明，如android_server、gdbserver等</li>
+<li>检测/proc/pid/status、/proc/pid/task/pid/status 下的 Tracepid 是否为0</li>
+<li>检测/proc/pid/stat、/proc/pid/task/pid/stat 的第二个字段是否为t</li>
+<li>检测/proc/pid/wchan、/proc/pid/task/pid/wchan 是否为 trace_stop</li>
+</ul>
+</li>
+<li>检测自身进程运行状态<ul>
+<li>检测父进程是否为 zygote</li>
+<li>利用系统自带检测函数 android.os.Debug.isDebuggerConnected</li>
+<li>检测自身是否被 ptrace</li>
+<li>检测自身代码是否包含软件断点</li>
+<li>主动发出异常信号并捕获，如果没有被正常接收说明被调试器捕获</li>
+<li>检测某段程序代码运行时间是否超过预期</li>
+</ul>
+</li>
+</ol>
+<p>攻击者绕过上述检测方法最便捷的是定制 Android ROM，从Android源码层面隐藏调试器特征。比如通过 ptrace函数检测是否被 ptrace时，可以修改源码让ptrace函数永远返回非调试状态等。</p>
+<h2 id="4-APK逆向-脱壳"><a href="#4-APK逆向-脱壳" class="headerlink" title="4. APK逆向 - 脱壳"></a>4. APK逆向 - 脱壳</h2><p>在软件开发和逆向工程中，“壳”是指一种 <strong>软件保护技术</strong>，通常用于保护应用程序的代码和资源，防止被未经授权地分析、修改或使用。壳通常通过加密、混淆或动态加载等手段来隐藏应用的核心逻辑，使逆向工程变得更加困难。</p>
+<h3 id="4-1-注入进程Dump内存"><a href="#4-1-注入进程Dump内存" class="headerlink" title="4.1 注入进程Dump内存"></a>4.1 注入进程Dump内存</h3><p>首先使用adb命令获取应用包名，再启动目标应用，确保应用的壳加载解密过程完成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell pm list packages | grep targetapp</span><br><span class="line">adb shell monkey -p com.targetapp -c android.intent.category.LAUNCHER 1</span><br></pre></td></tr></table></figure>
+
+<p>找到目标进程，获取其pid</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell ps | grep targetapp</span><br></pre></td></tr></table></figure>
+
+<p>使用Frida注入进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frida -U -n com.targetapp  <span class="comment"># 通过 USB 或网络连接 Frida 到设备</span></span><br><span class="line">frida -U -n com.targetapp -s dumpdex.js  <span class="comment"># 执行注入脚本（脚本内容见下）</span></span><br></pre></td></tr></table></figure>
+
+<p>编写dump脚本，用于 Hook DEX 加载函数并提取内存中的数据（以下为一个简单例子）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Module = Process.getModuleByName(<span class="string">&quot;libart.so&quot;</span>); <span class="comment">// 获取 ART 虚拟机的模块</span></span><br><span class="line"><span class="keyword">var</span> addr = Module.findExportByName(<span class="string">&quot;art::DexFile::OpenMemory&quot;</span>); <span class="comment">// 查找函数地址</span></span><br><span class="line"></span><br><span class="line">Interceptor.attach(addr, &#123;</span><br><span class="line">    <span class="attr">onEnter</span>: <span class="function"><span class="keyword">function</span> (<span class="params">args</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> dexAddr = args[<span class="number">1</span>]; <span class="comment">// DEX 文件的内存地址</span></span><br><span class="line">        <span class="keyword">var</span> dexSize = args[<span class="number">2</span>].toInt32(); <span class="comment">// DEX 文件的大小</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;Dex Dump Addr: &quot;</span> + dexAddr + <span class="string">&quot;, Size: &quot;</span> + dexSize);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 读取内存数据</span></span><br><span class="line">        <span class="keyword">var</span> dex = Memory.readByteArray(dexAddr, dexSize);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 保存到设备上的文件</span></span><br><span class="line">        <span class="keyword">var</span> file = <span class="keyword">new</span> File(<span class="string">&quot;/data/local/tmp/dumped.dex&quot;</span>, <span class="string">&quot;wb&quot;</span>);</span><br><span class="line">        file.write(dex);</span><br><span class="line">        file.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>操作目标应用的关键功能，使其加载核心 DEX 文件。此时，脚本会捕获到 DEX 文件的解密内容，并自动将其保存到设备的 /data/local/tmp/ 路径下。</p>
+<p>导出dump的文件（DEX），并对其反编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb pull /data/<span class="built_in">local</span>/tmp/dumped.dex .  <span class="comment"># 使用 ADB 将导出的 DEX 文件拉到本地</span></span><br><span class="line">dexdump dumped.dex  <span class="comment"># 使用工具如 dexdump 检查文件是否有效</span></span><br><span class="line">jadx-gui dumped.dex  <span class="comment"># 使用 JADX GUI 打开提取的 DEX 文件，查看代码逻辑</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>🙋：为什么内存中会存储解密后的代码（DEX文件）？</p>
+<p>在 Android 应用的运行过程中，应用加固壳会将加密的代码（通常是 DEX 文件）在启动时或使用到某些功能时解密到内存中，然后由 Android 的 ART/Dalvik 虚拟机执行。</p>
+<p>因为运行时解密是必须的。加壳的目的是保护代码，使其在静态分析时不可读取。但在运行时，虚拟机需要能读取和解析解密后的 DEX 文件才能执行，否则应用无法正常运行。</p>
+</blockquote>
+<h3 id="4-2-修改源码脱壳"><a href="#4-2-修改源码脱壳" class="headerlink" title="4.2 修改源码脱壳"></a>4.2 修改源码脱壳</h3><p>使用 apktool 解包 APK 文件，查找壳的代码文件（壳代码通常在 smali 文件夹中，如 smali_classes2 或其他 obfuscation 的命名目录下），用 JADX 查看壳逻辑。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apktool d target.apk -o target_apk</span><br></pre></td></tr></table></figure>
+
+<p>根据壳中的关键代码，用 Smali 替换相关逻辑。例如有如下反调试代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Debug.isDebuggerConnected() || Debug.waitingForDebugger()) &#123;</span><br><span class="line">    System.exit(<span class="number">0</span>); <span class="comment">// 检测到调试器，直接退出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以编写如下smali代码</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">.line</span> 25<span class="built_in"></span></span><br><span class="line"><span class="built_in">invoke-static </span>&#123;&#125;, <span class="class">Landroid/os/Debug;</span>-&gt;isDebuggerConnected()Z<span class="built_in"></span></span><br><span class="line"><span class="built_in">move-result </span>v0</span><br><span class="line"><span class="built_in"></span></span><br><span class="line"><span class="built_in">if-nez </span>v0,<span class="keyword"> :exit</span> // 原逻辑：检测到调试器时退出</span><br><span class="line">// 修改为：<span class="built_in"></span></span><br><span class="line"><span class="built_in">const/4 </span>v0, 0x0 // 强制将结果设为 <span class="string">&quot;未检测&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>壳逻辑可能会在 DEX 文件解密加载后清理内存，常见代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.fill(decryptedDex, (<span class="keyword">byte</span>) <span class="number">0</span>); <span class="comment">// 用 0 覆盖解密后的 DEX</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以修改Smali代码，保持解密后的数据完整</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">.line</span> 50<span class="built_in"></span></span><br><span class="line"><span class="built_in">invoke-static </span>&#123;v0, 0x0&#125;, <span class="class">Ljava/util/Arrays;</span>-&gt;fill([BB)V</span><br><span class="line">// 修改为：</span><br><span class="line"><span class="comment"># invoke-static &#123;v0, 0x0&#125;, Ljava/util/Arrays;-&gt;fill([BB)V</span></span><br><span class="line"><span class="comment"># 注释掉销毁代码</span></span><br></pre></td></tr></table></figure>
+
+<p>最后重新打包和签名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apktool b target_apk -o modified_target.apk  <span class="comment"># 使用 apktool 重新打包修改后的 APK</span></span><br><span class="line">jarsigner -verbose -keystore my-release-key.keystore modified_target.apk mykey  <span class="comment"># 签名</span></span><br><span class="line">adb install -r modified_target.apk  <span class="comment"># 安装到设备进行测试</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>🙋：Smali是什么，如何通过Smali代码来修改app源代码？</p>
+<p>Smali 是 Android 的字节码语言，修改 Smali 文件后生成的 DEX 文件会被加载到内存中，因此最终效果是间接“修改了内存中的代码”。通过对 APK 的反编译、修改、重编译和重新打包的过程，可以<code>间接改变运行时的代码逻辑</code>。</p>
+</blockquote>
+<h3 id="4-3-类重载和DEX重组"><a href="#4-3-类重载和DEX重组" class="headerlink" title="4.3 类重载和DEX重组"></a>4.3 类重载和DEX重组</h3><p>对于不连续壳，在内存中不存在完整的DEX文件，此时不能通过Dump内存来完成完整脱壳，需要在运行时对DEX进行重建。</p>
+<p>推荐使用FUPK3（是在Android4.4下通过修改源码实现的DEX重组方式）</p>
+<ol>
+<li><strong>动态监控 DEX 加载</strong>：</li>
+</ol>
+<ul>
+<li>修改 ART/Dalvik 虚拟机的源码，在每次加载 DEX 文件的碎片时拦截数据。</li>
+<li>记录每一段 DEX 数据的内存地址和大小。</li>
+</ul>
+<ol start="2">
+<li><strong>数据拼接</strong>：</li>
+</ol>
+<ul>
+<li>收集所有的 DEX 碎片，按照 DEX 文件格式重新拼接。</li>
+<li>将拼接后的完整 DEX 文件写入到文件系统。</li>
+</ul>
+<ol start="3">
+<li><strong>自动化</strong>：</li>
+</ol>
+<ul>
+<li>修改虚拟机源码后，所有运行的应用都会被自动监控，不需要手动 Hook 或注入。</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>xyy</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://www.xuyuyan.cn/2024/11/23/APK/">http://www.xuyuyan.cn/2024/11/23/APK/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CTF/"># CTF</a>
+                    
+                        <a href="/tags/APK/"># APK</a>
+                    
+                        <a href="/tags/%E9%80%86%E5%90%91/"># 逆向</a>
+                    
+                        <a href="/tags/%E5%8F%8D%E8%B0%83%E8%AF%95/"># 反调试</a>
+                    
+                        <a href="/tags/%E8%84%B1%E5%A3%B3/"># 脱壳</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2024/11/14/web%E6%89%A9%E5%B1%95/">web扩展</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4283629b368b1cf98f81',
+        clientSecret: '8bb6ce27010c0db8286e943f3765aeae1757de4d',
+        repo: 'xyyBlog',
+        owner: 'rdzfv',
+        admin: 'rdzfv',
+        id: md5(location.pathname),      
+        labels: 'Gitalk'.split(',').filter(l => l),
+        perPage: 10,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: true
+      })
+      gitalk.render('gitalk-container')
+</script>
+
+
+
+        </div>
+        <footer id="footer" class="footer">
+   <div class="copyright">
+    <div style="position:fixed;left:8%;bottom:5%;">
+        <div id="webpushr-subscription-button" data-button-text="订阅本站" data-subscriber-count-text="人已订阅" data-background-color="#000000"></div>
+    </div>
+    <div style="display:inline-block;">
+        <div> <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="text-decoration: none;color: black;" >浙ICP备19012712号</a> </div>
+        <span>© xyy | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
