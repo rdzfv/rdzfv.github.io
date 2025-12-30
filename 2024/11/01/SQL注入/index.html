@@ -281,7 +281,7 @@
 <p>【尝试1】以别名的方法取出数据，访问 <code>http://xxx.xxx.xxx.xxx/sql1.php?id=(select pwd AS title FROM wp_user)x</code>，即 <code>SELECT title FROM (select pwd AS title FROM wp_user)x</code></p>
 <h4 id="2-3-SELECT-注入点在WHERE和HAVNG后"><a href="#2-3-SELECT-注入点在WHERE和HAVNG后" class="headerlink" title="2.3 SELECT 注入点在WHERE和HAVNG后"></a>2.3 SELECT 注入点在WHERE和HAVNG后</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;SELECT title FROM wp_news WHERE id = <span class="subst">&#123;$_GET[&#x27;title&#x27;]&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<p>先判断有无引号包裹，再闭合前面可能存在的引号</p>
+<p>先判断有无引号包裹，再闭合前面可能存在的引#</p>
 <h4 id="2-4-SELECT-注入点在GROUP-BY或ORDER-BY后"><a href="#2-4-SELECT-注入点在GROUP-BY或ORDER-BY后" class="headerlink" title="2.4 SELECT 注入点在GROUP BY或ORDER BY后"></a>2.4 SELECT 注入点在GROUP BY或ORDER BY后</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;SELECT title FROM wp_news GROUP BY <span class="subst">&#123;$_GET[&#x27;title&#x27;]&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>经过测试可以发现 title=id desc, (if(1, sleep(1), 1))会让页面延迟1秒</p>

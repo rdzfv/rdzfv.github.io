@@ -224,6 +224,15 @@
 <li>整句明文符合英语语法和上下文逻辑。</li>
 </ul>
 <p>凯撒加密的危险性在于，当我们知道或猜测密文使用了凯撒密码，使用穷举法就能破解偏移量。因为一般使用凯撒加密都是英文，仅有26个英文字母，偏移量最大为25，可以通过穷举的方式轻易破解。</p>
+<blockquote>
+<p>Tips：</p>
+<ul>
+<li>破解思路：字母、词组出现频率</li>
+<li>字母：E &gt; T &gt; A &gt; O &gt; I</li>
+<li>词组：the &gt; ing &gt; and &gt; her &gt; ere</li>
+<li>在线网站：<a target="_blank" rel="noopener" href="http://quipqiup.com/index.php">http://quipqiup.com/index.php</a> （网页似乎挂掉了）</li>
+</ul>
+</blockquote>
 <h3 id="1-2-维吉尼亚密码"><a href="#1-2-维吉尼亚密码" class="headerlink" title="1.2 维吉尼亚密码"></a>1.2 维吉尼亚密码</h3><p>维吉尼亚密码是使用一系列凯撒密码组成密码字母表的加密算法。</p>
 <p>让我们通过一个例子来了解维吉尼亚密码的加密过程：假设明文为 <code>ATTACKATDAWN</code>，密钥为 <code>LEMON</code>。首先循环密钥使之成为密钥流，长度和明文长度相同，即 <code>LEMONLEMONLE</code>。然后根据每一位密钥对明文进行加密，第一位密钥为 <code>L</code> 是第12个字母，则偏移量为（12-1），对于第一位明文 <code>A</code> ，加密后的密文应为 <code>（A+11）mod 26</code>，反复操作。</p>
 <p>一般破解维吉尼亚密码有一定的套路：寻找密文中相同连续的字符串。下面我们举一个例子：<code>ZICVTWQNGRZGVTWAVZHCQYGLMGJ</code> 这是用维吉尼亚密码加密的密文，但密钥长度和明文未知。</p>
@@ -374,8 +383,6 @@
             </div>
         </section>
         <section class="post-nav">
-            
-                <a class="prev" rel="prev" href="/2024/12/30/2024%E7%94%B5%E4%B8%93%E8%BF%9B%E4%BF%AE%E6%97%A5%E8%AE%B0/">2024电专进修日记</a>
             
             
             <a class="next" rel="next" href="/2024/11/23/APK/">APK</a>
